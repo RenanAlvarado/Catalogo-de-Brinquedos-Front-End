@@ -1,0 +1,75 @@
+/* Geral */
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+/* NavBar */
+#navbar {
+  padding: 1.5rem 2.5rem;
+  background-color: #55cbcd;
+}
+
+/* Conteudos */
+#navbar-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo na Navbar */
+#navbar-inner img {
+  width: 75px;
+}
+
+/* Form --> É a div que abriga o buscar */
+#busca-navbar form {
+  /* Deixa os itens juntos */
+  display: flex;
+}
+
+/* Itens para pesquisar */
+#busca-navbar input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-right: none; /* remove a borda entre input e botão */
+  border-radius: 5px 0 0 5px; /* arredonda só o lado esquerdo */
+}
+
+#busca-navbar button {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 0 5px 5px 0; /* arredonda só o lado direito */
+}
+
+/* Botão de favoritos */
+#favs {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 5px; /* arredonda o botão inteiro */
+}
+
+#login {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  border-radius: 5px; /* arredonda o botão inteiro */
+}
+
+#main-container {
+  padding: 20px;
+  align-items: center;
+}
+
+/* Categorias */
+#categories-container {
+  display: flex;
+  gap: 20px;
+}
