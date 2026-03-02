@@ -1,35 +1,45 @@
 const carousel = document.getElementById("brands-carousel");
-const nextBtn = document.querySelector(".arrow.right");
-const prevBtn = document.querySelector(".arrow.left");
+const wrapper = document.getElementById("brands-wrapper");
 
 let items = document.querySelectorAll(".brand");
-const itemWidth = items[0].offsetWidth + 20; // largura + gap
+const itemWidth = items[0].offsetWidth + 20;
 
-// ===== DUPLICAR ITENS =====
-// Para garantir loop suave, duplicamos todos os itens
+// ===== DUPLICAR LISTA =====
 carousel.innerHTML += carousel.innerHTML;
 items = document.querySelectorAll(".brand");
 
 let position = 0;
-let speed = 1; // pixels por frame
+let speed = 0; // começa parado
+const totalWidth = (items.length / 2) * itemWidth;
 
+// ===== ANIMAÇÃO CONTÍNUA =====
 function animate() {
   position -= speed;
-  if (Math.abs(position) >= (items.length / 2) * itemWidth) {
-    // reset quando chega na metade (fim da lista original)
-    position = 0;
-  }
-  carousel.style.transform = `translateX(${position}px)`;
+  const visiblePosition = position % totalWidth;
+  carousel.style.transform = `translateX(${visiblePosition}px)`;
   requestAnimationFrame(animate);
 }
-
 animate();
 
-// ===== CONTROLE MANUAL =====
-nextBtn.addEventListener("click", () => {
-  position -= itemWidth * 2; // acelera para frente
+// ===== CONTROLE PELO MOUSE =====
+wrapper.addEventListener("mousemove", (e) => {
+  const rect = wrapper.getBoundingClientRect();
+  const x = e.clientX - rect.left; // posição do mouse dentro do wrapper
+  const center = rect.width / 2;
+
+  if (x < center - 50) {
+    // mouse mais para a esquerda → anda para trás
+    speed = -3.5;
+  } else if (x > center + 50) {
+    // mouse mais para a direita → anda para frente
+    speed = 3.5;
+  } else {
+    // mouse no centro → velocidade menor ou parado
+    speed = 1;
+  }
 });
 
-prevBtn.addEventListener("click", () => {
-  position += itemWidth * 2; // acelera para trás
+// ===== VOLTA ao normal quando sai do wrapper =====
+wrapper.addEventListener("mouseleave", () => {
+  speed = 1; // velocidade padrão
 });
