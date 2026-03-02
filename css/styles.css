@@ -159,27 +159,29 @@ body {
 }
 
 /* ===== MARCAS ===== */
-
 #brands-container {
   padding: 40px 50px;
+  background: #f9f9f9;
 }
 
-/* Titulo */
+/* Título */
 #brands-container h2 {
   text-align: center;
   margin-bottom: 25px;
+  font-size: 1.8rem;
+  color: #333;
+  font-weight: 600;
 }
 
-/* Envolve as setas */
+/* Wrapper */
 #brands-wrapper {
   position: relative;
   overflow: hidden;
   width: 100%;
-  padding: 0 100px;
-  border-radius: 5px;
+  padding: 0 80px;
 }
 
-/* Carrosel */
+/* Carrossel */
 #brands-carousel {
   display: flex;
   gap: 20px;
@@ -188,24 +190,31 @@ body {
 
 /* Cada marca */
 .brand {
-  flex: 0 0 180px; /* largura fixa */
+  flex: 0 0 180px;
   height: 110px;
-  background: white;
+  background: #fff;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+.brand:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Imagem da marca */
+/* Imagem */
 .brand img {
   max-width: 80%;
   max-height: 70%;
+  object-fit: contain;
 }
 
 /* Botões */
-
 .arrow {
   position: absolute;
   top: 50%;
@@ -214,16 +223,24 @@ body {
   height: 45px;
   border: none;
   border-radius: 50%;
-  background: white;
+  background: #fff;
   cursor: pointer;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 2;
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
+}
+
+.arrow:hover {
+  background: #f0f0f0;
+  transform: translateY(-50%) scale(1.1);
 }
 
 .arrow.left {
-  left: 0;
+  left: 20px;
 }
 
 .arrow.right {
-  right: 0;
+  right: 20px;
 }

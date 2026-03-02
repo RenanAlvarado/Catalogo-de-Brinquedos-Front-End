@@ -3,54 +3,33 @@ const nextBtn = document.querySelector(".arrow.right");
 const prevBtn = document.querySelector(".arrow.left");
 
 let items = document.querySelectorAll(".brand");
-const itemWidth = items[0].offsetWidth + 20; // 180 + gap
-let index = 1;
+const itemWidth = items[0].offsetWidth + 20; // largura + gap
 
-// ===== CLONAR PRIMEIRO E ÚLTIMO =====
-const firstClone = items[0].cloneNode(true);
-const lastClone = items[items.length - 1].cloneNode(true);
-
-carousel.appendChild(firstClone);
-carousel.insertBefore(lastClone, items[0]);
-
+// ===== DUPLICAR ITENS =====
+// Para garantir loop suave, duplicamos todos os itens
+carousel.innerHTML += carousel.innerHTML;
 items = document.querySelectorAll(".brand");
 
-// Posição inicial (já no primeiro real)
-carousel.style.transform = `translateX(-${itemWidth}px)`;
+let position = 0;
+let speed = 1; // pixels por frame
 
-// ===== FUNÇÃO MOVER =====
-function moveCarousel() {
-  carousel.style.transition = "transform 0.4s ease";
-  carousel.style.transform = `translateX(-${itemWidth * index}px)`;
+function animate() {
+  position -= speed;
+  if (Math.abs(position) >= (items.length / 2) * itemWidth) {
+    // reset quando chega na metade (fim da lista original)
+    position = 0;
+  }
+  carousel.style.transform = `translateX(${position}px)`;
+  requestAnimationFrame(animate);
 }
 
-// ===== BOTÃO DIREITA =====
+animate();
+
+// ===== CONTROLE MANUAL =====
 nextBtn.addEventListener("click", () => {
-  if (index >= items.length - 1) return;
-  index++;
-  moveCarousel();
+  position -= itemWidth * 2; // acelera para frente
 });
 
-// ===== BOTÃO ESQUERDA =====
 prevBtn.addEventListener("click", () => {
-  if (index <= 0) return;
-  index--;
-  moveCarousel();
-});
-
-// ===== CORREÇÃO INVISÍVEL =====
-carousel.addEventListener("transitionend", () => {
-  // Se chegou no clone do final
-  if (items[index].isSameNode(firstClone)) {
-    carousel.style.transition = "none";
-    index = 1;
-    carousel.style.transform = `translateX(-${itemWidth * index}px)`;
-  }
-
-  // Se chegou no clone do começo
-  if (items[index].isSameNode(lastClone)) {
-    carousel.style.transition = "none";
-    index = items.length - 2;
-    carousel.style.transform = `translateX(-${itemWidth * index}px)`;
-  }
+  position += itemWidth * 2; // acelera para trás
 });
