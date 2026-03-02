@@ -6,6 +6,9 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #f5f5f5;
+}
 /* Classe de estiilização dos botões */
 .btn {
   padding: 12px 16px;
@@ -44,7 +47,8 @@
   align-items: center;
   gap: 20px;
 }
-/* Apenas a imagem, que agora está na esquerda */
+
+/* DIV da imagem */
 #logo-nav {
   margin-left: 30px;
 }
@@ -104,26 +108,122 @@
 }
 
 /* Botão de favoritos */
-
 #favs {
   background: #ff6b6b;
   color: white;
   border: none;
 }
 
+/* Botão de Login */
 #login {
   background: #ffb703;
   border: none;
 }
 
+/* Conteúdo Principal */
 #main-container {
-  padding: 20px;
+  padding: 30px 0;
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 100%;
 }
 
-/* Categorias */
+/* Div das Categorias */
 #categories-container {
   display: flex;
+  gap: 15px;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 0 100px;
+}
+
+/* Classe das categorias */
+.category {
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: none;
+}
+
+/* Quando passa por cima */
+.category:hover {
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+/* Imagem */
+.category img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+/* ===== MARCAS ===== */
+
+#brands-container {
+  padding: 40px 50px;
+}
+
+/* Titulo */
+#brands-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Envolve as setas */
+#brands-wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 0 100px;
+  border-radius: 5px;
+}
+
+/* Carrosel */
+#brands-carousel {
+  display: flex;
   gap: 20px;
+  transition: transform 0.4s ease;
+}
+
+/* Cada marca */
+.brand {
+  flex: 0 0 180px; /* largura fixa */
+  height: 110px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagem da marca */
+.brand img {
+  max-width: 80%;
+  max-height: 70%;
+}
+
+/* Botões */
+
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+}
+
+.arrow.left {
+  left: 0;
+}
+
+.arrow.right {
+  right: 0;
 }
