@@ -21,20 +21,27 @@
     <nav id="navbar">
       <!-- Para o CSS -->
       <div id="navbar-inner">
-        <img src="img/logo.png" alt="Logo do Catalogo de Brinquedos" />
+        <div id="logo-nav">
+          <img src="img/logo.png" alt="Logo do Catalogo de Brinquedos" />
+        </div>
 
         <div id="busca-navbar">
           <form>
             <input type="text" placeholder="Barra de Pesquisa" />
-            <button type="submit" class="btn">Buscar</button>
+            <button type="submit" class="btn">
+              <i class="fas fa-search"></i>
+            </button>
           </form>
         </div>
-        <button id="favs" class="btn">
-          <p>Favoritos <i class="fa-regular fa-heart"></i></p>
-        </button>
-        <button id="login" class="btn">
-          <p>Cadastro/Login <i class="fa-regular fa-user"></i></p>
-        </button>
+
+        <div id="actions">
+          <button id="favs" class="btn">
+            <p>Favoritos <i class="fa-regular fa-heart"></i></p>
+          </button>
+          <button id="login" class="btn">
+            <p>Cadastro/Login <i class="fa-regular fa-user"></i></p>
+          </button>
+        </div>
       </div>
     </nav>
 
