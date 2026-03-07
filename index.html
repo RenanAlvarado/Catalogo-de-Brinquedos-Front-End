@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -8,17 +9,20 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/styles.css" />
 
-    <!-- JavaScript -->
-    <script src="js/scripts.js" defer></script>
+```
+<!-- JavaScript -->
+<script src="js/scripts.js" defer></script>
 
-    <!-- Icones -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+<!-- Icones -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+  integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+```
+
   </head>
   <body>
     <!-- Navegação da parte de cima -->
@@ -31,96 +35,131 @@
           /></a>
         </div>
 
-        <div id="busca-navbar">
-          <form>
-            <input type="text" placeholder="Barra de Pesquisa" />
-            <button type="submit" class="btn">
-              <i class="fas fa-search"></i>
-            </button>
-          </form>
-        </div>
+```
+    <div id="busca-navbar">
+      <form>
+        <input type="text" placeholder="Barra de Pesquisa" />
+        <button type="submit" class="btn">
+          <i class="fas fa-search"></i>
+        </button>
+      </form>
+    </div>
 
-        <div id="actions">
-          <button id="favs" class="btn">
-            <p>Favoritos <i class="fa-regular fa-heart"></i></p>
-          </button>
-          <button id="login" class="btn">
-            <p>Cadastro/Login <i class="fa-regular fa-user"></i></p>
-          </button>
-        </div>
-      </div>
-    </nav>
+    <div id="actions">
+      <button id="favs" class="btn">
+        <p>Favoritos <i class="fa-regular fa-heart"></i></p>
+      </button>
+      <button id="login" class="btn">
+        <p>Cadastro/Login <i class="fa-regular fa-user"></i></p>
+      </button>
+    </div>
+  </div>
+</nav>
 
-    <!-- Conteudo Principal -->
-    <main id="main-container">
-      <!-- Categorias -->
-      <div id="categories-container">
-        <button class="category">
-          <img src="img/placeholder.png" alt="placeholder" />
-          <p>Categoria</p>
-        </button>
-        <button class="category">
-          <img src="img/placeholder.png" alt="placeholder" />
-          <p>Categoria</p>
-        </button>
-        <button class="category">
-          <img src="img/placeholder.png" alt="placeholder" />
-          <p>Categoria</p>
-        </button>
-        <button class="category">
-          <img src="img/placeholder.png" alt="placeholder" />
-          <p>Categoria</p>
-        </button>
-        <button class="category">
-          <img src="img/placeholder.png" alt="placeholder" />
-          <p>Categoria</p>
-        </button>
-        <button class="category">
-          <img src="img/placeholder.png" alt="placeholder" />
-          <p>Categoria</p>
-        </button>
-        <button class="category">
-          <img src="img/placeholder.png" alt="placeholder" />
-          <p>Categoria</p>
-        </button>
-        <button class="category">
-          <img src="img/placeholder.png" alt="placeholder" />
-          <p>Categoria</p>
-        </button>
+<!-- Conteudo Principal -->
+<main id="main-container">
+
+  <!-- Categorias -->
+  <div id="categories-container">
+    <button class="category">
+      <img src="img/placeholder.png" alt="placeholder" />
+      <p>Categoria</p>
+    </button>
+    <button class="category">
+      <img src="img/placeholder.png" alt="placeholder" />
+      <p>Categoria</p>
+    </button>
+    <button class="category">
+      <img src="img/placeholder.png" alt="placeholder" />
+      <p>Categoria</p>
+    </button>
+    <button class="category">
+      <img src="img/placeholder.png" alt="placeholder" />
+      <p>Categoria</p>
+    </button>
+    <button class="category">
+      <img src="img/placeholder.png" alt="placeholder" />
+      <p>Categoria</p>
+    </button>
+    <button class="category">
+      <img src="img/placeholder.png" alt="placeholder" />
+      <p>Categoria</p>
+    </button>
+    <button class="category">
+      <img src="img/placeholder.png" alt="placeholder" />
+      <p>Categoria</p>
+    </button>
+    <button class="category">
+      <img src="img/placeholder.png" alt="placeholder" />
+      <p>Categoria</p>
+    </button>
+  </div>
+
+  <!-- Banner -->
+  <div id="banner-container">
+
+    <div id="banner-carousel">
+
+      <div class="banner-slide">
+        <img src="img/Banner_1.png" alt="Promoção de Brinquedos">
       </div>
 
-      <!-- Marcas -->
-      <div id="brands-container">
-        <h2>Maiores Marcas</h2>
-        <div id="brands-wrapper">
-          <div id="brands-carousel">
-            <button class="brand">
-              <img src="img/Candide.png" alt="Placeholder" />
-            </button>
-            <button class="brand">
-              <img src="img/Disney.png" alt="Placeholder" />
-            </button>
-            <button class="brand">
-              <img src="img/Fisher-Price.png" alt="Placeholder" />
-            </button>
-            <button class="brand">
-              <img src="img/Hasbro.png" alt="Placeholder" />
-            </button>
-            <button class="brand">
-              <img src="img/Hot_Wheels.png" alt="Placeholder" />
-            </button>
-            <button class="brand">
-              <img src="img/Lego.png" alt="Placeholder" />
-            </button>
-            <button class="brand">
-              <img src="img/Mattel.png" alt="Placeholder" />
-            </button>
-            <button class="brand">
-              <img src="img/Pop_funko.png" alt="Placeholder" />
-            </button>
-          </div>
-        </div>
+      <div class="banner-slide">
+        <img src="img/Banner_2.png" alt="Novidades">
       </div>
-    </main>
+
+      <div class="banner-slide">
+        <img src="img/Banner_3.png" alt="Ofertas">
+      </div>
+
+    </div>
+
+    <!-- Botões -->
+    <button class="banner-btn prev">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+
+    <button class="banner-btn next">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+  </div>
+
+  <!-- Marcas -->
+  <div id="brands-container">
+    <h2>Maiores Marcas</h2>
+    <div id="brands-wrapper">
+      <div id="brands-carousel">
+        <button class="brand">
+          <img src="img/Candide.png" alt="Placeholder" />
+        </button>
+        <button class="brand">
+          <img src="img/Disney.png" alt="Placeholder" />
+        </button>
+        <button class="brand">
+          <img src="img/Fisher-Price.png" alt="Placeholder" />
+        </button>
+        <button class="brand">
+          <img src="img/Hasbro.png" alt="Placeholder" />
+        </button>
+        <button class="brand">
+          <img src="img/Hot_Wheels.png" alt="Placeholder" />
+        </button>
+        <button class="brand">
+          <img src="img/Lego.png" alt="Placeholder" />
+        </button>
+        <button class="brand">
+          <img src="img/Mattel.png" alt="Placeholder" />
+        </button>
+        <button class="brand">
+          <img src="img/Pop_funko.png" alt="Placeholder" />
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>
+```
+
   </body>
 </html>
