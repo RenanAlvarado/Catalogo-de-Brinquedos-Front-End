@@ -45,7 +45,6 @@ wrapper.addEventListener("mouseleave", () => {
   speed = 1;
 });
 
-
 /* ===================================== */
 /* CARROSSEL DO BANNER */
 /* ===================================== */
@@ -95,3 +94,44 @@ setInterval(() => {
 
   updateBanner();
 }, 5000);
+
+// Consumo de API para listar todos os brinquedos
+
+// Seleciona elemento pai
+const container = document.querySelector("#products-wrapper");
+
+// Cria função assíncrona(necessita da espera) para receber os brinquedos
+async function carregarBrinquedos() {
+  // Requisição da API --> await para esperar a resposta antes de continuar
+  const resposta = await fetch("http://localhost:8080/api/brinquedos");
+
+  //Converte a resposta em JSON
+  const brinquedos = await resposta.json();
+
+  // Criação do botão e cada uma das partes
+  brinquedos.forEach((brinquedo) => {
+    const card = document.createElement("button");
+    card.classList.add("product-card");
+
+    // verifica se existe imagem, se não é placeholder
+    const imagem = brinquedo.imagem ? brinquedo.imagem : "img/placeholder.png";
+
+    // Código html que recebe as variáveis
+    card.innerHTML = `
+      <img 
+        src="img/toys/${imagem}" 
+        alt="${brinquedo.nome}" 
+        class="toy-img"
+        onerror="this.src='img/placeholder.png'"
+      />
+      <h3 class="toy-title">${brinquedo.nome}</h3>
+      <p class="toy-description">${brinquedo.descricao}</p>
+    `;
+
+    // Inserção do card no elemento pai
+    container.appendChild(card);
+  });
+}
+
+// Chamar função para quando a página carregar
+carregarBrinquedos();

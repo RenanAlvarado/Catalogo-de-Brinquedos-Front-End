@@ -296,11 +296,14 @@ body {
 
 /* Card do produto */
 .product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 220px;
   padding: 20px;
   /* Grow: 1 Shrink: 1 Basis: 200px */
   flex: 1 1 200px;
-  max-width: 250px;
+  max-width: 220px;
   border-radius: 10px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -316,8 +319,9 @@ body {
   /* Ocupar tudo */
   width: 100%;
   border: 1px solid black;
+  object-fit: contain;
   border-radius: 8px;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .product-card .toy-title {
