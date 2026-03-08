@@ -180,6 +180,8 @@ body {
   overflow: hidden;
   max-width: 95%; /* limite de largura */
   margin: 0 auto; /* centraliza horizontalmente */
+
+  padding: 15px 0;
 }
 
 /* Carrossel */
