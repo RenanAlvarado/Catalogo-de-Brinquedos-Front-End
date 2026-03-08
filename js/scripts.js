@@ -137,7 +137,7 @@ async function carregarBrinquedos() {
 carregarBrinquedos();
 
 // API para carregar categorias
-const categoryContainer = document.querySelector("#categories-wrapper");
+const categoryCarousel = document.querySelector("#categories-carousel");
 
 // Cria função assíncrona(necessita da espera) para receber os brinquedos
 async function carregarCategorias() {
@@ -167,9 +167,48 @@ async function carregarCategorias() {
     `;
 
     // Inserção do card no elemento pai
-    categoryContainer.appendChild(card);
+    categoryCarousel.appendChild(card);
   });
 }
 
 // Chamar função para quando a página carregar
 carregarCategorias();
+
+// Carrosell de Categorias
+
+// Elementos
+const categorywrapper = document.querySelector("#categories-wrapper");
+const prevBtnCategories = document.querySelector(".prev-categories");
+const nextBtnCategories = document.querySelector(".next-categories");
+
+// mover para direita
+nextBtnCategories.addEventListener("click", () => {
+  const maxScroll = categoryCarousel.scrollWidth - categorywrapper.clientWidth;
+
+  if (scrollPosition < maxScroll) {
+    scrollPosition += scrollAmount;
+
+    if (scrollPosition > maxScroll) {
+      scrollPosition = maxScroll;
+    }
+
+    categoryCarousel.style.transform = `translateX(-${scrollPosition}px)`;
+  }
+});
+
+// posição atual
+let scrollPosition = 0;
+
+// quantidade de movimento
+const scrollAmount = 180;
+
+// mover para esquerda
+prevBtnCategories.addEventListener("click", () => {
+  scrollPosition -= scrollAmount;
+
+  if (scrollPosition < 0) {
+    scrollPosition = 0;
+  }
+
+  categoryCarousel.style.transform = `translateX(-${scrollPosition}px)`;
+});

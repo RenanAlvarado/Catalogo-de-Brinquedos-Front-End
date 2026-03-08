@@ -133,9 +133,11 @@ body {
 #categories-container {
   display: flex;
   justify-content: space-between;
+  gap: 20px;
   align-items: center;
   margin-bottom: 30px;
   padding: 0 100px;
+  width: 100%;
 }
 
 /* Setas */
@@ -165,9 +167,15 @@ body {
 }
 
 #categories-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+#categories-carousel {
   display: flex;
   justify-content: space-between;
-  gap: 15px;
+  gap: 20px;
+  transition: transform 0.4s ease;
 }
 
 /* Card das categorias */
