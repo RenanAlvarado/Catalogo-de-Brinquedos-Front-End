@@ -1,3 +1,7 @@
+/* ===================================== */
+/* CARROSSEL DE MARCAS */
+/* ===================================== */
+
 const carousel = document.getElementById("brands-carousel");
 const wrapper = document.getElementById("brands-wrapper");
 
@@ -24,22 +28,70 @@ animate();
 // ===== CONTROLE PELO MOUSE =====
 wrapper.addEventListener("mousemove", (e) => {
   const rect = wrapper.getBoundingClientRect();
-  const x = e.clientX - rect.left; // posição do mouse dentro do wrapper
+  const x = e.clientX - rect.left;
   const center = rect.width / 2;
 
   if (x < center - 50) {
-    // mouse mais para a esquerda → anda para trás
     speed = -3.5;
   } else if (x > center + 50) {
-    // mouse mais para a direita → anda para frente
     speed = 3.5;
   } else {
-    // mouse no centro → velocidade menor ou parado
     speed = 1;
   }
 });
 
-// ===== VOLTA ao normal quando sai do wrapper =====
+// ===== VOLTA AO NORMAL =====
 wrapper.addEventListener("mouseleave", () => {
-  speed = 1; // velocidade padrão
+  speed = 1;
 });
+
+
+/* ===================================== */
+/* CARROSSEL DO BANNER */
+/* ===================================== */
+
+const bannerCarousel = document.querySelector("#banner-carousel");
+const bannerSlides = document.querySelectorAll(".banner-slide");
+
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+
+let bannerIndex = 0;
+
+// atualizar posição
+function updateBanner() {
+  bannerCarousel.style.transform = `translateX(-${bannerIndex * 100}%)`;
+}
+
+// botão próximo
+nextBtn.addEventListener("click", () => {
+  bannerIndex++;
+
+  if (bannerIndex >= bannerSlides.length) {
+    bannerIndex = 0;
+  }
+
+  updateBanner();
+});
+
+// botão anterior
+prevBtn.addEventListener("click", () => {
+  bannerIndex--;
+
+  if (bannerIndex < 0) {
+    bannerIndex = bannerSlides.length - 1;
+  }
+
+  updateBanner();
+});
+
+// auto slide
+setInterval(() => {
+  bannerIndex++;
+
+  if (bannerIndex >= bannerSlides.length) {
+    bannerIndex = 0;
+  }
+
+  updateBanner();
+}, 5000);
