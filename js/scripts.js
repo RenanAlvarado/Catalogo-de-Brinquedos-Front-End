@@ -98,7 +98,7 @@ setInterval(() => {
 // Consumo de API para listar todos os brinquedos
 
 // Seleciona elemento pai
-const container = document.querySelector("#products-wrapper");
+const productsContainer = document.querySelector("#products-wrapper");
 
 // Cria função assíncrona(necessita da espera) para receber os brinquedos
 async function carregarBrinquedos() {
@@ -129,9 +129,47 @@ async function carregarBrinquedos() {
     `;
 
     // Inserção do card no elemento pai
-    container.appendChild(card);
+    productsContainer.appendChild(card);
   });
 }
 
 // Chamar função para quando a página carregar
 carregarBrinquedos();
+
+// API para carregar categorias
+const categoryContainer = document.querySelector("#categories-wrapper");
+
+// Cria função assíncrona(necessita da espera) para receber os brinquedos
+async function carregarCategorias() {
+  // Requisição da API --> await para esperar a resposta antes de continuar
+  const resposta = await fetch("http://localhost:8080/api/categorias");
+
+  //Converte a resposta em JSON
+  const categorias = await resposta.json();
+
+  // Criação do botão e cada uma das partes
+  categorias.forEach((categoria) => {
+    const card = document.createElement("button");
+    card.classList.add("category-card");
+
+    // verifica se existe imagem, se não é placeholder
+    const imagem = categoria.imagem ? categoria.imagem : "img/placeholder.png";
+
+    // Código html que recebe as variáveis
+    card.innerHTML = `
+      <img 
+        src="img/categories/${imagem}" 
+        alt="${categoria.nome}" 
+        class="category-img"
+        onerror="this.src='img/placeholder.png'"
+      />
+      <h3 class="category-title">${categoria.nome}</h3>  
+    `;
+
+    // Inserção do card no elemento pai
+    categoryContainer.appendChild(card);
+  });
+}
+
+// Chamar função para quando a página carregar
+carregarCategorias();
