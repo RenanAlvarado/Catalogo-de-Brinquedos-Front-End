@@ -23,34 +23,36 @@
   </head>
   <body>
     <!-- Navegação da parte de cima -->
-    <nav id="navbar">
-      <!-- Para o CSS -->
-      <div id="navbar-inner">
-        <div id="logo-nav">
-          <a href="index.html"
-            ><img src="img/logo.png" alt="Logo do Catalogo de Brinquedos"
-          /></a>
-        </div>
+    <header>
+      <nav id="navbar">
+        <!-- Para o CSS -->
+        <div id="navbar-inner">
+          <div id="logo-nav">
+            <a href="index.html"
+              ><img src="img/logo.png" alt="Logo do Catalogo de Brinquedos"
+            /></a>
+          </div>
 
-        <div id="busca-navbar">
-          <form>
-            <input type="text" placeholder="Barra de Pesquisa" />
-            <button type="submit" class="btn">
-              <i class="fas fa-search"></i>
+          <div id="busca-navbar">
+            <form>
+              <input type="text" placeholder="Barra de Pesquisa" />
+              <button type="submit" class="btn">
+                <i class="fas fa-search"></i>
+              </button>
+            </form>
+          </div>
+
+          <div id="actions">
+            <button id="favs" class="btn">
+              <p>Favoritos <i class="fa-regular fa-heart"></i></p>
             </button>
-          </form>
+            <button id="login" class="btn">
+              <p>Cadastro/Login <i class="fa-regular fa-user"></i></p>
+            </button>
+          </div>
         </div>
-
-        <div id="actions">
-          <button id="favs" class="btn">
-            <p>Favoritos <i class="fa-regular fa-heart"></i></p>
-          </button>
-          <button id="login" class="btn">
-            <p>Cadastro/Login <i class="fa-regular fa-user"></i></p>
-          </button>
-        </div>
-      </div>
-    </nav>
+      </nav>
+    </header>
 
     <!-- Conteudo Principal -->
     <main id="main-container">
@@ -133,5 +135,46 @@
         <div id="products-wrapper"></div>
       </div>
     </main>
+
+    <footer id="footer">
+      <div id="footer-container">
+        <div class="footer-column">
+          <img src="img/logo.png" alt="Logo" />
+          <p>Seu catálogo de brinquedos online.</p>
+        </div>
+
+        <div class="footer-column">
+          <h3>Categorias</h3>
+          <ul>
+            <li>Carrinhos</li>
+            <li>Bonecas</li>
+            <li>Educativos</li>
+            <li>Jogos</li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Ajuda</h3>
+          <ul>
+            <li>Contato</li>
+            <li>Trocas</li>
+            <li>Perguntas frequentes</li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Redes sociais</h3>
+          <p>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-facebook"></i>
+            <i class="fa-brands fa-youtube"></i>
+          </p>
+        </div>
+      </div>
+
+      <div id="footer-bottom">
+        <p>© 2026 Catálogo de Brinquedos</p>
+      </div>
+    </footer>
   </body>
 </html>
