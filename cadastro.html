@@ -1,84 +1,78 @@
 <!doctype html>
 <html lang="pt-br">
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Fonte -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
 
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
-<link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <!-- Logo do Navegador -->
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
 
-<link rel="stylesheet" href="css/register.css">
+    <!-- CSS -->
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-crossorigin="anonymous"
-referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="css/register.css" />
 
-<title>Marah / Cadastro</title>
+    <!-- Icones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
-</head>
+    <title>Marah / Cadastro</title>
+  </head>
 
-<body>
+  <body>
+    <main id="main-container">
+      <div id="register-container">
+        <a href="login.html" id="arrow-left">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
 
-<main id="main-container">
+        <div id="logo-container">
+          <img src="img/marah_cadas-rem.png" alt="Logo" />
 
-<div id="register-container">
+          <h1 id="frase-login">Crie sua conta na Marah</h1>
+        </div>
 
-<a href="login.html" id="arrow-left">
-<i class="fa-solid fa-arrow-left"></i>
-</a>
+        <div id="form-container">
+          <form id="register-form">
+            <h3 id="title">Cadastro</h3>
 
-<div id="logo-container">
+            <div class="input-icon">
+              <i class="fa-regular fa-user"></i>
+              <input type="text" placeholder="Nome completo" required />
+            </div>
 
-<img src="img/marah_cadas-rem.png" alt="Logo">
+            <div class="input-icon">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" placeholder="Email" required />
+            </div>
 
-<h1 id="frase-login">
-Crie sua conta<br>
-na Marah
-</h1>
+            <div class="input-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" placeholder="Senha" required />
+            </div>
 
-</div>
+            <div class="input-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" placeholder="Confirmar senha" required />
+            </div>
 
-<div id="form-container">
+            <input type="submit" value="Criar conta" id="btn-submit" />
+          </form>
 
-<form id="register-form">
-
-<h3 id="title">Cadastro</h3>
-
-<div class="input-icon">
-<i class="fa-regular fa-user"></i>
-<input type="text" placeholder="Nome completo" required>
-</div>
-
-<div class="input-icon">
-<i class="fa-regular fa-envelope"></i>
-<input type="email" placeholder="Email" required>
-</div>
-
-<div class="input-icon">
-<i class="fa-solid fa-lock"></i>
-<input type="password" placeholder="Senha" required>
-</div>
-
-<div class="input-icon">
-<i class="fa-solid fa-lock"></i>
-<input type="password" placeholder="Confirmar senha" required>
-</div>
-
-<input type="submit" value="Criar conta" id="btn-submit">
-
-</form>
-
-<a href="login.html" id="link-account">
-Já possui conta? Fazer login
-</a>
-
-</div>
-
-</div>
-
-</main>
-
-</body>
+          <a href="login.html" id="link-account">
+            Já possui conta? Fazer login
+          </a>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>

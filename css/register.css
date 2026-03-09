@@ -62,7 +62,6 @@ html {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
   width: 100%;
   border-bottom: 2px double #000;
   padding: 20px;

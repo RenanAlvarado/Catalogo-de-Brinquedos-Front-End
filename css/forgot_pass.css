@@ -1,139 +1,139 @@
 /* RESET */
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-body,html{
-width:100%;
-height:100%;
-font-family: Arial, Helvetica, sans-serif;
+body,
+html {
+  width: 100%;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* IMPORTANDO FONTE */
 
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap");
 
 /* FUNDO */
 
-#main-container{
-width:100%;
-height:100%;
-display:flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#d9d9d9,#bfbfbf);
+#main-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #d9d9d9, #bfbfbf);
 }
 
 /* CONTAINER */
 
-#forgot-container{
-display:flex;
-flex-direction:column;
-align-items:center;
-width:30%;
-max-width:420px;
-background:#d1d1d1;
-border-radius:12px;
-border:1px solid #000;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
-padding:25px;
+#forgot-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  max-width: 420px;
+  background: #d1d1d1;
+  border-radius: 12px;
+  border: 1px solid #000;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 25px;
 }
 
 /* SETA */
 
-#forgot-container #arrow-left{
-align-self:flex-start;
-font-size:24px;
-color:#000;
-margin-bottom:10px;
-transition:0.2s;
+#forgot-container #arrow-left {
+  align-self: flex-start;
+  font-size: 24px;
+  color: #000;
+  margin-bottom: 10px;
+  transition: 0.2s;
 }
 
-#forgot-container #arrow-left:hover{
-transform:scale(1.1);
+#forgot-container #arrow-left:hover {
+  transform: scale(1.1);
 }
 
 /* FORM CONTAINER */
 
-#form-container{
-width:100%;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
+#form-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* FORM */
 
-#forgot-form{
-display:flex;
-flex-direction:column;
-width:100%;
-color:#000;
+#forgot-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #000;
 }
 
-#forgot-form h3{
-align-self:flex-start;
-margin-bottom:12px;
-font-size:20px;
+#forgot-form h3 {
+  align-self: flex-start;
+  margin-bottom: 12px;
+  font-size: 20px;
 }
 
 /* INPUTS */
 
-.input-icon{
-display:flex;
-align-items:center;
-border:1px solid #ccc;
-border-radius:20px;
-margin-bottom:12px;
-background:#fff;
-padding:10px;
-transition:0.2s;
+.input-icon {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  background: #fff;
+  padding: 10px;
+  transition: 0.2s;
 }
 
-.input-icon i{
-margin-right:8px;
+.input-icon i {
+  margin-right: 8px;
 }
 
 /* INPUT */
 
-#forgot-form input[type="text"]{
-width:100%;
-border:none;
-outline:none;
-background:transparent;
-color:#000;
+#forgot-form input[type="text"] {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #000;
 }
 
 /* EFEITOS INPUT */
 
-.input-icon:hover{
-transform:scale(1.02);
+.input-icon:hover {
+  transform: scale(1.02);
 }
 
-.input-icon:focus-within{
-border-color:aqua;
-box-shadow:0 0 5px rgba(0,255,255,0.5);
+.input-icon:focus-within {
+  border-color: aqua;
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
 }
 
 /* BOTÃO */
 
-#btn-submit{
-border:1px solid #000;
-cursor:pointer;
-background:linear-gradient(135deg,#FFC5D3,#FFC5D3);
-padding:9px;
-color:#000;
-font-weight:bold;
-border-radius:6px;
-margin-bottom:10px;
-transition:0.2s;
+#btn-submit {
+  border: 1px solid #000;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffc5d3, #ffc5d3);
+  padding: 9px;
+  color: #000;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  transition: 0.2s;
 }
 
-#btn-submit:hover{
-background:#FFC5D3;
-color:#fff;
+#btn-submit:hover {
+  background: #ffc5d3;
+  color: #fff;
 }
