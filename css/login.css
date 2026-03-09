@@ -251,3 +251,37 @@ html {
     gap: 15px;
   }
 }
+
+/*animação digitação*/
+#frase-login span {
+display: inline-block;
+overflow: hidden;
+white-space: nowrap;
+border-right: 3px solid transparent; /* Cursor escondido no início */
+width: 0; /* Todas começam invisíveis com largura zero */
+}
+
+/* Linha 1: "É sempre" (8 letras/espaços). Demora 1 segundo. */
+.linha1 {
+animation: type1 1s steps(8) forwards, piscar 0.5s step-end 2;
+}
+
+/* Linha 2: "um prazer" (9 letras/espaços). Tem um atraso de 1s para esperar a linha 1! */
+.linha2 {
+animation: type2 1s steps(9) 1s forwards, piscar 0.5s step-end 2 1s;
+}
+
+/* Linha 3: "recebê-lo" (9 letras/espaços). Tem um atraso de 2s para esperar as linhas 1 e 2! */
+.linha3 {
+animation: type3 1s steps(9) 2s forwards, piscar 0.5s step-end infinite 2s;
+}
+
+/* Os 3 motores que definem o tamanho final de cada linha */
+@keyframes type1 { to { width: 8ch; } }
+@keyframes type2 { to { width: 9ch; } }
+@keyframes type3 { to { width: 9ch; } }
+
+/* O motor do cursor amarelo */
+@keyframes piscar {
+50% { border-color: #ffb703; }
+}

@@ -296,8 +296,8 @@ body {
   background: linear-gradient(45deg, #55cbcd, #2b7a7c, #1b4e4f, #3ea2a4, #55cbcd);
   background-size: 400%, 100%;
   animation: degrade 30s linear infinite alternate;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  /*-webkit-background-clip: text;*/
+  -webkit-text-fill-color: white;
   font-weight: 600;
   font-family: 'Oswald', sans-serif;
 }
