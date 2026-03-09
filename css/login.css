@@ -112,6 +112,7 @@ html {
   display: none;
 }
 
+/* Fundo do check */
 .switch {
   position: relative;
   background-color: #777;
@@ -125,6 +126,7 @@ html {
   cursor: pointer;
 }
 
+/* Bolinha do Slider */
 .slider {
   position: absolute;
   background-color: white;
@@ -153,7 +155,7 @@ html {
 }
 
 /* Submit de Login */
-#btn-login {
+#btn-submit {
   border: 1px solid #000;
   cursor: pointer;
   background-color: aqua;
@@ -162,6 +164,12 @@ html {
   font-weight: bold;
   border-radius: 2px;
   margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+#btn-submit:hover {
+  background-color: #777;
+  color: #fff;
 }
 
 #link-account {
@@ -173,5 +181,3 @@ html {
 #link-account:hover {
   text-decoration: underline;
 }
-
-/* Recuperar senha */

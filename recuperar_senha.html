@@ -7,7 +7,40 @@
     <title>Marah/Recuperar Senha</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/login_cadastro.css" />
+    <link rel="stylesheet" href="css/forgot_pass.css" />
+
+    <!-- Icones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
-  <body></body>
+  <body>
+    <main id="main-container">
+      <div id="forgot-container">
+        <a href="login.html" id="arrow-left">
+          <i class="fa-solid fa-arrow-left"></i
+        ></a>
+
+        <div id="form-container">
+          <form action="#" id="forgot-form">
+            <h3>Recuperar Senha:</h3>
+            <div class="input-icon">
+              <i class="fa-regular fa-envelope"></i>
+              <input
+                type="text"
+                name="email"
+                id="email-input"
+                placeholder="Insira seu Email"
+              />
+            </div>
+            <input type="submit" value="Enviar" id="btn-submit" />
+          </form>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
