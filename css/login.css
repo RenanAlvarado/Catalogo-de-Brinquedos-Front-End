@@ -25,11 +25,23 @@ html {
 /* Parte do container */
 #login-container {
   display: flex;
+  width: 30%;
+  max-width: 30%;
   flex-direction: column;
   align-items: center;
   border: 1px solid #000;
   padding-bottom: 10px;
   background-color: #d1d1d1;
+}
+
+#login-container #arrow-left {
+  /* Seta ficar para a esquerda */
+  align-self: flex-start;
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #000;
+  padding-top: 20px;
+  padding-left: 15px;
 }
 
 #logo-container {
@@ -40,7 +52,8 @@ html {
   border-bottom: 2px double #000;
 }
 #logo-container img {
-  width: 450px;
+  width: 350px;
+  max-width: 350px;
 }
 
 /* Onde está o formulário */
