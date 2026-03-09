@@ -4,8 +4,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
     <title>Catalogo de Brinquedos</title>
+
     <!-- CSS Geral (HomePage) -->
     <link rel="stylesheet" href="css/homepage.css" />
 
@@ -38,12 +39,19 @@
 
           <div id="busca-navbar">
             <form>
-              <input type="text" placeholder="Barra de Pesquisa" />
+              <input
+                type="text"
+                placeholder="Barra de Pesquisa"
+                id="search-input"
+              />
               <button type="submit" class="btn">
                 <i class="fas fa-search"></i>
               </button>
             </form>
           </div>
+
+          <!-- Sugestões -->
+          <div id="suggestions-box"></div>
 
           <div id="actions">
             <button id="favs" class="btn">
@@ -103,7 +111,7 @@
 
       <!-- Marcas -->
       <div id="brands-container">
-        <h2>Maiores Marcas</h2>
+        Maiores Marcas
         <div id="brands-wrapper">
           <div id="brands-carousel">
             <button class="brand">
@@ -143,8 +151,7 @@
     <footer id="footer">
       <div id="footer-container">
         <div class="footer-column">
-          <img src="img/newlogo.png" alt="Logo" />
-          <p>Seu catálogo de brinquedos online.</p>
+          <img src="img/logoSlogan.png" alt="Logo" />
         </div>
 
         <div class="footer-column">
