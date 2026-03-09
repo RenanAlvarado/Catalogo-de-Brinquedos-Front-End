@@ -1,196 +1,238 @@
-/* Gerais */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* RESET */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-body,
-html {
-  /* Preencher a tela inteira */
-  width: 100%;
-  height: 100%;
+body,html{
+width:100%;
+height:100%;
+font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Principal */
-#main-container {
-  background-color: #ddd;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* IMPORTANDO FONTE */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');
+
+/* FUNDO */
+
+#main-container{
+width:100%;
+height:100%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:linear-gradient(135deg,#d9d9d9,#bfbfbf);
 }
 
-/* Parte do container */
-#login-container {
-  display: flex;
-  width: 30%;
-  max-width: 30%;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #000;
-  padding-bottom: 10px;
-  background-color: #d1d1d1;
+/* CONTAINER LOGIN */
+
+#login-container{
+display:flex;
+flex-direction:column;
+align-items:center;
+width:30%;
+max-width:420px;
+background:#d1d1d1;
+border-radius:12px;
+border:1px solid #000;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+padding-bottom:15px;
 }
 
-#login-container #arrow-left {
-  /* Seta ficar para a esquerda */
-  align-self: flex-start;
-  font-size: 24px;
-  margin-bottom: 10px;
-  color: #000;
-  padding-top: 20px;
-  padding-left: 15px;
+/* SETA */
+
+#arrow-left{
+align-self:flex-start;
+font-size:24px;
+color:#000;
+padding:20px 0 0 15px;
+transition:0.2s;
 }
 
-#logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  border-bottom: 2px double #000;
-}
-#logo-container img {
-  width: 350px;
-  max-width: 350px;
+#arrow-left:hover{
+transform:scale(1.1);
 }
 
-/* Onde está o formulário */
-#form-container {
-  /* Cima, Baixo e laterais  */
-  padding: 20px 50px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/* LOGO */
+
+#logo-container{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:20px;
+width:100%;
+border-bottom:2px double #000;
+padding:20px;
 }
 
-/* Formulário */
-#login-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  color: #000;
+/* FRASE */
+
+#frase-login{
+font-family:'Fredoka', sans-serif;
+font-size:30px;
+line-height:1.3;
+text-align:center;
+max-width:260px;
+color:#222;
+font-weight:600;
 }
 
-#title {
-  align-self: flex-start;
-  margin-bottom: 10px;
-  /* Alterar o tamanho do titulo */
-  font-size: 20px;
+/* IMAGEM */
+
+#logo-container img{
+width:220px;
 }
 
-.input-icon {
-  display: flex;
-  align-items: center;
-  border: 1px solid #000;
-  border-radius: 15px;
-  margin-bottom: 10px;
-  /* Alterar a cor dos inputs */
-  background-color: #fff;
-  padding: 6px;
+/* FORM */
+
+#form-container{
+padding:20px 50px;
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
 }
 
-#login-form input[type="text"] {
-  width: 100%;
-  padding: 5px;
-  border: none;
-  /* Para ficar apenas a cor de fundo */
-  background-color: transparent;
-  color: #000;
-  outline: none;
+#login-form{
+display:flex;
+flex-direction:column;
+width:100%;
+color:#000;
 }
 
-/* Para deixar em Linha */
-#remember-password {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  width: 100%;
+#title{
+align-self:flex-start;
+margin-bottom:12px;
+font-size:20px;
 }
 
-/* Botão e texto de relembrar */
-#remember-me {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  align-items: center;
+/* INPUTS */
+
+.input-icon{
+display:flex;
+align-items:center;
+border:1px solid #ccc;
+border-radius:20px;
+margin-bottom:12px;
+background:#fff;
+padding:10px;
+transition:0.2s;
 }
 
-#remember-check {
-  /* Para sumir o botão */
-  display: none;
+.input-icon i{
+margin-right:8px;
 }
 
-/* Fundo do check */
-.switch {
-  position: relative;
-  background-color: #777;
-  width: 30px;
-  height: 20px;
-  border-radius: 40px;
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  transition: all 0.5s ease-in-out;
-  cursor: pointer;
+#login-form input{
+width:100%;
+border:none;
+outline:none;
+background:transparent;
 }
 
-/* Bolinha do Slider */
-.slider {
-  position: absolute;
-  background-color: white;
-  border-radius: 50%;
-  width: 10px;
-  height: 10px;
-  transition: all 0.5s ease-in-out;
+/* EFEITO INPUT */
+
+.input-icon:hover{
+transform:scale(1.02);
 }
 
-#remember-check:checked ~ .switch {
-  background-color: aqua;
+.input-icon:focus-within{
+border-color:aqua;
+box-shadow:0 0 5px rgba(0,255,255,0.5);
 }
 
-#remember-check:checked ~ .switch .slider {
-  transform: translateX(10px);
+/* LEMBRAR SENHA */
+
+#remember-password{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:12px;
+width:100%;
+font-size:14px;
 }
 
-#remember-password a {
-  text-decoration: none;
-  /* Mudar a cor do Link */
-  color: #000;
+#remember-me{
+display:flex;
+align-items:center;
+gap:10px;
 }
 
-#remember-password a:hover {
-  text-decoration: underline;
+#remember-check{
+display:none;
 }
 
-/* Submit de Login */
-#btn-submit {
-  border: 1px solid #000;
-  cursor: pointer;
-  background-color: aqua;
-  padding: 6px;
-  color: #000;
-  font-weight: bold;
-  border-radius: 2px;
-  margin-bottom: 10px;
-  transition: 0.2s;
+/* SWITCH */
+
+.switch{
+position:relative;
+background:#777;
+width:32px;
+height:18px;
+border-radius:40px;
+display:flex;
+align-items:center;
+padding:4px;
+cursor:pointer;
+transition:0.3s;
 }
 
-#btn-submit:hover {
-  background-color: #777;
-  color: #fff;
+.slider{
+position:absolute;
+background:white;
+border-radius:50%;
+width:10px;
+height:10px;
+transition:0.3s;
 }
 
-#link-account {
-  text-decoration: none;
-  /* Mudar a cor do Link */
-  color: #000;
+#remember-check:checked ~ .switch{
+background:#FFC5D3;
 }
 
-#link-account:hover {
-  text-decoration: underline;
+#remember-check:checked ~ .switch .slider{
+transform:translateX(14px);
+}
+
+#remember-password a{
+text-decoration:none;
+color:#000;
+}
+
+#remember-password a:hover{
+text-decoration:underline;
+}
+
+/* BOTÃO */
+
+#btn-submit{
+border:1px solid #000;
+cursor:pointer;
+background:linear-gradient(135deg,#00e5e5,#00bfbf);
+padding:9px;
+color:#000;
+font-weight:bold;
+border-radius:6px;
+margin-bottom:10px;
+transition:0.2s;
+}
+
+#btn-submit:hover{
+background:#FFC5D3;
+color:#fff;
+}
+
+/* CRIAR CONTA */
+
+#link-account{
+text-decoration:none;
+color:#000;
+font-size:14px;
+}
+
+#link-account:hover{
+text-decoration:underline;
 }
