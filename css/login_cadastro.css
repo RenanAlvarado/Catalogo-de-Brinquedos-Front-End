@@ -1,0 +1,139 @@
+/* Gerais */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  /* Preencher a tela inteira */
+  width: 100%;
+  height: 100%;
+}
+
+/* Principal */
+#main-container {
+  background-color: #ddd;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Parte do container */
+#login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #000;
+  padding-bottom: 10px;
+  background-color: #d1d1d1;
+}
+
+#logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-bottom: 2px double #000;
+}
+#logo-container img {
+  width: 450px;
+}
+
+/* Onde está o formulário */
+#form-container {
+  /* Cima, Baixo e laterais  */
+  padding: 20px 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Formulário */
+#login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: #000;
+}
+
+#title {
+  align-self: flex-start;
+  margin-bottom: 10px;
+  /* Alterar o tamanho do titulo */
+  font-size: 20px;
+}
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  /* Alterar a cor dos inputs */
+  background-color: #fff;
+  padding: 6px;
+}
+
+#login-form input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  /* Para ficar apenas a cor de fundo */
+  background-color: transparent;
+  color: #000;
+}
+
+/* Para deixar em Linha */
+#remember-password {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+/* Botão e texto de relembrar */
+#remember-me {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+#remember-password a {
+  text-decoration: none;
+  /* Mudar a cor do Link */
+  color: #000;
+}
+
+#remember-password a:hover {
+  text-decoration: underline;
+}
+
+/* Submit de Login */
+#btn-login {
+  border: 1px solid #000;
+  cursor: pointer;
+  background-color: aqua;
+  padding: 6px;
+  color: #000;
+  font-weight: bold;
+  border-radius: 2px;
+  margin-bottom: 10px;
+}
+
+#link-account {
+  text-decoration: none;
+  /* Mudar a cor do Link */
+  color: #000;
+}
+
+#link-account:hover {
+  text-decoration: underline;
+}
