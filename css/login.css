@@ -25,6 +25,8 @@ html {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #d9d9d9, #bfbfbf);
+  /* Para afastamento, não colar nas bordas */
+  padding: 20px;
 }
 
 /* CONTAINER LOGIN */
@@ -33,7 +35,8 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%;
+  /* Deixar 100% e com largura máxima, faz com que a tela se mantenha */
+  width: 100%;
   max-width: 420px;
   background: #d1d1d1;
   border-radius: 12px;
@@ -69,7 +72,9 @@ html {
 /* IMAGEM */
 
 #logo-container img {
-  width: 220px;
+  /* Imagem preenche tudo */
+  width: 100%;
+  max-width: 220px;
 }
 
 /* FRASE */
@@ -124,7 +129,8 @@ html {
   margin-right: 8px;
 }
 
-#login-form input {
+/* Mexe apenas nos inputs do tipo texto */
+#login-form input[type="text"] {
   width: 100%;
   border: none;
   outline: none;
@@ -204,22 +210,21 @@ html {
   text-decoration: underline;
 }
 
-/* BOTÃO */
-
+/* BOTÃO DE LOGIN */
 #btn-submit {
   border: 1px solid #000;
   cursor: pointer;
-  background: linear-gradient(135deg, #00e5e5, #00bfbf);
   padding: 9px;
   color: #000;
   font-weight: bold;
+  font-size: 16px;
   border-radius: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   transition: 0.2s;
 }
 
 #btn-submit:hover {
-  background: #ffc5d3;
+  background: #ea8da2;
   color: #fff;
 }
 
@@ -228,9 +233,21 @@ html {
 #link-account {
   text-decoration: none;
   color: #000;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 #link-account:hover {
   text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 450px) {
+  #logo-container {
+    flex-direction: column;
+  }
+
+  #remember-password {
+    justify-content: center;
+    gap: 15px;
+  }
 }
