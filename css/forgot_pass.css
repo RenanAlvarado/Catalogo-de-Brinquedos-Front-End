@@ -25,6 +25,8 @@ html {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #d9d9d9, #bfbfbf);
+  /* Para afastamento, não colar nas bordas */
+  padding: 20px;
 }
 
 /* CONTAINER */
@@ -33,7 +35,8 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%;
+  /* Deixar 100% e com largura máxima, faz com que a tela se mantenha */
+  width: 100%;
   max-width: 420px;
   background: #d1d1d1;
   border-radius: 12px;

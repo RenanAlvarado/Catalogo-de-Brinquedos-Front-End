@@ -25,6 +25,8 @@ html {
   align-items: center;
   justify-content: center;
   background: linear-gradient(135deg, #d9d9d9, #bfbfbf);
+  /* Para afastamento, não colar nas bordas */
+  padding: 20px;
 }
 
 /* CONTAINER */
@@ -33,7 +35,7 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 30%;
+  width: 100%;
   max-width: 420px;
   background: #d1d1d1;
   border-radius: 12px;
@@ -68,7 +70,8 @@ html {
 }
 
 #logo-container img {
-  width: 220px;
+  width: 100%;
+  max-width: 220px;
 }
 
 /* FRASE */
@@ -172,4 +175,16 @@ html {
 
 #link-account:hover {
   text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 450px) {
+  #logo-container {
+    flex-direction: column;
+  }
+
+  #remember-password {
+    justify-content: center;
+    gap: 15px;
+  }
 }
