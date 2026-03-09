@@ -4,7 +4,67 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="img/logo.png" type="image/x-icon" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/login_cadastro.css" />
+
+    <!-- Icones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Marah/Login</title>
   </head>
-  <body></body>
+  <body>
+    <main id="main-container">
+      <div id="login-container">
+        <div id="logo-container">
+          <img src="img/logo.png" alt="Logo" />
+        </div>
+        <div id="form-container">
+          <form action="#" id="login-form">
+            <h3 id="title">Login</h3>
+            <div class="input-icon">
+              <i class="fa-regular fa-user"></i>
+              <input
+                type="text"
+                name="email"
+                id="email-input"
+                placeholder="Insira seu Email"
+              />
+            </div>
+            <div class="input-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input
+                type="text"
+                name="password"
+                id="password-input"
+                placeholder="Insira sua senha"
+              />
+            </div>
+
+            <!-- Div criada para deixar tudo lado a lado -->
+            <div id="remember-password">
+              <div id="remember-me">
+                <input type="checkbox" name="lembrar" id="remember-check" />
+                <label for="remember-check" class="switch">
+                  <span class="slider"></span>
+                </label>
+                <span id="remember-title">Lembrar</span>
+              </div>
+
+              <a href="#">Esqueceu a senha?</a>
+            </div>
+
+            <input type="submit" value="Login" id="btn-login" />
+          </form>
+
+          <a href="#" id="link-account">Criar conta</a>
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
