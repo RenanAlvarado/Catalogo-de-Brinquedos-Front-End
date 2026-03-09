@@ -36,6 +36,14 @@ body {
   /* Ficar fixo no topo da tela */
   position: sticky;
   top: 0;
+  /* A mágica do SVG embutido direto no CSS */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%233abec1' fill-opacity='1' d='M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,144C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    
+    /* Configurações para a onda se comportar bem */
+    background-size: cover;       /* Faz a onda cobrir toda a largura */
+    background-position: bottom;  /* Fixa a onda na parte de baixo do header */
+    background-repeat: no-repeat; /* Evita que a onda se repita como um azulejo */
+
   /* Ficar acima de tudo */
   z-index: 9999;
 }
@@ -58,6 +66,11 @@ body {
 /* Logo na Navbar */
 #navbar-inner img {
   width: 110px;
+}
+
+/* sombra na barra */
+#busca-navbar {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra bem levinha */
 }
 
 /* ID que tem os searchs */
@@ -111,15 +124,19 @@ body {
 
 /* Botão de favoritos */
 #favs {
-  background: #ff6b6b;
+  background: #ff8eb3;
   color: white;
   border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 50px;
 }
 
 /* Botão de Login */
 #login {
   background: #ffb703;
   border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 50px;
 }
 
 /* Conteúdo Principal */
