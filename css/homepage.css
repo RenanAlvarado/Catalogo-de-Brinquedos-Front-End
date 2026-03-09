@@ -456,7 +456,7 @@ header {
 #footer-container {
   display: flex;
   flex-wrap: wrap;
-  padding: -10px 20px;
+  padding: -20px 20px;
   justify-content: space-around;
   width: 100%;
   background-color: #4ed3d6; /* Sua cor ciano base */
@@ -476,7 +476,7 @@ header {
 }
 
 .footer-column img {
-  width: 200px;
+  width: 175px;
   margin-bottom: 10px;
 }
 
@@ -493,11 +493,12 @@ header {
 }
 
 .footer-column li {
-  margin-bottom: 25px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 16px;
+  margin-bottom: 12px !important;
+  cursor: pointer !important;
+  transition: 0.3s !important;
+  font-size: 16px !important;
   color: #1b4e4f;
+  text-align: center !important;
 }
 
 .footer-column li:hover {
@@ -508,4 +509,20 @@ header {
   text-align: center;
   border-top: 1px solid #444;
   padding: 5px 0;
+}
+
+footer-column {
+display: flex !important;
+flex-direction: column !important; /* Força os itens a ficarem um embaixo do outro */
+align-items: center !important; /* Centraliza TUDO que estiver dentro da coluna */
+text-align: center !important;
+}
+
+.caixa-icones {
+display: flex !important;
+justify-content: center !important;
+align-items: center !important;
+gap: 15px !important;
+width: 100% !important; /* O segredo para esticar a caixa! */
+margin: 0 auto !important;
 }
