@@ -400,7 +400,7 @@ body {
 #footer-container {
   display: flex;
   flex-wrap: wrap;
-  padding: 40px 20px;
+  padding: 20px 20px;
   justify-content: space-around;
   width: 100%;
   background-color: #55cbcd;
@@ -419,7 +419,10 @@ body {
 }
 
 .footer-column h3 {
-  margin-bottom: 10px;
+margin-bottom: 10px;
+font-size: 20px;
+font-weight: 800;
+color: #ffffff;
 }
 
 .footer-column ul {
@@ -427,10 +430,13 @@ body {
 }
 
 .footer-column li {
-  margin-bottom: 6px;
-  cursor: pointer;
-  transition: 0.3s;
+margin-bottom: 6px;
+cursor: pointer;
+transition: 0.3s;
+font-size: 16px;
+color: #1b4e4f;
 }
+
 
 .footer-column li:hover {
   color: #fff;
