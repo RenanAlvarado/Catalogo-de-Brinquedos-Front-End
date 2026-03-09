@@ -90,8 +90,11 @@ header {
   width: 100%;
 
   background: white;
+
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-top: none;
+
+  border-radius: 0 0 20px 20px;
 
   max-height: 250px;
   overflow-y: auto;
@@ -512,17 +515,17 @@ header {
 }
 
 footer-column {
-display: flex !important;
-flex-direction: column !important; /* Força os itens a ficarem um embaixo do outro */
-align-items: center !important; /* Centraliza TUDO que estiver dentro da coluna */
-text-align: center !important;
+  display: flex !important;
+  flex-direction: column !important; /* Força os itens a ficarem um embaixo do outro */
+  align-items: center !important; /* Centraliza TUDO que estiver dentro da coluna */
+  text-align: center !important;
 }
 
 .caixa-icones {
-display: flex !important;
-justify-content: center !important;
-align-items: center !important;
-gap: 15px !important;
-width: 100% !important; /* O segredo para esticar a caixa! */
-margin: 0 auto !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 15px !important;
+  width: 100% !important; /* O segredo para esticar a caixa! */
+  margin: 0 auto !important;
 }
