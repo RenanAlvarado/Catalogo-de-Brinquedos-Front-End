@@ -16,16 +16,23 @@ if (carousel && wrapper) {
     items = document.querySelectorAll(".brand");
 
     let position = 0;
-    let speed = 0;
+    let speed = 1;
 
     const totalWidth = (items.length / 2) * itemWidth;
 
     function animate() {
       position -= speed;
 
-      const visiblePosition = position % totalWidth;
+      // LOOP INFINITO CORRIGIDO
+      if (position <= -totalWidth) {
+        position = 0;
+      }
 
-      carousel.style.transform = `translateX(${visiblePosition}px)`;
+      if (position > 0) {
+        position = -totalWidth;
+      }
+
+      carousel.style.transform = `translateX(${position}px)`;
 
       requestAnimationFrame(animate);
     }
@@ -39,9 +46,9 @@ if (carousel && wrapper) {
       const center = rect.width / 2;
 
       if (x < center - 50) {
-        speed = -3.5;
+        speed = -3.5; // vai para esquerda
       } else if (x > center + 50) {
-        speed = 3.5;
+        speed = 3.5; // vai para direita
       } else {
         speed = 1;
       }
