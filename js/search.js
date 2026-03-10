@@ -15,11 +15,12 @@ import { renderizarBrinquedos } from "./render.js";
 // ===============================
 
 let sugestaoSelecionada = -1;
-
+const mainContainer = document.querySelector("#main-container");
 const searchInput = document.querySelector("#search-input");
 const suggestionsBox = document.querySelector("#suggestions-box");
 const buscaNavbar = document.querySelector("#busca-navbar");
 const formBusca = document.querySelector("#busca-navbar form");
+const returnButton = document.querySelector("#return-index-btn");
 
 const productsContainer = document.querySelector("#products-wrapper");
 
@@ -31,6 +32,41 @@ const toysTitle = document.querySelector("#toys-container h2");
 
 // guardar título original
 const tituloOriginal = toysTitle.innerText;
+
+// ===============================
+// BOTÃO VOLTAR AO MENU
+// ===============================
+
+function criarBotaoVoltar() {
+  // verifica se já existe
+  if (document.querySelector("#return-index-btn")) {
+    return;
+  }
+
+  const link = document.createElement("a");
+  link.href = "index.html";
+
+  const button = document.createElement("button");
+  button.classList.add("btn");
+  button.id = "return-index-btn";
+  button.textContent = "Voltar ao Menu Principal";
+
+  link.appendChild(button);
+
+  mainContainer.prepend(link);
+}
+
+// ===============================
+// REMOVER BOTÃO VOLTAR
+// ===============================
+
+function removerBotaoVoltar() {
+  const botao = document.querySelector("#return-index-btn");
+
+  if (botao) {
+    botao.parentElement.remove(); // remove também o <a>
+  }
+}
 
 // ===============================
 // Detacar texto Buscado
@@ -152,6 +188,8 @@ async function executarBusca(valor) {
 
     mostrarResultadosBusca(valor);
 
+    criarBotaoVoltar(); // 👈 adiciona aqui
+
     renderizarBrinquedos(productsContainer, brinquedos);
   } catch (erro) {
     console.error("Erro na busca:", erro);
@@ -171,19 +209,16 @@ function mostrarResultadosBusca(valor) {
 }
 
 export async function filtrarPorCategoria(id, nomeCategoria) {
-  // 1. Esconde os banners e categorias (reutilizando sua lógica de busca)
-  categoriesContainer.style.display = "none";
   bannerContainer.style.display = "none";
   brandsContainer.style.display = "none";
 
-  // 2. Atualiza o título
+  criarBotaoVoltar();
+
   toysTitle.innerText = `Categoria: ${nomeCategoria}`;
 
   try {
-    // 3. Busca no back-end
     const brinquedos = await buscarBrinquedosPorCategoria(id);
 
-    // 4. Renderiza os resultados
     renderizarBrinquedos(productsContainer, brinquedos);
   } catch (erro) {
     console.error("Erro ao filtrar categoria:", erro);
@@ -200,6 +235,8 @@ async function restaurarCatalogo() {
   brandsContainer.style.display = "";
 
   toysTitle.innerText = tituloOriginal;
+
+  removerBotaoVoltar(); // 👈 remove o botão
 
   const brinquedos = await buscarBrinquedos();
 
