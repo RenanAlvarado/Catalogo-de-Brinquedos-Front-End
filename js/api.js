@@ -46,3 +46,11 @@ export async function buscarBrinquedos() {
 export async function buscarBrinquedosPorNome(nome) {
   return await requisicao(`/brinquedos/contem-nome/${nome}`);
 }
+
+// ===============================
+// BUSCA DE BRINQUEDOS POR ID DA CATEGORIA
+// ===============================
+
+export async function buscarBrinquedosPorCategoria(id) {
+  return await requisicao(`/brinquedos/categoria/${id}`);
+}

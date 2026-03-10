@@ -10,7 +10,7 @@ function obterImagem(pasta, imagem) {
 // RENDERIZAR CATEGORIAS
 // ===============================
 
-export function renderizarCategorias(container, categorias) {
+export function renderizarCategorias(container, categorias, aoClicar) {
   container.innerHTML = "";
 
   categorias.forEach((categoria) => {
@@ -28,6 +28,17 @@ export function renderizarCategorias(container, categorias) {
       />
       <h3 class="category-title">${categoria.nome}</h3>
     `;
+
+    // guardar id da categoria
+    card.dataset.id = categoria.id;
+
+    // evento de clique
+    card.addEventListener("click", () => {
+      // Se a função aoClicar existir, ela será executada passando os dados
+      if (typeof aoClicar === "function") {
+        aoClicar(categoria.id, categoria.nome);
+      }
+    });
 
     container.appendChild(card);
   });

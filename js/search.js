@@ -2,7 +2,11 @@
 // IMPORTS
 // ===============================
 
-import { buscarBrinquedos, buscarBrinquedosPorNome } from "./api.js";
+import {
+  buscarBrinquedos,
+  buscarBrinquedosPorNome,
+  buscarBrinquedosPorCategoria,
+} from "./api.js";
 
 import { renderizarBrinquedos } from "./render.js";
 
@@ -164,6 +168,26 @@ function mostrarResultadosBusca(valor) {
   brandsContainer.style.display = "none";
 
   toysTitle.innerText = `Resultados para: "${valor}"`;
+}
+
+export async function filtrarPorCategoria(id, nomeCategoria) {
+  // 1. Esconde os banners e categorias (reutilizando sua lógica de busca)
+  categoriesContainer.style.display = "none";
+  bannerContainer.style.display = "none";
+  brandsContainer.style.display = "none";
+
+  // 2. Atualiza o título
+  toysTitle.innerText = `Categoria: ${nomeCategoria}`;
+
+  try {
+    // 3. Busca no back-end
+    const brinquedos = await buscarBrinquedosPorCategoria(id);
+
+    // 4. Renderiza os resultados
+    renderizarBrinquedos(productsContainer, brinquedos);
+  } catch (erro) {
+    console.error("Erro ao filtrar categoria:", erro);
+  }
 }
 
 // ===============================

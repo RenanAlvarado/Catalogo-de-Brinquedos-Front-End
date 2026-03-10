@@ -1,7 +1,11 @@
 // IMPORTS
-import { buscarCategorias, buscarBrinquedos } from "./api.js";
+import {
+  buscarCategorias,
+  buscarBrinquedos,
+  buscarBrinquedosPorCategoria,
+} from "./api.js";
 import { renderizarCategorias, renderizarBrinquedos } from "./render.js";
-import "./search.js"; // ativa a busca
+import { filtrarPorCategoria } from "./search.js"; // ativa a busca
 import "./scripts.js"; // carrossel e interações da página
 
 // ELEMENTOS
@@ -11,7 +15,7 @@ const productsContainer = document.querySelector("#products-wrapper");
 // CATEGORIAS
 async function carregarCategorias() {
   const categorias = await buscarCategorias();
-  renderizarCategorias(categoriesContainer, categorias);
+  renderizarCategorias(categoriesContainer, categorias, filtrarPorCategoria);
 }
 
 // BRINQUEDOS
