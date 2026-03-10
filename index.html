@@ -11,10 +11,7 @@
     <link rel="stylesheet" href="css/homepage.css" />
 
     <!-- JavaScript -->
-    <script src="js/scripts.js" defer></script>
-
-    <!-- script da api -->
-    <script src="js/apiAccess.js" defer></script>
+    <script type="module" src="js/main.js" defer></script>
 
     <!-- Icones -->
     <link
@@ -37,8 +34,9 @@
             /></a>
           </div>
 
-          <div id="busca-navbar">
-            <form>
+          <div id="busca-navbar" class="active">
+            <!-- Desligar Sugestões do Navegadors -->
+            <form autocomplete="off">
               <input
                 type="text"
                 placeholder="Barra de Pesquisa"
@@ -50,11 +48,9 @@
             </form>
 
             <!-- Sugestões -->
-          <div id="suggestions-box"></div>
-
+            <div id="suggestions-box"></div>
           </div>
 
-          
           <div id="actions">
             <button id="favs" class="btn">
               <p>Favoritos <i class="fa-regular fa-heart"></i></p>
@@ -176,25 +172,20 @@
         </div>
 
         <div class="footer-column">
-<h3>Redes sociais</h3>
-<div class="caixa-icones">
-<i class="fa-brands fa-instagram"></i>
-<i class="fa-brands fa-facebook"></i>
-<i class="fa-brands fa-youtube"></i>
-</div>
-
-<h3 style="margin-top: 25px;">Formas de pagamento</h3>
-<div class="caixa-icones">
-    <i class="fa-brands fa-pix"></i>
-    <i class="fa-brands fa-cc-visa"></i>
-    <i class="fa-brands fa-cc-mastercard"></i>
-    <i class="fas fa-barcode"></i>
-</div>
-</div>
-</div>
-
+          <h3>Redes sociais</h3>
+          <div class="caixa-icones">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+          <h3>Formas de pagamento</h3>
+          <div class="caixa-icones">
+            <a href="#"><i class="fa-brands fa-pix"></i></a>
+            <a href="#"><i class="fa-brands fa-cc-visa"></i></a>
+            <a href="#"><i class="fa-brands fa-cc-mastercard"></i></a>
+            <a href="#"><i class="fas fa-barcode"></i></a>
+          </div>
         </div>
-
       </div>
 
       <div id="footer-bottom">

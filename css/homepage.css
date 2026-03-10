@@ -43,10 +43,7 @@ header {
 #navbar {
   background-color: #55cbcd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  /* Ficar fixo no topo da tela */
-
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%233abec1' fill-opacity='1' d='M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,144C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-  /* Configurações para a onda se comportar bem */
   background-size: cover; /* Faz a onda cobrir toda a largura */
   background-position: bottom; /* Fixa a onda na parte de baixo do header */
   background-repeat: no-repeat; /* Evita que a onda se repita como um azulejo */
@@ -82,36 +79,6 @@ header {
   position: relative;
 }
 
-/* Sugestões da barra de pesquisa */
-#suggestions-box {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-
-  background: white;
-
-  border: 1px solid #ddd;
-  border-top: none;
-
-  border-radius: 0 0 20px 20px;
-
-  max-height: 250px;
-  overflow-y: auto;
-
-  display: none;
-  z-index: 1000;
-}
-
-.suggestion-item {
-  padding: 10px;
-  cursor: pointer;
-}
-
-.suggestion-item:hover {
-  background: #f2f2f2;
-}
-
 /* Form --> É a div que abriga o buscar */
 #busca-navbar form {
   /* Deixa os itens juntos */
@@ -127,7 +94,7 @@ header {
   border-radius: 30px 0 0 30px;
   outline: none;
   font-size: 14px;
-  transition: 0.2s ease;
+
   min-width: 0; /* para evitar que o input cresça demais e quebre o layout */
 }
 
@@ -146,6 +113,40 @@ header {
   color: white;
   transform: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+#busca-navbar.active input {
+  border-bottom-left-radius: 0;
+}
+
+#busca-navbar.active button {
+  border-bottom-right-radius: 0;
+  border-right: 1px solid #ddd;
+}
+
+/* Sugestões da barra de pesquisa */
+#suggestions-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  max-height: 250px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background: #f2f2f2;
 }
 
 /* Botões da NavBar */
@@ -483,6 +484,7 @@ header {
   margin-bottom: 10px;
 }
 
+/* Títulos */
 .footer-column h3 {
   margin-top: 30px;
   margin-bottom: 20px;
@@ -495,37 +497,33 @@ header {
   list-style: none;
 }
 
+.footer-column a {
+  color: #000;
+}
+
 .footer-column li {
-  margin-bottom: 12px !important;
-  cursor: pointer !important;
-  transition: 0.3s !important;
-  font-size: 16px !important;
-  color: #1b4e4f;
-  text-align: center !important;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  transition: 0.3s;
 }
 
 .footer-column li:hover {
   color: #fff;
 }
 
+.caixa-icones {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 #footer-bottom {
   text-align: center;
   border-top: 1px solid #444;
   padding: 5px 0;
-}
-
-footer-column {
-  display: flex !important;
-  flex-direction: column !important; /* Força os itens a ficarem um embaixo do outro */
-  align-items: center !important; /* Centraliza TUDO que estiver dentro da coluna */
-  text-align: center !important;
-}
-
-.caixa-icones {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  gap: 15px !important;
-  width: 100% !important; /* O segredo para esticar a caixa! */
-  margin: 0 auto !important;
 }
