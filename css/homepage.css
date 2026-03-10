@@ -184,13 +184,18 @@ header {
   max-width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 /* Botão de voltar a tela principal */
 #return-index-btn {
   background-color: #2b7a7c;
   margin-bottom: 10px;
+  align-self: center;
+}
+
+/* Apenas para o A que tem o botão de retornar */
+#main-container a:has(#return-index-btn) {
+  align-self: center;
 }
 
 /* Div das Categorias */
