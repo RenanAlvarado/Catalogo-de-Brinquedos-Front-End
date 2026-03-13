@@ -227,7 +227,7 @@ export async function filtrarPorCategoria(id, nomeCategoria) {
     const brinquedos = await buscarBrinquedosPorCategoria(id);
 
     if (brinquedos.length === 0) {
-      toysTitle.innerText = `Nenhum produto encontrado para: ${nomeCategoria}`;
+      toysTitle.innerText = `Nenhum produto encontrado para a Categoria: ${nomeCategoria}`;
     } else {
       toysTitle.innerText = `Categoria: ${nomeCategoria} `;
     }
@@ -252,7 +252,7 @@ export async function filtrarPorMarca(id, nomeMarca) {
     const brinquedos = await buscarBrinquedosPorMarca(id);
 
     if (brinquedos.length === 0) {
-      toysTitle.innerText = `Nenhum produto encontrado para: ${nomeMarca}`;
+      toysTitle.innerText = `Nenhum produto encontrado para a Marca: ${nomeMarca}`;
     } else {
       toysTitle.innerText = `Marca: ${nomeMarca}`;
     }
