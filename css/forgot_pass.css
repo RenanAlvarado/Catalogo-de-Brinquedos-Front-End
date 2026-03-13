@@ -32,6 +32,39 @@ html {
 /* CONTAINER */
 
 #forgot-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 420px;
+  background: #d1d1d1;
+  border-radius: 12px;
+  border: 1px solid #000;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  padding: 25px;
+  overflow: hidden; /* evita a imagem sair do container */
+}
+
+#forgot-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: url("../img/fundo_mar.png"); /* sua imagem */
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0.8; /* controla transparência da imagem */
+  z-index: 0;
+}
+
+#forgot-container > * {
+  position: relative;
+  z-index: 1;
+}
+
+#forgot-container {
   display: flex;
   flex-direction: column;
   align-items: center;
