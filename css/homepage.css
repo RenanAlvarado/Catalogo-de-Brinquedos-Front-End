@@ -339,10 +339,6 @@ header {
   flex-direction: column;
   align-items: center; /* centraliza o conteúdo */
   max-width: 100%;
-}
-
-/* Título */
-#brands-container {
   text-align: center;
   margin-bottom: 25px;
   text-transform: uppercase;
@@ -363,6 +359,7 @@ header {
   font-family: "Oswald", sans-serif;
 }
 
+/* Animação da parte de categorias */
 @keyframes degrade {
   0% {
     background-position: 0%;
@@ -385,11 +382,12 @@ header {
 #brands-carousel {
   display: flex;
   gap: 20px;
+  /* Para mudança fluida */
   will-change: transform;
 }
 
 /* Cada marca */
-.brand {
+.brand-card {
   flex: 0 0 180px;
   height: 110px;
   background: #fff;
@@ -402,13 +400,14 @@ header {
     transform 0.4s ease,
     box-shadow 0.4s ease;
 }
-.brand:hover {
+
+.brand-card:hover {
   transform: translateY(-8px) scale(1.05);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Imagem */
-.brand img {
+.brand-card .brand-img {
   max-width: 80%;
   max-height: 70%;
   object-fit: contain;

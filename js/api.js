@@ -32,6 +32,14 @@ export async function buscarCategorias() {
 }
 
 // ===============================
+// Marcas
+// ===============================
+
+export async function buscarMarcas() {
+  return await requisicao("/marcas");
+}
+
+// ===============================
 // BRINQUEDOS
 // ===============================
 
@@ -53,4 +61,12 @@ export async function buscarBrinquedosPorNome(nome) {
 
 export async function buscarBrinquedosPorCategoria(id) {
   return await requisicao(`/brinquedos/categoria/${id}`);
+}
+
+// ===============================
+// BUSCA DE BRINQUEDOS POR ID DA MARCA
+// ===============================
+
+export async function buscarBrinquedosPorMarca(id) {
+  return await requisicao(`/brinquedos/marca/${id}`);
 }

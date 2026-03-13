@@ -2,63 +2,54 @@
 /* CARROSSEL DE MARCAS */
 /* ===================================== */
 
-const carousel = document.getElementById("brands-carousel");
-const wrapper = document.getElementById("brands-wrapper");
+export function iniciarCarrosselMarcas() {
+  const carousel = document.getElementById("brands-carousel");
+  const wrapper = document.getElementById("brands-wrapper");
 
-if (carousel && wrapper) {
-  let items = document.querySelectorAll(".brand");
+  if (!carousel || !wrapper) return;
 
-  if (items.length > 0) {
-    const itemWidth = items[0].offsetWidth + 20;
+  let items = document.querySelectorAll(".brand-card");
 
-    // DUPLICAR LISTA
-    carousel.innerHTML += carousel.innerHTML;
-    items = document.querySelectorAll(".brand");
+  if (items.length === 0) return;
 
-    let position = 0;
-    let speed = 1;
+  const itemWidth = items[0].offsetWidth + 20;
 
-    const totalWidth = (items.length / 2) * itemWidth;
+  // DUPLICAR LISTA
+  carousel.innerHTML += carousel.innerHTML;
+  items = document.querySelectorAll(".brand-card");
 
-    function animate() {
-      position -= speed;
+  let position = 0;
+  let speed = 1;
 
-      // LOOP INFINITO CORRIGIDO
-      if (position <= -totalWidth) {
-        position = 0;
-      }
+  const totalWidth = items.length * itemWidth;
 
-      if (position > 0) {
-        position = -totalWidth;
-      }
+  function animate() {
+    position -= speed;
 
-      carousel.style.transform = `translateX(${position}px)`;
-
-      requestAnimationFrame(animate);
+    if (Math.abs(position) >= totalWidth / 2) {
+      position = 0;
     }
 
-    animate();
+    carousel.style.transform = `translateX(${position}px)`;
 
-    // CONTROLE PELO MOUSE
-    wrapper.addEventListener("mousemove", (e) => {
-      const rect = wrapper.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const center = rect.width / 2;
-
-      if (x < center - 50) {
-        speed = -3.5; // vai para esquerda
-      } else if (x > center + 50) {
-        speed = 3.5; // vai para direita
-      } else {
-        speed = 1;
-      }
-    });
-
-    // VOLTA AO NORMAL
-    wrapper.addEventListener("mouseleave", () => {
-      speed = 1;
-    });
+    requestAnimationFrame(animate);
   }
+
+  animate();
+
+  wrapper.addEventListener("mousemove", (e) => {
+    const rect = wrapper.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const center = rect.width / 2;
+
+    if (x < center - 50) speed = -3.5;
+    else if (x > center + 50) speed = 3.5;
+    else speed = 1;
+  });
+
+  wrapper.addEventListener("mouseleave", () => {
+    speed = 1;
+  });
 }
 
 /* ===================================== */

@@ -45,6 +45,43 @@ export function renderizarCategorias(container, categorias, aoClicar) {
 }
 
 // ===============================
+// RENDERIZAR MARCAS
+// ===============================
+
+export function renderizarMarcas(container, marcas, aoClicar) {
+  container.innerHTML = "";
+
+  marcas.forEach((marca) => {
+    const card = document.createElement("button");
+    card.classList.add("brand-card");
+
+    const imagem = obterImagem("brands", marca.imagem);
+
+    card.innerHTML = `
+      <img 
+        src="${imagem}" 
+        alt="${marca.nome}" 
+        class="brand-img"
+        onerror="this.src='img/placeholder.png'"
+      />
+    `;
+
+    // guardar id da categoria
+    card.dataset.id = marca.id;
+
+    // evento de clique
+    card.addEventListener("click", () => {
+      // Se a função aoClicar existir, ela será executada passando os dados
+      if (typeof aoClicar === "function") {
+        aoClicar(marca.id, marca.nome);
+      }
+    });
+
+    container.appendChild(card);
+  });
+}
+
+// ===============================
 // RENDERIZAR BRINQUEDOS
 // ===============================
 

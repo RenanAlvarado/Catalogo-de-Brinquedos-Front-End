@@ -6,6 +6,7 @@ import {
   buscarBrinquedos,
   buscarBrinquedosPorNome,
   buscarBrinquedosPorCategoria,
+  buscarBrinquedosPorMarca,
 } from "./api.js";
 
 import { renderizarBrinquedos } from "./render.js";
@@ -208,6 +209,9 @@ function mostrarResultadosBusca(valor) {
   toysTitle.innerText = `Resultados para: "${valor}"`;
 }
 
+// ===============================
+// FILTRAR POR CATEGORIA
+// ===============================
 export async function filtrarPorCategoria(id, nomeCategoria) {
   bannerContainer.style.display = "none";
   brandsContainer.style.display = "none";
@@ -222,6 +226,27 @@ export async function filtrarPorCategoria(id, nomeCategoria) {
     renderizarBrinquedos(productsContainer, brinquedos);
   } catch (erro) {
     console.error("Erro ao filtrar categoria:", erro);
+  }
+}
+
+// ===============================
+// FILTRAR POR MARCAS
+// ===============================
+
+export async function filtrarPorMarca(id, nomeMarca) {
+  bannerContainer.style.display = "none";
+  brandsContainer.style.display = "none";
+
+  criarBotaoVoltar();
+
+  toysTitle.innerText = `Marca: ${nomeMarca}`;
+
+  try {
+    const brinquedos = await buscarBrinquedosPorMarca(id);
+
+    renderizarBrinquedos(productsContainer, brinquedos);
+  } catch (erro) {
+    console.error("Erro ao filtrar Marca:", erro);
   }
 }
 
