@@ -8,26 +8,42 @@ export function iniciarCarrosselMarcas() {
 
   if (!carousel || !wrapper) return;
 
-  let items = document.querySelectorAll(".brand-card");
+  let items = carousel.querySelectorAll(".brand-card");
 
   if (items.length === 0) return;
 
   const itemWidth = items[0].offsetWidth + 20;
 
-  // DUPLICAR LISTA
-  carousel.innerHTML += carousel.innerHTML;
-  items = document.querySelectorAll(".brand-card");
+  // DUPLICAR LISTA (forma segura)
+  const cards = [...items];
+
+  cards.forEach((card) => {
+    const clone = card.cloneNode(true);
+
+    // copiar evento de clique
+    clone.addEventListener("click", () => {
+      card.click();
+    });
+
+    carousel.appendChild(clone);
+  });
+  items = carousel.querySelectorAll(".brand-card");
 
   let position = 0;
   let speed = 1;
 
-  const totalWidth = items.length * itemWidth;
+  const totalWidth = (items.length / 2) * itemWidth;
 
   function animate() {
     position -= speed;
 
-    if (Math.abs(position) >= totalWidth / 2) {
-      position = 0;
+    // LOOP INFINITO CORRIGIDO
+    if (position <= -totalWidth) {
+      position += totalWidth;
+    }
+
+    if (position >= 0) {
+      position -= totalWidth;
     }
 
     carousel.style.transform = `translateX(${position}px)`;

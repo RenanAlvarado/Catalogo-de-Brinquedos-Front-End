@@ -189,7 +189,12 @@ async function executarBusca(valor) {
 
     mostrarResultadosBusca(valor);
 
-    criarBotaoVoltar(); // 👈 adiciona aqui
+    criarBotaoVoltar();
+
+    // VERIFICAR SE NÃO HÁ RESULTADOS
+    if (brinquedos.length === 0) {
+      toysTitle.innerText = `Nenhum resultado para: "${valor}"`;
+    }
 
     renderizarBrinquedos(productsContainer, brinquedos);
   } catch (erro) {
@@ -206,7 +211,7 @@ function mostrarResultadosBusca(valor) {
   bannerContainer.style.display = "none";
   brandsContainer.style.display = "none";
 
-  toysTitle.innerText = `Resultados para: "${valor}"`;
+  toysTitle.innerText = `Resultados para: ${valor} `;
 }
 
 // ===============================
@@ -218,10 +223,14 @@ export async function filtrarPorCategoria(id, nomeCategoria) {
 
   criarBotaoVoltar();
 
-  toysTitle.innerText = `Categoria: ${nomeCategoria}`;
-
   try {
     const brinquedos = await buscarBrinquedosPorCategoria(id);
+
+    if (brinquedos.length === 0) {
+      toysTitle.innerText = `Nenhum produto encontrado para: ${nomeCategoria}`;
+    } else {
+      toysTitle.innerText = `Categoria: ${nomeCategoria} `;
+    }
 
     renderizarBrinquedos(productsContainer, brinquedos);
   } catch (erro) {
@@ -239,10 +248,14 @@ export async function filtrarPorMarca(id, nomeMarca) {
 
   criarBotaoVoltar();
 
-  toysTitle.innerText = `Marca: ${nomeMarca}`;
-
   try {
     const brinquedos = await buscarBrinquedosPorMarca(id);
+
+    if (brinquedos.length === 0) {
+      toysTitle.innerText = `Nenhum produto encontrado para: ${nomeMarca}`;
+    } else {
+      toysTitle.innerText = `Marca: ${nomeMarca}`;
+    }
 
     renderizarBrinquedos(productsContainer, brinquedos);
   } catch (erro) {
