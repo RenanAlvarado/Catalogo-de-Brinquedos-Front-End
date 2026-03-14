@@ -1,4 +1,5 @@
-/* Gerais */
+/* RESET */
+
 * {
   margin: 0;
   padding: 0;
@@ -17,18 +18,25 @@ html {
 
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap");
 
-/* Classe de estiilização dos botões */
+/* BOTÕES */
+
 .btn {
-  padding: 12px 16px;
+  padding: 12px 22px;
   border: none;
-  border-radius: 30px;
+  border-radius: 50px;
   background: white;
-  font-weight: bold;
-  text-align: center;
-  align-content: center;
+  font-weight: 600;
   font-size: 14px;
   cursor: pointer;
-  transition: all 0.2s ease;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
 /* INPUTS */
@@ -36,11 +44,15 @@ html {
 .input-icon {
   display: flex;
   align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  margin-bottom: 12px;
+
+  border: 1px solid #ddd;
+  border-radius: 25px;
+
+  margin-bottom: 15px;
+
   background: #fff;
-  padding: 10px;
+  padding: 12px 15px;
+
   transition: 0.2s;
 }
 
@@ -48,71 +60,85 @@ html {
   margin-right: 8px;
 }
 
+.input-icon:focus-within {
+  border-color: #ffb703;
+  box-shadow: 0 0 0 3px rgba(255, 183, 3, 0.25);
+}
+
+/* HEADER */
+
 header {
-  /* Descer com a tela */
   position: sticky;
   top: 0;
-  /* Ficar acima de tudo */
   z-index: 9999;
 }
 
-/* NavBar */
+/* NAVBAR */
+
 #navbar {
   background-color: #55cbcd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%233abec1' fill-opacity='1' d='M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,144C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-  background-size: cover; /* Faz a onda cobrir toda a largura */
-  background-position: bottom; /* Fixa a onda na parte de baixo do header */
-  background-repeat: no-repeat; /* Evita que a onda se repita como um azulejo */
+
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
 }
 
-/* Conteudos */
+/* CONTEÚDO NAVBAR */
+
 #navbar-inner {
   padding: 1.5rem 0;
   margin: 0 auto;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   gap: 20px;
 }
 
-/* DIV da imagem */
+/* LOGO */
+
 #logo-nav {
   margin-left: 30px;
 }
 
-/* Logo na Navbar */
 #navbar-inner img {
   width: 110px;
 }
 
-/* ID que tem os searchs */
+/* BUSCA NAVBAR */
+
 #busca-navbar {
   flex: 1;
   max-width: 900px;
-  /* sombra na barra */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra bem levinha */
-  /* Para servir as sugestões */
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
   position: relative;
 }
 
-/* Form --> É a div que abriga o buscar */
 #busca-navbar form {
-  /* Deixa os itens juntos */
   display: flex;
   width: 100%;
 }
 
-/* Itens para pesquisar */
 #busca-navbar input {
   flex: 1;
+
   padding: 12px 16px;
+
   border: 2px solid transparent;
+
   border-radius: 30px 0 0 30px;
+
   outline: none;
+
   font-size: 14px;
 
-  min-width: 0; /* para evitar que o input cresça demais e quebre o layout */
+  min-width: 0;
 }
 
 #busca-navbar input:focus {
@@ -121,8 +147,8 @@ header {
 }
 
 #busca-navbar button {
-  border-radius: 0 5px 5px 0; /* arredonda só o lado direito */
-  border-left: 1px solid black;
+  border-radius: 0 30px 30px 0;
+  border-left: 1px solid #ddd;
 }
 
 #busca-navbar button:hover {
@@ -141,62 +167,85 @@ header {
   border-right: 1px solid #ddd;
 }
 
-/* Botões da NavBar */
+/* BOTÕES NAVBAR */
+
 #actions {
   display: flex;
   gap: 15px;
   margin-right: 30px;
 }
 
-/* Botão de favoritos */
 #favs {
   background: #ff8eb3;
   color: white;
   border: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   border-radius: 50px;
 }
 
-/* Botão de Login */
 #login {
   background: #ffb703;
   border: none;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   border-radius: 50px;
 }
 
-/* Conteúdo Principal */
+/* CONTEÚDO PRINCIPAL */
+
 #main-container {
   width: 100%;
-  height: 100%;
+  min-height: 80vh;
+
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  background: linear-gradient(135deg, #d9d9d9, #bfbfbf);
+  justify-content: center;
+
+  gap: 60px;
+
+  padding: 40px;
+
+  background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
 }
+
+/* SEÇÃO ESQUERDA (PERFIL) */
 
 #left-section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
-  /* Vou tirar a borda depois */
-  border: 1px solid black;
+
+  padding: 40px;
+
+  width: 380px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  margin-left: -60px;
 }
 
+/* FOTO PERFIL */
+
 #left-section #profile-img-button {
-  width: 160px; /* Tamanho do botão */
-  height: 160px; /* Tamanho do botão (igual à largura) */
-  border-radius: 50%; /* Faz o botão ficar redondo */
-  border: none; /* Remove a borda padrão */
-  padding: 0; /* Remove espaçamento interno */
-  overflow: hidden; /* Esconde o que passar do círculo */
+  width: 160px;
+  height: 160px;
+
+  border-radius: 50%;
+
+  border: 4px solid #ffb703;
+
+  overflow: hidden;
+
   cursor: pointer;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+
+  margin-bottom: 15px;
+
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 #left-section #profile-img {
@@ -204,6 +253,8 @@ header {
   height: 100%;
   object-fit: cover;
 }
+
+/* INPUTS PERFIL */
 
 #left-section input[type="text"],
 #left-section input[type="email"] {
@@ -213,38 +264,58 @@ header {
   background: transparent;
 }
 
-/* PARTE DA DIREITA */
+/* PARTE DIREITA */
+
 #right-section {
+  display: flex;
+  align-items: center;
 }
 
+/* FORMULÁRIO */
+
 #form-container {
-  border: 1px solid black;
+  padding: 40px;
+
+  width: 420px;
+
+  background: white;
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 #form-aditional-informations {
   display: flex;
   flex-direction: column;
+
   justify-content: center;
   align-items: center;
 }
 
-/* Rodapé */
+/* FOOTER */
 
 #footer-container {
   display: flex;
   flex-wrap: wrap;
-  padding: -20px 20px;
+
+  padding: 40px 20px;
+
   justify-content: space-around;
+
   width: 100%;
-  background-color: #4ed3d6; /* Sua cor ciano base */
-  /* Cria as "bolhinhas" com gradiente radial */
+
+  background-color: #4ed3d6;
+
   background-image: radial-gradient(
     rgba(255, 255, 255, 0.25) 3px,
     transparent 3px
   );
-  background-size: 40px 40px; /* Define o espaço entre as bolhas */
-  border-top: 1px solid #333;
+
+  background-size: 40px 40px;
 }
+
+/* COLUNAS FOOTER */
 
 .footer-column {
   display: flex;
@@ -257,12 +328,16 @@ header {
   margin-bottom: 10px;
 }
 
-/* Títulos */
+/* TÍTULOS */
+
 .footer-column h3 {
-  margin-top: 30px;
+  margin-top: 25px;
   margin-bottom: 20px;
-  font-size: 20px;
-  font-weight: 800;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
   color: #ffffff;
 }
 
@@ -272,13 +347,17 @@ header {
 
 .footer-column a {
   color: #000;
+  text-decoration: none;
 }
 
 .footer-column li {
   margin-bottom: 12px;
   cursor: pointer;
+
   font-size: 16px;
+
   text-align: center;
+
   transition: 0.3s;
 }
 
@@ -286,17 +365,28 @@ header {
   color: #fff;
 }
 
+/* ÍCONES */
+
 .caixa-icones {
   display: flex;
   justify-content: center;
   align-items: center;
+
   gap: 15px;
+
   width: 100%;
+
   margin: 0 auto;
 }
 
+/* FOOTER FINAL */
+
 #footer-bottom {
   text-align: center;
+
   border-top: 1px solid #444;
-  padding: 5px 0;
+
+  padding: 10px 0;
+
+  font-size: 14px;
 }
