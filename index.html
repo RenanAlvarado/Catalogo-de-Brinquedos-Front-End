@@ -115,9 +115,51 @@
         </div>
       </div>
 
-      <div id="toys-container">
-        <h2>Lista de Produtos</h2>
-        <div id="products-wrapper"></div>
+      <!-- Título dos produtos -->
+      <h2 id="toysContainer-title">Lista de Produtos</h2>
+
+      <!-- DIV PARA DEIXAR LADO A LADO -->
+      <div id="filter-toys">
+        <!-- FILTROS -->
+        <div id="filters-container">
+          <h3>Filtros</h3>
+          <button class="dropdown-btn">
+            Categorias <i class="fa-solid fa-chevron-down"></i>
+          </button>
+
+          <div class="filter-options" id="#categories-filter">
+            <label>
+              <input type="checkbox" value="lego" />
+              Lego
+            </label>
+
+            <label>
+              <input type="checkbox" value="Barbie" />
+              Barbie
+            </label>
+          </div>
+
+          <button class="dropdown-btn">
+            Marcas <i class="fa-solid fa-chevron-down"></i>
+          </button>
+
+          <div class="filter-options">
+            <label>
+              <input type="checkbox" value="lego" />
+              Lego
+            </label>
+
+            <label>
+              <input type="checkbox" value="Barbie" />
+              Barbie
+            </label>
+          </div>
+        </div>
+
+        <!-- Brinquedos -->
+        <div id="toys-container">
+          <div id="products-wrapper"></div>
+        </div>
       </div>
     </main>
 

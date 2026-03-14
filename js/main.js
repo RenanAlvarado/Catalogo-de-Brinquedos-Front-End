@@ -7,6 +7,7 @@ import {
 } from "./api.js";
 import {
   renderizarCategorias,
+  renderizarFiltroCategorias,
   renderizarBrinquedos,
   renderizarMarcas,
 } from "./render.js";
@@ -17,11 +18,23 @@ import { iniciarCarrosselMarcas } from "./scripts.js"; // carrossel e interaçõ
 const categoriesContainer = document.querySelector("#categories-carousel");
 const productsContainer = document.querySelector("#products-wrapper");
 const brandsContainer = document.querySelector("#brands-carousel");
+const filtroCategoriasContainer = document.querySelector("#categories-filter");
 
 // CATEGORIAS
 async function carregarCategorias() {
   const categorias = await buscarCategorias();
   renderizarCategorias(categoriesContainer, categorias, filtrarPorCategoria);
+}
+
+async function carregarCategoriasFiltro() {
+  const resposta = await fetch("http://localhost:8080/api/categorias");
+  const categorias = await resposta.json();
+
+  renderizarFiltroCategorias(
+    filtroCategoriasContainer,
+    categorias,
+    aoAlterarCategoria,
+  );
 }
 
 // MARCAS
@@ -44,6 +57,7 @@ async function iniciarPagina() {
   await carregarCategorias();
   await carregarBrinquedos();
   await carregarMarcas();
+  await carregarCategoriasFiltro();
 }
 
 iniciarPagina();

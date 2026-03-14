@@ -45,6 +45,33 @@ export function renderizarCategorias(container, categorias, aoClicar) {
 }
 
 // ===============================
+// RENDERIZAR FILTRO DE CATEGORIAS
+// ===============================
+
+export function renderizarFiltroCategorias(container, categorias, aoAlterar) {
+  container.innerHTML = "";
+
+  categorias.forEach((categoria) => {
+    const label = document.createElement("label");
+
+    label.innerHTML = `
+      <input type="checkbox" value="${categoria.id}">
+      ${categoria.nome}
+    `;
+
+    const checkbox = label.querySelector("input");
+
+    checkbox.addEventListener("change", () => {
+      if (typeof aoAlterar === "function") {
+        aoAlterar(categoria.id, checkbox.checked);
+      }
+    });
+
+    container.appendChild(label);
+  });
+}
+
+// ===============================
 // RENDERIZAR MARCAS
 // ===============================
 
@@ -103,6 +130,7 @@ export function renderizarBrinquedos(container, brinquedos) {
       />
       <h3 class="toy-title">${brinquedo.nome}</h3>
       <p class="toy-description">${brinquedo.descricao}</p>
+      <p class="toy-price">R$: ${brinquedo.preco}</p>
     `;
 
     container.appendChild(card);

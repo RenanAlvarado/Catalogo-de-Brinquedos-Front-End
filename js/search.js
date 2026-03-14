@@ -29,7 +29,7 @@ const productsContainer = document.querySelector("#products-wrapper");
 const categoriesContainer = document.querySelector("#categories-container");
 const bannerContainer = document.querySelector("#banner-container");
 const brandsContainer = document.querySelector("#brands-container");
-const toysTitle = document.querySelector("#toys-container h2");
+const toysTitle = document.querySelector("#toysContainer-title");
 
 // guardar título original
 const tituloOriginal = toysTitle.innerText;
