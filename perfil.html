@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Fonte -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Logo do Navegador -->
+    <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="css/perfil.css" />
+
+    <!-- Icones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <title>Marah/Perfil</title>
+  </head>
+  <body>
+    <!-- Navegação da parte de cima -->
+    <header>
+      <nav id="navbar">
+        <!-- Para o CSS -->
+        <div id="navbar-inner">
+          <div id="logo-nav">
+            <a href="index.html"
+              ><img src="img/newlogo.png" alt="Logo do Catalogo de Brinquedos"
+            /></a>
+          </div>
+
+          <div id="busca-navbar">
+            <!-- Desligar Sugestões do Navegadors -->
+            <form autocomplete="off">
+              <input
+                type="text"
+                placeholder="Barra de Pesquisa"
+                id="search-input"
+              />
+              <button type="submit" class="btn">
+                <i class="fas fa-search"></i>
+              </button>
+            </form>
+
+            <!-- Sugestões -->
+            <div id="suggestions-box"></div>
+          </div>
+
+          <div id="actions">
+            <button id="favs" class="btn">
+              <p>Favoritos <i class="fa-regular fa-heart"></i></p>
+            </button>
+            <a href="login.html"
+              ><button id="login" class="btn" href="login.html">
+                <p>Cadastro/Login <i class="fa-regular fa-user"></i></p></button
+            ></a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Conteudo Principal -->
+    <main id="main-container">
+      <section id="left-section">
+        <button id="profile-img-button">
+          <img src="img/placeholder.png" alt="Placeholder" id="profile-img" />
+        </button>
+
+        <div class="input-icon">
+          <i class="fa-regular fa-user"></i>
+          <input
+            type="text"
+            class="input-profile"
+            placeholder="Aqui tera o nome"
+          />
+        </div>
+
+        <div class="input-icon">
+          <i class="fa-regular fa-envelope"></i>
+          <input type="email" placeholder="Email" required />
+        </div>
+      </section>
+
+      <section id="right-section">
+        <h2>Informações Adicionais</h2>
+        <div id="form-container">
+          <form action="#" id="form-aditional-informations">
+            <div class="input-icon">
+              <i class="fa-solid fa-phone"></i>
+              <input type="number" placeholder="Phone Number" required />
+            </div>
+
+            <div class="input-icon">
+              <i class="fa-solid fa-location-crosshairs"></i>
+              <input type="Number" placeholder="CEP" required />
+            </div>
+
+            <div class="input-icon">
+              <i class="fa-solid fa-location-crosshairs"></i>
+              <input type="text" placeholder="Endereço" required />
+            </div>
+
+            <div class="input-icon">
+              <i class="fa-solid fa-location-crosshairs"></i>
+              <input type="Number" placeholder="Bairro" required />
+            </div>
+
+            <div class="input-icon">
+              <i class="fa-solid fa-location-crosshairs"></i>
+              <input type="Number" placeholder="Número" required />
+            </div>
+
+            <select name="Estado" id="state-select">
+              <option value="teste">São Paulo</option>
+            </select>
+
+            <select name="Cidade" id="city-select">
+              <option value="teste">Guarulhos</option>
+            </select>
+
+            <input type="submit" value="Alterar" />
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer id="footer">
+      <div id="footer-container">
+        <div class="footer-column">
+          <img src="img/logoSlogan.png" alt="Logo" />
+        </div>
+
+        <div class="footer-column">
+          <h3>Categorias</h3>
+          <ul>
+            <li>Carrinhos</li>
+            <li>Bonecas</li>
+            <li>Educativos</li>
+            <li>Jogos</li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Ajuda</h3>
+          <ul>
+            <li>Contato</li>
+            <li>Trocas</li>
+            <li>Perguntas frequentes</li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3>Redes sociais</h3>
+          <div class="caixa-icones">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+          <h3>Formas de pagamento</h3>
+          <div class="caixa-icones">
+            <a href="#"><i class="fa-brands fa-pix"></i></a>
+            <a href="#"><i class="fa-brands fa-cc-visa"></i></a>
+            <a href="#"><i class="fa-brands fa-cc-mastercard"></i></a>
+            <a href="#"><i class="fas fa-barcode"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer-bottom">
+        <p>© 2026 Catálogo de Brinquedos</p>
+      </div>
+    </footer>
+  </body>
+</html>
