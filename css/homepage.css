@@ -476,12 +476,12 @@ header {
 #filters-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 15%;
-  min-width: 15%;
-  max-width: 15%;
-  margin-left: 15px;
+  background-color: #ffffff; /* Fundo branco */
+  padding: 20px;             /* Respiro interno */
+  border-radius: 12px;       /* Bordas arredondadas suaves */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombrinha leve */
+  width: 250px;              /* Uma largura fixa costuma funcionar melhor que 15% */
+  margin-left: 50px;
 }
 
 #filters-container h3 {
@@ -492,9 +492,15 @@ header {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 5px 10px;
-  font-size: 18px;
-  margin-bottom: 10px;
+  align-items: center;
+  padding: 15px 0; /* Mais espaço para o clique */
+  font-size: 16px;
+  font-weight: bold; /* Deixa o texto com destaque */
+  color: #333;
+  background: none;  /* Remove a cor de fundo cinza padrão do botão */
+  border: none;      /* Remove a borda do botão */
+  border-bottom: 1px solid #eeeeee; /* Cria a linha divisória sutil da Toys R Us */
+  cursor: pointer;
 }
 
 .filter-options {
@@ -520,9 +526,12 @@ header {
 .filter-options label {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 10px;
+  justify-content: flex-start; /* MUDE AQUI: Joga o quadradinho para a esquerda! */
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 15px;
+  color: #555;
+  cursor: pointer;
 }
 
 /* Estilização do Quadrado de Check */
@@ -550,47 +559,72 @@ header {
 }
 
 /* Card do produto */
+
+#products-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* A MÁGICA DO FLEXBOX: Permite criar novas linhas! */
+  gap: 20px;
+  width: 100%;
+}
+
 .product-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 220px;
-  padding: 20px;
-  /* Grow: 1 Shrink: 1 Basis: 200px */
-  flex: 1 1 200px;
-  max-width: 220px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff; /* Fundo branco limpo */
+  border: 1px solid #eeeeee; /* Bordinha bem suave, estilo loja */
+  border-radius: 12px;
+  padding: 15px;
+  /* REMOVE O MAX-WIDTH E O FLEX: 1 1... A grelha é que vai ditar o tamanho agora! */
+  text-align: left; /* Textos alinhados à esquerda ficam mais fáceis de ler */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); /* Sombra bem mais subtil */
   cursor: pointer;
-  transition: 0.2s;
+  transition: all 0.2s ease;
+  height: 100%; /* Obriga todos os cartões na mesma linha a terem a mesma altura */
+  flex: 1 1 250px;  /* Significa: Pode crescer(1), Pode encolher(1), Tamanho base(250px) */
+  max-width: 300px;
 }
 
 .product-card:hover {
-  background-color: #ddd;
+  transform: translateY(-3px); /* Efeito de flutuar ao invés de ficar cinzento */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  /* Removi aquele background-color: #ddd do hover, pois deixava o cartão "sujo" */
 }
 
 .product-card .toy-img {
-  /* Ocupar tudo */
   width: 100%;
-  border: 1px solid black;
+  border: none;
   object-fit: contain;
+  height: 200px; /* Altura fixa para todas as fotos de brinquedos! */
+  object-fit: contain; /* Não deixa a foto esticar nem cortar */
   border-radius: 8px;
-  margin-bottom: 8px;
+  margin-bottom: 15px;
+  background-color: #f9f9f9; /* Um fundo cinza hiper claro caso a imagem seja PNG com fundo transparente */
 }
 
 .product-card .toy-title {
-  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+  line-height: 1.3;
 }
 
 .product-card .toy-description {
   font-size: 14px;
-  margin-bottom: 10px;
+  color: #666; /* Cor mais suave para a descrição */
+  margin-bottom: 15px;
+  /* Estas 3 linhas fazem o texto da descrição ser cortado com "..." se for muito grande */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; 
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
 
 .product-card .toy-price {
-  font-size: 18px;
-  color: #1b4e4f;
+  font-size: 20px;
+  font-weight: 900;
+  color:#1b4e4f; 
+  margin-top: auto; /* O SEGREDO: Empurra o preço sempre para o fundo do cartão, mantendo-os alinhados! */
 }
 
 /* Rodapé */
