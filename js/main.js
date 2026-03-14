@@ -1,15 +1,11 @@
 // IMPORTS
-import {
-  buscarCategorias,
-  buscarBrinquedos,
-  buscarBrinquedosPorCategoria,
-  buscarMarcas,
-} from "./api.js";
+import { buscarCategorias, buscarBrinquedos, buscarMarcas } from "./api.js";
 import {
   renderizarCategorias,
   renderizarFiltroCategorias,
   renderizarBrinquedos,
   renderizarMarcas,
+  renderizarFiltroMarcas,
 } from "./render.js";
 import { filtrarPorCategoria, filtrarPorMarca } from "./search.js"; // ativa a busca
 import { iniciarCarrosselMarcas } from "./scripts.js"; // carrossel e interações da página
@@ -19,6 +15,7 @@ const categoriesContainer = document.querySelector("#categories-carousel");
 const productsContainer = document.querySelector("#products-wrapper");
 const brandsContainer = document.querySelector("#brands-carousel");
 const filtroCategoriasContainer = document.querySelector("#categories-filter");
+const filtroMarcasContainer = document.querySelector("#brands-filter");
 
 // CATEGORIAS
 async function carregarCategorias() {
@@ -26,17 +23,12 @@ async function carregarCategorias() {
   renderizarCategorias(categoriesContainer, categorias, filtrarPorCategoria);
 }
 
+//Filtros de Categoria
 async function carregarCategoriasFiltro() {
-  const resposta = await fetch("http://localhost:8080/api/categorias");
-  const categorias = await resposta.json();
+  const categorias = await buscarCategorias();
 
-  renderizarFiltroCategorias(
-    filtroCategoriasContainer,
-    categorias,
-    aoAlterarCategoria,
-  );
+  renderizarFiltroCategorias(filtroCategoriasContainer, categorias);
 }
-
 // MARCAS
 async function carregarMarcas() {
   const marcas = await buscarMarcas();
@@ -44,6 +36,13 @@ async function carregarMarcas() {
 
   // INICIA O CARROSSEL DEPOIS
   iniciarCarrosselMarcas();
+}
+
+//Filtros de Marca
+async function carregarMarcasFiltro() {
+  const marcas = await buscarMarcas();
+
+  renderizarFiltroMarcas(filtroMarcasContainer, marcas);
 }
 
 // BRINQUEDOS
@@ -58,6 +57,7 @@ async function iniciarPagina() {
   await carregarBrinquedos();
   await carregarMarcas();
   await carregarCategoriasFiltro();
+  await carregarMarcasFiltro();
 }
 
 iniciarPagina();

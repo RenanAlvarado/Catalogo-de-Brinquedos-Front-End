@@ -45,10 +45,9 @@ export function renderizarCategorias(container, categorias, aoClicar) {
 }
 
 // ===============================
-// RENDERIZAR FILTRO DE CATEGORIAS
+// RENDERIZAR FILTROS DAS CATEGORIAS
 // ===============================
-
-export function renderizarFiltroCategorias(container, categorias, aoAlterar) {
+export function renderizarFiltroCategorias(container, categorias) {
   container.innerHTML = "";
 
   categorias.forEach((categoria) => {
@@ -56,16 +55,8 @@ export function renderizarFiltroCategorias(container, categorias, aoAlterar) {
 
     label.innerHTML = `
       <input type="checkbox" value="${categoria.id}">
-      ${categoria.nome}
+      <span>${categoria.nome}</span>
     `;
-
-    const checkbox = label.querySelector("input");
-
-    checkbox.addEventListener("change", () => {
-      if (typeof aoAlterar === "function") {
-        aoAlterar(categoria.id, checkbox.checked);
-      }
-    });
 
     container.appendChild(label);
   });
@@ -105,6 +96,24 @@ export function renderizarMarcas(container, marcas, aoClicar) {
     });
 
     container.appendChild(card);
+  });
+}
+
+// ===============================
+// RENDERIZAR FILTROS DAS MARCAS
+// ===============================
+export function renderizarFiltroMarcas(container, marcas) {
+  container.innerHTML = "";
+
+  marcas.forEach((marca) => {
+    const label = document.createElement("label");
+
+    label.innerHTML = `
+      <input type="checkbox" value="${marca.id}">
+      <span>${marca.nome}</span>
+    `;
+
+    container.appendChild(label);
   });
 }
 

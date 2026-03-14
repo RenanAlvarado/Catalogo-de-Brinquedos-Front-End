@@ -157,3 +157,15 @@ if (categoryCarousel && categoryWrapper) {
     categoryCarousel.style.transform = `translateX(-${scrollPosition}px)`;
   });
 }
+
+/* ===================================== */
+/* ABRIR OPÇÕES DE CATEGORIAS E MARCAS */
+/* ===================================== */
+document.querySelectorAll(".dropdown-btn").forEach((botao) => {
+  botao.addEventListener("click", () => {
+    const opcoes = botao.nextElementSibling;
+
+    opcoes.classList.toggle("open");
+    botao.classList.toggle("open");
+  });
+});
