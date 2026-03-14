@@ -44,15 +44,27 @@ header {
 #navbar {
   background-color: #55cbcd;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%233abec1' fill-opacity='1' d='M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,144C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-  background-size: cover; /* Faz a onda cobrir toda a largura */
-  background-position: bottom; /* Fixa a onda na parte de baixo do header */
-  background-repeat: no-repeat; /* Evita que a onda se repita como um azulejo */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath fill='%233abec1' fill-opacity='1' d='M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,144C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 200% 150%; /* Faz a onda ter o dobro da largura da tela */
+  background-position: bottom left; /* Começa grudada no canto esquerdo */
+  background-repeat: no-repeat;
+  
+  animation: moverOnda 10s ease-in-out infinite alternate; 
+}
+
+/* Criamos a regra da animação */
+@keyframes moverOnda {
+  0% { 
+    background-position-x: 0%; 
+  }
+  100% { 
+    background-position-x: 100%; /* Faz ela deslizar até o outro extremo da imagem */
+  }
 }
 
 /* Conteudos */
 #navbar-inner {
-  padding: 1.5rem 0;
+  padding: 1.0rem 0;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -62,7 +74,7 @@ header {
 
 /* DIV da imagem */
 #logo-nav {
-  margin-left: 30px;
+  margin-left: 55px;
 }
 
 /* Logo na Navbar */
@@ -73,7 +85,7 @@ header {
 /* ID que tem os searchs */
 #busca-navbar {
   flex: 1;
-  max-width: 900px;
+  max-width: 850px;
   /* sombra na barra */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra bem levinha */
   /* Para servir as sugestões */
@@ -90,11 +102,11 @@ header {
 /* Itens para pesquisar */
 #busca-navbar input {
   flex: 1;
-  padding: 12px 16px;
+  padding: 13px 20px;
   border: 2px solid transparent;
   border-radius: 30px 0 0 30px;
   outline: none;
-  font-size: 14px;
+  font-size: 13px;
 
   min-width: 0; /* para evitar que o input cresça demais e quebre o layout */
 }
@@ -157,8 +169,8 @@ header {
 /* Botões da NavBar */
 #actions {
   display: flex;
-  gap: 15px;
-  margin-right: 30px;
+  gap: 10px;
+  margin-right: 20px;
 }
 
 /* Botão de favoritos */
@@ -168,6 +180,9 @@ header {
   border: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   border-radius: 50px;
+  padding: 12px 24px; /* 12px de altura, 24px de largura */
+  font-size: 12px;    /* Aumenta a letrinha */
+  font-weight: bold;  /* Deixa o texto mais gordinho e legível */
 }
 
 /* Botão de Login */
@@ -176,6 +191,32 @@ header {
   border: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   border-radius: 50px;
+  padding: 12px 24px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+
+/*botões menu*/
+#menu-links {
+  display: flex;
+  justify-content: center; /* Centraliza os links */
+  align-items: center;
+  gap: 3rem;               /* Espaçamento entre eles */
+  font-size: 1.1rem;
+  width: 100%;
+  margin-top: -1.5rem;
+  padding-bottom: 1rem;  /* Um espacinho para não colar na borda de baixo */
+}
+
+#menu-links a {
+  color: #f2f2f2;
+  text-decoration: none;
+}
+
+#menu-links a:hover {
+  color: #1b4e4f;
+  transition: 0.2s linear;
 }
 
 /* Conteúdo Principal */
