@@ -436,8 +436,9 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 20%;
-  max-width: 20%;
+  width: 15%;
+  min-width: 15%;
+  max-width: 15%;
   margin-left: 15px;
 }
 

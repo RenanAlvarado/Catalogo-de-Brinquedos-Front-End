@@ -2,13 +2,7 @@
 // IMPORTS
 // ===============================
 
-import {
-  buscarBrinquedos,
-  buscarBrinquedosPorNome,
-  buscarBrinquedosPorCategoria,
-  buscarBrinquedosPorMarca,
-} from "./api.js";
-
+import { buscarBrinquedos, buscarBrinquedosPorNome } from "./api.js";
 import { renderizarBrinquedos } from "./render.js";
 
 // ===============================
@@ -212,55 +206,6 @@ function mostrarResultadosBusca(valor) {
   brandsContainer.style.display = "none";
 
   toysTitle.innerText = `Resultados para: ${valor} `;
-}
-
-// ===============================
-// FILTRAR POR CATEGORIA
-// ===============================
-export async function filtrarPorCategoria(id, nomeCategoria) {
-  bannerContainer.style.display = "none";
-  brandsContainer.style.display = "none";
-
-  criarBotaoVoltar();
-
-  try {
-    const brinquedos = await buscarBrinquedosPorCategoria(id);
-
-    if (brinquedos.length === 0) {
-      toysTitle.innerText = `Nenhum produto encontrado para a Categoria: ${nomeCategoria}`;
-    } else {
-      toysTitle.innerText = `Categoria: ${nomeCategoria} `;
-    }
-
-    renderizarBrinquedos(productsContainer, brinquedos);
-  } catch (erro) {
-    console.error("Erro ao filtrar categoria:", erro);
-  }
-}
-
-// ===============================
-// FILTRAR POR MARCAS
-// ===============================
-
-export async function filtrarPorMarca(id, nomeMarca) {
-  bannerContainer.style.display = "none";
-  brandsContainer.style.display = "none";
-
-  criarBotaoVoltar();
-
-  try {
-    const brinquedos = await buscarBrinquedosPorMarca(id);
-
-    if (brinquedos.length === 0) {
-      toysTitle.innerText = `Nenhum produto encontrado para a Marca: ${nomeMarca}`;
-    } else {
-      toysTitle.innerText = `Marca: ${nomeMarca}`;
-    }
-
-    renderizarBrinquedos(productsContainer, brinquedos);
-  } catch (erro) {
-    console.error("Erro ao filtrar Marca:", erro);
-  }
 }
 
 // ===============================

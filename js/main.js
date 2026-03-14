@@ -1,5 +1,9 @@
+// ===============================
 // IMPORTS
+// ===============================
+
 import { buscarCategorias, buscarBrinquedos, buscarMarcas } from "./api.js";
+
 import {
   renderizarCategorias,
   renderizarFiltroCategorias,
@@ -7,55 +11,94 @@ import {
   renderizarMarcas,
   renderizarFiltroMarcas,
 } from "./render.js";
-import { filtrarPorCategoria, filtrarPorMarca } from "./search.js"; // ativa a busca
-import { iniciarCarrosselMarcas } from "./scripts.js"; // carrossel e interações da página
 
+import {
+  filtrarPorCategoria,
+  filtrarPorMarca,
+  alterarCategoria,
+  alterarMarca,
+} from "./filters.js";
+
+import { iniciarCarrosselMarcas } from "./scripts.js";
+import "./search.js";
+
+// ===============================
 // ELEMENTOS
+// ===============================
+
 const categoriesContainer = document.querySelector("#categories-carousel");
 const productsContainer = document.querySelector("#products-wrapper");
 const brandsContainer = document.querySelector("#brands-carousel");
+
 const filtroCategoriasContainer = document.querySelector("#categories-filter");
 const filtroMarcasContainer = document.querySelector("#brands-filter");
 
-// CATEGORIAS
+// ===============================
+// CARREGAR CATEGORIAS (CARROSSEL)
+// ===============================
+
 async function carregarCategorias() {
   const categorias = await buscarCategorias();
+
   renderizarCategorias(categoriesContainer, categorias, filtrarPorCategoria);
 }
 
-//Filtros de Categoria
+// ===============================
+// FILTRO DE CATEGORIAS
+// ===============================
+
 async function carregarCategoriasFiltro() {
   const categorias = await buscarCategorias();
 
-  renderizarFiltroCategorias(filtroCategoriasContainer, categorias);
+  renderizarFiltroCategorias(
+    filtroCategoriasContainer,
+    categorias,
+    alterarCategoria,
+  );
 }
-// MARCAS
+
+// ===============================
+// CARREGAR MARCAS (CARROSSEL)
+// ===============================
+
 async function carregarMarcas() {
   const marcas = await buscarMarcas();
+
   renderizarMarcas(brandsContainer, marcas, filtrarPorMarca);
 
-  // INICIA O CARROSSEL DEPOIS
+  // inicia o carrossel depois que renderiza
   iniciarCarrosselMarcas();
 }
 
-//Filtros de Marca
+// ===============================
+// FILTRO DE MARCAS
+// ===============================
+
 async function carregarMarcasFiltro() {
   const marcas = await buscarMarcas();
 
-  renderizarFiltroMarcas(filtroMarcasContainer, marcas);
+  renderizarFiltroMarcas(filtroMarcasContainer, marcas, alterarMarca);
 }
 
-// BRINQUEDOS
+// ===============================
+// CARREGAR BRINQUEDOS
+// ===============================
+
 async function carregarBrinquedos() {
   const brinquedos = await buscarBrinquedos();
+
   renderizarBrinquedos(productsContainer, brinquedos);
 }
 
-// INICIALIZAÇÃO
+// ===============================
+// INICIALIZAÇÃO DA PÁGINA
+// ===============================
+
 async function iniciarPagina() {
   await carregarCategorias();
   await carregarBrinquedos();
   await carregarMarcas();
+
   await carregarCategoriasFiltro();
   await carregarMarcasFiltro();
 }

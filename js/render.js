@@ -47,18 +47,32 @@ export function renderizarCategorias(container, categorias, aoClicar) {
 // ===============================
 // RENDERIZAR FILTROS DAS CATEGORIAS
 // ===============================
-export function renderizarFiltroCategorias(container, categorias) {
+export function renderizarFiltroCategorias(container, categorias, aoAlterar) {
   container.innerHTML = "";
 
   categorias.forEach((categoria) => {
-    const label = document.createElement("label");
+    const item = document.createElement("label");
+    item.classList.add("filter-item");
 
-    label.innerHTML = `
-      <input type="checkbox" value="${categoria.id}">
-      <span>${categoria.nome}</span>
+    item.innerHTML = `
+      <input 
+        type="checkbox" 
+        class="filter-checkbox"
+        value="${categoria.id}"
+      >
+      <span class="checkmark"></span>
+      <span class="filter-text">${categoria.nome}</span>
     `;
 
-    container.appendChild(label);
+    const checkbox = item.querySelector("input");
+
+    checkbox.addEventListener("change", () => {
+      if (typeof aoAlterar === "function") {
+        aoAlterar(categoria.id, checkbox.checked);
+      }
+    });
+
+    container.appendChild(item);
   });
 }
 
@@ -102,18 +116,32 @@ export function renderizarMarcas(container, marcas, aoClicar) {
 // ===============================
 // RENDERIZAR FILTROS DAS MARCAS
 // ===============================
-export function renderizarFiltroMarcas(container, marcas) {
+export function renderizarFiltroMarcas(container, marcas, aoAlterar) {
   container.innerHTML = "";
 
   marcas.forEach((marca) => {
-    const label = document.createElement("label");
+    const item = document.createElement("label");
+    item.classList.add("filter-item");
 
-    label.innerHTML = `
-      <input type="checkbox" value="${marca.id}">
-      <span>${marca.nome}</span>
+    item.innerHTML = `
+      <input 
+        type="checkbox" 
+        class="filter-checkbox"
+        value="${marca.id}"
+      >
+      <span class="checkmark"></span>
+      <span class="filter-text">${marca.nome}</span>
     `;
 
-    container.appendChild(label);
+    const checkbox = item.querySelector("input");
+
+    checkbox.addEventListener("change", () => {
+      if (typeof aoAlterar === "function") {
+        aoAlterar(marca.id, checkbox.checked);
+      }
+    });
+
+    container.appendChild(item);
   });
 }
 
