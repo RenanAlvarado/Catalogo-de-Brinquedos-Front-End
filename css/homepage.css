@@ -627,6 +627,48 @@ header {
   margin-top: auto; /* O SEGREDO: Empurra o preço sempre para o fundo do cartão, mantendo-os alinhados! */
 }
 
+/* --- PAGINAÇÃO --- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 40px;
+  width: 100%;
+}
+
+.page-btn {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  color: #333;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-btn:hover {
+  background-color: #f4fbcf; /* Amarelinho claro ao passar o mouse */
+  border-color: #55cbcd;
+}
+
+/* A classe que destaca a página em que o usuário está agora */
+.page-btn.active {
+  background-color: #55cbcd; /* Verde-água da MARAH */
+  color: #ffffff;
+  border-color: #55cbcd;
+}
+
+/* Botões de "Anterior" e "Próxima" quando não puderem ser clicados */
+.page-btn:disabled {
+  background-color: #f9f9f9;
+  color: #ccc;
+  cursor: not-allowed;
+  border-color: #eee;
+}
+
 /* --- SEÇÃO DA EQUIPE --- */
 #team {
   background-color: transparent;
