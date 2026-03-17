@@ -12,6 +12,11 @@ body {
   background-color: #f5f5f5;
 }
 
+html {
+  /* Descer devagar ao apertar os links */
+  scroll-behavior: smooth;
+}
+
 /* Classe de estiilização dos botões */
 .btn {
   padding: 12px 16px;

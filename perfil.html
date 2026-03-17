@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -90,38 +90,56 @@
       <section id="right-section">
         <div id="form-container">
           <form action="#" id="form-aditional-informations">
-            <div class="input-icon">
-              <i class="fa-solid fa-phone"></i>
-              <input type="number" placeholder="Phone Number" required />
+            <h3>Dados para Contato:</h3>
+
+            <div id="contact">
+              <div class="input-icon">
+                <i class="fa-solid fa-phone"></i>
+                <input type="number" placeholder="Phone Number" required />
+              </div>
+
+              <div class="input-icon">
+                <i class="fa-solid fa-envelope"></i>
+                <input type="email" placeholder="Email" required />
+              </div>
             </div>
 
-            <div class="input-icon">
-              <i class="fa-solid fa-location-crosshairs"></i>
-              <input type="Number" placeholder="CEP" required />
+            <h3>Endereço:</h3>
+
+            <!-- Para o input do Cep e o botão -->
+            <div id="cep">
+              <div class="input-icon">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                <input type="Number" placeholder="CEP" required />
+              </div>
+              <button class="btn">Validar</button>
             </div>
 
-            <div class="input-icon">
-              <i class="fa-solid fa-location-crosshairs"></i>
-              <input type="text" placeholder="Endereço" required />
+            <!-- Para os campos depois do cep -->
+            <div id="address">
+              <div class="input-icon" id="input-endereco">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                <input type="text" placeholder="Endereço" required />
+              </div>
+
+              <div class="input-icon" id="input-bairro">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                <input type="text" placeholder="Bairro" required />
+              </div>
+
+              <div class="input-icon" id="input-numero">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                <input type="number" placeholder="Nº" required />
+              </div>
+
+              <select name="Estado" id="state-select">
+                <option value="teste">São Paulo</option>
+              </select>
+
+              <select name="Cidade" id="city-select">
+                <option value="teste">Guarulhos</option>
+              </select>
             </div>
-
-            <div class="input-icon">
-              <i class="fa-solid fa-location-crosshairs"></i>
-              <input type="text" placeholder="Bairro" required />
-            </div>
-
-            <div class="input-icon">
-              <i class="fa-solid fa-location-crosshairs"></i>
-              <input type="number" placeholder="Número" required />
-            </div>
-
-            <select name="Estado" id="state-select">
-              <option value="teste">São Paulo</option>
-            </select>
-
-            <select name="Cidade" id="city-select">
-              <option value="teste">Guarulhos</option>
-            </select>
 
             <input type="submit" value="Alterar" />
           </form>

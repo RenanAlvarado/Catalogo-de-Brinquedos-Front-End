@@ -98,7 +98,6 @@ async function iniciarPagina() {
   await carregarCategorias();
   await carregarBrinquedos();
   await carregarMarcas();
-
   await carregarCategoriasFiltro();
   await carregarMarcasFiltro();
 }

@@ -41,9 +41,9 @@ html {
   align-items: center;
   border: 1px solid #ddd;
   border-radius: 25px;
-  margin-bottom: 15px;
   background: #fff;
   padding: 14px 18px;
+  width: 100%;
   transition: 0.2s;
 }
 
@@ -149,11 +149,10 @@ header {
 /* CONTEÚDO PRINCIPAL */
 #main-container {
   width: 100%;
-  min-height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 80px;
+  gap: 60px;
   padding: 40px;
   background: linear-gradient(135deg, #f5f5f5, #e9f7f7);
 }
@@ -163,13 +162,18 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   min-height: 520px;
-  padding: 40px;
-  width: 360px;
-  background: white;
+  padding: 40px 20px;
+  /* Ocupar 1/4 */
+  flex: 1;
+  background: #fff;
   border-radius: 30px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  margin-left: 40px;
+}
+
+#left-section .input-icon {
+  margin-bottom: 15px;
 }
 
 #profile-img-button {
@@ -197,34 +201,80 @@ header {
 }
 
 /* SEÇÃO DIREITA (FORMULÁRIO) */
-#form-container {
+
+#right-section {
+  display: flex;
+  /* Ocupar 3/4 */
+  flex: 3;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 520px;
-  padding: 40px;
-  width: 820px;
-  background: white;
+  padding: 40px 20px;
+  background: #fff;
   border-radius: 30px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-#form-aditional-informations {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
+#form-container {
   width: 100%;
 }
 
-/* BOTÕES DE SUBMIT */
-#form-container button,
-#form-aditional-informations input[type="submit"] {
-  grid-column: span 2;
-  margin-top: 25px;
-  padding: 14px 40px;
-  border-radius: 30px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  justify-self: center;
-  color: white;
+#form-aditional-informations {
+}
+
+#form-aditional-informations h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#form-aditional-informations #contact {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+#form-aditional-informations #cep {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+#form-aditional-informations #cep .input-icon {
+  /* Deixar apenas o campo do cep menor */
+  width: 20%;
+}
+
+#form-aditional-informations #address {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+#form-aditional-informations #address #input-endereco {
+  width: 40%;
+}
+
+#form-aditional-informations #address #input-bairro {
+  width: 25%;
+}
+
+#form-aditional-informations #address #input-numero {
+  width: 15%;
+}
+
+#form-aditional-informations #address #state-select {
+  width: 40%;
+}
+
+#form-aditional-informations #address #city-select {
+  width: 40%;
 }
 
 #form-container button {
@@ -233,26 +283,42 @@ header {
   font-size: 15px;
 }
 
-#form-aditional-informations input[type="submit"] {
-  background: #ffc5d3;
-  border: 2px solid black;
-  font-size: 16px;
-}
-
 /* SELECTS E CAMPOS ESPECÍFICOS */
 #state-select,
 #city-select {
-  width: 100%;
-  height: 52px;
-  padding: 0 18px;
+  padding: 14px 18px;
   border-radius: 25px;
   border: 1px solid #ddd;
   background: #fff;
   font-size: 14px;
+  width: 100%;
+  cursor: pointer;
+
+  /* remover estilo padrão */
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  /* seta personalizada */
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+
+  transition: all 0.2s ease;
 }
 
-#city-select {
-  grid-column: span 2;
+/* HOVER */
+#state-select:hover,
+#city-select:hover {
+  border-color: #ffb703;
+}
+
+/* FOCUS */
+#state-select:focus,
+#city-select:focus {
+  outline: none;
+  border-color: #ffb703;
 }
 
 /* FOOTER */
