@@ -299,7 +299,7 @@ header {
   width: 140px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px;
   background-color: #f5f5f5;
@@ -331,7 +331,7 @@ header {
   position: relative;
   width: 100%;
   overflow: hidden;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 #banner-carousel {
@@ -474,18 +474,24 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  margin-left: 30px;
+  gap: 25px;
 }
 
 /* PARTE DE FILTROS */
 #filters-container {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff; /* Fundo branco */
-  padding: 20px; /* Respiro interno */
-  border-radius: 12px; /* Bordas arredondadas suaves */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombrinha leve */
-  width: 250px; /* Uma largura fixa costuma funcionar melhor que 15% */
-  margin-left: 50px;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  width: 15%;
+  min-width: 15%;
+  max-width: 15%;
+  margin-left: 15px;
 }
 
 #filters-container h3 {
@@ -497,24 +503,25 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 0; /* Mais espaço para o clique */
+  padding: 15px 0;
   font-size: 16px;
-  font-weight: bold; /* Deixa o texto com destaque */
+  font-weight: bold;
   color: #333;
-  background: none; /* Remove a cor de fundo cinza padrão do botão */
-  border: none; /* Remove a borda do botão */
-  border-bottom: 1px solid #eeeeee; /* Cria a linha divisória sutil da Toys R Us */
+  background: none;
+  border: none;
+  border-bottom: 1px solid #eeeeee;
   cursor: pointer;
 }
 
 .filter-options {
   width: 100%;
-  /* Para não aparecer nada */
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   font-size: 18px;
+  /* Espaçamento entre eles */
+  margin: 12px 0;
 }
 
 .filter-options.open {
@@ -530,7 +537,7 @@ header {
 .filter-options label {
   display: flex;
   align-items: center;
-  justify-content: flex-start; /* MUDE AQUI: Joga o quadradinho para a esquerda! */
+  justify-content: flex-start;
   gap: 12px;
   margin-bottom: 12px;
   font-size: 15px;
@@ -550,7 +557,6 @@ header {
 
 /* BRINQUEDOS */
 #toys-container {
-  padding: 0 60px;
 }
 
 /* DIV PAI --> Ela que possui o flex e controla o wrap dos elementos */
@@ -560,40 +566,29 @@ header {
   /* Elementos começam da esquerda */
   justify-content: flex-start;
   gap: 20px;
-}
-
-/* Card do produto */
-
-#products-wrapper {
-  display: flex;
-  flex-wrap: wrap; /* A MÁGICA DO FLEXBOX: Permite criar novas linhas! */
-  gap: 20px;
   width: 100%;
 }
 
 .product-card {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff; /* Fundo branco limpo */
-  border: 1px solid #eeeeee; /* Bordinha bem suave, estilo loja */
+  background-color: #ffffff;
+  border: 1px solid #eeeeee;
   border-radius: 12px;
   padding: 15px;
-  /* REMOVE O MAX-WIDTH E O FLEX: 1 1... A grelha é que vai ditar o tamanho agora! */
-  text-align: left; /* Textos alinhados à esquerda ficam mais fáceis de ler */
+  text-align: left;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); /* Sombra bem mais subtil */
   cursor: pointer;
   transition: all 0.2s ease;
-  height: 100%; /* Obriga todos os cartões na mesma linha a terem a mesma altura */
-  flex: 1 1 250px; /* Significa: Pode crescer(1), Pode encolher(1), Tamanho base(250px) */
-  max-width: 300px;
+  height: 380px;
+  max-width: 280px;
+  min-width: 280px;
 }
 
 .product-card:hover {
-  transform: translateY(
-    -3px
-  ); /* Efeito de flutuar ao invés de ficar cinzento */
+  /* Efeito de flutuar ao invés de ficar cinzento */
+  transform: translateY(-3px);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  /* Removi aquele background-color: #ddd do hover, pois deixava o cartão "sujo" */
 }
 
 .product-card .toy-img {
@@ -617,7 +612,7 @@ header {
 
 .product-card .toy-description {
   font-size: 14px;
-  color: #666; /* Cor mais suave para a descrição */
+  color: #666;
   margin-bottom: 15px;
   /* Estas 3 linhas fazem o texto da descrição ser cortado com "..." se for muito grande */
   display: -webkit-box;
@@ -630,7 +625,8 @@ header {
   font-size: 20px;
   font-weight: 900;
   color: #1b4e4f;
-  margin-top: auto; /* O SEGREDO: Empurra o preço sempre para o fundo do cartão, mantendo-os alinhados! */
+  /* Sempre ficar no final */
+  margin-top: auto;
 }
 
 /* --- PAGINAÇÃO --- */
@@ -677,9 +673,17 @@ header {
 
 /* --- SEÇÃO DA EQUIPE --- */
 #team {
+  width: 100%;
   background-color: transparent;
-  padding: 60px 20px;
   text-align: center;
+}
+
+#team-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 0;
 }
 
 #team h2 {
@@ -688,46 +692,51 @@ header {
   margin-bottom: 40px;
 }
 
-/* O Flexbox que coloca os 4 lado a lado */
+/* Div para os 4 cards */
 .team-members {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 40px;
   flex-wrap: wrap; /* Se a tela for pequena (celular), eles caem para a linha de baixo organizadamente */
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: 100%;
 }
 
+/* Card dos membros */
 .member-card {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 180px; /* Largura de cada "cartão" de membro */
+  width: 180px;
+  max-width: 180px; /* Largura de cada "cartão" de membro */
 }
 
-/* A magia da foto redonda */
+/* Foto */
 .member-photo {
   width: 140px;
   height: 140px;
-  border-radius: 50%; /* É isso que faz a foto ficar um círculo perfeito! */
-  object-fit: cover; /* Garante que a foto não fique achatada ou esticada, mesmo se a imagem original for retangular */
-  border: 4px solid #55cbcd; /* A bordinha com a cor principal do seu site */
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #55cbcd;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   margin-bottom: 15px;
   transition: transform 0.3s ease;
 }
 
-/* Um efeitinho de zoom quando passa o mouse na foto */
+/* Efeito de Zoom */
 .member-photo:hover {
   transform: scale(1.05);
 }
 
+/* Nome */
 .member-card h3 {
   font-size: 18px;
   color: #333;
   margin-bottom: 5px;
 }
 
+/* Função */
 .member-card p {
   font-size: 14px;
   color: #666;
