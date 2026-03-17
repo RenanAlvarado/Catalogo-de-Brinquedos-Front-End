@@ -15,13 +15,11 @@ const searchInput = document.querySelector("#search-input");
 const suggestionsBox = document.querySelector("#suggestions-box");
 const buscaNavbar = document.querySelector("#busca-navbar");
 const formBusca = document.querySelector("#busca-navbar form");
-const returnButton = document.querySelector("#return-index-btn");
 
 const productsContainer = document.querySelector("#products-wrapper");
 
 // ELEMENTOS QUE SOMEM NA BUSCA
 const categoriesContainer = document.querySelector("#categories-container");
-const bannerContainer = document.querySelector("#banner-container");
 const brandsContainer = document.querySelector("#brands-container");
 const toysTitle = document.querySelector("#toysContainer-title");
 
@@ -202,7 +200,6 @@ async function executarBusca(valor) {
 
 function mostrarResultadosBusca(valor) {
   categoriesContainer.style.display = "none";
-  bannerContainer.style.display = "none";
   brandsContainer.style.display = "none";
 
   toysTitle.innerText = `Resultados para: ${valor} `;
@@ -214,7 +211,6 @@ function mostrarResultadosBusca(valor) {
 
 async function restaurarCatalogo() {
   categoriesContainer.style.display = "";
-  bannerContainer.style.display = "";
   brandsContainer.style.display = "";
 
   toysTitle.innerText = tituloOriginal;

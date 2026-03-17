@@ -16,7 +16,6 @@ import { renderizarBrinquedos } from "./render.js";
 
 const mainContainer = document.querySelector("#main-container");
 const productsContainer = document.querySelector("#products-wrapper");
-const bannerContainer = document.querySelector("#banner-container");
 const brandsContainer = document.querySelector("#brands-container");
 const toysTitle = document.querySelector("#toysContainer-title");
 
@@ -55,7 +54,6 @@ let marcasSelecionadas = [];
 // ===============================
 
 export async function filtrarPorCategoria(id, nomeCategoria) {
-  bannerContainer.style.display = "none";
   brandsContainer.style.display = "none";
 
   criarBotaoVoltar();
@@ -80,7 +78,6 @@ export async function filtrarPorCategoria(id, nomeCategoria) {
 // ===============================
 
 export async function filtrarPorMarca(id, nomeMarca) {
-  bannerContainer.style.display = "none";
   brandsContainer.style.display = "none";
 
   criarBotaoVoltar();
