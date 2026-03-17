@@ -200,7 +200,7 @@ header {
 /*Botões da parte debaixo do menu*/
 #bottom-header {
   width: 100%;
-  background-color: #ddd;
+  background-color: #47bbc3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -219,7 +219,7 @@ header {
 }
 
 #menu-links a {
-  color: #000;
+  color: #FFFFFF;
   text-decoration: none;
 }
 
@@ -676,6 +676,22 @@ header {
   border-color: #eee;
 }
 
+<<<<<<< HEAD
+
+/* =========================================
+   RODAPÉ (FOOTER) - ESTRUTURA DIVIDIDA
+   ========================================= */
+
+#footer {
+  background-color: #26c6da; 
+  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 3px, transparent 3px);
+  background-size: 35px 35px;
+  border-top: 6px solid #ff7eb3; 
+  padding-top: 60px;
+  color: #1a4a4c; 
+}
+
+=======
 /* --- SEÇÃO DA EQUIPE --- */
 #team {
   width: 100%;
@@ -749,73 +765,160 @@ header {
 
 /* Rodapé */
 
+>>>>>>> cd0047d2466f3262c9ae502d077c3425e49f19ea
 #footer-container {
   display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between;
+  gap: 50px; 
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 0 5%;
+  padding-bottom: 50px;
+}
+
+/* --- LADO ESQUERDO --- */
+.footer-left {
+  flex: 1; 
+  min-width: 250px;
+  max-width: 320px; /* Segura o texto para ele não invadir o lado direito */
+}
+
+.footer-left img {
+  max-width: 180px; 
+  margin-bottom: 15px;
+  display: block;
+}
+
+.footer-left p {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* --- LADO DIREITO --- */
+.footer-right {
+  flex: 2; /* Ocupa o resto do espaço */
+  display: flex;
+  flex-direction: column; /* Organiza os menus em cima e ícones embaixo */
+  gap: 40px; 
+  min-width: 300px;
+}
+
+.footer-menus {
+  display: flex;
   flex-wrap: wrap;
-  padding: -20px 20px;
-  justify-content: space-around;
-  width: 100%;
-  background-color: #4ed3d6; /* Sua cor ciano base */
-  /* Cria as "bolhinhas" com gradiente radial */
-  background-image: radial-gradient(
-    rgba(255, 255, 255, 0.25) 3px,
-    transparent 3px
-  );
-  background-size: 40px 40px; /* Define o espaço entre as bolhas */
-  border-top: 1px solid #333;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .footer-column {
+  flex: 1;
+  min-width: 140px;
+}
+
+/* --- ÁREA DOS ÍCONES (Alvo do seu print!) --- */
+.footer-icons-row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 80px; /* Afasta bem as Redes Sociais dos Pagamentos */
 }
 
-.footer-column img {
-  width: 175px;
-  margin-bottom: 10px;
-}
-
-/* Títulos */
-.footer-column h3 {
-  margin-top: 30px;
-  margin-bottom: 20px;
-  font-size: 20px;
-  font-weight: 800;
+/* --- TEXTOS E TÍTULOS GERAIS --- */
+#footer h3 {
   color: #ffffff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.1); 
 }
 
-.footer-column ul {
-  list-style: none;
+#footer ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
 }
 
-.footer-column a {
-  color: #000;
-}
-
-.footer-column li {
+#footer ul li {
   margin-bottom: 12px;
-  cursor: pointer;
+}
+
+#footer ul li a {
+  color: #1a4a4c; 
+  text-decoration: none;
   font-size: 16px;
-  text-align: center;
-  transition: 0.3s;
+  font-weight: 500;
+  transition: all 0.3s ease; 
 }
 
-.footer-column li:hover {
-  color: #fff;
+#footer ul li a:hover {
+  color: #ffffff; 
+  padding-left: 6px; 
 }
 
+/* --- CONFIGURAÇÃO DOS ÍCONES --- */
 .caixa-icones {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 15px;
-  width: 100%;
-  margin: 0 auto;
 }
 
-#footer-bottom {
+.caixa-icones a, .pagamento-icones i {
+  color: #1a4a4c;
+  font-size: 28px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.caixa-icones a:hover {
+  color: #ffffff;
+  transform: translateY(-5px); 
+}
+
+.pagamento-icones i {
+  font-size: 34px;
+  cursor: default; 
+}
+
+/* --- BARRA INFERIOR --- */
+.footer-bottom {
+  background-color: #1eabbd; 
   text-align: center;
-  border-top: 1px solid #444;
-  padding: 5px 0;
+  padding: 20px 5%;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* =========================================
+   RESPONSIVIDADE (Tablets e Celulares)
+   ========================================= */
+
+@media (max-width: 850px) {
+  #footer-container {
+    flex-direction: column; /* Empilha o esquerdo e o direito no celular */
+    align-items: center;
+    text-align: center;
+  }
+  .footer-left img {
+    margin: 0 auto 15px auto; 
+  }
+  .footer-menus {
+    justify-content: center;
+    gap: 40px;
+  }
+  .footer-icons-row {
+    justify-content: center;
+    gap: 40px;
+  }
+  #footer ul li a:hover {
+    padding-left: 0; /* Desativa a animação de ir pro lado no touch */
+  }
 }

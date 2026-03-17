@@ -1,5 +1,3 @@
-<!doctype html>
-
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -8,7 +6,7 @@
     <title>Catalogo de Brinquedos</title>
 
     <!-- CSS Geral (HomePage) -->
-    <link rel="stylesheet" href="css/homepage.css" />
+    <link rel="stylesheet" href="css/termos.css" />
 
     <!-- JavaScript -->
     <script type="module" src="js/main.js" defer></script>
@@ -75,156 +73,45 @@
       </div>
     </header>
 
-    <!-- Conteudo Principal -->
-    <main id="main-container">
-      <!-- Categorias -->
-      <div id="categories-container">
-        <!-- Botão da esquerda -->
-        <button class="categories-btn prev-categories">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
+   <main class="legal-page">
+  <div class="legal-container">
+    <h1>Termos e Condições de Uso</h1>
+    <p class="last-update">Última atualização: 16 de março de 2026</p>
 
-        <div id="categories-wrapper"><div id="categories-carousel"></div></div>
+    <section class="legal-section">
+      <h2>1. Aceitação dos Termos</h2>
+      <p>Ao aceder e utilizar o catálogo de brinquedos da MARAH, o utilizador concorda em cumprir e estar vinculado a estes Termos e Condições. Se não concordar com qualquer parte destes termos, não deverá utilizar o nosso website.</p>
+    </section>
 
-        <!-- Botão da direita -->
-        <button class="categories-btn next-categories">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-      </div>
+    <section class="legal-section">
+      <h2>2. Uso do Catálogo</h2>
+      <p>A MARAH disponibiliza este catálogo online com fins informativos e de demonstração de produtos. O utilizador compromete-se a utilizar o site apenas para fins lícitos e de uma forma que não infrinja os direitos de terceiros, nem restrinja ou iniba a utilização do site por qualquer outra pessoa.</p>
+    </section>
 
-      <!--
-  
-      <div id="banner-container">
-        <div id="banner-carousel">
-          <div class="banner-slide">
-            <img src="img/banner/Banner_1.png" alt="Promoção de Brinquedos" />
-          </div>
+    <section class="legal-section">
+      <h2>3. Informações sobre os Brinquedos</h2>
+      <p>Esforçamo-nos para garantir que as descrições, imagens e preços dos brinquedos (incluindo carrinhos, bonecas, educativos, etc.) sejam o mais precisos possível. No entanto, a MARAH não garante que as descrições dos produtos ou outros conteúdos do site sejam totalmente precisos, completos, fiáveis ou isentos de erros.</p>
+    </section>
 
-          <div class="banner-slide">
-            <img src="img/banner/Banner_2.png" alt="Novidades" />
-          </div>
+    <section class="legal-section">
+      <h2>4. Propriedade Intelectual</h2>
+      <p>Todo o conteúdo presente neste site, incluindo textos, gráficos, logótipos, ícones, imagens e compilações de dados, é propriedade da MARAH ou dos seus fornecedores de conteúdo, estando protegido pelas leis de direitos de autor.</p>
+    </section>
 
-          <div class="banner-slide">
-            <img src="img/banner/Banner_3.png" alt="Ofertas" />
-          </div>
-        </div>
+    <section class="legal-section">
+      <h2>5. Modificações dos Termos</h2>
+      <p>A MARAH reserva-se o direito de rever e alterar estes Termos e Condições a qualquer momento. A utilização continuada do site após a publicação de quaisquer alterações constitui a aceitação dessas mesmas alterações.</p>
+    </section>
 
-   
-        <button class="banner-btn prev">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
-
-        <button class="banner-btn next">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-      </div>
-
-      -->
-
-      
-
-      <!-- Marcas -->
-      <div id="brands-container">
-        Maiores Marcas
-        <div id="brands-wrapper">
-          <div id="brands-carousel"></div>
-        </div>
-      </div>
-
-      <!-- Título dos produtos -->
-      <h2 id="toysContainer-title">Lista de Produtos</h2>
-
-      <!-- DIV PARA DEIXAR LADO A LADO -->
-      <div id="filter-toys">
-        <!-- FILTROS -->
-        <div id="filters-container">
-          <h3>Filtros</h3>
-          <button class="dropdown-btn">
-            Categorias <i class="fa-solid fa-chevron-down filter-arrow"></i>
-          </button>
-
-          <div class="filter-options" id="categories-filter">
-            <!-- Onde é carregado as categorias para filtragem -->
-          </div>
-
-          <button class="dropdown-btn">
-            Marcas <i class="fa-solid fa-chevron-down filter-arrow"></i>
-          </button>
-
-          <div class="filter-options" id="brands-filter">
-            <!-- Onde é carregado as marcas para filtragem -->
-          </div>
-        </div>
-
-        <!-- Brinquedos -->
-        <div id="toys-container">
-          <div id="products-wrapper"></div>
-          <div id="products-wrapper"></div>
-
-          <div id="pagination-container" class="pagination"></div>
-        </div>
-      </div>
-
-      <!-- Parte da Equipe -->
-      <section id="team">
-        <div id="team-container">
-          <h2>Nossa equipe:</h2>
-
-          <div class="team-members">
-            <div class="member-card">
-              <img
-                src="img/members/foto-arthur.jpg"
-                alt="Arthur Portilio"
-                class="member-photo"
-              />
-              <h3>Arthur Portilio</h3>
-              <p>Front-End</p>
-            </div>
-
-            <div class="member-card">
-              <img
-                src="img/members/foto-heitor.jpg"
-                alt="Heitor Norilla"
-                class="member-photo"
-              />
-              <h3>Heitor Norilla</h3>
-              <p>Front-End</p>
-            </div>
-
-            <div class="member-card">
-              <img
-                src="img/members/foto-matheus.jpg"
-                alt="Matheus Fernandes"
-                class="member-photo"
-              />
-              <h3>Matheus Fernandes</h3>
-              <p>Back-End</p>
-            </div>
-
-            <div class="member-card">
-              <img
-                src="img/members/foto-renan.jpg"
-                alt="Renan Amaral"
-                class="member-photo"
-              />
-              <h3>Renan Amaral</h3>
-              <p>Back-End</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-<<<<<<< HEAD
-    </div>
+    <section class="legal-section">
+      <h2>6. Contactos</h2>
+      <p>Se tiver alguma dúvida sobre estes Termos e Condições, por favor, entre em contacto com a nossa equipa de suporte através dos canais oficiais indicados no nosso site.</p>
+    </section>
+    
   </div>
-</section>
+</main>
 
-
-=======
-    <!-- Rodapé -->
->>>>>>> cd0047d2466f3262c9ae502d077c3425e49f19ea
-    <footer id="footer">
+   <footer id="footer">
   <div id="footer-container">
 
     <div class="footer-left">
@@ -250,10 +137,10 @@
           <h3>Categorias</h3>
           <nav>
             <ul>
-              <li><a href="index.html#toys-container">Carrinhos</a></li>
-              <li><a href="index.html#toys-container">Bonecas</a></li>
-              <li><a href="index.html#toys-container">Educativos</a></li>
-              <li><a href="index.html#toys-container">Jogos</a></li>
+              <li><a href="termos.html">Termos & Condições</a></li>
+              <li><a href="privacidade.html">Política de privacidade</a></li>
+              <li><a href="compra-segura.html">Compra segura</a></li>
+              <li><a href="cookies.html">Aviso sobre cookies</a></li>
             </ul>
           </nav>
         </div>
@@ -295,3 +182,5 @@
     <p>&copy; 2026 MARAH Catálogo de Brinquedos. Todos os direitos reservados.</p>
   </div>
 </footer>
+  </body>
+</html>

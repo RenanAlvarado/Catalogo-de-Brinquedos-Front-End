@@ -1,0 +1,446 @@
+/* Geral */
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f5f5f5;
+}
+
+/* Classe de estiilização dos botões */
+.btn {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  font-weight: bold;
+  text-align: center;
+  align-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Botão quando apertado */
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+header {
+  /* Descer com a tela */
+  position: sticky;
+  top: 0;
+  /* Ficar acima de tudo */
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NavBar */
+#navbar {
+  background-color: #55cbcd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath fill='%233abec1' fill-opacity='1' d='M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,144C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 200% 150%; /* Faz a onda ter o dobro da largura da tela */
+  background-position: bottom left; /* Começa grudada no canto esquerdo */
+  background-repeat: no-repeat;
+  animation: moverOnda 10s ease-in-out infinite alternate;
+}
+
+/* Animação de Mover a Onda */
+@keyframes moverOnda {
+  0% {
+    background-position-x: 0%;
+  }
+  100% {
+    background-position-x: 100%; /* Faz ela deslizar até o outro extremo da imagem */
+  }
+}
+
+/* Conteudos */
+#navbar-inner {
+  padding: 1rem 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* DIV da imagem */
+#logo-nav {
+  margin-left: 55px;
+}
+
+/* Logo na Navbar */
+#navbar-inner img {
+  width: 110px;
+}
+
+/* ID que tem os searchs */
+#busca-navbar {
+  flex: 1;
+  max-width: 900px;
+  /* sombra na barra */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra bem levinha */
+  /* Para servir as sugestões */
+  position: relative;
+}
+
+/* Form --> É a div que abriga o buscar */
+#busca-navbar form {
+  /* Deixa os itens juntos */
+  display: flex;
+  width: 100%;
+}
+
+/* Itens para pesquisar */
+#busca-navbar input {
+  flex: 1;
+  padding: 13px 20px;
+  border: 2px solid transparent;
+  border-radius: 30px 0 0 30px;
+  outline: none;
+  font-size: 14px;
+  min-width: 0; /* para evitar que o input cresça demais e quebre o layout */
+}
+
+/* Quando clicado */
+#busca-navbar input:focus {
+  border-color: #ffb703;
+  box-shadow: 0 0 0 3px rgba(255, 183, 3, 0.2);
+}
+
+#busca-navbar button {
+  border-radius: 0 5px 5px 0; /* arredonda só o lado direito */
+  border-left: 1px solid black;
+}
+
+#busca-navbar button:hover {
+  background: #ffb703;
+  color: white;
+  transform: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Quando a barra de sugestões está ativa */
+#busca-navbar.active input {
+  border-bottom-left-radius: 0;
+}
+
+#busca-navbar.active button {
+  border-bottom-right-radius: 0;
+  border-right: 1px solid #ddd;
+}
+
+/* Sugestões da barra de pesquisa */
+#suggestions-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  max-height: 250px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background: #f2f2f2;
+}
+
+.suggestion-item.selected {
+  background-color: #f0f0f0;
+}
+
+/* Botões da NavBar */
+#actions {
+  display: flex;
+  gap: 15px;
+  margin-right: 30px;
+}
+
+/* Botão de favoritos */
+#favs {
+  background: #ff8eb3;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 50px;
+}
+
+/* Botão de Login */
+#login {
+  background: #ffb703;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 50px;
+}
+
+/*Botões da parte debaixo do menu*/
+#bottom-header {
+  width: 100%;
+  background-color: #47bbc3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+#menu-links {
+  display: flex;
+  /* Centraliza os links */
+  justify-content: center;
+  align-items: center;
+  /* Espaçamento entre eles */
+  gap: 3rem;
+  font-size: 1.1rem;
+  padding: 0.6rem 0; /* Um espacinho para não colar na borda de baixo */
+}
+
+#menu-links a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+#menu-links a:hover {
+  color: #1b4e4f;
+  transition: 0.2s linear;
+}
+
+/* --- ESTILO PARA PÁGINAS LEGAIS (TERMOS E PRIVACIDADE) --- */
+
+.legal-page {
+  background-color: #f9f9f9; /* Fundo cinza bem suave para descansar a vista */
+  padding: 60px 20px;
+  min-height: 60vh; 
+}
+
+.legal-container {
+  max-width: 800px; /* Limita a largura para a leitura não ficar cansativa */
+  margin: 0 auto;
+  background-color: #ffffff; /* Caixa branca central */
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra bem leve e elegante */
+}
+
+.legal-container h1 {
+  color: #1b4e4f; /* O seu tom mais escuro para o título principal */
+  font-size: 32px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.last-update {
+  text-align: center;
+  color: #888;
+  font-size: 14px;
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.legal-section {
+  margin-bottom: 30px;
+}
+
+.legal-section h2 {
+  color: #47bbc3; /* Aquele turquesa/verde-água lindo que você escolheu! */
+  font-size: 22px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #f4fbcf; /* Detalhe amarelo bem sutil separando o título do texto */
+  padding-bottom: 5px;
+}
+
+.legal-section p {
+  color: #444;
+  font-size: 16px;
+  line-height: 1.6; /* Espaçamento entre as linhas que facilita muito a leitura */
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+/* =========================================
+   RODAPÉ (FOOTER) - ESTRUTURA DIVIDIDA
+   ========================================= */
+
+#footer {
+  background-color: #26c6da; 
+  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 3px, transparent 3px);
+  background-size: 35px 35px;
+  border-top: 6px solid #ff7eb3; 
+  padding-top: 60px;
+  color: #1a4a4c; 
+}
+
+#footer-container {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between;
+  gap: 50px; 
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 0 5%;
+  padding-bottom: 50px;
+}
+
+/* --- LADO ESQUERDO --- */
+.footer-left {
+  flex: 1; 
+  min-width: 250px;
+  max-width: 320px; /* Segura o texto para ele não invadir o lado direito */
+}
+
+.footer-left img {
+  max-width: 180px; 
+  margin-bottom: 15px;
+  display: block;
+}
+
+.footer-left p {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* --- LADO DIREITO --- */
+.footer-right {
+  flex: 2; /* Ocupa o resto do espaço */
+  display: flex;
+  flex-direction: column; /* Organiza os menus em cima e ícones embaixo */
+  gap: 40px; 
+  min-width: 300px;
+}
+
+.footer-menus {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-column {
+  flex: 1;
+  min-width: 140px;
+}
+
+/* --- ÁREA DOS ÍCONES (Alvo do seu print!) --- */
+.footer-icons-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 80px; /* Afasta bem as Redes Sociais dos Pagamentos */
+}
+
+/* --- TEXTOS E TÍTULOS GERAIS --- */
+#footer h3 {
+  color: #ffffff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.1); 
+}
+
+#footer ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+}
+
+#footer ul li {
+  margin-bottom: 12px;
+}
+
+#footer ul li a {
+  color: #1a4a4c; 
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease; 
+}
+
+#footer ul li a:hover {
+  color: #ffffff; 
+  padding-left: 6px; 
+}
+
+/* --- CONFIGURAÇÃO DOS ÍCONES --- */
+.caixa-icones {
+  display: flex;
+  gap: 15px;
+}
+
+.caixa-icones a, .pagamento-icones i {
+  color: #1a4a4c;
+  font-size: 28px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.caixa-icones a:hover {
+  color: #ffffff;
+  transform: translateY(-5px); 
+}
+
+.pagamento-icones i {
+  font-size: 34px;
+  cursor: default; 
+}
+
+/* --- BARRA INFERIOR --- */
+.footer-bottom {
+  background-color: #1eabbd; 
+  text-align: center;
+  padding: 20px 5%;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* =========================================
+   RESPONSIVIDADE (Tablets e Celulares)
+   ========================================= */
+
+@media (max-width: 850px) {
+  #footer-container {
+    flex-direction: column; /* Empilha o esquerdo e o direito no celular */
+    align-items: center;
+    text-align: center;
+  }
+  .footer-left img {
+    margin: 0 auto 15px auto; 
+  }
+  .footer-menus {
+    justify-content: center;
+    gap: 40px;
+  }
+  .footer-icons-row {
+    justify-content: center;
+    gap: 40px;
+  }
+  #footer ul li a:hover {
+    padding-left: 0; /* Desativa a animação de ir pro lado no touch */
+  }
+}
