@@ -32,7 +32,7 @@ export async function buscarCategorias() {
 }
 
 // ===============================
-// Marcas
+// MARCAS
 // ===============================
 
 export async function buscarMarcas() {
