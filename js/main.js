@@ -13,6 +13,7 @@ import {
   renderizarBrinquedos,
   renderizarMarcas,
   renderizarFiltroMarcas,
+  renderizarPaginacao,
 } from "./render.js";
 
 import {
