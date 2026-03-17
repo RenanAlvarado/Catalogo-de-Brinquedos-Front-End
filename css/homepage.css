@@ -219,7 +219,7 @@ header {
 }
 
 #menu-links a {
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -328,59 +328,6 @@ header {
 
 .category-card h3 {
   font-size: 14px;
-}
-
-/* ===== BANNER CARROSSEL ===== */
-
-#banner-container {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
-  margin-bottom: 20px;
-}
-
-#banner-carousel {
-  display: flex;
-  transition: transform 0.6s ease;
-}
-
-.banner-slide {
-  min-width: 100%;
-}
-
-.banner-slide img {
-  width: 100%;
-  height: 460px;
-  object-fit: cover;
-  display: block;
-}
-
-/* Botões */
-
-.banner-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.4);
-  border: none;
-  color: white;
-  font-size: 20px;
-  padding: 12px 16px;
-  cursor: pointer;
-  border-radius: 50%;
-  transition: 0.3s;
-}
-
-.banner-btn:hover {
-  background: rgba(0, 0, 0, 0.7);
-}
-
-.prev {
-  left: 20px;
-}
-
-.next {
-  right: 20px;
 }
 
 /* ===== MARCAS ===== */
@@ -676,22 +623,6 @@ header {
   border-color: #eee;
 }
 
-<<<<<<< HEAD
-
-/* =========================================
-   RODAPÉ (FOOTER) - ESTRUTURA DIVIDIDA
-   ========================================= */
-
-#footer {
-  background-color: #26c6da; 
-  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 3px, transparent 3px);
-  background-size: 35px 35px;
-  border-top: 6px solid #ff7eb3; 
-  padding-top: 60px;
-  color: #1a4a4c; 
-}
-
-=======
 /* --- SEÇÃO DA EQUIPE --- */
 #team {
   width: 100%;
@@ -763,15 +694,28 @@ header {
   color: #666;
 }
 
-/* Rodapé */
+/* =========================================
+   RODAPÉ (FOOTER) - ESTRUTURA DIVIDIDA
+   ========================================= */
 
->>>>>>> cd0047d2466f3262c9ae502d077c3425e49f19ea
+#footer {
+  background-color: #26c6da;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.25) 3px,
+    transparent 3px
+  );
+  background-size: 35px 35px;
+  border-top: 6px solid #ff7eb3;
+  padding-top: 60px;
+  color: #1a4a4c;
+}
+
 #footer-container {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 50px; 
-  max-width: 1200px; 
+  gap: 50px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 5%;
   padding-bottom: 50px;
@@ -779,13 +723,13 @@ header {
 
 /* --- LADO ESQUERDO --- */
 .footer-left {
-  flex: 1; 
+  flex: 1;
   min-width: 250px;
   max-width: 320px; /* Segura o texto para ele não invadir o lado direito */
 }
 
 .footer-left img {
-  max-width: 180px; 
+  max-width: 180px;
   margin-bottom: 15px;
   display: block;
 }
@@ -801,7 +745,7 @@ header {
   flex: 2; /* Ocupa o resto do espaço */
   display: flex;
   flex-direction: column; /* Organiza os menus em cima e ícones embaixo */
-  gap: 40px; 
+  gap: 40px;
   min-width: 300px;
 }
 
@@ -828,17 +772,17 @@ header {
 /* --- TEXTOS E TÍTULOS GERAIS --- */
 #footer h3 {
   color: #ffffff;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 22px;
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 20px;
   letter-spacing: 1px;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.1); 
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 #footer ul {
-  list-style: none; 
+  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -848,16 +792,16 @@ header {
 }
 
 #footer ul li a {
-  color: #1a4a4c; 
+  color: #1a4a4c;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
 }
 
 #footer ul li a:hover {
-  color: #ffffff; 
-  padding-left: 6px; 
+  color: #ffffff;
+  padding-left: 6px;
 }
 
 /* --- CONFIGURAÇÃO DOS ÍCONES --- */
@@ -866,7 +810,8 @@ header {
   gap: 15px;
 }
 
-.caixa-icones a, .pagamento-icones i {
+.caixa-icones a,
+.pagamento-icones i {
   color: #1a4a4c;
   font-size: 28px;
   text-decoration: none;
@@ -875,17 +820,17 @@ header {
 
 .caixa-icones a:hover {
   color: #ffffff;
-  transform: translateY(-5px); 
+  transform: translateY(-5px);
 }
 
 .pagamento-icones i {
   font-size: 34px;
-  cursor: default; 
+  cursor: default;
 }
 
 /* --- BARRA INFERIOR --- */
 .footer-bottom {
-  background-color: #1eabbd; 
+  background-color: #1eabbd;
   text-align: center;
   padding: 20px 5%;
 }
@@ -908,7 +853,7 @@ header {
     text-align: center;
   }
   .footer-left img {
-    margin: 0 auto 15px auto; 
+    margin: 0 auto 15px auto;
   }
   .footer-menus {
     justify-content: center;

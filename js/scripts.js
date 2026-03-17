@@ -69,55 +69,6 @@ export function iniciarCarrosselMarcas() {
 }
 
 /* ===================================== */
-/* CARROSSEL DO BANNER */
-/* ===================================== */
-
-const bannerCarousel = document.querySelector("#banner-carousel");
-const bannerSlides = document.querySelectorAll(".banner-slide");
-
-const nextBtn = document.querySelector(".next");
-const prevBtn = document.querySelector(".prev");
-
-if (bannerCarousel && bannerSlides.length > 0) {
-  let bannerIndex = 0;
-
-  function updateBanner() {
-    bannerCarousel.style.transform = `translateX(-${bannerIndex * 100}%)`;
-  }
-
-  nextBtn?.addEventListener("click", () => {
-    bannerIndex++;
-
-    if (bannerIndex >= bannerSlides.length) {
-      bannerIndex = 0;
-    }
-
-    updateBanner();
-  });
-
-  prevBtn?.addEventListener("click", () => {
-    bannerIndex--;
-
-    if (bannerIndex < 0) {
-      bannerIndex = bannerSlides.length - 1;
-    }
-
-    updateBanner();
-  });
-
-  // auto slide
-  setInterval(() => {
-    bannerIndex++;
-
-    if (bannerIndex >= bannerSlides.length) {
-      bannerIndex = 0;
-    }
-
-    updateBanner();
-  }, 5000);
-}
-
-/* ===================================== */
 /* CARROSSEL DE CATEGORIAS */
 /* ===================================== */
 
