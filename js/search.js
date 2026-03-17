@@ -15,7 +15,6 @@ const searchInput = document.querySelector("#search-input");
 const suggestionsBox = document.querySelector("#suggestions-box");
 const buscaNavbar = document.querySelector("#busca-navbar");
 const formBusca = document.querySelector("#busca-navbar form");
-
 const productsContainer = document.querySelector("#products-wrapper");
 
 // ELEMENTOS QUE SOMEM NA BUSCA
@@ -121,7 +120,7 @@ function atualizarSelecao() {
       // Faz o scroll acompanhar o item selecionado
       item.scrollIntoView({
         block: "nearest",
-        behavior: "smooth",
+        behavior: "auto",
       });
     } else {
       item.classList.remove("selected");
@@ -215,7 +214,7 @@ async function restaurarCatalogo() {
 
   toysTitle.innerText = tituloOriginal;
 
-  removerBotaoVoltar(); // 👈 remove o botão
+  removerBotaoVoltar();
 
   const brinquedos = await buscarBrinquedos();
 

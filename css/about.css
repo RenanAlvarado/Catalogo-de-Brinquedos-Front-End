@@ -214,7 +214,7 @@ header {
 }
 
 #menu-links a {
-  color: #FFFFFF;
+  color: #ffffff;
   text-decoration: none;
 }
 
@@ -223,121 +223,94 @@ header {
   transition: 0.2s linear;
 }
 
-/* --- PÁGINA SOBRE NÓS (Estilo Toys R Us) --- */
-
 /* =========================================
-   PÁGINA SOBRE NÓS (Banner Listrado Fixo)
+   PÁGINA SOBRE 
    ========================================= */
 
-.about-page {
+#main-container {
   background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-/* --- O BANNER LISTRADO --- */
-/* --- O BANNER LISTRADO COM ONDA --- */
-.banner-marah {
-  position: relative;
-  width: 100%;
-  min-height: 450px; /* Garante altura suficiente */
-  
-  /* Aumente o padding inferior para a onda não engolir o texto! */
-  padding: 100px 50px 100px 0px; 
-  
-  overflow: hidden; 
+/* --- BANNER --- */
+#banner-marah {
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  /* 1. A Cor de Fundo Base (Turquesa) */
-  background-color: #11cdd4; 
-  
-  /* 2. O Efeito das Listras Diagonais */
+  width: 100%;
+  min-height: 450px;
+  padding: 100px 50px 100px 0px;
+  overflow: hidden;
+  background-color: #11cdd4;
   background-image: repeating-linear-gradient(
-    -45deg,                           /* Inclinação das listras */
-    rgba(255, 255, 255, 0.15) 20px,    /* Início da listra clara (15% de opacidade) */
-    rgba(255, 255, 255, 0.20) 30px,   /* Fim da listra clara (largura de 20px) */
-    transparent 20px,                 /* Início da faixa vazia (mostra a cor base) */
-    transparent 60px                  /* Fim da faixa vazia (largura de 20px) */
+    -45deg,
+    rgba(255, 255, 255, 0.15) 20px,
+    rgba(255, 255, 255, 0.2) 30px,
+    transparent 20px,
+    transparent 60px
   );
 }
 
 /* --- GARANTIR QUE O TEXTO FICA POR CIMA --- */
-.banner-content {
+#banner-content {
   display: flex;
-  align-items: center; 
-  justify-content: space-between; 
-  gap: 50px; 
-  max-width: 1200px; 
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1200px;
   width: 100%;
-  
-  /* ESTAS DUAS LINHAS SALVAM O SEU TEXTO: */
-  position: relative; 
-  z-index: 10; /* Força o conteúdo a ficar acima da onda (que tem z-index 5) */
+  z-index: 10;
 }
 
-/* --- CONTEÚDO DO BANNER (Mascote + Texto) --- */
-.banner-content {
-  display: flex;
-  align-items: center; /* Alinha o mascote e o texto verticalmente no centro */
-  justify-content: space-between; /* Empurra o mascote para a esquerda e o texto para a direita */
-  gap: 40px; /* Espaço generoso entre os dois */
-  max-width: 1200px; /* Um pouco mais largo para acomodar bem as duas colunas */
-  width: 100%;
-  position: relative;
-  z-index: 8; /* Fica acima da onda */
-}
-
-/* --- CONTAINER E IMAGEM DO MASCOTE --- */
-.mascot-container {
-  flex: 0 0 auto; /* O container não estica nem encolhe */
-}
-
-.axolotl-mascot {
-  width: 500px!important; /* Ajuste o tamanho do mascote conforme necessário */
+#mascot-img {
+  width: 500px;
   display: block;
-  filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.1)); /* Sombra suave para destacar o mascote */
+  filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
 }
 
 /* --- TEXTO DO BANNER --- */
-.text-container {
+#text-container {
   color: #ffffff;
-  flex: 1; /* Ocupa o restante do espaço */
-  text-align: right; /* Alinha o texto à direita */
+  flex: 1;
+  text-align: right;
 }
 
 .title-group {
-    flex-direction: column; /* Mascote acima do título no mobile */
-    text-align: center;
-    gap: 10px;
-    justify-content: center;
-  }
+  flex-direction: column; /* Mascote acima do título no mobile */
+  text-align: center;
+  gap: 10px;
+  justify-content: center;
+}
 
-  .axolotl-mascot {
-    width: 180px; /* Mascote menor no mobile */
-  }
+.axolotl-mascot {
+  width: 180px; /* Mascote menor no mobile */
+}
 
 .title-group {
-    flex-direction: column; /* Mascote acima do título no mobile */
-    text-align: center;
-    gap: 10px;
-    justify-content: center;
-  }
+  flex-direction: column; /* Mascote acima do título no mobile */
+  text-align: center;
+  gap: 10px;
+  justify-content: center;
+}
 
 .text-container h1 {
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 110px; /* Tamanho grande e impactante */
   font-weight: 700;
   line-height: 0.9;
   margin: 0 0 10px 0;
   letter-spacing: 2px;
-  text-shadow: 3px 3px 0 rgba(0,0,0,0.1); 
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
 .text-container h2 {
   font-size: 32px;
   font-weight: 700;
   margin: 0 0 5px 0;
-  text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .text-container p {
@@ -365,7 +338,7 @@ header {
     text-align: center;
     gap: 20px;
   }
-  
+
   .text-container {
     text-align: center; /* Centraliza o texto no mobile */
   }
@@ -383,7 +356,7 @@ header {
   font-size: 32px;
   font-weight: 700;
   margin: 0 0 5px 0;
-  text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .text-container p {
@@ -411,8 +384,8 @@ header {
   align-items: center; /* Centraliza verticalmente o texto com a imagem */
   gap: 60px; /* Espaço generoso entre o texto e a imagem */
   max-width: 1200px; /* Largura máxima para não esticar demais em telas gigantes */
-  width: 100%;margin: 0 auto;
-
+  width: 100%;
+  margin: 0 auto;
 }
 
 /* Lado do Texto */
@@ -422,7 +395,8 @@ header {
 }
 
 .about-text h2 {
-  font-family: 'Oswald', sans-serif; /* Assumindo que você está usando a mesma fonte do banner */
+  font-family:
+    "Oswald", sans-serif; /* Assumindo que você está usando a mesma fonte do banner */
   font-size: 42px;
   color: #333333; /* Cor escura para contraste */
   margin-bottom: 20px;
@@ -454,7 +428,7 @@ header {
     flex-direction: column; /* Coloca a imagem embaixo do texto */
     gap: 40px;
   }
-  
+
   .about-text {
     text-align: center; /* Centraliza o texto no celular (opcional) */
   }
@@ -523,20 +497,23 @@ header {
    ========================================= */
 
 #footer {
-  background-color: #26c6da; 
-  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 3px, transparent 3px);
+  background-color: #26c6da;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.25) 3px,
+    transparent 3px
+  );
   background-size: 35px 35px;
-  border-top: 6px solid #ff7eb3; 
+  border-top: 6px solid #ff7eb3;
   padding-top: 60px;
-  color: #1a4a4c; 
+  color: #1a4a4c;
 }
 
 #footer-container {
   display: flex;
-  flex-wrap: wrap; 
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 50px; 
-  max-width: 1200px; 
+  gap: 50px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 5%;
   padding-bottom: 50px;
@@ -544,13 +521,13 @@ header {
 
 /* --- LADO ESQUERDO --- */
 .footer-left {
-  flex: 1; 
+  flex: 1;
   min-width: 250px;
   max-width: 320px; /* Segura o texto para ele não invadir o lado direito */
 }
 
 .footer-left img {
-  max-width: 180px; 
+  max-width: 180px;
   margin-bottom: 15px;
   display: block;
 }
@@ -566,7 +543,7 @@ header {
   flex: 2; /* Ocupa o resto do espaço */
   display: flex;
   flex-direction: column; /* Organiza os menus em cima e ícones embaixo */
-  gap: 40px; 
+  gap: 40px;
   min-width: 300px;
 }
 
@@ -593,17 +570,17 @@ header {
 /* --- TEXTOS E TÍTULOS GERAIS --- */
 #footer h3 {
   color: #ffffff;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 22px;
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 20px;
   letter-spacing: 1px;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.1); 
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
 
 #footer ul {
-  list-style: none; 
+  list-style: none;
   padding: 0;
   margin: 0;
 }
@@ -613,16 +590,16 @@ header {
 }
 
 #footer ul li a {
-  color: #1a4a4c; 
+  color: #1a4a4c;
   text-decoration: none;
   font-size: 16px;
   font-weight: 500;
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
 }
 
 #footer ul li a:hover {
-  color: #ffffff; 
-  padding-left: 6px; 
+  color: #ffffff;
+  padding-left: 6px;
 }
 
 /* --- CONFIGURAÇÃO DOS ÍCONES --- */
@@ -631,7 +608,8 @@ header {
   gap: 15px;
 }
 
-.caixa-icones a, .pagamento-icones i {
+.caixa-icones a,
+.pagamento-icones i {
   color: #1a4a4c;
   font-size: 28px;
   text-decoration: none;
@@ -640,17 +618,17 @@ header {
 
 .caixa-icones a:hover {
   color: #ffffff;
-  transform: translateY(-5px); 
+  transform: translateY(-5px);
 }
 
 .pagamento-icones i {
   font-size: 34px;
-  cursor: default; 
+  cursor: default;
 }
 
 /* --- BARRA INFERIOR --- */
 .footer-bottom {
-  background-color: #1eabbd; 
+  background-color: #1eabbd;
   text-align: center;
   padding: 20px 5%;
 }
@@ -673,7 +651,7 @@ header {
     text-align: center;
   }
   .footer-left img {
-    margin: 0 auto 15px auto; 
+    margin: 0 auto 15px auto;
   }
   .footer-menus {
     justify-content: center;
