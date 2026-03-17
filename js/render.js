@@ -7,6 +7,55 @@ function obterImagem(pasta, imagem) {
 }
 
 // ===============================
+// RENDERIZAR PÁGINAS
+// ===============================
+
+export function renderizarPaginacao(container, data, aoMudarPagina) {
+  container.innerHTML = "";
+
+  // ANTERIOR
+  const prev = document.createElement("button");
+  prev.innerText = "«";
+  prev.classList.add("page-btn");
+
+  if (data.first) {
+    prev.disabled = true;
+  } else {
+    prev.onclick = () => aoMudarPagina(data.number - 1);
+  }
+
+  container.appendChild(prev);
+
+  // NÚMEROS
+  for (let i = 0; i < data.totalPages; i++) {
+    const btn = document.createElement("button");
+    btn.innerText = i + 1;
+    btn.classList.add("page-btn");
+
+    if (i === data.number) {
+      btn.classList.add("active");
+    }
+
+    btn.onclick = () => aoMudarPagina(i);
+
+    container.appendChild(btn);
+  }
+
+  // PRÓXIMO
+  const next = document.createElement("button");
+  next.innerText = "»";
+  next.classList.add("page-btn");
+
+  if (data.last) {
+    next.disabled = true;
+  } else {
+    next.onclick = () => aoMudarPagina(data.number + 1);
+  }
+
+  container.appendChild(next);
+}
+
+// ===============================
 // RENDERIZAR CATEGORIAS
 // ===============================
 

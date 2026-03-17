@@ -4,6 +4,9 @@
 
 import { buscarCategorias, buscarBrinquedos, buscarMarcas } from "./api.js";
 
+let paginaAtual = 0;
+const tamanhoPagina = 15;
+
 import {
   renderizarCategorias,
   renderizarFiltroCategorias,
@@ -84,11 +87,34 @@ async function carregarMarcasFiltro() {
 // CARREGAR BRINQUEDOS
 // ===============================
 
-async function carregarBrinquedos() {
+async function carregarBrinquedos(page = 0) {
+  paginaAtual = page;
+
+  const resposta = await buscarBrinquedos(page, tamanhoPagina);
+
+  if (!resposta || !resposta.content) {
+    console.error("Resposta inválida:", resposta);
+    return;
+  }
+
+  const brinquedos = resposta.content;
+
+  renderizarBrinquedos(productsContainer, brinquedos);
+
+  const paginacaoContainer = document.getElementById("pagination-container");
+
+  renderizarPaginacao(paginacaoContainer, resposta, (novaPagina) => {
+    carregarBrinquedos(novaPagina);
+  });
+}
+
+// Lista todos os brinquedos
+/*async function carregarBrinquedos() {
   const brinquedos = await buscarBrinquedos();
 
   renderizarBrinquedos(productsContainer, brinquedos);
 }
+*/
 
 // ===============================
 // INICIALIZAÇÃO DA PÁGINA

@@ -19,7 +19,7 @@ async function requisicao(endpoint) {
     return await resposta.json();
   } catch (erro) {
     console.error("Erro na requisição da API:", erro);
-    return [];
+    return null;
   }
 }
 
@@ -43,9 +43,18 @@ export async function buscarMarcas() {
 // BRINQUEDOS
 // ===============================
 
+export async function buscarBrinquedos(page = 0, size = 15) {
+  return await requisicao(
+    `/brinquedos/listar-paginas?page=${page}&size=${size}`,
+  );
+}
+
+// Para listar todos os brinquedos
+/* 
 export async function buscarBrinquedos() {
   return await requisicao("/brinquedos");
 }
+*/
 
 // ===============================
 // BUSCA DE BRINQUEDOS POR NOME
