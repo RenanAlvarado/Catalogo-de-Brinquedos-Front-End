@@ -1,4 +1,4 @@
-<!doctype html>
+ <!doctype html>
 
 <html lang="pt-br">
   <head>
@@ -8,7 +8,7 @@
     <title>Catalogo de Brinquedos</title>
 
     <!-- CSS Geral (HomePage) -->
-    <link rel="stylesheet" href="css/homepage.css" />
+    <link rel="stylesheet" href="css/about.css" />
 
     <!-- JavaScript -->
     <script type="module" src="js/main.js" defer></script>
@@ -58,7 +58,7 @@
               <p>Favoritos <i class="fa-regular fa-heart"></i></p>
             </button>
             <a href="login.html"
-              ><button id="login" class="btn" href="login.html">
+              ><button id="login" class="btn" href="about.html">
                 <p>Cadastro/Login <i class="fa-regular fa-user"></i></p></button
             ></a>
           </div>
@@ -75,103 +75,70 @@
       </div>
     </header>
 
-    <!-- Conteudo Principal -->
-    <main id="main-container">
-      <!-- Categorias -->
-      <div id="categories-container">
-        <!-- Botão da esquerda -->
-        <button class="categories-btn prev-categories">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
-
-        <div id="categories-wrapper"><div id="categories-carousel"></div></div>
-
-        <!-- Botão da direita -->
-        <button class="categories-btn next-categories">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-      </div>
-
-      <!--
+    <main class="about-page">
   
-      <div id="banner-container">
-        <div id="banner-carousel">
-          <div class="banner-slide">
-            <img src="img/banner/Banner_1.png" alt="Promoção de Brinquedos" />
-          </div>
+  <section class="banner-marah">
+    <div class="banner-content">
+    
+    <img src="img/logo-about.png" alt="Mascote MARAH" class="axolotl-mascot">
 
-          <div class="banner-slide">
-            <img src="img/banner/Banner_2.png" alt="Novidades" />
-          </div>
-
-          <div class="banner-slide">
-            <img src="img/banner/Banner_3.png" alt="Ofertas" />
-          </div>
-        </div>
-
-   
-        <button class="banner-btn prev">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
-
-        <button class="banner-btn next">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-      </div>
-
-      -->
-
-      
-
-      <!-- Marcas -->
-      <div id="brands-container">
-        Maiores Marcas
-        <div id="brands-wrapper">
-          <div id="brands-carousel"></div>
-        </div>
-      </div>
-
-      <!-- Título dos produtos -->
-      <h2 id="toysContainer-title">Lista de Produtos</h2>
-
-      <!-- DIV PARA DEIXAR LADO A LADO -->
-      <div id="filter-toys">
-        <!-- FILTROS -->
-        <div id="filters-container">
-          <h3>Filtros</h3>
-          <button class="dropdown-btn">
-            Categorias <i class="fa-solid fa-chevron-down filter-arrow"></i>
-          </button>
-
-          <div class="filter-options" id="categories-filter">
-            <!-- Onde é carregado as categorias para filtragem -->
-          </div>
-
-          <button class="dropdown-btn">
-            Marcas <i class="fa-solid fa-chevron-down filter-arrow"></i>
-          </button>
-
-          <div class="filter-options" id="brands-filter">
-            <!-- Onde é carregado as marcas para filtragem -->
-          </div>
-        </div>
-
-        <!-- Brinquedos -->
-        <div id="toys-container">
-          <div id="products-wrapper"></div>
-          <div id="products-wrapper"></div>
-      
-          <div id="pagination-container" class="pagination"></div>
-        </div>
-      </div>
-    </main>
-
+    <div class="text-container">
+      <h1>MARAH</h1>
+      <h2>Onde a diversão é levada a sério!</h2>
+      <p>Catálogo de Brinquedos</p>
     </div>
+
   </div>
+
+  <svg class="hero-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <path fill="#ffffff" fill-opacity="1" d="M0,192L80,176C160,160,320,128,480,133.3C640,139,800,181,960,181.3C1120,181,1280,139,1360,117.3L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z"></path>
+  </svg>
 </section>
 
+  <section class="about-container">
+    <div class="about-text">
+      <h2>Nossa História</h2>
+      <p>A MARAH é um projeto pensado para crianças (e adultos) de todos os lugares... e nós sabemos como nos divertir de montão!</p>
+      <p>Acreditamos no poder transformador do brincar, e estamos aqui para garantir que os pequenos tenham uma explosão de alegria a cada passo do seu desenvolvimento. A nossa curadoria cuidadosa une diversão, segurança e aprendizado num só lugar.</p>
+    </div>
+    <div class="about-image">
+      <img src="img/store.png" alt="Nossa Loja">
+    </div>
+  </section>
 
-    <footer id="footer">
+<section id="team">
+  <div class="team-container">
+    <h2>Nossa equipe:</h2>
+    
+    <div class="team-members">
+      
+      <div class="member-card">
+        <img src="img/foto1.jpg" alt="Foto do Membro 1" class="member-photo">
+        <h3>Arthur Portilio</h3>
+        <p>Front-End</p>
+      </div>
+
+      <div class="member-card">
+        <img src="img/foto2.jpg" alt="Foto do Membro 2" class="member-photo">
+        <h3>Heitor Norilla</h3>
+        <p>Front-End</p>
+      </div>
+
+      <div class="member-card">
+        <img src="img/foto3.jpg" alt="Foto do Membro 3" class="member-photo">
+        <h3>Matheus Fernandes</h3>
+        <p>Back-End</p>
+      </div>
+
+      <div class="member-card">
+        <img src="img/foto4.jpg" alt="Foto do Membro 4" class="member-photo">
+        <h3>Renan Amaral</h3>
+        <p>Back-End</p>
+      </div>
+
+</main>
+
+<footer id="footer">
   <div id="footer-container">
 
     <div class="footer-left">
@@ -194,13 +161,13 @@
         </div>
 
         <div class="footer-column">
-          <h3>Categorias</h3>
+          <h3>Sobre</h3>
           <nav>
             <ul>
-              <li><a href="index.html#toys-container">Carrinhos</a></li>
-              <li><a href="index.html#toys-container">Bonecas</a></li>
-              <li><a href="index.html#toys-container">Educativos</a></li>
-              <li><a href="index.html#toys-container">Jogos</a></li>
+              <li><a href="termos.html">Termos & Condições</a></li>
+              <li><a href="privacidade.html">Política de privacidade</a></li>
+              <li><a href="compra-segura.html">Compra segura</a></li>
+              <li><a href="cookies.html">Aviso sobre cookies</a></li>
             </ul>
           </nav>
         </div>

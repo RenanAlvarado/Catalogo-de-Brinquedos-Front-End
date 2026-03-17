@@ -195,7 +195,7 @@ header {
 /*Botões da parte debaixo do menu*/
 #bottom-header {
   width: 100%;
-  background-color: #ddd;
+  background-color: #47bbc3;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -214,7 +214,7 @@ header {
 }
 
 #menu-links a {
-  color: #000;
+  color: #FFFFFF;
   text-decoration: none;
 }
 
@@ -675,133 +675,173 @@ header {
   border-color: #eee;
 }
 
-/* --- SEÇÃO DA EQUIPE --- */
-#team {
-  background-color: transparent;
-  padding: 60px 20px;
-  text-align: center;
-}
 
-#team h2 {
-  color: #1b4e4f;
-  font-size: 28px;
-  margin-bottom: 40px;
-}
+/* =========================================
+   RODAPÉ (FOOTER) - ESTRUTURA DIVIDIDA
+   ========================================= */
 
-/* O Flexbox que coloca os 4 lado a lado */
-.team-members {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap; /* Se a tela for pequena (celular), eles caem para a linha de baixo organizadamente */
-  max-width: 1000px;
-  margin: 0 auto;
+#footer {
+  background-color: #26c6da; 
+  background-image: radial-gradient(rgba(255, 255, 255, 0.25) 3px, transparent 3px);
+  background-size: 35px 35px;
+  border-top: 6px solid #ff7eb3; 
+  padding-top: 60px;
+  color: #1a4a4c; 
 }
-
-.member-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 180px; /* Largura de cada "cartão" de membro */
-}
-
-/* A magia da foto redonda */
-.member-photo {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%; /* É isso que faz a foto ficar um círculo perfeito! */
-  object-fit: cover; /* Garante que a foto não fique achatada ou esticada, mesmo se a imagem original for retangular */
-  border: 4px solid #55cbcd; /* A bordinha com a cor principal do seu site */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  margin-bottom: 15px;
-  transition: transform 0.3s ease;
-}
-
-/* Um efeitinho de zoom quando passa o mouse na foto */
-.member-photo:hover {
-  transform: scale(1.05);
-}
-
-.member-card h3 {
-  font-size: 18px;
-  color: #333;
-  margin-bottom: 5px;
-}
-
-.member-card p {
-  font-size: 14px;
-  color: #666;
-}
-
-/* Rodapé */
 
 #footer-container {
   display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between;
+  gap: 50px; 
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 0 5%;
+  padding-bottom: 50px;
+}
+
+/* --- LADO ESQUERDO --- */
+.footer-left {
+  flex: 1; 
+  min-width: 250px;
+  max-width: 320px; /* Segura o texto para ele não invadir o lado direito */
+}
+
+.footer-left img {
+  max-width: 180px; 
+  margin-bottom: 15px;
+  display: block;
+}
+
+.footer-left p {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* --- LADO DIREITO --- */
+.footer-right {
+  flex: 2; /* Ocupa o resto do espaço */
+  display: flex;
+  flex-direction: column; /* Organiza os menus em cima e ícones embaixo */
+  gap: 40px; 
+  min-width: 300px;
+}
+
+.footer-menus {
+  display: flex;
   flex-wrap: wrap;
-  padding: -20px 20px;
-  justify-content: space-around;
-  width: 100%;
-  background-color: #4ed3d6; /* Sua cor ciano base */
-  /* Cria as "bolhinhas" com gradiente radial */
-  background-image: radial-gradient(
-    rgba(255, 255, 255, 0.25) 3px,
-    transparent 3px
-  );
-  background-size: 40px 40px; /* Define o espaço entre as bolhas */
-  border-top: 1px solid #333;
+  justify-content: space-between;
+  gap: 20px;
 }
 
 .footer-column {
+  flex: 1;
+  min-width: 140px;
+}
+
+/* --- ÁREA DOS ÍCONES (Alvo do seu print!) --- */
+.footer-icons-row {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 80px; /* Afasta bem as Redes Sociais dos Pagamentos */
 }
 
-.footer-column img {
-  width: 175px;
-  margin-bottom: 10px;
-}
-
-/* Títulos */
-.footer-column h3 {
-  margin-top: 30px;
-  margin-bottom: 20px;
-  font-size: 20px;
-  font-weight: 800;
+/* --- TEXTOS E TÍTULOS GERAIS --- */
+#footer h3 {
   color: #ffffff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.1); 
 }
 
-.footer-column ul {
-  list-style: none;
+#footer ul {
+  list-style: none; 
+  padding: 0;
+  margin: 0;
 }
 
-.footer-column a {
-  color: #000;
-}
-
-.footer-column li {
+#footer ul li {
   margin-bottom: 12px;
-  cursor: pointer;
+}
+
+#footer ul li a {
+  color: #1a4a4c; 
+  text-decoration: none;
   font-size: 16px;
-  text-align: center;
-  transition: 0.3s;
+  font-weight: 500;
+  transition: all 0.3s ease; 
 }
 
-.footer-column li:hover {
-  color: #fff;
+#footer ul li a:hover {
+  color: #ffffff; 
+  padding-left: 6px; 
 }
 
+/* --- CONFIGURAÇÃO DOS ÍCONES --- */
 .caixa-icones {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 15px;
-  width: 100%;
-  margin: 0 auto;
 }
 
-#footer-bottom {
+.caixa-icones a, .pagamento-icones i {
+  color: #1a4a4c;
+  font-size: 28px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.caixa-icones a:hover {
+  color: #ffffff;
+  transform: translateY(-5px); 
+}
+
+.pagamento-icones i {
+  font-size: 34px;
+  cursor: default; 
+}
+
+/* --- BARRA INFERIOR --- */
+.footer-bottom {
+  background-color: #1eabbd; 
   text-align: center;
-  border-top: 1px solid #444;
-  padding: 5px 0;
+  padding: 20px 5%;
+}
+
+.footer-bottom p {
+  margin: 0;
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* =========================================
+   RESPONSIVIDADE (Tablets e Celulares)
+   ========================================= */
+
+@media (max-width: 850px) {
+  #footer-container {
+    flex-direction: column; /* Empilha o esquerdo e o direito no celular */
+    align-items: center;
+    text-align: center;
+  }
+  .footer-left img {
+    margin: 0 auto 15px auto; 
+  }
+  .footer-menus {
+    justify-content: center;
+    gap: 40px;
+  }
+  .footer-icons-row {
+    justify-content: center;
+    gap: 40px;
+  }
+  #footer ul li a:hover {
+    padding-left: 0; /* Desativa a animação de ir pro lado no touch */
+  }
 }
