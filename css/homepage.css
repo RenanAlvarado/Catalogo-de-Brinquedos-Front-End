@@ -319,6 +319,26 @@ html {
   accent-color: #ff6b00; /* cor do check */
 }
 
+/* Estilização do filtro de ordenação */
+#ordenacao-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#ordenacao-container select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#ordenacao-container select:focus {
+  border-color: #55cbcd;
+  outline: none;
+}
+
 /* BRINQUEDOS */
 #toys-container {
 }

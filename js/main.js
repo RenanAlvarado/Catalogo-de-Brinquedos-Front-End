@@ -6,6 +6,7 @@ import { buscarCategorias, buscarBrinquedos, buscarMarcas } from "./api.js";
 
 let paginaAtual = 0;
 const tamanhoPagina = 16;
+let ordenacao = "";
 
 import {
   renderizarCategorias,
@@ -111,6 +112,17 @@ async function carregarMarcasFiltro() {
 }
 
 // ===============================
+// FILTRO DE ORDENAÇÃO
+// ===============================
+
+const ordenacaoSelect = document.getElementById("ordenacao-select");
+
+ordenacaoSelect.addEventListener("change", (e) => {
+  ordenacao = e.target.value;
+  carregarBrinquedos(0); // volta pra primeira página
+});
+
+// ===============================
 // CARREGAR BRINQUEDOS
 // ===============================
 
@@ -132,6 +144,16 @@ async function carregarBrinquedos(page = 0) {
 
   renderizarPaginacao(paginacaoContainer, resposta, (novaPagina) => {
     carregarBrinquedos(novaPagina);
+
+    /*
+  const resposta = await filtrarBrinquedos({
+  categorias: filtros.categorias,
+  marcas: filtros.marcas,
+  page: paginaAtual,
+  size: tamanhoPagina,
+  ordenacao
+  });
+    */
   });
 }
 
@@ -151,24 +173,24 @@ async function iniciarPagina() {
 // ===============================
 
 async function start() {
-  await carregarLayout(); // 🔥 cria header/footer
+  await carregarLayout(); // Cria header/footer
 
-  iniciarBusca(); // 🔥 ativa busca global
+  iniciarBusca(); // Ativa busca global
 
   const busca = pegarParametroBusca();
 
-  // 🔥 Sempre carrega estrutura (SEM produtos ainda)
+  // Sempre carrega estrutura (SEM produtos ainda)
   await iniciarPagina();
 
   if (busca) {
-    // 🔥 se veio com ?search=
+    // Se veio com ?search=
     await executarBusca(busca);
 
     // opcional: preencher input
     const input = document.querySelector("#search-input");
     if (input) input.value = busca;
   } else {
-    // 🔥 comportamento normal
+    // Comportamento normal
     await carregarBrinquedos();
   }
 }

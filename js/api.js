@@ -40,6 +40,34 @@ export async function buscarMarcas() {
 }
 
 // ===============================
+// ORDENAÇÃO
+// ===============================
+
+export async function filtrarBrinquedos({
+  categorias,
+  marcas,
+  page = 0,
+  size = 15,
+  ordenacao,
+}) {
+  let url = `/brinquedos/filtrar?page=${page}&size=${size}`;
+
+  if (categorias.length) {
+    url += `&categorias=${categorias.join(",")}`;
+  }
+
+  if (marcas.length) {
+    url += `&marcas=${marcas.join(",")}`;
+  }
+
+  if (ordenacao) {
+    url += `&sort=${ordenacao}`;
+  }
+
+  return await requisicao(url);
+}
+
+// ===============================
 // BRINQUEDOS
 // ===============================
 
