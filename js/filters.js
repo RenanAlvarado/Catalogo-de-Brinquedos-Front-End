@@ -132,7 +132,8 @@ export function alterarMarca(id, marcado) {
 async function aplicarFiltros() {
   // nenhum filtro selecionado
   if (categoriasSelecionadas.length === 0 && marcasSelecionadas.length === 0) {
-    const brinquedos = await buscarBrinquedos();
+    const resposta = await buscarBrinquedos();
+    const brinquedos = resposta.content || resposta;
 
     toysTitle.innerText = "Lista de Produtos";
 
@@ -147,14 +148,20 @@ async function aplicarFiltros() {
   for (const id of categoriasSelecionadas) {
     const brinquedos = await buscarBrinquedosPorCategoria(id);
 
-    resultados.push(...brinquedos);
+    const resposta = await buscarBrinquedosPorCategoria(id);
+    const lista = resposta.content || resposta;
+
+    resultados.push(...lista);
   }
 
   // filtrar por marcas
   for (const id of marcasSelecionadas) {
     const brinquedos = await buscarBrinquedosPorMarca(id);
 
-    resultados.push(...brinquedos);
+    const resposta = await buscarBrinquedosPorMarca(id);
+    const lista = resposta.content || resposta;
+
+    resultados.push(...lista);
   }
 
   renderizarBrinquedos(productsContainer, resultados);

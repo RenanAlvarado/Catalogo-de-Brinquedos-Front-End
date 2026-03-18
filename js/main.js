@@ -24,21 +24,34 @@ import {
 } from "./filters.js";
 
 import { iniciarCarrosselMarcas } from "./scripts.js";
-import { iniciarBusca } from "./search.js";
+import { iniciarBusca, executarBusca } from "./search.js";
 
 // ===============================
-// FUNÇÃO AUXILIAR PARA CARREGAR COMPONENTES REPETIDOS
+// FUNÇÃO AUXILIAR PARA COMPONENTES
 // ===============================
+
 async function loadComponent(id, file) {
   const res = await fetch(file);
   const html = await res.text();
   document.getElementById(id).innerHTML = html;
 }
 
-// Aqui é o carregamento dos itens modularizados
+// ===============================
+// CARREGAR HEADER + FOOTER
+// ===============================
+
 async function carregarLayout() {
-  await loadComponent("footer", "components/footer.html");
   await loadComponent("header", "components/header.html");
+  await loadComponent("footer", "components/footer.html");
+}
+
+// ===============================
+// PEGAR PARÂMETRO DA URL
+// ===============================
+
+function pegarParametroBusca() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("search");
 }
 
 // ===============================
@@ -53,17 +66,16 @@ const filtroCategoriasContainer = document.querySelector("#categories-filter");
 const filtroMarcasContainer = document.querySelector("#brands-filter");
 
 // ===============================
-// CARREGAR CATEGORIAS (CARROSSEL)
+// CARREGAR CATEGORIAS
 // ===============================
 
 async function carregarCategorias() {
   const categorias = await buscarCategorias();
-
   renderizarCategorias(categoriesContainer, categorias, filtrarPorCategoria);
 }
 
 // ===============================
-// FILTRO DE CATEGORIAS
+// FILTRO CATEGORIAS
 // ===============================
 
 async function carregarCategoriasFiltro() {
@@ -77,7 +89,7 @@ async function carregarCategoriasFiltro() {
 }
 
 // ===============================
-// CARREGAR MARCAS (CARROSSEL)
+// CARREGAR MARCAS
 // ===============================
 
 async function carregarMarcas() {
@@ -85,12 +97,11 @@ async function carregarMarcas() {
 
   renderizarMarcas(brandsContainer, marcas, filtrarPorMarca);
 
-  // inicia o carrossel depois que renderiza
   iniciarCarrosselMarcas();
 }
 
 // ===============================
-// FILTRO DE MARCAS
+// FILTRO MARCAS
 // ===============================
 
 async function carregarMarcasFiltro() {
@@ -124,30 +135,42 @@ async function carregarBrinquedos(page = 0) {
   });
 }
 
-// Lista todos os brinquedos
-/*async function carregarBrinquedos() {
-  const brinquedos = await buscarBrinquedos();
-
-  renderizarBrinquedos(productsContainer, brinquedos);
-}
-*/
-
 // ===============================
 // INICIALIZAÇÃO DA PÁGINA
 // ===============================
 
 async function iniciarPagina() {
   await carregarCategorias();
-  await carregarBrinquedos();
   await carregarMarcas();
   await carregarCategoriasFiltro();
   await carregarMarcasFiltro();
 }
 
+// ===============================
+// START PRINCIPAL
+// ===============================
+
 async function start() {
-  await carregarLayout();
-  iniciarBusca();
+  await carregarLayout(); // 🔥 cria header/footer
+
+  iniciarBusca(); // 🔥 ativa busca global
+
+  const busca = pegarParametroBusca();
+
+  // 🔥 Sempre carrega estrutura (SEM produtos ainda)
   await iniciarPagina();
+
+  if (busca) {
+    // 🔥 se veio com ?search=
+    await executarBusca(busca);
+
+    // opcional: preencher input
+    const input = document.querySelector("#search-input");
+    if (input) input.value = busca;
+  } else {
+    // 🔥 comportamento normal
+    await carregarBrinquedos();
+  }
 }
 
 start();
