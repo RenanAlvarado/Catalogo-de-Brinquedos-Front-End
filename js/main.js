@@ -34,6 +34,8 @@ async function loadComponent(id, file) {
   const html = await res.text();
   document.getElementById(id).innerHTML = html;
 }
+
+// Aqui é o carregamento dos itens modularizados
 async function carregarLayout() {
   await loadComponent("footer", "components/footer.html");
   await loadComponent("header", "components/header.html");
