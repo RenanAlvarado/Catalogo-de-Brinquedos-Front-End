@@ -3,10 +3,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
-    <title>Catalogo de Brinquedos</title>
+    <title>Privacidade/Marah</title>
 
-    <!-- CSS Geral (HomePage) -->
-    <link rel="stylesheet" href="css/privacidade.css" />
+    <!-- CSS DOS TERMOS E PRIVACIDADE -->
+    <link rel="stylesheet" href="css/termos_privacidade.css" />
+
+    <!-- Header -->
+    <link rel="stylesheet" href="css/components/header.css" />
+
+    <!-- Footer -->
+    <link rel="stylesheet" href="css/components/footer.css" />
 
     <!-- JavaScript -->
     <script type="module" src="js/main.js" defer></script>
@@ -22,164 +28,77 @@
   </head>
   <body>
     <!-- Navegação da parte de cima -->
-    <header>
-      <nav id="navbar">
-        <!-- Para o CSS -->
-        <div id="navbar-inner">
-          <div id="logo-nav">
-            <a href="index.html"
-              ><img src="img/newlogo.png" alt="Logo do Catalogo de Brinquedos"
-            /></a>
-          </div>
+    <header id="header"></header>
 
-          <div id="busca-navbar">
-            <!-- Desligar Sugestões do Navegadors -->
-            <form autocomplete="off">
-              <input
-                type="text"
-                placeholder="Barra de Pesquisa"
-                id="search-input"
-              />
-              <button type="submit" class="btn">
-                <i class="fas fa-search"></i>
-              </button>
-            </form>
+    <main id="main-container">
+      <div id="legal-container">
+        <h1>Política de Privacidade</h1>
+        <p id="last-update">Última atualização: 16 de março de 2026</p>
 
-            <!-- Sugestões -->
-            <div id="suggestions-box">
-              <!-- AS SUGESTÔES SÃO CARREGADAS AQUI -->
-            </div>
-          </div>
+        <section class="legal-section">
+          <h2>1. Coleta de Informações</h2>
+          <p>
+            A MARAH valoriza a sua privacidade. Coletamos apenas as informações
+            estritamente necessárias para garantir a melhor experiência no nosso
+            catálogo de brinquedos, como nome, e-mail e dados básicos de
+            navegação quando interage com o nosso site, adiciona produtos aos
+            favoritos ou cria uma conta.
+          </p>
+        </section>
 
-          <div id="actions">
-            <button id="favs" class="btn">
-              <p>Favoritos <i class="fa-regular fa-heart"></i></p>
-            </button>
-            <a href="login.html"
-              ><button id="login" class="btn" href="login.html">
-                <p>Cadastro/Login <i class="fa-regular fa-user"></i></p></button
-            ></a>
-          </div>
-        </div>
-      </nav>
+        <section class="legal-section">
+          <h2>2. Uso dos Dados</h2>
+          <p>
+            As informações coletadas são utilizadas exclusivamente para
+            personalizar a sua experiência, processar as suas interações com o
+            catálogo, melhorar o desempenho do nosso site e enviar comunicações
+            relevantes sobre novos brinquedos e ofertas, caso tenha optado por
+            recebê-las.
+          </p>
+        </section>
 
-      <div id="bottom-header">
-        <div id="menu-links">
-          <a href="index.html#main-container">Home</a>
-          <a href="index.html#banner-container">Marcas</a>
-          <a href="index.html#toys-container">Produtos</a>
-          <a href="about.html">Sobre</a>
-        </div>
+        <section class="legal-section">
+          <h2>3. Proteção e Segurança</h2>
+          <p>
+            Implementamos medidas de segurança rigorosas e utilizamos
+            criptografia para proteger as suas informações pessoais contra
+            acesso, alteração, divulgação ou destruição não autorizados. Os seus
+            dados estão seguros connosco.
+          </p>
+        </section>
+
+        <section class="legal-section">
+          <h2>4. Compartilhamento de Dados</h2>
+          <p>
+            A MARAH não vende, aluga ou troca as suas informações pessoais com
+            terceiros. Podemos partilhar dados apenas com fornecedores de
+            serviços essenciais para o funcionamento do site (como serviços de
+            hospedagem), que também estão obrigados a manter a confidencialidade
+            das informações.
+          </p>
+        </section>
+
+        <section class="legal-section">
+          <h2>5. Uso de Cookies</h2>
+          <p>
+            O nosso site utiliza "cookies" para melhorar a navegação, lembrar
+            das suas preferências (como a sua lista de favoritos) e entender
+            como interage com o catálogo. Você pode desativar os cookies nas
+            configurações do seu navegador a qualquer momento.
+          </p>
+        </section>
+
+        <section class="legal-section">
+          <h2>6. Os Seus Direitos</h2>
+          <p>
+            Você tem o direito de solicitar o acesso, a correção ou a exclusão
+            dos seus dados pessoais armazenados no nosso sistema a qualquer
+            momento. Para exercer esses direitos, basta entrar em contacto com a
+            nossa equipa de suporte.
+          </p>
+        </section>
       </div>
-    </header>
-
-    <main class="legal-page">
-  <div class="legal-container">
-    <h1>Política de Privacidade</h1>
-    <p class="last-update">Última atualização: 16 de março de 2026</p>
-
-    <section class="legal-section">
-      <h2>1. Coleta de Informações</h2>
-      <p>A MARAH valoriza a sua privacidade. Coletamos apenas as informações estritamente necessárias para garantir a melhor experiência no nosso catálogo de brinquedos, como nome, e-mail e dados básicos de navegação quando interage com o nosso site, adiciona produtos aos favoritos ou cria uma conta.</p>
-    </section>
-
-    <section class="legal-section">
-      <h2>2. Uso dos Dados</h2>
-      <p>As informações coletadas são utilizadas exclusivamente para personalizar a sua experiência, processar as suas interações com o catálogo, melhorar o desempenho do nosso site e enviar comunicações relevantes sobre novos brinquedos e ofertas, caso tenha optado por recebê-las.</p>
-    </section>
-
-    <section class="legal-section">
-      <h2>3. Proteção e Segurança</h2>
-      <p>Implementamos medidas de segurança rigorosas e utilizamos criptografia para proteger as suas informações pessoais contra acesso, alteração, divulgação ou destruição não autorizados. Os seus dados estão seguros connosco.</p>
-    </section>
-
-    <section class="legal-section">
-      <h2>4. Compartilhamento de Dados</h2>
-      <p>A MARAH não vende, aluga ou troca as suas informações pessoais com terceiros. Podemos partilhar dados apenas com fornecedores de serviços essenciais para o funcionamento do site (como serviços de hospedagem), que também estão obrigados a manter a confidencialidade das informações.</p>
-    </section>
-
-    <section class="legal-section">
-      <h2>5. Uso de Cookies</h2>
-      <p>O nosso site utiliza "cookies" para melhorar a navegação, lembrar das suas preferências (como a sua lista de favoritos) e entender como interage com o catálogo. Você pode desativar os cookies nas configurações do seu navegador a qualquer momento.</p>
-    </section>
-
-    <section class="legal-section">
-      <h2>6. Os Seus Direitos</h2>
-      <p>Você tem o direito de solicitar o acesso, a correção ou a exclusão dos seus dados pessoais armazenados no nosso sistema a qualquer momento. Para exercer esses direitos, basta entrar em contacto com a nossa equipa de suporte.</p>
-    </section>
-  </div>
-</main>
-<footer id="footer">
-  <div id="footer-container">
-
-    <div class="footer-left">
-      <img src="img/logoSlogan.png" alt="Logo MARAH" />
-      <p>Onde a diversão é levada a sério! Explorando o melhor do desenvolvimento infantil a cada brincadeira.</p>
-    </div>
-
-    <div class="footer-right">
-      
-      <div class="footer-menus">
-        <div class="footer-column">
-          <h3>MARAH</h3>
-          <nav>
-            <ul>
-              <li><a href="index.html#main-container">Início</a></li>
-              <li><a href="about.html">Nossa História</a></li>
-              <li><a href="index.html#banner-container">Nossas Marcas</a></li>
-            </ul>
-          </nav>
-        </div>
-
-        <div class="footer-column">
-          <h3>Categorias</h3>
-          <nav>
-            <ul>
-              <li><a href="termos.html">Termos & Condições</a></li>
-              <li><a href="privacidade.html">Política de privacidade</a></li>
-              <li><a href="compra-segura.html">Compra segura</a></li>
-              <li><a href="cookies.html">Aviso sobre cookies</a></li>
-            </ul>
-          </nav>
-        </div>
-
-        <div class="footer-column">
-          <h3>Ajuda</h3>
-          <nav>
-            <ul>
-              <li><a href="#">Contato</a></li>
-              <li><a href="#">Trocas e Devoluções</a></li>
-              <li><a href="#">Perguntas Frequentes</a></li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-
-      <div class="footer-icons-row">
-        <div class="icon-group">
-          <h3>Redes Sociais</h3>
-          <div class="caixa-icones">
-            <a href="#" aria-label="Instagram MARAH"><i class="fa-brands fa-instagram"></i></a>
-            <a href="#" aria-label="Facebook MARAH"><i class="fa-brands fa-facebook"></i></a>
-            <a href="#" aria-label="YouTube MARAH"><i class="fa-brands fa-youtube"></i></a>
-          </div>
-        </div>
-
-        <div class="icon-group">
-          <h3>Formas de Pagamento</h3>
-          <div class="caixa-icones pagamento-icones">
-            <i class="fa-brands fa-pix" title="Pix"></i>
-            <i class="fa-brands fa-cc-visa" title="Visa"></i>
-            <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
-            <i class="fas fa-barcode" title="Boleto"></i>
-          </div>
-        </div>
-      </div>
-
-    </div> </div> <div class="footer-bottom">
-    <p>&copy; 2026 MARAH Catálogo de Brinquedos. Todos os direitos reservados.</p>
-  </div>
-</footer>
+    </main>
+    <footer id="footer"></footer>
   </body>
-
-  
+</html>
