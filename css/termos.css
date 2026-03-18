@@ -33,14 +33,14 @@ body {
 }
 
 /* --- PÁGINAS LEGAIS (TERMOS E PRIVACIDADE) --- */
-.legal-page {
-  background-color: #f9f9f9; /* Um fundo levemente cinza para destacar a área de leitura */
-  padding: 60px 20px;
-  min-height: 60vh; /* Garante que a página tenha uma altura mínima para o rodapé não subir na tela */
+#main-container {
+  background-color: #f9f9f9;
+  padding: 40px 0;
 }
 
-.legal-container {
-  max-width: 800px; /* Trava a largura para o texto não ficar muito esticado e difícil de ler */
+#legal-container {
+  max-width: 800px;
+  /* Centraliza assim para responsividade */
   margin: 0 auto;
   background-color: #ffffff;
   padding: 50px;
@@ -48,14 +48,14 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
-.legal-container h1 {
+#legal-container h1 {
   color: #1b4e4f; /* Tom escuro para o título principal */
   font-size: 32px;
   margin-bottom: 10px;
   text-align: center;
 }
 
-.last-update {
+#last-update {
   text-align: center;
   color: #888;
   font-size: 14px;
