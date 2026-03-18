@@ -1,0 +1,51 @@
+<!-- Navegação da parte de cima -->
+<header>
+  <nav id="navbar">
+    <!-- Para o CSS -->
+    <div id="navbar-inner">
+      <div id="logo-nav">
+        <a href="index.html"
+          ><img src="img/newlogo.png" alt="Logo do Catalogo de Brinquedos"
+        /></a>
+      </div>
+
+      <div id="busca-navbar">
+        <!-- Desligar Sugestões do Navegadors -->
+        <form autocomplete="off">
+          <input
+            type="text"
+            placeholder="Barra de Pesquisa"
+            id="search-input"
+          />
+          <button type="submit" class="btn">
+            <i class="fas fa-search"></i>
+          </button>
+        </form>
+
+        <!-- Sugestões -->
+        <div id="suggestions-box">
+          <!-- AS SUGESTÔES SÃO CARREGADAS AQUI -->
+        </div>
+      </div>
+
+      <div id="actions">
+        <button id="favs" class="btn">
+          <p>Favoritos <i class="fa-regular fa-heart"></i></p>
+        </button>
+        <a href="login.html"
+          ><button id="login" class="btn" href="login.html">
+            <p>Cadastro/Login <i class="fa-regular fa-user"></i></p></button
+        ></a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="bottom-header">
+    <div id="menu-links">
+      <a href="index.html">Home</a>
+      <a href="#brands-container">Marcas</a>
+      <a href="#toys-container">Produtos</a>
+      <a href="about.html">Sobre</a>
+    </div>
+  </div>
+</header>

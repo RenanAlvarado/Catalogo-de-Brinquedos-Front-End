@@ -24,7 +24,20 @@ import {
 } from "./filters.js";
 
 import { iniciarCarrosselMarcas } from "./scripts.js";
-import "./search.js";
+import { iniciarBusca } from "./search.js";
+
+// ===============================
+// FUNÇÃO AUXILIAR PARA CARREGAR COMPONENTES REPETIDOS
+// ===============================
+async function loadComponent(id, file) {
+  const res = await fetch(file);
+  const html = await res.text();
+  document.getElementById(id).innerHTML = html;
+}
+async function carregarLayout() {
+  await loadComponent("footer", "components/footer.html");
+  await loadComponent("header", "components/header.html");
+}
 
 // ===============================
 // ELEMENTOS
@@ -129,4 +142,10 @@ async function iniciarPagina() {
   await carregarMarcasFiltro();
 }
 
-iniciarPagina();
+async function start() {
+  await carregarLayout();
+  iniciarBusca();
+  await iniciarPagina();
+}
+
+start();

@@ -1,0 +1,194 @@
+/* =========================================
+   CABEÇALHO (HEADER) - ESTRUTURA DIVIDIDA
+   ========================================= */
+
+#header {
+  /* Descer com a tela */
+  position: sticky;
+  top: 0;
+  /* Ficar acima de tudo */
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NavBar */
+#navbar {
+  background-color: #55cbcd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320' preserveAspectRatio='none'%3E%3Cpath fill='%233abec1' fill-opacity='1' d='M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,144C672,149,768,203,864,213.3C960,224,1056,192,1152,165.3C1248,139,1344,117,1392,106.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 200% 150%; /* Faz a onda ter o dobro da largura da tela */
+  background-position: bottom left; /* Começa grudada no canto esquerdo */
+  background-repeat: no-repeat;
+  animation: moverOnda 10s ease-in-out infinite alternate;
+}
+
+/* Animação de Mover a Onda */
+@keyframes moverOnda {
+  0% {
+    background-position-x: 0%;
+  }
+  100% {
+    background-position-x: 100%; /* Faz ela deslizar até o outro extremo da imagem */
+  }
+}
+
+/* Conteudos */
+#navbar-inner {
+  padding: 1rem 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* DIV da imagem */
+#logo-nav {
+  margin-left: 55px;
+}
+
+/* Logo na Navbar */
+#navbar-inner img {
+  width: 110px;
+}
+
+/* ID que tem os searchs */
+#busca-navbar {
+  flex: 1;
+  max-width: 900px;
+  /* sombra na barra */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra bem levinha */
+  /* Para servir as sugestões */
+  position: relative;
+}
+
+/* Form --> É a div que abriga o buscar */
+#busca-navbar form {
+  /* Deixa os itens juntos */
+  display: flex;
+  width: 100%;
+}
+
+/* Itens para pesquisar */
+#busca-navbar input {
+  flex: 1;
+  padding: 13px 20px;
+  border: 2px solid transparent;
+  border-radius: 30px 0 0 30px;
+  outline: none;
+  font-size: 14px;
+  min-width: 0; /* para evitar que o input cresça demais e quebre o layout */
+}
+
+/* Quando clicado */
+#busca-navbar input:focus {
+  border-color: #ffb703;
+  box-shadow: 0 0 0 3px rgba(255, 183, 3, 0.2);
+}
+
+#busca-navbar button {
+  border-radius: 0 5px 5px 0; /* arredonda só o lado direito */
+  border-left: 1px solid black;
+}
+
+#busca-navbar button:hover {
+  background: #ffb703;
+  color: white;
+  transform: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Quando a barra de sugestões está ativa */
+#busca-navbar.active input {
+  border-bottom-left-radius: 0;
+}
+
+#busca-navbar.active button {
+  border-bottom-right-radius: 0;
+  border-right: 1px solid #ddd;
+}
+
+/* Sugestões da barra de pesquisa */
+#suggestions-box {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 20px 20px;
+  max-height: 250px;
+  overflow-y: auto;
+  display: none;
+  z-index: 1000;
+}
+
+.suggestion-item {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestion-item:hover {
+  background: #f2f2f2;
+}
+
+.suggestion-item.selected {
+  background-color: #f0f0f0;
+}
+
+/* Botões da NavBar */
+#actions {
+  display: flex;
+  gap: 15px;
+  margin-right: 30px;
+}
+
+/* Botão de favoritos */
+#favs {
+  background: #ff8eb3;
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 50px;
+}
+
+/* Botão de Login */
+#login {
+  background: #ffb703;
+  border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 50px;
+}
+
+/*Botões da parte debaixo do menu*/
+#bottom-header {
+  width: 100%;
+  background-color: #47bbc3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+}
+
+#menu-links {
+  display: flex;
+  /* Centraliza os links */
+  justify-content: center;
+  align-items: center;
+  /* Espaçamento entre eles */
+  gap: 3rem;
+  font-size: 1.1rem;
+  padding: 0.6rem 0; /* Um espacinho para não colar na borda de baixo */
+}
+
+#menu-links a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+#menu-links a:hover {
+  color: #1b4e4f;
+  transition: 0.2s linear;
+}

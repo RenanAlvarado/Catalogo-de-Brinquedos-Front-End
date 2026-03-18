@@ -10,6 +10,12 @@
     <!-- CSS Geral (HomePage) -->
     <link rel="stylesheet" href="css/homepage.css" />
 
+    <!-- Footer -->
+    <link rel="stylesheet" href="css/footer.css" />
+
+    <!-- Header -->
+    <link rel="stylesheet" href="css/header.css" />
+
     <!-- JavaScript -->
     <script type="module" src="js/main.js" defer></script>
 
@@ -24,56 +30,7 @@
   </head>
   <body>
     <!-- Navegação da parte de cima -->
-    <header>
-      <nav id="navbar">
-        <!-- Para o CSS -->
-        <div id="navbar-inner">
-          <div id="logo-nav">
-            <a href="index.html"
-              ><img src="img/newlogo.png" alt="Logo do Catalogo de Brinquedos"
-            /></a>
-          </div>
-
-          <div id="busca-navbar">
-            <!-- Desligar Sugestões do Navegadors -->
-            <form autocomplete="off">
-              <input
-                type="text"
-                placeholder="Barra de Pesquisa"
-                id="search-input"
-              />
-              <button type="submit" class="btn">
-                <i class="fas fa-search"></i>
-              </button>
-            </form>
-
-            <!-- Sugestões -->
-            <div id="suggestions-box">
-              <!-- AS SUGESTÔES SÃO CARREGADAS AQUI -->
-            </div>
-          </div>
-
-          <div id="actions">
-            <button id="favs" class="btn">
-              <p>Favoritos <i class="fa-regular fa-heart"></i></p>
-            </button>
-            <a href="login.html"
-              ><button id="login" class="btn" href="login.html">
-                <p>Cadastro/Login <i class="fa-regular fa-user"></i></p></button
-            ></a>
-          </div>
-        </div>
-      </nav>
-
-      <div id="bottom-header">
-        <div id="menu-links">
-          <a href="index.html">Home</a>
-          <a href="#brands-container">Marcas</a>
-          <a href="#toys-container">Produtos</a>
-          <a href="about.html">Sobre</a>
-        </div>
-      </div>
-    </header>
+    <header id="header"></header>
 
     <!-- Conteudo Principal -->
     <main id="main-container">
@@ -136,89 +93,6 @@
     </main>
 
     <!-- Rodapé -->
-    <footer id="footer">
-      <div id="footer-container">
-        <div class="footer-left">
-          <img src="img/logoSlogan.png" alt="Logo MARAH" />
-          <p>
-            Onde a diversão é levada a sério! Explorando o melhor do
-            desenvolvimento infantil a cada brincadeira.
-          </p>
-        </div>
-
-        <div class="footer-right">
-          <div class="footer-menus">
-            <div class="footer-column">
-              <h3>MARAH</h3>
-              <nav>
-                <ul>
-                  <li><a href="index.html#main-container">Início</a></li>
-                  <li><a href="about.html">Nossa História</a></li>
-                  <li>
-                    <a href="index.html#banner-container">Nossas Marcas</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-
-            <div class="footer-column">
-              <h3>Categorias</h3>
-              <nav>
-                <ul>
-                  <li><a href="index.html#toys-container">Carrinhos</a></li>
-                  <li><a href="index.html#toys-container">Bonecas</a></li>
-                  <li><a href="index.html#toys-container">Educativos</a></li>
-                  <li><a href="index.html#toys-container">Jogos</a></li>
-                </ul>
-              </nav>
-            </div>
-
-            <div class="footer-column">
-              <h3>Ajuda</h3>
-              <nav>
-                <ul>
-                  <li><a href="#">Contato</a></li>
-                  <li><a href="#">Trocas e Devoluções</a></li>
-                  <li><a href="#">Perguntas Frequentes</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-
-          <div class="footer-icons-row">
-            <div class="icon-group">
-              <h3>Redes Sociais</h3>
-              <div class="caixa-icones">
-                <a href="#" aria-label="Instagram MARAH"
-                  ><i class="fa-brands fa-instagram"></i
-                ></a>
-                <a href="#" aria-label="Facebook MARAH"
-                  ><i class="fa-brands fa-facebook"></i
-                ></a>
-                <a href="#" aria-label="YouTube MARAH"
-                  ><i class="fa-brands fa-youtube"></i
-                ></a>
-              </div>
-            </div>
-
-            <div class="icon-group">
-              <h3>Formas de Pagamento</h3>
-              <div class="caixa-icones pagamento-icones">
-                <i class="fa-brands fa-pix" title="Pix"></i>
-                <i class="fa-brands fa-cc-visa" title="Visa"></i>
-                <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
-                <i class="fas fa-barcode" title="Boleto"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>
-          &copy; 2026 MARAH Catálogo de Brinquedos. Todos os direitos
-          reservados.
-        </p>
-      </div>
-    </footer>
+    <footer id="footer"></footer>
   </body>
 </html>
