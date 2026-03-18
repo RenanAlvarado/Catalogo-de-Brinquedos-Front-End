@@ -7,7 +7,7 @@ function obterImagem(pasta, imagem) {
 }
 
 // ===============================
-// RENDERIZAR PÁGINAS
+// RENDERIZAR PÁGINAÇÃO DE PRODUTOS
 // ===============================
 
 export function renderizarPaginacao(container, data, aoMudarPagina) {

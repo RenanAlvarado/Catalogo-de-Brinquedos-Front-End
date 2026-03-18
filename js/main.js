@@ -5,7 +5,7 @@
 import { buscarCategorias, buscarBrinquedos, buscarMarcas } from "./api.js";
 
 let paginaAtual = 0;
-const tamanhoPagina = 15;
+const tamanhoPagina = 16;
 
 import {
   renderizarCategorias,

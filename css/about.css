@@ -236,14 +236,18 @@ header {
 }
 
 /* --- BANNER --- */
-#banner-marah {
+#banner-section {
+  /* Usa o relative apenas para posicionar melhor a onda */
+  position: relative;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: space-around;
+  /* Afastar do conteúdo de baixo */
+  margin-bottom: 40px;
+  /* Afastar de cima */
+  padding-top: 20px;
   width: 100%;
-  min-height: 450px;
-  padding: 100px 50px 100px 0px;
-  overflow: hidden;
   background-color: #11cdd4;
   background-image: repeating-linear-gradient(
     -45deg,
@@ -254,191 +258,114 @@ header {
   );
 }
 
-/* --- GARANTIR QUE O TEXTO FICA POR CIMA --- */
+/* Imagem e Texto */
 #banner-content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   gap: 40px;
-  max-width: 1200px;
   width: 100%;
   z-index: 10;
 }
 
 #mascot-img {
   width: 500px;
-  display: block;
   filter: drop-shadow(5px 5px 15px rgba(0, 0, 0, 0.1));
 }
 
 /* --- TEXTO DO BANNER --- */
 #text-container {
-  color: #ffffff;
-  flex: 1;
+  color: #fff;
   text-align: right;
 }
 
-.title-group {
-  flex-direction: column; /* Mascote acima do título no mobile */
-  text-align: center;
-  gap: 10px;
-  justify-content: center;
-}
-
-.axolotl-mascot {
-  width: 180px; /* Mascote menor no mobile */
-}
-
-.title-group {
-  flex-direction: column; /* Mascote acima do título no mobile */
-  text-align: center;
-  gap: 10px;
-  justify-content: center;
-}
-
-.text-container h1 {
+#text-container h1 {
   font-family: "Oswald", sans-serif;
-  font-size: 110px; /* Tamanho grande e impactante */
+  font-size: 110px;
   font-weight: 700;
   line-height: 0.9;
-  margin: 0 0 10px 0;
+  margin-bottom: 10px;
   letter-spacing: 2px;
   text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
 }
 
-.text-container h2 {
+#text-container h2 {
   font-size: 32px;
   font-weight: 700;
-  margin: 0 0 5px 0;
+  margin-bottom: 5px;
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
-.text-container p {
+#text-container p {
   font-size: 24px;
   font-weight: 500;
-  margin: 0;
   opacity: 0.9;
 }
 
 /* --- A ONDA REBAIXADA --- */
-.hero-wave {
+#hero-wave {
+  /* Absoluta em relação a Banner - Section */
   position: absolute;
-  bottom: 0px; /* Garante que não haja fresta no fundo */
-  left: 0;
+  /* Faz a onda subir na DIV */
+  bottom: -90px;
   width: 100%;
-  height: auto;
-  display: block;
-  z-index: 5; /* Fica atrás do conteúdo principal */
+  z-index: 9; /* Fica atrás do conteúdo principal */
 }
 
-/* Responsividade (Telemóveis) */
-@media (max-width: 768px) {
-  .banner-content {
-    flex-direction: column; /* Empilha mascote e texto verticalmente */
-    text-align: center;
-    gap: 20px;
-  }
-
-  .text-container {
-    text-align: center; /* Centraliza o texto no mobile */
-  }
-
-  .axolotl-mascot {
-    width: 180px; /* Mascote menor no mobile */
-  }
-
-  .text-container h1 {
-    font-size: 70px;
-  }
-}
-
-.text-container h2 {
-  font-size: 32px;
-  font-weight: 700;
-  margin: 0 0 5px 0;
-  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-}
-
-.text-container p {
-  font-size: 24px;
-  font-weight: 500;
-  margin: 0;
-  opacity: 0.9;
-}
-
-.mascot-img {
-  width: 200px;
-  height: auto;
-}
-
-/* --- A SECÇÃO DA HISTÓRIA --- */
-.about-container {
-  padding: 80px 5%; /* Espaço em cima e em baixo, e nas laterais */
-  background-color: #ffffff; /* Fundo branco para leitura limpa */
+/* --- SEÇÂO COM INFORMAÇÔES --- */
+#about-container {
+  padding: 80px 5%;
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
 }
 
-.about-content {
-  display: flex;
-  align-items: center; /* Centraliza verticalmente o texto com a imagem */
-  gap: 60px; /* Espaço generoso entre o texto e a imagem */
-  max-width: 1200px; /* Largura máxima para não esticar demais em telas gigantes */
-  width: 100%;
-  margin: 0 auto;
-}
-
 /* Lado do Texto */
-.about-text {
-  flex: 1; /* Ocupa metade do espaço disponível */
+#about-text {
+  flex: 1;
   padding-right: 40px;
 }
 
-.about-text h2 {
-  font-family:
-    "Oswald", sans-serif; /* Assumindo que você está usando a mesma fonte do banner */
+#about-text h2 {
+  font-family: "Oswald", sans-serif;
   font-size: 42px;
-  color: #333333; /* Cor escura para contraste */
+  color: #333333;
   margin-bottom: 20px;
 }
 
-.about-text p {
+#about-text p {
   font-size: 18px;
   line-height: 1.6; /* Aumenta o espaço entre as linhas para facilitar a leitura */
   color: #555555;
   margin-bottom: 15px;
+  text-align: justify;
 }
 
-/* Lado da Imagem */
-.about-image {
+#about-image {
   flex: 1; /* Ocupa a outra metade do espaço */
 }
 
-.about-image img {
-  width: 100%; /* Faz a imagem ocupar todo o espaço do container dela */
+#about-image img {
+  width: 100%;
   height: auto;
-  border-radius: 12px; /* Mantém as bordas arredondadas que você já tinha */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Uma sombra suave para dar profundidade */
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   display: block;
-}
-
-/* --- RESPONSIVIDADE (Para Celulares e Tablets) --- */
-@media (max-width: 850px) {
-  .about-content {
-    flex-direction: column; /* Coloca a imagem embaixo do texto */
-    gap: 40px;
-  }
-
-  .about-text {
-    text-align: center; /* Centraliza o texto no celular (opcional) */
-  }
 }
 
 /* --- SEÇÃO DA EQUIPE --- */
 #team {
+  width: 100%;
   background-color: transparent;
-  padding: 60px 20px;
   text-align: center;
+}
+
+#team-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 0;
 }
 
 #team h2 {
@@ -447,46 +374,51 @@ header {
   margin-bottom: 40px;
 }
 
-/* O Flexbox que coloca os 4 lado a lado */
+/* Div para os 4 cards */
 .team-members {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 40px;
   flex-wrap: wrap; /* Se a tela for pequena (celular), eles caem para a linha de baixo organizadamente */
-  max-width: 1000px;
-  margin: 0 auto;
+  max-width: 100%;
 }
 
+/* Card dos membros */
 .member-card {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  width: 180px; /* Largura de cada "cartão" de membro */
+  width: 180px;
+  max-width: 180px; /* Largura de cada "cartão" de membro */
 }
 
-/* A magia da foto redonda */
+/* Foto */
 .member-photo {
   width: 140px;
   height: 140px;
-  border-radius: 50%; /* É isso que faz a foto ficar um círculo perfeito! */
-  object-fit: cover; /* Garante que a foto não fique achatada ou esticada, mesmo se a imagem original for retangular */
-  border: 4px solid #55cbcd; /* A bordinha com a cor principal do seu site */
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #55cbcd;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   margin-bottom: 15px;
   transition: transform 0.3s ease;
 }
 
-/* Um efeitinho de zoom quando passa o mouse na foto */
+/* Efeito de Zoom */
 .member-photo:hover {
   transform: scale(1.05);
 }
 
+/* Nome */
 .member-card h3 {
   font-size: 18px;
   color: #333;
   margin-bottom: 5px;
 }
 
+/* Função */
 .member-card p {
   font-size: 14px;
   color: #666;
@@ -640,6 +572,39 @@ header {
   font-weight: 500;
 }
 
+/* Responsividade (Telemóveis) */
+@media (max-width: 450px) {
+  #banner-content {
+    flex-direction: column; /* Empilha mascote e texto verticalmente */
+    text-align: center;
+    gap: 20px;
+  }
+
+  #text-container {
+    text-align: center; /* Centraliza o texto no mobile */
+  }
+
+  #axolotl-mascot {
+    width: 180px; /* Mascote menor no mobile */
+  }
+
+  #text-container h1 {
+    font-size: 70px;
+  }
+}
+
+/* --- RESPONSIVIDADE (Para Celulares e Tablets) --- */
+@media (max-width: 850px) {
+  #about-content {
+    flex-direction: column; /* Coloca a imagem embaixo do texto */
+    gap: 40px;
+  }
+
+  #about-text {
+    text-align: center; /* Centraliza o texto no celular (opcional) */
+  }
+}
+
 /* =========================================
    RESPONSIVIDADE (Tablets e Celulares)
    ========================================= */
@@ -650,14 +615,14 @@ header {
     align-items: center;
     text-align: center;
   }
-  .footer-left img {
+  #footer-left img {
     margin: 0 auto 15px auto;
   }
-  .footer-menus {
+  #footer-menus {
     justify-content: center;
     gap: 40px;
   }
-  .footer-icons-row {
+  #footer-icons-row {
     justify-content: center;
     gap: 40px;
   }

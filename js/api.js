@@ -43,7 +43,7 @@ export async function buscarMarcas() {
 // BRINQUEDOS
 // ===============================
 
-export async function buscarBrinquedos(page = 0, size = 15) {
+export async function buscarBrinquedos(page = 0, size = 16) {
   return await requisicao(
     `/brinquedos/listar-paginas?page=${page}&size=${size}`,
   );
