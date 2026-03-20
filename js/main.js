@@ -115,12 +115,12 @@ async function carregarMarcasFiltro() {
 // FILTRO DE ORDENAÇÃO
 // ===============================
 
-const ordenacaoSelect = document.getElementById("ordenacao-select");
+// const ordenacaoSelect = document.getElementById("ordenacao-select");
 
-ordenacaoSelect.addEventListener("change", (e) => {
-  ordenacao = e.target.value;
-  carregarBrinquedos(0); // volta pra primeira página
-});
+// ordenacaoSelect.addEventListener("change", (e) => {
+//   ordenacao = e.target.value;
+//   carregarBrinquedos(0); // volta pra primeira página
+// });
 
 // ===============================
 // CARREGAR BRINQUEDOS
