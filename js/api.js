@@ -77,13 +77,6 @@ export async function buscarBrinquedos(page = 0, size = 16) {
   );
 }
 
-// Para listar todos os brinquedos
-/* 
-export async function buscarBrinquedos() {
-  return await requisicao("/brinquedos");
-}
-*/
-
 // ===============================
 // BUSCA DE BRINQUEDOS POR NOME
 // ===============================

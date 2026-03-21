@@ -6,7 +6,7 @@ import { buscarBrinquedos, buscarBrinquedosPorNome } from "./api.js";
 import { renderizarBrinquedos } from "./render.js";
 
 // ===============================
-// INICIAR BUSCA
+// FUNÇÃO DE INICIAR BUSCA
 // ===============================
 
 export function iniciarBusca() {

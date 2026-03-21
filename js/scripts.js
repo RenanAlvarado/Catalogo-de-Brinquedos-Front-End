@@ -1,4 +1,45 @@
 /* ===================================== */
+/* CARROSSEL DE CATEGORIAS */
+/* ===================================== */
+
+const categoryCarousel = document.querySelector("#categories-carousel");
+const categoryWrapper = document.querySelector("#categories-wrapper");
+
+const prevBtnCategories = document.querySelector(".prev-categories");
+const nextBtnCategories = document.querySelector(".next-categories");
+
+if (categoryCarousel && categoryWrapper) {
+  let scrollPosition = 0;
+
+  const scrollAmount = 180;
+
+  nextBtnCategories?.addEventListener("click", () => {
+    const maxScroll =
+      categoryCarousel.scrollWidth - categoryWrapper.clientWidth;
+
+    if (scrollPosition < maxScroll) {
+      scrollPosition += scrollAmount;
+
+      if (scrollPosition > maxScroll) {
+        scrollPosition = maxScroll;
+      }
+
+      categoryCarousel.style.transform = `translateX(-${scrollPosition}px)`;
+    }
+  });
+
+  prevBtnCategories?.addEventListener("click", () => {
+    scrollPosition -= scrollAmount;
+
+    if (scrollPosition < 0) {
+      scrollPosition = 0;
+    }
+
+    categoryCarousel.style.transform = `translateX(-${scrollPosition}px)`;
+  });
+}
+
+/* ===================================== */
 /* CARROSSEL DE MARCAS */
 /* ===================================== */
 
@@ -69,48 +110,7 @@ export function iniciarCarrosselMarcas() {
 }
 
 /* ===================================== */
-/* CARROSSEL DE CATEGORIAS */
-/* ===================================== */
-
-const categoryCarousel = document.querySelector("#categories-carousel");
-const categoryWrapper = document.querySelector("#categories-wrapper");
-
-const prevBtnCategories = document.querySelector(".prev-categories");
-const nextBtnCategories = document.querySelector(".next-categories");
-
-if (categoryCarousel && categoryWrapper) {
-  let scrollPosition = 0;
-
-  const scrollAmount = 180;
-
-  nextBtnCategories?.addEventListener("click", () => {
-    const maxScroll =
-      categoryCarousel.scrollWidth - categoryWrapper.clientWidth;
-
-    if (scrollPosition < maxScroll) {
-      scrollPosition += scrollAmount;
-
-      if (scrollPosition > maxScroll) {
-        scrollPosition = maxScroll;
-      }
-
-      categoryCarousel.style.transform = `translateX(-${scrollPosition}px)`;
-    }
-  });
-
-  prevBtnCategories?.addEventListener("click", () => {
-    scrollPosition -= scrollAmount;
-
-    if (scrollPosition < 0) {
-      scrollPosition = 0;
-    }
-
-    categoryCarousel.style.transform = `translateX(-${scrollPosition}px)`;
-  });
-}
-
-/* ===================================== */
-/* ABRIR OPÇÕES DE CATEGORIAS E MARCAS */
+/* ABRIR OPÇÕES DE CATEGORIAS E MARCAS NOS FILTROS*/
 /* ===================================== */
 document.querySelectorAll(".dropdown-btn").forEach((botao) => {
   botao.addEventListener("click", () => {

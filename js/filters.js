@@ -15,16 +15,16 @@ import { renderizarBrinquedos } from "./render.js";
 // ===============================
 
 const mainContainer = document.querySelector("#main-container");
-const productsContainer = document.querySelector("#products-wrapper");
 const brandsContainer = document.querySelector("#brands-container");
+const productsContainer = document.querySelector("#products-wrapper");
 const toysTitle = document.querySelector("#toysContainer-title");
 
 // ===============================
-// BOTÃO VOLTAR AO MENU
+// CRIAR BOTÃO DE VOLTAR AO MENU
 // ===============================
 
-function criarBotaoVoltar() {
-  // verifica se já existe
+async function criarBotaoVoltar() {
+  // verifica se já existe esse id no código
   if (document.querySelector("#return-index-btn")) {
     return;
   }
@@ -48,11 +48,11 @@ function criarBotaoVoltar() {
 
 let categoriasSelecionadas = [];
 let marcasSelecionadas = [];
+let resultados = [];
 
 // ===============================
 // FILTRAR POR CATEGORIA (CARROSSEL)
 // ===============================
-
 export async function filtrarPorCategoria(id, nomeCategoria) {
   brandsContainer.style.display = "none";
 
@@ -130,7 +130,7 @@ export function alterarMarca(id, marcado) {
 // ===============================
 
 async function aplicarFiltros() {
-  // nenhum filtro selecionado
+  //Nenhum filtro selecionado
   if (categoriasSelecionadas.length === 0 && marcasSelecionadas.length === 0) {
     const resposta = await buscarBrinquedos();
     const brinquedos = resposta.content || resposta;
@@ -141,8 +141,6 @@ async function aplicarFiltros() {
 
     return;
   }
-
-  let resultados = [];
 
   // filtrar por categorias
   for (const id of categoriasSelecionadas) {

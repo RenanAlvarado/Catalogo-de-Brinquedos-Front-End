@@ -4,10 +4,6 @@
 
 import { buscarCategorias, buscarBrinquedos, buscarMarcas } from "./api.js";
 
-let paginaAtual = 0;
-const tamanhoPagina = 16;
-let ordenacao = "";
-
 import {
   renderizarCategorias,
   renderizarFiltroCategorias,
@@ -25,10 +21,11 @@ import {
 } from "./filters.js";
 
 import { iniciarCarrosselMarcas } from "./scripts.js";
+
 import { iniciarBusca, executarBusca } from "./search.js";
 
 // ===============================
-// FUNÇÃO AUXILIAR PARA COMPONENTES
+// FUNÇÃO AUXILIAR PARA CARREGAR OS COMPONENTES HTML
 // ===============================
 
 async function loadComponent(id, file) {
@@ -38,16 +35,17 @@ async function loadComponent(id, file) {
 }
 
 // ===============================
-// CARREGAR HEADER + FOOTER
+// CARREGAR HEADER E FOOTER
 // ===============================
 
 async function carregarLayout() {
+  // Função pede o ID do elemento e o arquivo html dela
   await loadComponent("header", "components/header.html");
   await loadComponent("footer", "components/footer.html");
 }
 
 // ===============================
-// PEGAR PARÂMETRO DA URL
+// PEGAR PARÂMETRO DA URL PARA BUSCA FUNCIONAR EM QUALQUER PÁGINA
 // ===============================
 
 function pegarParametroBusca() {
@@ -56,43 +54,27 @@ function pegarParametroBusca() {
 }
 
 // ===============================
-// ELEMENTOS
+// ELEMENTOS HTML DA PÁGINA
 // ===============================
 
+const input = document.querySelector("#search-input");
 const categoriesContainer = document.querySelector("#categories-carousel");
-const productsContainer = document.querySelector("#products-wrapper");
 const brandsContainer = document.querySelector("#brands-carousel");
-
+const productsContainer = document.querySelector("#products-wrapper");
 const filtroCategoriasContainer = document.querySelector("#categories-filter");
 const filtroMarcasContainer = document.querySelector("#brands-filter");
 
 // ===============================
-// CARREGAR CATEGORIAS
+// FUNÇÕES DE CARREGAMENTO DA PÁGINA
 // ===============================
 
+// Carregar os cards de categoria
 async function carregarCategorias() {
   const categorias = await buscarCategorias();
   renderizarCategorias(categoriesContainer, categorias, filtrarPorCategoria);
 }
 
-// ===============================
-// FILTRO CATEGORIAS
-// ===============================
-
-async function carregarCategoriasFiltro() {
-  const categorias = await buscarCategorias();
-
-  renderizarFiltroCategorias(
-    filtroCategoriasContainer,
-    categorias,
-    alterarCategoria,
-  );
-}
-
-// ===============================
-// CARREGAR MARCAS
-// ===============================
-
+// Carregar os cards de marca
 async function carregarMarcas() {
   const marcas = await buscarMarcas();
 
@@ -101,34 +83,10 @@ async function carregarMarcas() {
   iniciarCarrosselMarcas();
 }
 
-// ===============================
-// FILTRO MARCAS
-// ===============================
-
-async function carregarMarcasFiltro() {
-  const marcas = await buscarMarcas();
-
-  renderizarFiltroMarcas(filtroMarcasContainer, marcas, alterarMarca);
-}
-
-// ===============================
-// FILTRO DE ORDENAÇÃO
-// ===============================
-
-// const ordenacaoSelect = document.getElementById("ordenacao-select");
-
-// ordenacaoSelect.addEventListener("change", (e) => {
-//   ordenacao = e.target.value;
-//   carregarBrinquedos(0); // volta pra primeira página
-// });
-
-// ===============================
-// CARREGAR BRINQUEDOS
-// ===============================
+//Carregar os cards de brinquedos
+const tamanhoPagina = 16; //Varíavel de quantos brinquedos aparecem na página
 
 async function carregarBrinquedos(page = 0) {
-  paginaAtual = page;
-
   const resposta = await buscarBrinquedos(page, tamanhoPagina);
 
   if (!resposta || !resposta.content) {
@@ -140,32 +98,61 @@ async function carregarBrinquedos(page = 0) {
 
   renderizarBrinquedos(productsContainer, brinquedos);
 
-  const paginacaoContainer = document.getElementById("pagination-container");
+  const paginacaoContainer = document.querySelector("#pagination-container");
 
   renderizarPaginacao(paginacaoContainer, resposta, (novaPagina) => {
     carregarBrinquedos(novaPagina);
+  });
+}
 
-    /*
-  const resposta = await filtrarBrinquedos({
-  categorias: filtros.categorias,
-  marcas: filtros.marcas,
-  page: paginaAtual,
-  size: tamanhoPagina,
-  ordenacao
-  });
-    */
-  });
+// ===============================
+// FUNÇÕES DE CARREGAMENTO DOS FILTROS
+// ===============================
+
+// Carregar os filtros de categoria
+async function carregarCategoriasFiltro() {
+  const categorias = await buscarCategorias();
+
+  renderizarFiltroCategorias(
+    filtroCategoriasContainer,
+    categorias,
+    alterarCategoria,
+  );
+}
+
+// Carregar os filtros de marca
+async function carregarMarcasFiltro() {
+  const marcas = await buscarMarcas();
+
+  renderizarFiltroMarcas(filtroMarcasContainer, marcas, alterarMarca);
 }
 
 // ===============================
 // INICIALIZAÇÃO DA PÁGINA
 // ===============================
 
+// Função auxiliar de inicialização isolada de cada coisa (Nome para erro e função que vai ser carregada)
+function init(nome, fn) {
+  try {
+    const result = fn();
+
+    // Caso seja async
+    if (result instanceof Promise) {
+      result.catch((err) => {
+        console.error(`Erro em ${nome}:`, err);
+      });
+    }
+  } catch (err) {
+    console.error(`Erro em ${nome}:`, err);
+  }
+}
+
+// Função auxiliar da inicialização dos componentes
 async function iniciarPagina() {
-  await carregarCategorias();
-  await carregarMarcas();
-  await carregarCategoriasFiltro();
-  await carregarMarcasFiltro();
+  init("categorias", carregarCategorias);
+  init("marcas", carregarMarcas);
+  init("filtroCategorias", carregarCategoriasFiltro);
+  init("filtroMarcas", carregarMarcasFiltro);
 }
 
 // ===============================
@@ -173,9 +160,11 @@ async function iniciarPagina() {
 // ===============================
 
 async function start() {
-  await carregarLayout(); // Cria header/footer
+  //Componentes Modularizados
+  await carregarLayout();
 
-  iniciarBusca(); // Ativa busca global
+  //Busca ativa após ter os componentes
+  iniciarBusca();
 
   const busca = pegarParametroBusca();
 
@@ -186,8 +175,7 @@ async function start() {
     // Se veio com ?search=
     await executarBusca(busca);
 
-    // opcional: preencher input
-    const input = document.querySelector("#search-input");
+    //Preench input
     if (input) input.value = busca;
   } else {
     // Comportamento normal
@@ -195,4 +183,5 @@ async function start() {
   }
 }
 
+//Inicialização
 start();
