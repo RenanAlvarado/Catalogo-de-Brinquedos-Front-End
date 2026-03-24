@@ -25,6 +25,20 @@ import { iniciarCarrosselMarcas } from "./scripts.js";
 import { iniciarBusca, executarBusca } from "./search.js";
 
 // ===============================
+// FUNÇÃO AUXILIAR PARA VER SE O COMPONENTES EXISTE
+// ===============================
+function getEl(selector) {
+  const el = document.querySelector(selector);
+
+  if (!el) {
+    // opcional: log leve (ou pode remover depois)
+    console.warn(`Elemento não encontrado: ${selector}`);
+  }
+
+  return el;
+}
+
+// ===============================
 // FUNÇÃO AUXILIAR PARA CARREGAR OS COMPONENTES HTML
 // ===============================
 
@@ -54,28 +68,24 @@ function pegarParametroBusca() {
 }
 
 // ===============================
-// ELEMENTOS HTML DA PÁGINA
-// ===============================
-
-const input = document.querySelector("#search-input");
-const categoriesContainer = document.querySelector("#categories-carousel");
-const brandsContainer = document.querySelector("#brands-carousel");
-const productsContainer = document.querySelector("#products-wrapper");
-const filtroCategoriasContainer = document.querySelector("#categories-filter");
-const filtroMarcasContainer = document.querySelector("#brands-filter");
-
-// ===============================
 // FUNÇÕES DE CARREGAMENTO DA PÁGINA
 // ===============================
 
 // Carregar os cards de categoria
 async function carregarCategorias() {
+  //Carrega dentro da função para não dar erro
+  const categoriesContainer = getEl("#categories-carousel");
+  if (!categoriesContainer) return;
+
   const categorias = await buscarCategorias();
   renderizarCategorias(categoriesContainer, categorias, filtrarPorCategoria);
 }
 
 // Carregar os cards de marca
 async function carregarMarcas() {
+  const brandsContainer = getEl("#brands-carousel");
+  if (!brandsContainer) return;
+
   const marcas = await buscarMarcas();
 
   renderizarMarcas(brandsContainer, marcas, filtrarPorMarca);
@@ -87,6 +97,9 @@ async function carregarMarcas() {
 const tamanhoPagina = 16; //Varíavel de quantos brinquedos aparecem na página
 
 async function carregarBrinquedos(page = 0) {
+  const productsContainer = getEl("#products-wrapper");
+  if (!productsContainer) return;
+
   const resposta = await buscarBrinquedos(page, tamanhoPagina);
 
   if (!resposta || !resposta.content) {
@@ -98,7 +111,8 @@ async function carregarBrinquedos(page = 0) {
 
   renderizarBrinquedos(productsContainer, brinquedos);
 
-  const paginacaoContainer = document.querySelector("#pagination-container");
+  const paginacaoContainer = getEl("#pagination-container");
+  if (!paginacaoContainer) return;
 
   renderizarPaginacao(paginacaoContainer, resposta, (novaPagina) => {
     carregarBrinquedos(novaPagina);
@@ -111,6 +125,9 @@ async function carregarBrinquedos(page = 0) {
 
 // Carregar os filtros de categoria
 async function carregarCategoriasFiltro() {
+  const filtroCategoriasContainer = getEl("#categories-filter");
+  if (!filtroCategoriasContainer) return;
+
   const categorias = await buscarCategorias();
 
   renderizarFiltroCategorias(
@@ -122,6 +139,9 @@ async function carregarCategoriasFiltro() {
 
 // Carregar os filtros de marca
 async function carregarMarcasFiltro() {
+  const filtroMarcasContainer = getEl("#brands-filter");
+  if (!filtroMarcasContainer) return;
+
   const marcas = await buscarMarcas();
 
   renderizarFiltroMarcas(filtroMarcasContainer, marcas, alterarMarca);
@@ -160,6 +180,8 @@ async function iniciarPagina() {
 // ===============================
 
 async function start() {
+  const input = getEl("#search-input");
+
   //Componentes Modularizados
   await carregarLayout();
 
