@@ -238,29 +238,3 @@ body {
     text-align: center; /* Centraliza o texto no celular (opcional) */
   }
 }
-
-/* =========================================
-   RESPONSIVIDADE (Tablets e Celulares)
-   ========================================= */
-
-@media (max-width: 850px) {
-  #footer-container {
-    flex-direction: column; /* Empilha o esquerdo e o direito no celular */
-    align-items: center;
-    text-align: center;
-  }
-  #footer-left img {
-    margin: 0 auto 15px auto;
-  }
-  #footer-menus {
-    justify-content: center;
-    gap: 40px;
-  }
-  #footer-icons-row {
-    justify-content: center;
-    gap: 40px;
-  }
-  #footer ul li a:hover {
-    padding-left: 0; /* Desativa a animação de ir pro lado no touch */
-  }
-}

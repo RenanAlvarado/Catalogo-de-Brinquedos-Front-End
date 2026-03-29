@@ -145,3 +145,93 @@
   color: #ffffff;
   font-weight: 500;
 }
+
+/* =========================================
+   Responsividade
+   ========================================= */
+/* =========================================
+   TABLETS (até 992px)
+   ========================================= */
+@media (max-width: 992px) {
+  #footer-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .footer-right {
+    width: 100%;
+  }
+
+  .footer-menus {
+    justify-content: flex-start;
+    gap: 30px;
+  }
+
+  .footer-icons-row {
+    gap: 40px; /* diminui o espaço */
+  }
+}
+
+/* =========================================
+   CELULARES (até 768px)
+   ========================================= */
+@media (max-width: 768px) {
+  #footer {
+    padding-top: 40px;
+  }
+
+  .footer-left {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .footer-left img {
+    margin: 0 auto 15px auto;
+  }
+
+  .footer-right {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-menus {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-column {
+    width: 100%;
+  }
+
+  .footer-icons-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+}
+
+/* =========================================
+   CELULARES PEQUENOS (até 480px)
+   ========================================= */
+@media (max-width: 480px) {
+  #footer h3 {
+    font-size: 18px;
+  }
+
+  #footer ul li a {
+    font-size: 14px;
+  }
+
+  .caixa-icones a,
+  .pagamento-icones i {
+    font-size: 24px;
+  }
+
+  .pagamento-icones i {
+    font-size: 28px;
+  }
+
+  .footer-bottom p {
+    font-size: 13px;
+  }
+}
