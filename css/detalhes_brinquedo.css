@@ -1,0 +1,82 @@
+/* ===== PÁGINA DE DETALHES DO BRINQUEDO ===== */
+
+/* 1. O container principal da página */
+#main-container {
+padding: 60px 20px !important;
+min-height: 60vh !important; /* Evita que o rodapé suba muito se o conteúdo for pequeno */
+background-color: #f4f7f6 !important; /* Um fundo cinza bem clarinho para dar contraste */
+}
+
+/* 2. A caixa branca que segura a foto e os textos */
+#details-container {
+display: flex !important;
+flex-direction: row !important; /**/
+max-width: 1000px !important;
+margin: 0 auto !important; /* Centraliza a caixa na tela */
+background-color: #ffffff !important;
+border-radius: 20px !important;
+padding: 40px !important;
+box-shadow: 0px 10px 30px rgba(0,0,0,0.08) !important; /* Sombreado suave*/
+gap: 40px !important; /* Espaço entre a foto e o texto */
+}
+
+/* 3. Coluna da Imagem */
+#details-img {
+flex: 1 !important;
+display: flex !important;
+justify-content: center !important;
+align-items: center !important;
+}
+
+#details-img img {
+width: 100% !important;
+max-width: 400px !important;
+border-radius: 15px !important;
+box-shadow: 0px 5px 15px rgba(0,0,0,0.1) !important;
+}
+
+/* 4. Coluna das Informações */
+#details-info {
+flex: 1 !important;
+display: flex !important;
+flex-direction: column !important;
+justify-content: center !important;
+}
+
+/* Estilo do Nome do Brinquedo */
+#details-info h1 {
+font-size: 32px !important;
+color: #1b4e4f !important;
+margin-bottom: 15px !important;
+margin-top: 0 !important;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+/* Estilo da Descrição (Seleciona o primeiro parágrafo) */
+#details-info p:nth-of-type(1) {
+font-size: 16px !important;
+color: #666666 !important;
+line-height: 1.6 !important;
+margin-bottom: 25px !important;
+}
+
+/* Estilo do Preço (Seleciona o segundo parágrafo) */
+#details-info p:nth-of-type(2) {
+font-size: 28px !important;
+font-weight: bold !important;
+color: #ffb703 !important; /* Amarelo da sua paleta */
+margin-bottom: 30px !important;
+}
+
+/* ===== RESPONSIVIDADE (Celulares e Tablets) ===== */
+@media (max-width: 768px) {
+#details-container {
+flex-direction: column !important; /* Empilha a foto em cima do texto */
+padding: 20px !important;
+gap: 20px !important;
+}
+
+#details-info h1 {
+    font-size: 26px !important;
+}
+}
