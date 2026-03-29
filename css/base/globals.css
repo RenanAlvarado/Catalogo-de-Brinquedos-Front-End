@@ -18,6 +18,7 @@
   background: #fff;
   padding: 10px;
   transition: 0.2s;
+  width: 100%;
 }
 
 .input-icon i {
@@ -35,15 +36,16 @@
 
 .input-icon input[type="text"],
 .input-icon input[type="email"],
-.input-icon input[type="password"] {
+.input-icon input[type="password"],
+.input-icon input[type="number"] {
   width: 100%;
   border: none;
   outline: none;
   background: transparent;
 }
 
-/* BOTÕES DO HEADER */
-.btn-header {
+/* ESTLIZAÇÂO DE BOTÔES MAIS PRESENTES */
+.btn {
   padding: 12px 16px;
   border: none;
   border-radius: 30px;
@@ -56,7 +58,6 @@
   transition: all 0.2s ease;
 }
 
-/* Botão quando apertado */
 .btn:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
