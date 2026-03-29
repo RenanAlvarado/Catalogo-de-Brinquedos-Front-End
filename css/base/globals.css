@@ -8,7 +8,7 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* INPUTS */
+/* INPUTS  COM ICONE DO LADO*/
 .input-icon {
   display: flex;
   align-items: center;
@@ -24,8 +24,6 @@
   margin-right: 8px;
 }
 
-/* EFEITO INPUT */
-
 .input-icon:hover {
   transform: scale(1.02);
 }
@@ -33,4 +31,51 @@
 .input-icon:focus-within {
   border-color: aqua;
   box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
+
+.input-icon input[type="text"],
+.input-icon input[type="email"],
+.input-icon input[type="password"] {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+/* BOTÕES DO HEADER */
+.btn-header {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 30px;
+  background: white;
+  font-weight: bold;
+  text-align: center;
+  align-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Botão quando apertado */
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* BOTÃO DE ENVIO DE FORMULÁRIOS */
+.btn-submit {
+  border: 1px solid #000;
+  cursor: pointer;
+  background: linear-gradient(135deg, #ffc5d3, #ffc5d3);
+  padding: 9px;
+  color: #000;
+  font-weight: bold;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+}
+
+.btn-submit:hover {
+  background: #ffc5d3;
+  color: #fff;
 }

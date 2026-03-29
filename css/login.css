@@ -24,7 +24,7 @@ html {
   position: absolute;
   inset: 0;
 
-  background-image: url("../img/fundo_mar.png"); /* sua imagem */
+  background-image: url("../img/fundo_mar.png");
   background-size: cover;
   background-position: center;
 
@@ -118,16 +118,7 @@ html {
   font-size: 20px;
 }
 
-#login-form input[type="email"],
-#login-form input[type="password"] {
-  width: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-}
-
 /* LEMBRAR SENHA */
-
 #remember-password {
   display: flex;
   align-items: center;
@@ -186,25 +177,6 @@ html {
 
 #remember-password a:hover {
   text-decoration: underline;
-}
-
-/* BOTÃO */
-
-#btn-submit {
-  border: 1px solid #000;
-  cursor: pointer;
-  background: linear-gradient(135deg, #ffc5d3, #ffc5d3);
-  padding: 9px;
-  color: #000;
-  font-weight: bold;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  transition: 0.2s;
-}
-
-#btn-submit:hover {
-  background: #ffc5d3;
-  color: #fff;
 }
 
 /* CRIAR CONTA */

@@ -1,15 +1,7 @@
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body,
 html {
   width: 100%;
   height: 100%;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* IMPORTANDO FONTE */
@@ -68,7 +60,6 @@ html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Deixar 100% e com largura máxima, faz com que a tela se mantenha */
   width: 100%;
   max-width: 420px;
   background: #d1d1d1;
@@ -115,61 +106,4 @@ html {
   align-self: flex-start;
   margin-bottom: 12px;
   font-size: 20px;
-}
-
-/* INPUTS */
-
-.input-icon {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  margin-bottom: 12px;
-  background: #fff;
-  padding: 10px;
-  transition: 0.2s;
-}
-
-.input-icon i {
-  margin-right: 8px;
-}
-
-/* INPUT */
-
-#forgot-form input[type="text"] {
-  width: 100%;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: #000;
-}
-
-/* EFEITOS INPUT */
-
-.input-icon:hover {
-  transform: scale(1.02);
-}
-
-.input-icon:focus-within {
-  border-color: aqua;
-  box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
-}
-
-/* BOTÃO */
-
-#btn-submit {
-  border: 1px solid #000;
-  cursor: pointer;
-  background: linear-gradient(135deg, #ffc5d3, #ffc5d3);
-  padding: 9px;
-  color: #000;
-  font-weight: bold;
-  border-radius: 6px;
-  margin-bottom: 10px;
-  transition: 0.2s;
-}
-
-#btn-submit:hover {
-  background: #ffc5d3;
-  color: #fff;
 }
