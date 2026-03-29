@@ -205,36 +205,3 @@ body {
   font-size: 14px;
   color: #666;
 }
-
-/* Responsividade (Telemóveis) */
-@media (max-width: 450px) {
-  #banner-content {
-    flex-direction: column; /* Empilha mascote e texto verticalmente */
-    text-align: center;
-    gap: 20px;
-  }
-
-  #text-container {
-    text-align: center; /* Centraliza o texto no mobile */
-  }
-
-  #axolotl-mascot {
-    width: 180px; /* Mascote menor no mobile */
-  }
-
-  #text-container h1 {
-    font-size: 70px;
-  }
-}
-
-/* --- RESPONSIVIDADE (Para Celulares e Tablets) --- */
-@media (max-width: 850px) {
-  #about-content {
-    flex-direction: column; /* Coloca a imagem embaixo do texto */
-    gap: 40px;
-  }
-
-  #about-text {
-    text-align: center; /* Centraliza o texto no celular (opcional) */
-  }
-}
