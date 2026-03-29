@@ -34,10 +34,6 @@ html {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
-#left-section .input-icon {
-  margin-bottom: 15px;
-}
-
 #profile-img-button {
   width: 160px;
   height: 160px;
@@ -62,6 +58,16 @@ html {
   object-fit: cover;
 }
 
+#left-section .input-icon {
+  margin-bottom: 15px;
+}
+
+#left-section .btn {
+  background: linear-gradient(135deg, #ff4d4d, #d90429);
+  border: none;
+  font-size: 15px;
+}
+
 /* SEÇÃO DIREITA (FORMULÁRIO) */
 
 #right-section {
@@ -83,6 +89,10 @@ html {
 }
 
 #form-aditional-informations {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 #form-aditional-informations h3 {
@@ -96,6 +106,7 @@ html {
   align-items: center;
   gap: 10px;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 #form-aditional-informations #cep {
@@ -104,39 +115,13 @@ html {
   align-items: center;
   gap: 10px;
   margin-bottom: 15px;
+  width: 100%;
 }
 
 #form-aditional-informations #cep .input-icon {
   /* Deixar apenas o campo do cep menor */
   width: 20%;
-}
-
-#form-aditional-informations #address {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-}
-
-#form-aditional-informations #address #input-endereco {
-  width: 40%;
-}
-
-#form-aditional-informations #address #input-bairro {
-  width: 25%;
-}
-
-#form-aditional-informations #address #input-numero {
-  width: 15%;
-}
-
-#form-aditional-informations #address #state-select {
-  width: 40%;
-}
-
-#form-aditional-informations #address #city-select {
-  width: 40%;
+  margin-bottom: 0;
 }
 
 #form-container button {
@@ -145,9 +130,33 @@ html {
   font-size: 15px;
 }
 
-/* SELECTS E CAMPOS ESPECÍFICOS */
+/* DIV COM AS INFORMAÇÔES DE ENDEREÇO */
+#address {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+#input-endereco {
+  flex: 2 1 500px;
+}
+
+#input-bairro {
+  flex: 1 1 300px;
+}
+
+#input-numero {
+  flex: 1 1 120px;
+}
+
+/* Selects */
 #state-select,
 #city-select {
+  flex: 1 1 200px;
   padding: 14px 18px;
   border-radius: 25px;
   border: 1px solid #ddd;
@@ -170,15 +179,20 @@ html {
   transition: all 0.2s ease;
 }
 
-/* HOVER */
 #state-select:hover,
 #city-select:hover {
   border-color: #ffb703;
 }
 
-/* FOCUS */
 #state-select:focus,
 #city-select:focus {
   outline: none;
   border-color: #ffb703;
+}
+
+#alterar-btn {
+  align-self: center;
+  background: linear-gradient(135deg, #ffb703, #ff9f00);
+  border: none;
+  font-size: 15px;
 }
