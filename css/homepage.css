@@ -453,3 +453,57 @@ html {
     padding-left: 0; /* Desativa a animação de ir pro lado no touch */
   }
 }
+
+/* ===== RESPONSIVIDADE DA HEADER (Celulares e Tablets) ===== */
+@media (max-width: 768px) {
+  /* 1. Empilha as 3 partes: Logo, Busca e Ações */
+#navbar-inner {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 15px !important;
+    padding: 15px !important;
+}
+
+/* 2. Força a área de busca a usar todo o espaço do celular */
+#busca-navbar {
+    width: 100% !important;
+}
+
+#busca-navbar form {
+    display: flex !important;
+    width: 100% !important;
+}
+
+#search-input {
+    width: 100% !important;
+}
+
+/* 3. Coloca os botões de Favorito e Login lado a lado, distribuídos */
+#actions {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    width: 100% !important;
+    gap: 15px !important;
+}
+
+/* Diminui um pouquinho a fonte dos botões para caberem sem espremer */
+#actions .btn-header p {
+    font-size: 13px !important;
+    margin: 0 !important;
+}
+
+/* 4. Ajusta a barra inferior de links (Home, Marcas, Produtos, Sobre) */
+#bottom-header {
+    height: auto !important; /* Libera a altura caso os links precisem descer uma linha */
+}
+
+#menu-links {
+    display: flex !important;
+    flex-wrap: wrap !important; /* Se a tela for muito fina, joga o link para a linha de baixo */
+    justify-content: center !important;
+    gap: 15px !important;
+    padding: 10px !important;
+}
+}
