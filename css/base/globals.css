@@ -1,0 +1,36 @@
+/* CSS de elementos repetidos da página */
+
+/* RESET GERAL */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* INPUTS */
+.input-icon {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-bottom: 12px;
+  background: #fff;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.input-icon i {
+  margin-right: 8px;
+}
+
+/* EFEITO INPUT */
+
+.input-icon:hover {
+  transform: scale(1.02);
+}
+
+.input-icon:focus-within {
+  border-color: aqua;
+  box-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+}
