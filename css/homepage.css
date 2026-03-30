@@ -204,15 +204,48 @@ html {
   font-weight: 600;
 }
 
-/* DIV PARA DEIXAR OS FILTROS E BRINQUEDOS LADO A LADO */
 #filter-toys {
   display: flex;
-  justify-content: flex-start;
   align-items: flex-start;
-  /* Deve ocupar 100% para não quebrar ao filtrar */
   width: 100%;
-  margin-left: 30px;
   gap: 25px;
+
+  flex-wrap: nowrap; /* impede quebrar linha */
+}
+
+/* FILTROS (ESQUERDA) */
+#filters-container {
+  width: 18%;
+  min-width: 200px;
+}
+
+/* BRINQUEDOS (CENTRO) */
+#toys-container {
+  flex: 1;
+}
+
+/* ORDENAÇÃO (DIREITA) */
+#ordenacao-lateral {
+  width: 200px;
+  min-width: 200px;
+
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* SELEÇÃO DA ORDENAÇÃO */
+#ordenacao-lateral select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
 }
 
 /* PARTE DE FILTROS */
