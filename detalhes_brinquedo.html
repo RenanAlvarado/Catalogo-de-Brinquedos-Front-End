@@ -36,28 +36,33 @@
     <!-- Conteudo Principal -->
     <main id="main-container">
       <div id="details-container">
-        <div id="details-img">
-          <img src="img/placeholder.png" alt="Placholder" id="details-img" />
-        </div>
-        <div id="details-info">
-          <h1>Nome do Brinquedo</h1>
-
-          <p>
-            Descrição: Este é um brinquedo divertido e educativo para crianças.
-          </p>
-
-          <p>Marca: Exemplo</p>
-
-          <p>Preço: R$ 99,99</p>
-
-          <div id="buttons-div">
-            <!-- Comprar -->
-            <button class="btn" id="comprar-btn">Comprar</button>
-
-            <!-- Adicionar ao carrinho -->
-            <button class="btn" id="adicionar-carrinho-btn">
-              <i class="fa-solid fa-cart-shopping"></i>
+        <a href="index.html" class="arrow-index-back">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+        <div id="details-content">
+          <div id="details-img">
+            <img src="img/placeholder.png" alt="Placholder" id="details-img" />
+          </div>
+          <div id="details-info">
+            <h1>Nome do Brinquedo</h1>
+            <button class="dropdown-btn">
+              Descrição <i class="fa-solid fa-chevron-down filter-arrow"></i>
             </button>
+            <p>Este é um brinquedo divertido e educativo para crianças.</p>
+
+            <p>Marca: Exemplo</p>
+
+            <p>Preço: R$ 99,99</p>
+
+            <div id="buttons-div">
+              <!-- Comprar -->
+              <button class="btn" id="comprar-btn">Comprar</button>
+
+              <!-- Adicionar ao carrinho -->
+              <button class="btn" id="adicionar-carrinho-btn">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>

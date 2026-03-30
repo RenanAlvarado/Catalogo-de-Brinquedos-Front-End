@@ -51,20 +51,6 @@ html {
   overflow: hidden;
 }
 
-/* SETA */
-
-#arrow-left {
-  align-self: flex-start;
-  font-size: 24px;
-  color: #000;
-  padding: 20px 0 0 15px;
-  transition: 0.2s;
-}
-
-#arrow-left:hover {
-  transform: scale(1.1);
-}
-
 /* LOGO */
 
 #logo-container {

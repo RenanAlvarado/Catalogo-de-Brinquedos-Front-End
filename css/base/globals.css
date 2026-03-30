@@ -80,3 +80,17 @@
   background: #ffc5d3;
   color: #fff;
 }
+
+/* Seta de Voltar para a HOME */
+.arrow-index-back {
+  align-self: flex-start;
+  font-size: 24px;
+  color: #000;
+  padding: 20px 0 0 15px;
+  transition: 0.2s;
+  margin-bottom: 15px;
+}
+
+.arrow-index-back:hover {
+  transform: scale(1.1);
+}
