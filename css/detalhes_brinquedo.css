@@ -27,6 +27,7 @@
   display: flex;
   width: 100%;
   gap: 40px;
+  align-items: flex-start;
 }
 
 /* ===== IMAGEM ===== */
@@ -60,22 +61,19 @@
 
 /* Botão para descer a descrição */
 .dropdown-btn {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 0;
-  font-size: 16px;
-  font-weight: bold;
-  color: #333;
-  background: none;
-  border: none;
-
-  cursor: pointer;
+  border-bottom: none;
 }
 
 /* Descrição */
-#details-info p:nth-of-type(1) {
+#content-toy-description {
+  display: none;
+}
+
+#content-toy-description.open {
+  display: flex;
+}
+
+#content-toy-description p {
   font-size: 16px;
   color: #666;
   line-height: 1.6;
@@ -83,14 +81,14 @@
 }
 
 /* Marca */
-#details-info p:nth-of-type(2) {
+#content-toy-brand {
   font-size: 14px;
   color: #888;
   margin-bottom: 10px;
 }
 
 /* Preço */
-#details-info p:nth-of-type(3) {
+#content-toy-price {
   font-size: 32px;
   font-weight: bold;
   color: #ffb703;

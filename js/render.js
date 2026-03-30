@@ -170,6 +170,11 @@ export function renderizarBrinquedos(container, brinquedos) {
       <p class="toy-price">R$: ${brinquedo.preco}</p>
     `;
 
+    // Abrir a tela de detalhes já com id ao clicar
+    card.addEventListener("click", () => {
+      window.location.href = `detalhes_brinquedo.html?id=${brinquedo.id}`;
+    });
+
     container.appendChild(card);
   });
 }
@@ -221,4 +226,43 @@ export function renderizarPaginacao(container, data, aoMudarPagina) {
   }
 
   container.appendChild(next);
+}
+
+// ===============================
+// RENDERIZAR CONTEÚDO DA TELA DE DETALHES
+// ===============================
+export function renderizarDetalhes(brinquedo) {
+  // Nome
+  const titulo = document.getElementById("content-toy-title");
+  if (titulo) {
+    titulo.textContent = brinquedo.nome;
+  }
+
+  // Descrição
+  const descricao = document.getElementById("content-toy-description");
+  if (descricao) {
+    descricao.innerHTML = `<p>${brinquedo.descricao}</p>`;
+  }
+
+  // Marca
+  const marca = document.getElementById("content-toy-brand");
+  if (marca) {
+    marca.textContent = `Marca: ${brinquedo.marca?.nome || "N/A"}`;
+  }
+
+  // Preço
+  const preco = document.getElementById("content-toy-price");
+  if (preco) {
+    preco.textContent = `R$ ${brinquedo.preco}`;
+  }
+
+  // Imagem
+
+  const imagemHTML = document.getElementById("content-toy-img");
+
+  if (imagemHTML) {
+    imagemHTML.src = brinquedo.imagem
+      ? `img/toys/${brinquedo.imagem}`
+      : "img/placeholder.png";
+  }
 }

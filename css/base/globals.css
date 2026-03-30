@@ -81,6 +81,27 @@
   color: #fff;
 }
 
+/* Botão que faz descer os itens ou conteúdo */
+.dropdown-btn {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #eeeeee;
+  cursor: pointer;
+}
+
+/* Seta quando aberto */
+.dropdown-btn.open .filter-arrow {
+  transform: rotate(180deg);
+}
+
 /* Seta de Voltar para a HOME */
 .arrow-index-back {
   align-self: flex-start;

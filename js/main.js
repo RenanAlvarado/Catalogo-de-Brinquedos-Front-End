@@ -7,6 +7,7 @@ import {
   buscarBrinquedos,
   buscarMarcas,
   filtrarBrinquedos,
+  buscarBrinquedoPorId,
 } from "./api.js";
 
 import {
@@ -16,6 +17,7 @@ import {
   renderizarMarcas,
   renderizarFiltroMarcas,
   renderizarPaginacao,
+  renderizarDetalhes,
 } from "./render.js";
 
 import {
@@ -51,6 +53,23 @@ function getEl(selector) {
   }
 
   return el;
+}
+
+// ===============================
+// FUNÇÃO AUXILIAR DE CARREGAMENTO DAS INFORMAÇÕES DA TELA DE DETALHES
+// ===============================
+async function carregarDetalhes() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (!id) return;
+
+  try {
+    const brinquedo = await buscarBrinquedoPorId(id);
+    renderizarDetalhes(brinquedo);
+  } catch (erro) {
+    console.error("Erro ao carregar detalhes:", erro);
+  }
 }
 
 // ===============================
@@ -118,7 +137,7 @@ async function carregarBrinquedos(page = 0) {
   const resposta = await filtrarBrinquedos({
     categorias: filtros.categorias,
     marcas: filtros.marcas,
-    page: page, // ✅ CORRETO
+    page: page,
     size: tamanhoPagina,
     ordenacao,
   });
@@ -226,6 +245,16 @@ async function start() {
 
   //Componentes Modularizados
   await carregarLayout();
+
+  // Caso esteja na pagina de detalhes
+  const isDetalhesPage = window.location.pathname.includes(
+    "detalhes_brinquedo.html",
+  );
+
+  if (isDetalhesPage) {
+    await carregarDetalhes();
+    return;
+  }
 
   //Busca ativa após ter os componentes
   iniciarBusca();

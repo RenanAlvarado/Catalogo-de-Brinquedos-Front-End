@@ -84,6 +84,14 @@ export async function buscarBrinquedos(page = 0, size = 16) {
 }
 
 // ===============================
+// BUSCA DE BRINQUEDOS POR ID
+// ===============================
+
+export async function buscarBrinquedoPorId(id) {
+  return await requisicao(`/brinquedos/${id}`);
+}
+
+// ===============================
 // BUSCA DE BRINQUEDOS POR NOME
 // ===============================
 

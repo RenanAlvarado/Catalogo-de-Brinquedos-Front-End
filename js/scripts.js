@@ -110,7 +110,7 @@ export function iniciarCarrosselMarcas() {
 }
 
 /* ===================================== */
-/* ABRIR OPÇÕES DE CATEGORIAS E MARCAS NOS FILTROS*/
+/* ABRIR OPÇÕES OU CONTEÚDO QUANDO A TELA TEM UM DROPDOWN BTN
 /* ===================================== */
 document.querySelectorAll(".dropdown-btn").forEach((botao) => {
   botao.addEventListener("click", () => {
