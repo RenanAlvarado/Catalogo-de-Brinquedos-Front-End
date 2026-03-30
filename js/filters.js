@@ -43,12 +43,35 @@ async function criarBotaoVoltar() {
 }
 
 // ===============================
-// ESTADO DOS FILTROS
+// ESTADO
 // ===============================
 
-let categoriasSelecionadas = [];
-let marcasSelecionadas = [];
-let resultados = [];
+let atualizarFiltrosCallback = null;
+
+// função para o main.js registrar callback
+export function setAtualizarFiltrosCallback(callback) {
+  atualizarFiltrosCallback = callback;
+}
+
+// ===============================
+// ALTERAR CATEGORIA
+// ===============================
+
+export function alterarCategoria(id, marcado) {
+  if (atualizarFiltrosCallback) {
+    atualizarFiltrosCallback("categoria", id, marcado);
+  }
+}
+
+// ===============================
+// ALTERAR MARCA
+// ===============================
+
+export function alterarMarca(id, marcado) {
+  if (atualizarFiltrosCallback) {
+    atualizarFiltrosCallback("marca", id, marcado);
+  }
+}
 
 // ===============================
 // FILTRAR POR CATEGORIA (CARROSSEL)
@@ -97,6 +120,7 @@ export async function filtrarPorMarca(id, nomeMarca) {
   }
 }
 
+/*
 // ===============================
 // ALTERAR CATEGORIA (CHECKBOX)
 // ===============================
@@ -128,6 +152,7 @@ export function alterarMarca(id, marcado) {
 // ===============================
 // APLICAR FILTROS
 // ===============================
+
 
 async function aplicarFiltros() {
   //Nenhum filtro selecionado
@@ -164,3 +189,4 @@ async function aplicarFiltros() {
 
   renderizarBrinquedos(productsContainer, resultados);
 }
+*/

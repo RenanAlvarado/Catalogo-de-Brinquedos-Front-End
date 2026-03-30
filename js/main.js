@@ -2,7 +2,12 @@
 // IMPORTS
 // ===============================
 
-import { buscarCategorias, buscarBrinquedos, buscarMarcas } from "./api.js";
+import {
+  buscarCategorias,
+  buscarBrinquedos,
+  buscarMarcas,
+  filtrarBrinquedos,
+} from "./api.js";
 
 import {
   renderizarCategorias,
@@ -18,11 +23,21 @@ import {
   filtrarPorMarca,
   alterarCategoria,
   alterarMarca,
+  setAtualizarFiltrosCallback,
 } from "./filters.js";
 
 import { iniciarCarrosselMarcas } from "./scripts.js";
 
 import { iniciarBusca, executarBusca } from "./search.js";
+
+// Inicialização dos filtros
+let filtros = {
+  categorias: [],
+  marcas: [],
+};
+
+// Variável que inicia a ordenação
+let ordenacao = "";
 
 // ===============================
 // FUNÇÃO AUXILIAR PARA VER SE O COMPONENTES EXISTE
@@ -100,7 +115,13 @@ async function carregarBrinquedos(page = 0) {
   const productsContainer = getEl("#products-wrapper");
   if (!productsContainer) return;
 
-  const resposta = await buscarBrinquedos(page, tamanhoPagina);
+  const resposta = await filtrarBrinquedos({
+    categorias: filtros.categorias,
+    marcas: filtros.marcas,
+    page: page, // ✅ CORRETO
+    size: tamanhoPagina,
+    ordenacao,
+  });
 
   if (!resposta || !resposta.content) {
     console.error("Resposta inválida:", resposta);
@@ -145,6 +166,27 @@ async function carregarMarcasFiltro() {
   const marcas = await buscarMarcas();
 
   renderizarFiltroMarcas(filtroMarcasContainer, marcas, alterarMarca);
+}
+
+// Função que atualiza os filtros
+function atualizarFiltros(tipo, id, marcado) {
+  if (tipo === "categoria") {
+    if (marcado) {
+      filtros.categorias.push(id);
+    } else {
+      filtros.categorias = filtros.categorias.filter((c) => c !== id);
+    }
+  }
+
+  if (tipo === "marca") {
+    if (marcado) {
+      filtros.marcas.push(id);
+    } else {
+      filtros.marcas = filtros.marcas.filter((m) => m !== id);
+    }
+  }
+
+  carregarBrinquedos(0); // recarrega com paginação + filtro + ordenação
 }
 
 // ===============================
@@ -203,6 +245,19 @@ async function start() {
     // Comportamento normal
     await carregarBrinquedos();
   }
+
+  // Carregar o filtro de ordenação
+  const ordenacaoSelect = document.getElementById("ordenacao-select");
+
+  if (ordenacaoSelect) {
+    ordenacaoSelect.addEventListener("change", (e) => {
+      ordenacao = e.target.value;
+      carregarBrinquedos(0); // volta para a primeira página
+    });
+  }
+
+  // Registrar o callback
+  setAtualizarFiltrosCallback(atualizarFiltros);
 }
 
 //Inicialização

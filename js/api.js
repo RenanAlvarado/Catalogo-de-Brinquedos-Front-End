@@ -47,21 +47,27 @@ export async function filtrarBrinquedos({
   categorias,
   marcas,
   page = 0,
-  size = 15,
+  size = 16,
   ordenacao,
 }) {
   let url = `/brinquedos/filtrar?page=${page}&size=${size}`;
 
-  if (categorias.length) {
+  if (categorias && categorias.length) {
     url += `&categorias=${categorias.join(",")}`;
   }
 
-  if (marcas.length) {
+  if (marcas && marcas.length) {
     url += `&marcas=${marcas.join(",")}`;
   }
 
   if (ordenacao) {
-    url += `&sort=${ordenacao}`;
+    if (ordenacao === "preco-asc") {
+      url += "&sort=preco,asc";
+    } else if (ordenacao === "preco-desc") {
+      url += "&sort=preco,desc";
+    } else if (ordenacao === "nome-asc") {
+      url += "&sort=nome,asc";
+    }
   }
 
   return await requisicao(url);
