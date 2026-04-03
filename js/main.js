@@ -2,12 +2,16 @@
 // IMPORTS
 // ===============================
 
+import { aplicarMascaraCEP } from "./utils/masks.js";
+
+import { cepValido } from "./utils/validators.js";
+
 import {
   buscarCategorias,
-  buscarBrinquedos,
   buscarMarcas,
   filtrarBrinquedos,
   buscarBrinquedoPorId,
+  buscarCEP,
 } from "./api.js";
 
 import {
@@ -73,6 +77,27 @@ async function carregarDetalhes() {
 }
 
 // ===============================
+// FUNÇÃO AUXILIAR DE CARREGAMENTO DAS INFORMAÇÕES DO CEP NA TELA DE DETALHES
+// ===============================
+function preencherDadosCEP(dados) {
+  const cepPrice = document.querySelector("#price-span");
+  const cepTime = document.querySelector("#cep-time span");
+  const cepCode = document.querySelector("#cep-span");
+
+  if (cepCode) {
+    cepCode.textContent = dados.cep;
+  }
+
+  if (cepPrice) {
+    cepPrice.textContent = "R$ 20,90";
+  }
+
+  if (cepTime) {
+    cepTime.textContent = "3 a 5";
+  }
+}
+
+// ===============================
 // FUNÇÃO AUXILIAR PARA CARREGAR OS COMPONENTES HTML
 // ===============================
 
@@ -99,6 +124,43 @@ async function carregarLayout() {
 function pegarParametroBusca() {
   const params = new URLSearchParams(window.location.search);
   return params.get("search");
+}
+
+// ===============================
+// FUNÇÃO AUXILIAR PARA INICIAR A MÁSCARA E VALIDAÇÃO DOS CAMPOS
+// ===============================
+function iniciarCEP() {
+  const cepInput = getEl("#cep-input");
+
+  const cepInfoDiv = getEl("#cep-info-div");
+
+  const cepErrorDiv = getEl("#cep-error");
+
+  if (!cepInput) return;
+
+  cepInput.addEventListener("input", async (e) => {
+    const valor = aplicarMascaraCEP(e.target.value);
+    e.target.value = valor;
+
+    //  quando estiver completo
+    if (cepValido(valor)) {
+      try {
+        const dados = await buscarCEP(valor);
+
+        preencherDadosCEP(dados);
+
+        cepInfoDiv.classList.remove("hide");
+        cepErrorDiv.classList.add("hide");
+      } catch (erro) {
+        console.error("Erro ao buscar CEP:", erro);
+      }
+    } else if (valor.length === 0) {
+      cepErrorDiv.classList.add("hide");
+    } else {
+      cepInfoDiv.classList.add("hide");
+      cepErrorDiv.classList.remove("hide");
+    }
+  });
 }
 
 // ===============================
@@ -253,7 +315,9 @@ async function start() {
 
   if (isDetalhesPage) {
     await carregarDetalhes();
-    return;
+
+    // Funcionamento do campo de cep
+    iniciarCEP();
   }
 
   //Busca ativa após ter os componentes

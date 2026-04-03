@@ -102,6 +102,7 @@
   justify-content: flex-start;
   width: 100%;
   gap: 10px;
+  margin-bottom: 20px;
 }
 
 #comprar-btn {
@@ -132,6 +133,59 @@
 #comprar-btn:hover {
   background-color: #e0a300;
   transform: scale(1.03);
+}
+
+#cep-div h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+#cep-inner {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+#cep-inner .input-icon {
+  width: 40%;
+  margin-bottom: 0;
+}
+
+#cep-inner button {
+  width: 20%;
+  background-color: #1b4e4f;
+  color: #fff;
+}
+
+/* Detalhes do CEP */
+#cep-info-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.hide {
+  display: none !important;
+}
+
+.cep-info {
+  display: flex;
+  gap: 5px;
+}
+
+.cep-info span {
+  font-weight: bold;
+}
+
+.cep-info #cep-span {
+  font-weight: normal;
+}
+
+#cep-error {
+  color: red;
 }
 
 /* ===== RESPONSIVIDADE ===== */

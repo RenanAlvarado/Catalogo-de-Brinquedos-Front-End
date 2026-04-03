@@ -114,3 +114,20 @@ export async function buscarBrinquedosPorCategoria(id) {
 export async function buscarBrinquedosPorMarca(id) {
   return await requisicao(`/brinquedos/marca/${id}`);
 }
+
+// ===============================
+// API DE CEP
+// ===============================
+
+export async function buscarCEP(cep) {
+  const cepLimpo = cep.replace(/\D/g, "");
+
+  const res = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+  const data = await res.json();
+
+  if (data.erro) {
+    throw new Error("CEP não encontrado");
+  }
+
+  return data;
+}

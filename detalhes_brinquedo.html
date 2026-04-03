@@ -71,6 +71,46 @@
                 <i class="fa-solid fa-cart-shopping"></i>
               </button>
             </div>
+
+            <!-- CEP -->
+            <div id="cep-div">
+              <h2>Calcular Frete:</h2>
+
+              <div id="cep-inner">
+                <div class="input-icon">
+                  <i class="fa-solid fa-location-crosshairs"></i>
+                  <input
+                    type="text"
+                    id="cep-input"
+                    placeholder="Digite seu CEP"
+                    required
+                  />
+                </div>
+
+                <button class="btn">Calcular</button>
+              </div>
+
+              <div id="cep-info-div" class="hide">
+                <div id="cep-price" class="cep-info">
+                  <i class="fa-solid fa-truck"></i>
+
+                  <p>
+                    Frete para <span id="cep-span">07000-370</span>:
+                    <span id="price-span">R$: 19,90</span>
+                  </p>
+                </div>
+                <div id="cep-time" class="cep-info">
+                  <i class="fa-regular fa-clock"></i>
+
+                  <p>Prazo de entrega: <span>5 a 7</span> dias úteis</p>
+                </div>
+              </div>
+
+              <div id="cep-error" class="cep-info hide">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <p>CEP inválido ou não encontrado</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
