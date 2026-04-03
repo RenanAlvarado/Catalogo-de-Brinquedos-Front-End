@@ -79,7 +79,7 @@ async function carregarDetalhes() {
 // ===============================
 // FUNÇÃO AUXILIAR DE CARREGAMENTO DAS INFORMAÇÕES DO CEP NA TELA DE DETALHES
 // ===============================
-function preencherDadosCEP(dados) {
+function preencherDadosCepDetalhes(dados) {
   const cepPrice = document.querySelector("#price-span");
   const cepTime = document.querySelector("#cep-time span");
   const cepCode = document.querySelector("#cep-span");
@@ -129,7 +129,7 @@ function pegarParametroBusca() {
 // ===============================
 // FUNÇÃO AUXILIAR PARA INICIAR A MÁSCARA E VALIDAÇÃO DOS CAMPOS
 // ===============================
-function iniciarCEP() {
+function iniciarCepDetalhes() {
   const cepInput = getEl("#cep-input");
 
   const cepInfoDiv = getEl("#cep-info-div");
@@ -147,7 +147,7 @@ function iniciarCEP() {
       try {
         const dados = await buscarCEP(valor);
 
-        preencherDadosCEP(dados);
+        preencherDadosCepDetalhes(dados);
 
         cepInfoDiv.classList.remove("hide");
         cepErrorDiv.classList.add("hide");
@@ -159,6 +159,56 @@ function iniciarCEP() {
     } else {
       cepInfoDiv.classList.add("hide");
       cepErrorDiv.classList.remove("hide");
+    }
+  });
+}
+
+function iniciarCepPerfil() {
+  const cepInput = getEl("#cep-input");
+  const cepErrorDiv = getEl("#cep-error");
+
+  const enderecoInput = getEl("#endereco");
+  const bairroInput = getEl("#bairro");
+
+  const cidadeSelect = getEl("#city-select");
+  const estadoSelect = getEl("#state-select");
+
+  if (!cepInput) return;
+
+  cepInput.addEventListener("input", async (e) => {
+    const valor = aplicarMascaraCEP(e.target.value);
+    e.target.value = valor;
+
+    //  quando estiver completo
+    if (cepValido(valor)) {
+      try {
+        const dados = await buscarCEP(valor);
+
+        enderecoInput.value = dados.logradouro;
+        bairroInput.value = dados.bairro;
+
+        cidadeSelect.innerHTML = `<option>${dados.localidade}</option>`;
+        estadoSelect.innerHTML = `<option>${dados.uf}</option>`;
+        cepErrorDiv.classList.add("hide");
+      } catch (erro) {
+        console.error("Erro ao buscar CEP:", erro);
+      }
+    } else if (valor.length === 0) {
+      cepErrorDiv.classList.add("hide");
+
+      enderecoInput.value = "";
+      bairroInput.value = "";
+
+      cidadeSelect.innerHTML = `<option>Selecione</option>`;
+      estadoSelect.innerHTML = `<option>Selecione</option>`;
+    } else {
+      cepErrorDiv.classList.remove("hide");
+
+      enderecoInput.value = "";
+      bairroInput.value = "";
+
+      cidadeSelect.innerHTML = `<option>Selecione</option>`;
+      estadoSelect.innerHTML = `<option>Selecione</option>`;
     }
   });
 }
@@ -308,6 +358,13 @@ async function start() {
   //Componentes Modularizados
   await carregarLayout();
 
+  // Caso esteja na pagina de perfil
+  const isPerfilPage = window.location.pathname.includes("perfil.html");
+
+  if (isPerfilPage) {
+    iniciarCepPerfil();
+  }
+
   // Caso esteja na pagina de detalhes
   const isDetalhesPage = window.location.pathname.includes(
     "detalhes_brinquedo.html",
@@ -316,8 +373,8 @@ async function start() {
   if (isDetalhesPage) {
     await carregarDetalhes();
 
-    // Funcionamento do campo de cep
-    iniciarCEP();
+    // Funcionamento do campo de cep na tela de detalhes
+    iniciarCepDetalhes();
   }
 
   //Busca ativa após ter os componentes

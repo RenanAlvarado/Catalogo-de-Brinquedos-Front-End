@@ -8,6 +8,10 @@ html {
   height: 100%;
 }
 
+.hide {
+  display: none !important;
+}
+
 /* CONTEÚDO PRINCIPAL */
 #main-container {
   width: 100%;
@@ -130,6 +134,13 @@ html {
   font-size: 15px;
 }
 
+#cep-error {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  color: red;
+}
+
 /* DIV COM AS INFORMAÇÔES DE ENDEREÇO */
 #address {
   display: flex;
@@ -142,11 +153,11 @@ html {
 }
 
 #input-endereco {
-  flex: 2 1 500px;
+  flex: 3 1 400px;
 }
 
 #input-bairro {
-  flex: 1 1 300px;
+  flex: 2 1 300px;
 }
 
 #input-numero {

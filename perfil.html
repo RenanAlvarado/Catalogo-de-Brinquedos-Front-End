@@ -86,34 +86,51 @@
             <div id="cep">
               <div class="input-icon">
                 <i class="fa-solid fa-location-crosshairs"></i>
-                <input type="Number" placeholder="CEP" required />
+                <input type="text" id="cep-input" placeholder="CEP" required />
               </div>
               <button class="btn">Validar</button>
+
+              <div id="cep-error" class="hide">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <p>CEP inválido ou não encontrado</p>
+              </div>
             </div>
 
             <!-- Para os campos depois do cep -->
             <div id="address">
               <div class="input-icon" id="input-endereco">
                 <i class="fa-solid fa-location-crosshairs"></i>
-                <input type="text" placeholder="Endereço" required />
+                <input
+                  type="text"
+                  id="endereco"
+                  placeholder="Endereço"
+                  required
+                  disabled
+                />
               </div>
 
               <div class="input-icon" id="input-bairro">
                 <i class="fa-solid fa-location-crosshairs"></i>
-                <input type="text" placeholder="Bairro" required />
+                <input
+                  type="text"
+                  id="bairro"
+                  placeholder="Bairro"
+                  required
+                  disabled
+                />
               </div>
 
               <div class="input-icon" id="input-numero">
                 <i class="fa-solid fa-location-crosshairs"></i>
-                <input type="number" placeholder="Nº" required />
+                <input type="number" id="numero" placeholder="Nº" required />
               </div>
 
-              <select name="Estado" id="state-select">
-                <option value="teste">São Paulo</option>
+              <select name="Estado" id="state-select" disabled>
+                <option value="teste">Selecione</option>
               </select>
 
-              <select name="Cidade" id="city-select">
-                <option value="teste">Guarulhos</option>
+              <select name="Cidade" id="city-select" disabled>
+                <option value="teste">Selecione</option>
               </select>
             </div>
 
