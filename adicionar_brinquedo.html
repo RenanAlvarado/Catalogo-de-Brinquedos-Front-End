@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adicionar Brinquedo</title>
+
+    <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
+
+    <!-- CSS GERAL -->
+    <link rel="stylesheet" href="css/base/globals.css" />
+
+    <!-- CSS ESPECÍFICO -->
+    <link rel="stylesheet" href="css/adicionar_brinquedo.css" />
+
+    <!-- Header -->
+    <link rel="stylesheet" href="css/components/header.css" />
+
+    <!-- Footer -->
+    <link rel="stylesheet" href="css/components/footer.css" />
+
+    <!-- JavaScript -->
+    <script type="module" src="js/main.js" defer></script>
+
+    <!-- Icones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <main id="main-container">
+      <div id="form-container">
+        <!-- Seta -->
+        <a href="index.html" class="arrow-index-back">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <h1>Adicionar Brinquedo</h1>
+
+        <!-- Formulário -->
+        <form id="adicionar-brinquedo-form">
+          <section id="left-section">
+            <img
+              src="img/placeholder.png"
+              id="img-preview"
+              alt="Preview da Imagem"
+            />
+
+            <input type="file" name="img" id="img-input" />
+          </section>
+
+          <section id="right-section">
+            <h2>Informações</h2>
+            <div class="input-icon" id="id-input-icon">
+              <i class="fa-solid fa-tag"></i>
+              <input
+                type="text"
+                name="id-brinquedo"
+                id="id-input"
+                placeholder="ID"
+                disabled
+              />
+            </div>
+
+            <div class="input-icon">
+              <i class="fa-solid fa-tag"></i>
+              <input
+                type="text"
+                name="nome-brinquedo"
+                id="nome-input"
+                placeholder="Nome do Brinquedo"
+              />
+            </div>
+
+            <textarea
+              name="descricao-brinquedo"
+              id="descricao-input"
+              placeholder="Descrição do Brinquedo"
+            ></textarea>
+
+            <div class="input-icon">
+              <i class="fa-solid fa-dollar-sign"></i>
+              <input
+                type="number"
+                name="preco-brinquedo"
+                id="preco-input"
+                placeholder="Preço do Brinquedo"
+                step="0.01"
+              />
+            </div>
+
+            <select name="marca-brinquedo" id="marca-input">
+              <option value="">Selecione a Marca</option>
+              <option value="marca1">Marca 1</option>
+              <option value="marca2">Marca 2</option>
+              <option value="marca3">Marca 3</option>
+            </select>
+
+            <select name="categoria-brinquedo" id="categoria-input">
+              <option value="">Selecione a Categoria</option>
+              <option value="categoria1">Categoria 1</option>
+              <option value="categoria2">Categoria 2</option>
+              <option value="categoria3">Categoria 3</option>
+            </select>
+
+            <button class="btn" id="salvar-brinquedo-btn">Salvar</button>
+            <button class="btn" id="limpar-btn">Limpar</button>
+          </section>
+        </form>
+      </div>
+    </main>
+
+    <footer id="footer"></footer>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+/* Principal (Fundo) */
+#main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  width: 100%;
+  min-height: 70vh;
+  background: linear-gradient(180deg, #f4f7f6 0%, #eef3f2 100%);
+}
+
+/* Div de estilização do formulário */
+#form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 900px;
+  padding: 25px;
+  background-color: #fff;
+  border-radius: 12px;
+  border: 1px solid #000;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.arrow-index-back {
+  padding-left: 0;
+  padding-top: 0;
+  margin-bottom: 5px;
+}
+
+#form-container h1 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 26px;
+}
+
+/* Formulário */
+#form-container form {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+#left-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+#left-section img {
+  width: 100%;
+
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* Informações */
+#right-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1;
+}
+
+#right-section h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+#id-input-icon {
+  width: 30%;
+}
+
+textarea {
+  min-width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: none;
+  margin-bottom: 10px;
+}
