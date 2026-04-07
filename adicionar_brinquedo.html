@@ -52,7 +52,19 @@
               alt="Preview da Imagem"
             />
 
-            <input type="file" name="img" id="img-input" />
+            <!-- Clicar na label é o mesmo que clicar no input -->
+            <label for="img-input" id="upload-btn" class="btn">
+              <i class="fa-solid fa-upload"></i>
+              Selecionar imagem
+            </label>
+
+            <input
+              type="file"
+              name="img"
+              id="img-input"
+              accept="image/*"
+              hidden
+            />
           </section>
 
           <section id="right-section">
@@ -84,14 +96,14 @@
               placeholder="Descrição do Brinquedo"
             ></textarea>
 
-            <div class="input-icon">
+            <div class="input-icon" id="price-input-icon">
               <i class="fa-solid fa-dollar-sign"></i>
+              <span>R$: </span>
               <input
-                type="number"
+                type="text"
                 name="preco-brinquedo"
                 id="preco-input"
-                placeholder="Preço do Brinquedo"
-                step="0.01"
+                placeholder="1.000,00"
               />
             </div>
 
@@ -109,8 +121,10 @@
               <option value="categoria3">Categoria 3</option>
             </select>
 
-            <button class="btn" id="salvar-brinquedo-btn">Salvar</button>
-            <button class="btn" id="limpar-btn">Limpar</button>
+            <div id="buttons-div">
+              <button class="btn" id="limpar-btn">Limpar</button>
+              <button class="btn" id="salvar-brinquedo-btn">Salvar</button>
+            </div>
           </section>
         </form>
       </div>

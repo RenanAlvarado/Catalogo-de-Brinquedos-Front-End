@@ -11,3 +11,23 @@ export function aplicarMascaraCEP(valor) {
 
   return valor;
 }
+
+// Máscara para preço (R$)
+export function aplicarMascaraPreco(valor) {
+  // remove tudo que não for número
+  valor = valor.replace(/\D/g, "");
+
+  // evita vazio
+  if (valor === "") return "";
+
+  // transforma em número e divide por 100
+  valor = (parseInt(valor) / 100).toFixed(2);
+
+  // troca ponto por vírgula
+  valor = valor.replace(".", ",");
+
+  // adiciona separador de milhar
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+  return valor;
+}

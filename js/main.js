@@ -2,7 +2,7 @@
 // IMPORTS
 // ===============================
 
-import { aplicarMascaraCEP } from "./utils/masks.js";
+import { aplicarMascaraCEP, aplicarMascaraPreco } from "./utils/masks.js";
 
 import { cepValido } from "./utils/validators.js";
 
@@ -77,27 +77,6 @@ async function carregarDetalhes() {
 }
 
 // ===============================
-// FUNÇÃO AUXILIAR DE CARREGAMENTO DAS INFORMAÇÕES DO CEP NA TELA DE DETALHES
-// ===============================
-function preencherDadosCepDetalhes(dados) {
-  const cepPrice = document.querySelector("#price-span");
-  const cepTime = document.querySelector("#cep-time span");
-  const cepCode = document.querySelector("#cep-span");
-
-  if (cepCode) {
-    cepCode.textContent = dados.cep;
-  }
-
-  if (cepPrice) {
-    cepPrice.textContent = "R$ 20,90";
-  }
-
-  if (cepTime) {
-    cepTime.textContent = "3 a 5";
-  }
-}
-
-// ===============================
 // FUNÇÃO AUXILIAR PARA CARREGAR OS COMPONENTES HTML
 // ===============================
 
@@ -129,14 +108,32 @@ function pegarParametroBusca() {
 // ===============================
 // FUNÇÃO AUXILIAR PARA INICIAR A MÁSCARA E VALIDAÇÃO DOS CAMPOS
 // ===============================
-function iniciarCepDetalhes() {
+
+function iniciarCep() {
   const cepInput = getEl("#cep-input");
 
-  const cepInfoDiv = getEl("#cep-info-div");
+  if (!cepInput) return;
 
   const cepErrorDiv = getEl("#cep-error");
 
-  if (!cepInput) return;
+  // Variáveis fora de escopo
+  let isDetalhesPage = false;
+
+  let cepInfoDiv, cepPrice, cepTime, cepCode;
+  let enderecoInput, bairroInput, cidadeSelect, estadoSelect;
+
+  if (window.location.pathname.includes("detalhes_brinquedo.html")) {
+    isDetalhesPage = true;
+    cepInfoDiv = getEl("#cep-info-div");
+    cepPrice = document.querySelector("#price-span");
+    cepTime = document.querySelector("#cep-time span");
+    cepCode = document.querySelector("#cep-span");
+  } else if (window.location.pathname.includes("perfil.html")) {
+    enderecoInput = getEl("#endereco");
+    bairroInput = getEl("#bairro");
+    cidadeSelect = getEl("#city-select");
+    estadoSelect = getEl("#state-select");
+  }
 
   cepInput.addEventListener("input", async (e) => {
     const valor = aplicarMascaraCEP(e.target.value);
@@ -147,69 +144,65 @@ function iniciarCepDetalhes() {
       try {
         const dados = await buscarCEP(valor);
 
-        preencherDadosCepDetalhes(dados);
+        if (isDetalhesPage) {
+          if (cepCode) {
+            cepCode.textContent = dados.cep;
+          }
 
-        cepInfoDiv.classList.remove("hide");
-        cepErrorDiv.classList.add("hide");
+          if (cepPrice) {
+            cepPrice.textContent = "R$ 20,90";
+          }
+
+          if (cepTime) {
+            cepTime.textContent = "3 a 5";
+          }
+
+          cepInfoDiv.classList.remove("hide");
+          cepErrorDiv.classList.add("hide");
+        } else {
+          enderecoInput.value = dados.logradouro;
+          bairroInput.value = dados.bairro;
+
+          cidadeSelect.innerHTML = `<option>${dados.localidade}</option>`;
+          estadoSelect.innerHTML = `<option>${dados.uf}</option>`;
+          cepErrorDiv.classList.add("hide");
+        }
       } catch (erro) {
         console.error("Erro ao buscar CEP:", erro);
       }
     } else if (valor.length === 0) {
       cepErrorDiv.classList.add("hide");
+
+      if (!isDetalhesPage) {
+        enderecoInput.value = "";
+        bairroInput.value = "";
+
+        cidadeSelect.innerHTML = `<option>Selecione</option>`;
+        estadoSelect.innerHTML = `<option>Selecione</option>`;
+      }
     } else {
-      cepInfoDiv.classList.add("hide");
       cepErrorDiv.classList.remove("hide");
+
+      if (isDetalhesPage) {
+        cepInfoDiv.classList.add("hide");
+      } else {
+        enderecoInput.value = "";
+        bairroInput.value = "";
+
+        cidadeSelect.innerHTML = `<option>Selecione</option>`;
+        estadoSelect.innerHTML = `<option>Selecione</option>`;
+      }
     }
   });
 }
 
-function iniciarCepPerfil() {
-  const cepInput = getEl("#cep-input");
-  const cepErrorDiv = getEl("#cep-error");
+function iniciarMascaraPreco() {
+  const precoInput = getEl("#preco-input");
 
-  const enderecoInput = getEl("#endereco");
-  const bairroInput = getEl("#bairro");
+  if (!precoInput) return;
 
-  const cidadeSelect = getEl("#city-select");
-  const estadoSelect = getEl("#state-select");
-
-  if (!cepInput) return;
-
-  cepInput.addEventListener("input", async (e) => {
-    const valor = aplicarMascaraCEP(e.target.value);
-    e.target.value = valor;
-
-    //  quando estiver completo
-    if (cepValido(valor)) {
-      try {
-        const dados = await buscarCEP(valor);
-
-        enderecoInput.value = dados.logradouro;
-        bairroInput.value = dados.bairro;
-
-        cidadeSelect.innerHTML = `<option>${dados.localidade}</option>`;
-        estadoSelect.innerHTML = `<option>${dados.uf}</option>`;
-        cepErrorDiv.classList.add("hide");
-      } catch (erro) {
-        console.error("Erro ao buscar CEP:", erro);
-      }
-    } else if (valor.length === 0) {
-      cepErrorDiv.classList.add("hide");
-
-      enderecoInput.value = "";
-      bairroInput.value = "";
-
-      cidadeSelect.innerHTML = `<option>Selecione</option>`;
-      estadoSelect.innerHTML = `<option>Selecione</option>`;
-    } else {
-      cepErrorDiv.classList.remove("hide");
-
-      enderecoInput.value = "";
-      bairroInput.value = "";
-
-      cidadeSelect.innerHTML = `<option>Selecione</option>`;
-      estadoSelect.innerHTML = `<option>Selecione</option>`;
-    }
+  precoInput.addEventListener("input", (e) => {
+    e.target.value = aplicarMascaraPreco(e.target.value);
   });
 }
 
@@ -358,12 +351,9 @@ async function start() {
   //Componentes Modularizados
   await carregarLayout();
 
-  // Caso esteja na pagina de perfil
-  const isPerfilPage = window.location.pathname.includes("perfil.html");
+  iniciarMascaraPreco();
 
-  if (isPerfilPage) {
-    iniciarCepPerfil();
-  }
+  iniciarCep();
 
   // Caso esteja na pagina de detalhes
   const isDetalhesPage = window.location.pathname.includes(
@@ -372,9 +362,6 @@ async function start() {
 
   if (isDetalhesPage) {
     await carregarDetalhes();
-
-    // Funcionamento do campo de cep na tela de detalhes
-    iniciarCepDetalhes();
   }
 
   //Busca ativa após ter os componentes

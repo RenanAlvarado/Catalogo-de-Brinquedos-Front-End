@@ -60,6 +60,11 @@
   border: 1px solid #ccc;
 }
 
+#upload-btn {
+  width: 100%;
+  background-color: #ddd;
+}
+
 /* Informações */
 #right-section {
   width: 100%;
@@ -87,4 +92,63 @@ textarea {
   font-size: 14px;
   resize: none;
   margin-bottom: 10px;
+}
+
+#price-input-icon {
+  width: 40%;
+}
+
+#price-input-icon span {
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+#adicionar-brinquedo-form select {
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-size: 14px;
+  width: 100%;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  transition: all 0.2s ease;
+}
+
+#adicionar-brinquedo-form select:hover {
+  border-color: #ffb703;
+}
+
+#adicionar-brinquedo-form select:focus {
+  outline: none;
+  border-color: #ffb703;
+}
+
+#adicionar-brinquedo-form select option {
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+}
+
+#buttons-div {
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+#salvar-brinquedo-btn {
+  flex: 1;
+  background-color: green;
+}
+
+#limpar-btn {
+  flex: 1;
+  background-color: red;
 }
