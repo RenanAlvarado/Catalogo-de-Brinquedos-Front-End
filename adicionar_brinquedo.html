@@ -54,8 +54,8 @@
 
             <!-- Clicar na label é o mesmo que clicar no input -->
             <label for="img-input" id="upload-btn" class="btn">
-              <i class="fa-solid fa-upload"></i>
-              Selecionar imagem
+              <i class="fa-solid fa-upload" id="upload-icon"></i>
+              <span id="upload-text">Selecionar imagem</span>
             </label>
 
             <input
@@ -80,7 +80,7 @@
               />
             </div>
 
-            <div class="input-icon">
+            <div class="input-icon" id="nome-input-icon">
               <i class="fa-solid fa-tag"></i>
               <input
                 type="text"
@@ -107,23 +107,15 @@
               />
             </div>
 
-            <select name="marca-brinquedo" id="marca-input">
-              <option value="">Selecione a Marca</option>
-              <option value="marca1">Marca 1</option>
-              <option value="marca2">Marca 2</option>
-              <option value="marca3">Marca 3</option>
-            </select>
+            <select name="marca-brinquedo" id="marca-input"></select>
 
-            <select name="categoria-brinquedo" id="categoria-input">
-              <option value="">Selecione a Categoria</option>
-              <option value="categoria1">Categoria 1</option>
-              <option value="categoria2">Categoria 2</option>
-              <option value="categoria3">Categoria 3</option>
-            </select>
+            <select name="categoria-brinquedo" id="categoria-input"></select>
 
             <div id="buttons-div">
               <button class="btn" id="limpar-btn">Limpar</button>
-              <button class="btn" id="salvar-brinquedo-btn">Salvar</button>
+              <button type="submit" class="btn" id="salvar-brinquedo-btn">
+                Salvar
+              </button>
             </div>
           </section>
         </form>

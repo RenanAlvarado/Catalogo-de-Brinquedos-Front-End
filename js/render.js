@@ -7,6 +7,24 @@ function obterImagem(pasta, imagem) {
 }
 
 // ===============================
+// FUNÇÃO AUXILIAR PARA CRIAR SELECTS
+// ===============================
+export function renderizarSelect(select, lista, placeholder) {
+  if (!select) return;
+
+  // opção padrão
+  select.innerHTML = `<option value="">${placeholder}</option>`;
+
+  lista.forEach((item) => {
+    const option = document.createElement("option");
+    option.value = item.id;
+    option.textContent = item.nome;
+
+    select.appendChild(option);
+  });
+}
+
+// ===============================
 // RENDERIZAR CATEGORIAS
 // ===============================
 

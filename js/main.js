@@ -7,6 +7,14 @@ import { aplicarMascaraCEP, aplicarMascaraPreco } from "./utils/masks.js";
 import { cepValido } from "./utils/validators.js";
 
 import {
+  iniciarUploadImagem,
+  carregarMarcasSelect,
+  carregarCategoriasSelect,
+  iniciarLimparFormulario,
+  iniciarValidacaoFormulario,
+} from "./adicionarBrinquedo.js";
+
+import {
   buscarCategorias,
   buscarMarcas,
   filtrarBrinquedos,
@@ -355,6 +363,8 @@ async function start() {
 
   iniciarCep();
 
+  iniciarUploadImagem();
+
   // Caso esteja na pagina de detalhes
   const isDetalhesPage = window.location.pathname.includes(
     "detalhes_brinquedo.html",
@@ -362,6 +372,18 @@ async function start() {
 
   if (isDetalhesPage) {
     await carregarDetalhes();
+  }
+
+  // Se esta na página de adicionar
+  const isAddPage = window.location.pathname.includes(
+    "adicionar_brinquedo.html",
+  );
+
+  if (isAddPage) {
+    carregarMarcasSelect();
+    carregarCategoriasSelect();
+    iniciarLimparFormulario();
+    iniciarValidacaoFormulario();
   }
 
   //Busca ativa após ter os componentes

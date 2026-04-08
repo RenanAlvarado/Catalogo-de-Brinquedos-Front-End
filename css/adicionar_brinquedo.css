@@ -54,10 +54,11 @@
 
 #left-section img {
   width: 100%;
-
-  height: auto;
+  max-height: 450px;
+  object-fit: cover;
   border-radius: 8px;
   border: 1px solid #ccc;
+  cursor: pointer;
 }
 
 #upload-btn {
@@ -65,13 +66,18 @@
   background-color: #ddd;
 }
 
+#upload-btn.active {
+  background-color: red;
+  color: #fff;
+}
+
 /* Informações */
 #right-section {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
   flex: 1;
 }
 
@@ -82,6 +88,8 @@
 
 #id-input-icon {
   width: 30%;
+  align-self: flex-start;
+  display: none;
 }
 
 textarea {
@@ -96,6 +104,7 @@ textarea {
 
 #price-input-icon {
   width: 40%;
+  align-self: flex-start;
 }
 
 #price-input-icon span {
