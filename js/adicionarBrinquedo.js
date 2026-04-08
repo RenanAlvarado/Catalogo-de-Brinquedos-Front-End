@@ -253,13 +253,8 @@ function montarObjetoBrinquedo() {
     nome,
     descricao,
     preco: normalizarPreco(preco),
-    marca: {
-      id: Number(marca),
-    },
-    categoria: {
-      id: Number(categoria),
-    },
-    imagem: imgInput.files[0]?.name || null, // depois você decide como enviar
+    marca: { id: Number(marca) },
+    categoria: { id: Number(categoria) },
   };
 }
 
@@ -271,13 +266,33 @@ function montarObjetoBrinquedo() {
 async function salvarBrinquedo() {
   const brinquedo = montarObjetoBrinquedo();
 
+  const imgInput = document.getElementById("img-input");
+  const arquivo = imgInput.files[0];
+
+  console.log("Arquivo direto do input:", arquivo);
+
   try {
+    const formData = new FormData();
+
+    formData.append(
+      "brinquedo",
+      JSON.stringify({
+        nome: brinquedo.nome,
+        descricao: brinquedo.descricao,
+        preco: brinquedo.preco,
+        marca: brinquedo.marca,
+        categoria: brinquedo.categoria,
+      }),
+    );
+
+    // Usa o arquivo direto
+    if (arquivo) {
+      formData.append("imagem", arquivo);
+    }
+
     const response = await fetch("http://localhost:8080/api/brinquedos", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(brinquedo),
+      body: formData,
     });
 
     if (!response.ok) {
@@ -285,15 +300,11 @@ async function salvarBrinquedo() {
     }
 
     const data = await response.json();
+    console.log("Salvo com sucesso:", data);
 
-    console.log("Brinquedo salvo com sucesso:", data);
-
-    alert("Brinquedo cadastrado com sucesso!");
-
-    // limpa o formulário depois de salvar
-    document.getElementById("adicionar-brinquedo-form").reset();
+    alert("Brinquedo salvo com sucesso!");
   } catch (erro) {
     console.error("Erro:", erro);
-    alert("Erro ao salvar brinquedo.");
+    alert("Erro ao salvar brinquedo");
   }
 }

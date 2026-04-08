@@ -2,8 +2,18 @@
 // FUNÇÃO AUXILIAR PARA IMAGENS -->  Arquivo que Carrega os elementos
 // ===============================
 
+const API_URL = "http://localhost:8080";
+
 function obterImagem(pasta, imagem) {
-  return imagem ? `img/${pasta}/${imagem}` : "img/placeholder.png";
+  if (!imagem) return "img/placeholder.png";
+
+  // brinquedos (tentar backend primeiro)
+  if (pasta === "toys") {
+    return `${API_URL}/uploads/toys/${imagem}`;
+  }
+
+  // categorias e marcas continuam locais
+  return `img/${pasta}/${imagem}`;
 }
 
 // ===============================
@@ -177,16 +187,16 @@ export function renderizarBrinquedos(container, brinquedos) {
     const imagem = obterImagem("toys", brinquedo.imagem);
 
     card.innerHTML = `
-      <img 
-        src="${imagem}" 
-        alt="${brinquedo.nome}" 
-        class="toy-img"
-        onerror="this.src='img/placeholder.png'"
-      />
-      <h3 class="toy-title">${brinquedo.nome}</h3>
-      <p class="toy-description">${brinquedo.descricao}</p>
-      <p class="toy-price">R$: ${brinquedo.preco}</p>
-    `;
+  <img 
+    src="${imagem}" 
+    alt="${brinquedo.nome}" 
+    class="toy-img"
+    onerror="this.onerror=null; this.src='img/placeholder.png'"
+  />
+  <h3 class="toy-title">${brinquedo.nome}</h3>
+  <p class="toy-description">${brinquedo.descricao}</p>
+  <p class="toy-price">R$: ${brinquedo.preco}</p>
+`;
 
     // Abrir a tela de detalhes já com id ao clicar
     card.addEventListener("click", () => {
@@ -279,8 +289,13 @@ export function renderizarDetalhes(brinquedo) {
   const imagemHTML = document.getElementById("content-toy-img");
 
   if (imagemHTML) {
-    imagemHTML.src = brinquedo.imagem
-      ? `img/toys/${brinquedo.imagem}`
-      : "img/placeholder.png";
+    const imagem = obterImagem("toys", brinquedo.imagem);
+
+    imagemHTML.src = imagem;
+
+    imagemHTML.onerror = () => {
+      imagemHTML.onerror = null;
+      imagemHTML.src = "img/placeholder.png";
+    };
   }
 }
