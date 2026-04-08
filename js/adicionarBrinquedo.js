@@ -259,7 +259,7 @@ function montarObjetoBrinquedo() {
     categoria: {
       id: Number(categoria),
     },
-    imagem: imgInput.files[0] || null, // depois você decide como enviar
+    imagem: imgInput.files[0]?.name || null, // depois você decide como enviar
   };
 }
 
@@ -267,8 +267,33 @@ function montarObjetoBrinquedo() {
 // FUNÇÕES DE CRUD DOS BRINQUEDOS
 // ===============================
 
-function salvarBrinquedo() {
+// Método para salvar brinquedos
+async function salvarBrinquedo() {
   const brinquedo = montarObjetoBrinquedo();
 
-  console.log("Objeto pronto para envio:", brinquedo);
+  try {
+    const response = await fetch("http://localhost:8080/api/brinquedos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(brinquedo),
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao salvar brinquedo");
+    }
+
+    const data = await response.json();
+
+    console.log("Brinquedo salvo com sucesso:", data);
+
+    alert("Brinquedo cadastrado com sucesso!");
+
+    // limpa o formulário depois de salvar
+    document.getElementById("adicionar-brinquedo-form").reset();
+  } catch (erro) {
+    console.error("Erro:", erro);
+    alert("Erro ao salvar brinquedo.");
+  }
 }
