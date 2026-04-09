@@ -1,20 +1,8 @@
 // ===============================
-// FUNÇÃO AUXILIAR PARA IMAGENS -->  Arquivo que Carrega os elementos
+// IMPORTS
 // ===============================
 
-const API_URL = "http://localhost:8080";
-
-function obterImagem(pasta, imagem) {
-  if (!imagem) return "img/placeholder.png";
-
-  // Puxar imagens
-  if (pasta === "toys") {
-    return `${API_URL}/uploads/toys/${imagem}`;
-  }
-
-  // categorias e marcas continuam locais
-  return `img/${pasta}/${imagem}`;
-}
+import { obterImagem } from "./api.js";
 
 // ===============================
 // FUNÇÃO AUXILIAR PARA CRIAR SELECTS

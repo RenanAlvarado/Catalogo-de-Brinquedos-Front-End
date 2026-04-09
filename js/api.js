@@ -35,6 +35,22 @@ async function requisicao(endpoint, options = {}) {
 }
 
 // ===============================
+// FUNÇÃO AUXILIAR DE IMAGENS
+// ===============================
+
+export function obterImagem(pasta, imagem) {
+  if (!imagem) return "img/placeholder.png";
+
+  // Puxar imagens
+  if (pasta === "toys") {
+    return `http://localhost:8080/uploads/toys/${imagem}`;
+  }
+
+  // categorias e marcas continuam locais
+  return `img/${pasta}/${imagem}`;
+}
+
+// ===============================
 // CATEGORIAS
 // ===============================
 

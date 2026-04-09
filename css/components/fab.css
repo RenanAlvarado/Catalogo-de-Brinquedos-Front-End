@@ -1,0 +1,26 @@
+#fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  width: 62px;
+  height: 62px;
+
+  background: linear-gradient(135deg, #ff4d8d, #4d7cff);
+  color: white;
+
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 24px;
+
+  text-decoration: none;
+  border: none;
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
+
+  transition: all 0.2s ease;
+  z-index: 999;
+}
