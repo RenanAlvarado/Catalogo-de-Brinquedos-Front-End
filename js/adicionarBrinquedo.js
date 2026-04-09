@@ -2,7 +2,7 @@
 // IMPORTS
 // ===============================
 
-import { buscarMarcas, buscarCategorias } from "./api.js";
+import { buscarMarcas, buscarCategorias, salvarBrinquedoAPI } from "./api.js";
 
 import { renderizarSelect } from "./render.js";
 
@@ -21,6 +21,7 @@ export function iniciarUploadImagem() {
   const uploadBtn = document.getElementById("upload-btn");
   const uploadIcon = document.getElementById("upload-icon");
   const imgPreview = document.getElementById("img-preview");
+  const imgErrorMsg = document.querySelector("#left-section p");
 
   if (imgPreview && imgInput) {
     imgPreview.addEventListener("click", () => {
@@ -33,13 +34,26 @@ export function iniciarUploadImagem() {
   if (!imgInput || !uploadText || !uploadBtn || !uploadIcon || !imgPreview)
     return;
 
+  const tiposPermitidos = ["image/jpeg", "image/png", "image/jpg"];
+
   imgInput.addEventListener("change", () => {
     if (imgInput.files.length > 1) {
-      alert("Selecione apenas uma imagem.");
+      imgErrorMsg.textContent = "Envie apenas uma imagem!";
+      imgErrorMsg.classList.add("active");
       imgInput.value = "";
       uploadText.textContent = "Selecionar imagem";
       return;
     }
+
+    const arquivo = imgInput.files[0];
+
+    if (!tiposPermitidos.includes(arquivo.type)) {
+      imgErrorMsg.textContent = "*Arquivos aceitos: jpeg, png, jpg*";
+      imgErrorMsg.classList.add("active");
+      imgInput.value = "";
+      return;
+    }
+
     if (imgInput.files.length === 1) {
       const nome = imgInput.files[0].name;
 
@@ -118,6 +132,18 @@ export function iniciarLimparFormulario() {
       uploadIcon.classList.remove("fa-xmark");
       uploadIcon.classList.add("fa-upload");
     }
+
+    const camposErro = [
+      document.getElementById("nome-input-icon"),
+      document.getElementById("descricao-input"),
+      document.getElementById("price-input-icon"),
+      document.getElementById("marca-input"),
+      document.getElementById("categoria-input"),
+    ];
+
+    camposErro.forEach((campo) => {
+      if (campo) limparErro(campo);
+    });
   });
 }
 
@@ -249,9 +275,13 @@ function montarObjetoBrinquedo() {
   const categoria = document.getElementById("categoria-input").value;
   const imgInput = document.getElementById("img-input");
 
+  const arquivo = imgInput.files[0];
+  const nomeImagem = arquivo ? arquivo.name : "";
+
   return {
     nome,
     descricao,
+    imagem: nomeImagem,
     preco: normalizarPreco(preco),
     marca: { id: Number(marca) },
     categoria: { id: Number(categoria) },
@@ -266,42 +296,10 @@ function montarObjetoBrinquedo() {
 async function salvarBrinquedo() {
   const brinquedo = montarObjetoBrinquedo();
 
-  const imgInput = document.getElementById("img-input");
-  const arquivo = imgInput.files[0];
-
-  console.log("Arquivo direto do input:", arquivo);
-
   try {
-    const formData = new FormData();
+    const data = await salvarBrinquedoAPI(brinquedo);
 
-    formData.append(
-      "brinquedo",
-      JSON.stringify({
-        nome: brinquedo.nome,
-        descricao: brinquedo.descricao,
-        preco: brinquedo.preco,
-        marca: brinquedo.marca,
-        categoria: brinquedo.categoria,
-      }),
-    );
-
-    // Usa o arquivo direto
-    if (arquivo) {
-      formData.append("imagem", arquivo);
-    }
-
-    const response = await fetch("http://localhost:8080/api/brinquedos", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error("Erro ao salvar brinquedo");
-    }
-
-    const data = await response.json();
     console.log("Salvo com sucesso:", data);
-
     alert("Brinquedo salvo com sucesso!");
   } catch (erro) {
     console.error("Erro:", erro);

@@ -8,9 +8,15 @@ const API_URL = "http://localhost:8080/api";
 // FUNÇÃO GENÉRICA DE REQUISIÇÃO
 // ===============================
 
-async function requisicao(endpoint) {
+async function requisicao(endpoint, options = {}) {
   try {
-    const resposta = await fetch(`${API_URL}${endpoint}`);
+    const resposta = await fetch(`${API_URL}${endpoint}`, {
+      headers: {
+        "Content-Type": "application/json",
+        ...options.headers,
+      },
+      ...options,
+    });
 
     if (!resposta.ok) {
       throw new Error(`Erro HTTP: ${resposta.status}`);
@@ -76,6 +82,13 @@ export async function filtrarBrinquedos({
 // ===============================
 // BRINQUEDOS
 // ===============================
+
+export async function salvarBrinquedoAPI(brinquedo) {
+  return await requisicao("/brinquedos", {
+    method: "POST",
+    body: JSON.stringify(brinquedo),
+  });
+}
 
 export async function buscarBrinquedos(page = 0, size = 16) {
   return await requisicao(
