@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
+    <title>Carrinho de Compras - MARAH</title>
+
+    <link rel="stylesheet" href="css/base/globals.css" />
+    <link rel="stylesheet" href="css/carrinho.css" />
+    <link rel="stylesheet" href="css/components/header.css" />
+    <link rel="stylesheet" href="css/components/footer.css" />
+
+    <script type="module" src="js/main.js" defer></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <main id="main-container">
+      <div id="cart-wrapper">
+        <a href="index.html" class="arrow-back">
+          <i class="fa-solid fa-arrow-left"></i> Continuar Comprando
+        </a>
+        
+        <h1>Meu Carrinho</h1>
+
+        <div id="cart-content">
+          <section id="cart-items-section">
+            
+            <div class="cart-item">
+              <img src="img/placeholder.png" alt="Carrinho Hot Wheels" class="item-img" />
+              
+              <div class="item-info">
+                <h3>Carrinho Hot Wheels</h3>
+                <p class="item-brand">Marca: Hotwheels</p>
+                <p class="item-price">R$ 19,90</p>
+              </div>
+
+              <div class="item-actions">
+                <div class="quantity-control">
+                  <button class="qtd-btn minus">-</button>
+                  <input type="text" value="1" readonly />
+                  <button class="qtd-btn plus">+</button>
+                </div>
+                <button class="remove-btn" title="Remover item">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="cart-item">
+              <img src="img/placeholder.png" alt="Pelúcia Axolote" class="item-img" />
+              
+              <div class="item-info">
+                <h3>Ursinho de Pelúcia Axolote</h3>
+                <p class="item-brand">Marca: MARAH</p>
+                <p class="item-price">R$ 89,90</p>
+              </div>
+
+              <div class="item-actions">
+                <div class="quantity-control">
+                  <button class="qtd-btn minus">-</button>
+                  <input type="text" value="1" readonly />
+                  <button class="qtd-btn plus">+</button>
+                </div>
+                <button class="remove-btn" title="Remover item">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+
+          </section>
+
+          <section id="cart-summary-section">
+            <h2>Resumo do Pedido</h2>
+            
+            <div class="summary-line">
+              <span>Subtotal (2 itens)</span>
+              <span>R$ 109,80</span>
+            </div>
+            
+            <div class="summary-line shipping-line">
+              <span>Frete</span>
+              <span>Calcular na próxima etapa</span>
+            </div>
+
+            <hr class="summary-divider" />
+
+            <div class="summary-line total-line">
+              <span>Total</span>
+              <span>R$ 109,80</span>
+            </div>
+
+            <button class="checkout-btn">Finalizar Compra <i class="fa-solid fa-check"></i></button>
+            
+            <div class="safe-checkout">
+              <i class="fa-solid fa-lock"></i> Compra 100% Segura
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer"></footer>
+  </body>
+</html>

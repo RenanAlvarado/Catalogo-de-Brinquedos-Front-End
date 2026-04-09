@@ -1,0 +1,246 @@
+/* ===== FUNDO E CONTAINERS ===== */
+#main-container {
+    padding: 40px 20px;
+    background-color: #f4f7f6;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+}
+
+#cart-wrapper {
+    width: 100%;
+    max-width: 1200px;
+}
+
+.arrow-back {
+    color: #1b4e4f;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.arrow-back:hover {
+    color: #ffb703;
+}
+
+#cart-wrapper h1 {
+    color: #1b4e4f;
+    margin-bottom: 30px;
+    font-size: 32px;
+}
+
+/* ===== LAYOUT PRINCIPAL (DIVISÃO DAS COLUNAS) ===== */
+#cart-content {
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+#cart-items-section {
+    flex: 2; /* Ocupa 2/3 do espaço */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#cart-summary-section {
+    flex: 1; /* Ocupa 1/3 do espaço */
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    position: sticky; /* Faz o resumo acompanhar a rolagem da tela */
+    top: 20px;
+}
+
+/* ===== LISTA DE ITENS DO CARRINHO ===== */
+.cart-item {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.item-img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 1px solid #eeeeee;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-info h3 {
+    color: #1b4e4f;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.item-brand {
+    color: #888888;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.item-price {
+    color: #ffb703;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Controles de Quantidade e Excluir */
+.item-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 20px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    border: 1px solid #cccccc;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.qtd-btn {
+    background-color: #f4f7f6;
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    cursor: pointer;
+    color: #1b4e4f;
+    transition: 0.2s;
+}
+
+.qtd-btn:hover {
+    background-color: #e2e8e7;
+}
+
+.quantity-control input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    pointer-events: none; /* Impede digitação manual por enquanto */
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.remove-btn:hover {
+    transform: scale(1.1);
+    color: #cc0000;
+}
+
+/* ===== RESUMO DO PEDIDO ===== */
+#cart-summary-section h2 {
+    color: #1b4e4f;
+    font-size: 22px;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f4f7f6;
+}
+
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    color: #555555;
+    font-size: 16px;
+}
+
+.shipping-line {
+    font-size: 14px;
+    color: #888888;
+}
+
+.summary-divider {
+    border: none;
+    border-top: 1px dashed #cccccc;
+    margin: 20px 0;
+}
+
+.total-line {
+    font-size: 22px;
+    font-weight: bold;
+    color: #1b4e4f;
+}
+
+.total-line span:last-child {
+    color: #40b4b2; /* Verde/Azul da MARAH */
+}
+
+.checkout-btn {
+    width: 100%;
+    background-color: #ffb703; /* Amarelo da MARAH */
+    color: #1b4e4f;
+    border: none;
+    padding: 18px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 183, 3, 0.3);
+}
+
+.checkout-btn:hover {
+    background-color: #e6a500;
+    transform: translateY(-2px);
+}
+
+.safe-checkout {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #888888;
+}
+
+.safe-checkout i {
+    color: #40b4b2;
+}
+
+/* ===== RESPONSIVIDADE (CELULARES E TABLETS) ===== */
+@media (max-width: 900px) {
+    #cart-content {
+        flex-direction: column; /* Empilha o resumo embaixo dos itens */
+    }
+
+    #cart-summary-section {
+        position: static; /* Tira o efeito sticky no celular */
+        width: 100%;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .item-actions {
+        align-items: center;
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 15px;
+    }
+}

@@ -419,5 +419,125 @@ async function start() {
   setAtualizarFiltrosCallback(atualizarFiltros);
 }
 
+// ==========================================
+// MOTOR DO CARRINHO DE COMPRAS (LOCALSTORAGE)
+// ==========================================
+
+// 1. Função para ler o carrinho salvo no navegador (ou criar um vazio)
+function obterCarrinho() {
+const carrinhoSalvo = localStorage.getItem('carrinhoMarah');
+if (carrinhoSalvo) {
+return JSON.parse(carrinhoSalvo);
+} else {
+return [];
+}
+}
+
+// 2. Função para salvar as alterações no navegador
+function salvarCarrinho(carrinho) {
+localStorage.setItem('carrinhoMarah', JSON.stringify(carrinho));
+}
+
+// 3. Função para Adicionar um produto (Vamos chamar essa função lá na tela de Detalhes)
+function adicionarAoCarrinho(id, nome, preco, imagem, marca) {
+const carrinho = obterCarrinho();
+
+// Verifica se o brinquedo já está no carrinho
+const brinquedoExistente = carrinho.find(item => item.id === id);
+
+if (brinquedoExistente) {
+    brinquedoExistente.quantidade += 1; // Se já tem, só aumenta a quantidade
+} else {
+    // Se não tem, adiciona um novo item
+    carrinho.push({
+        id: id,
+        nome: nome,
+        preco: preco,
+        imagem: imagem,
+        marca: marca,
+        quantidade: 1
+    });
+}
+
+salvarCarrinho(carrinho);
+alert(`${nome} foi adicionado ao seu carrinho!`);
+}
+
+// 4. Função para desenhar os itens na tela do Carrinho
+function renderizarTelaCarrinho() {
+// Verifica se estamos na página do carrinho
+const cartItemsSection = document.getElementById('cart-items-section');
+if (!cartItemsSection) return; // Se não estiver na tela do carrinho, para a função aqui
+
+const carrinho = obterCarrinho();
+cartItemsSection.innerHTML = ''; // Limpa os exemplos fixos do HTML
+
+if (carrinho.length === 0) {
+    cartItemsSection.innerHTML = '<h2 style="text-align: center; color: #888; padding: 40px;">Seu carrinho está vazio 😔</h2>';
+    document.querySelector('.summary-line span:last-child').textContent = 'R$ 0,00';
+    document.querySelector('.total-line span:last-child').textContent = 'R$ 0,00';
+    return;
+}
+
+let subtotal = 0;
+
+// Desenha cada item salvo no LocalStorage
+carrinho.forEach((item, index) => {
+    // Remove o "R$" e converte a string de preço para número para podermos calcular
+    const precoNumerico = parseFloat(item.preco.replace('R$ ', '').replace(',', '.'));
+    subtotal += (precoNumerico * item.quantidade);
+
+    const itemHTML = `
+        <div class="cart-item">
+            <img src="${item.imagem}" alt="${item.nome}" class="item-img" />
+            <div class="item-info">
+                <h3>${item.nome}</h3>
+                <p class="item-brand">Marca: ${item.marca}</p>
+                <p class="item-price">${item.preco}</p>
+            </div>
+            <div class="item-actions">
+                <div class="quantity-control">
+                    <button class="qtd-btn minus" onclick="alterarQuantidade(${index}, -1)">-</button>
+                    <input type="text" value="${item.quantidade}" readonly />
+                    <button class="qtd-btn plus" onclick="alterarQuantidade(${index}, 1)">+</button>
+                </div>
+                <button class="remove-btn" title="Remover item" onclick="removerDoCarrinho(${index})">
+                    <i class="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
+        </div>
+    `;
+    cartItemsSection.innerHTML += itemHTML;
+});
+
+// Atualiza os valores do resumo à direita
+const valorFormatado = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+document.querySelectorAll('.summary-line span:last-child')[0].textContent = valorFormatado;
+document.querySelector('.total-line span:last-child').textContent = valorFormatado;
+}
+
+// 5. Funções de controle (Botão de +, - e Excluir)
+window.alterarQuantidade = function(index, mudanca) {
+const carrinho = obterCarrinho();
+carrinho[index].quantidade += mudanca;
+
+if (carrinho[index].quantidade <= 0) {
+    carrinho.splice(index, 1); // Se a quantidade chegar a zero, remove o item
+}
+
+salvarCarrinho(carrinho);
+renderizarTelaCarrinho();
+}
+
+window.removerDoCarrinho = function(index) {
+const carrinho = obterCarrinho();
+carrinho.splice(index, 1);
+salvarCarrinho(carrinho);
+renderizarTelaCarrinho();
+}
+
+// Executa a renderização assim que a página carrega
+renderizarTelaCarrinho();
+
 //Inicialização
 start();
