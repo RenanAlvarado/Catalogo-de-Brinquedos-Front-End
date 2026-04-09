@@ -7,7 +7,7 @@ const API_URL = "http://localhost:8080";
 function obterImagem(pasta, imagem) {
   if (!imagem) return "img/placeholder.png";
 
-  // brinquedos (tentar backend primeiro)
+  // Puxar imagens
   if (pasta === "toys") {
     return `${API_URL}/uploads/toys/${imagem}`;
   }

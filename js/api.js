@@ -10,9 +10,14 @@ const API_URL = "http://localhost:8080/api";
 
 async function requisicao(endpoint, options = {}) {
   try {
+    const headers =
+      options.body instanceof FormData
+        ? {}
+        : { "Content-Type": "application/json" };
+
     const resposta = await fetch(`${API_URL}${endpoint}`, {
       headers: {
-        "Content-Type": "application/json",
+        ...headers,
         ...options.headers,
       },
       ...options,
@@ -83,10 +88,10 @@ export async function filtrarBrinquedos({
 // BRINQUEDOS
 // ===============================
 
-export async function salvarBrinquedoAPI(brinquedo) {
+export async function salvarBrinquedoAPI(formData) {
   return await requisicao("/brinquedos", {
     method: "POST",
-    body: JSON.stringify(brinquedo),
+    body: formData,
   });
 }
 
