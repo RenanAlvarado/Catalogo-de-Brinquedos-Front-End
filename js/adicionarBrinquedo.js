@@ -296,8 +296,21 @@ function montarObjetoBrinquedo() {
 async function salvarBrinquedo() {
   const brinquedo = montarObjetoBrinquedo();
 
+  const imgInput = document.getElementById("img-input");
+  const arquivo = imgInput.files[0];
+
+  const formData = new FormData();
+
+  // envia JSON como string
+  formData.append("brinquedo", JSON.stringify(brinquedo));
+
+  // envia imagem
+  if (arquivo) {
+    formData.append("imagem", arquivo);
+  }
+
   try {
-    const data = await salvarBrinquedoAPI(brinquedo);
+    const data = await salvarBrinquedoAPI(formData);
 
     console.log("Salvo com sucesso:", data);
     alert("Brinquedo salvo com sucesso!");
