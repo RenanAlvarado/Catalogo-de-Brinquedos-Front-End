@@ -1,163 +1,246 @@
 /* Principal (Fundo) */
 #main-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 30px;
-  width: 100%;
-  min-height: 70vh;
-  background: linear-gradient(180deg, #f4f7f6 0%, #eef3f2 100%);
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 40px 20px;
+width: 100%;
+min-height: 70vh;
+background-color: #f4f7f6;
 }
 
 /* Div de estilização do formulário */
 #form-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  max-width: 900px;
-  padding: 25px;
-  background-color: #fff;
-  border-radius: 12px;
-  border: 1px solid #000;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+width: 100%;
+max-width: 900px;
+padding: 40px;
+background-color: #ffffff;
+border-radius: 20px;
+box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Sombra mais suave e moderna */
 }
 
+/* Seta de Voltar */
 .arrow-index-back {
-  padding-left: 0;
-  padding-top: 0;
-  margin-bottom: 5px;
+font-size: 20px;
+color: #1b4e4f;
+text-decoration: none;
+margin-bottom: 10px;
+transition: 0.3s;
+}
+
+.arrow-index-back:hover {
+color: #ffb703;
 }
 
 #form-container h1 {
-  text-align: center;
-  margin-bottom: 25px;
-  font-size: 26px;
+text-align: center;
+margin-bottom: 35px;
+font-size: 28px;
+color: #1b4e4f;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Formulário */
+/* Estrutura das Colunas */
 #form-container form {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-  gap: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    align-items: flex-start; /* <-- Adicione esta linha para impedir o esticamento vertical */
 }
 
+/* ----- LADO ESQUERDO (Imagem) ----- */
 #left-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-  flex: 1;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 15px;
+flex: 1;
+margin-top: 80px;
 }
 
+/* MANTIDO O DESIGN ORIGINAL (Retangular com borda sólida cinza) */
 #left-section img {
-  width: 100%;
-  max-height: 450px;
-  object-fit: cover;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  cursor: pointer;
+width: 100%;
+max-height: 450px;
+object-fit: cover;
+border-radius: 8px; /* Mantive o radius menor original */
+border: 1px solid #cccccc; /* Borda sólida original */
+cursor: pointer;
 }
 
+/* SEGUIDO COM A NOVA COR DO BOTÃO (Branding MARAH) */
 #upload-btn {
-  width: 100%;
-  background-color: #ddd;
+    width: 100%; /* Mantém a mesma largura da imagem de cima */
+    height: max-content; /* Garante que a altura seja apenas o tamanho do conteúdo */
+    background-color: #1b4e4f; 
+    color: #ffffff;
+    padding: 12px;
+    border-radius: 25px; 
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    border: none;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
-#upload-btn.active {
-  background-color: red;
-  color: #fff;
+#upload-btn:hover {
+background-color: #133a3b;
+transform: translateY(-2px);
 }
 
-/* Informações */
+/* ----- LADO DIREITO (Informações) ----- */
 #right-section {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  flex: 1;
+width: 100%;
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+flex: 1;
 }
 
 #right-section h2 {
-  margin-bottom: 15px;
-  font-size: 22px;
+margin-bottom: 20px;
+font-size: 20px;
+color: #1b4e4f;
+}
+
+/* Estilo global para as caixas de texto com ícones */
+.input-icon {
+display: flex;
+align-items: center;
+width: 100%;
+background-color: #ffffff;
+border: 1px solid #cccccc;
+border-radius: 25px;
+padding: 0 15px;
+margin-bottom: 15px;
+transition: all 0.3s ease;
+}
+
+/* Foca na caixa inteira quando clica dentro */
+.input-icon:focus-within {
+border-color: #ffb703;
+box-shadow: 0 0 5px rgba(255, 183, 3, 0.3);
+}
+
+.input-icon i {
+color: #888888;
+margin-right: 10px;
+font-size: 14px;
+}
+
+/* Remove a borda padrão do input já que a div .input-icon faz esse papel */
+.input-icon input {
+width: 100%;
+border: none;
+outline: none;
+padding: 12px 0;
+font-size: 14px;
+background: transparent;
 }
 
 #id-input-icon {
-  width: 30%;
-  align-self: flex-start;
-  display: none;
+width: 40%;
+background-color: #f4f7f6; /* Campo desabilitado fica mais escurinho */
 }
 
+/* Textarea (Descrição) */
 textarea {
-  min-width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 14px;
-  resize: none;
-  margin-bottom: 10px;
+width: 100%;
+min-height: 100px;
+padding: 15px;
+border: 1px solid #cccccc;
+border-radius: 15px;
+font-size: 14px;
+resize: none;
+margin-bottom: 15px;
+outline: none;
+font-family: inherit;
+transition: 0.3s;
 }
 
-#price-input-icon {
-  width: 40%;
-  align-self: flex-start;
+textarea:focus {
+border-color: #ffb703;
+box-shadow: 0 0 5px rgba(255, 183, 3, 0.3);
 }
 
-#price-input-icon span {
-  margin-right: 5px;
-  font-size: 14px;
-}
-
+/* Selects (Marca e Categoria) */
 #adicionar-brinquedo-form select {
-  padding: 14px 18px;
-  margin-bottom: 10px;
-  border-radius: 25px;
-  border: 1px solid #ddd;
-  background: #fff;
-  font-size: 14px;
-  width: 100%;
-  cursor: pointer;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 18px;
-  transition: all 0.2s ease;
-}
-
-#adicionar-brinquedo-form select:hover {
-  border-color: #ffb703;
+width: 100%;
+padding: 12px 18px;
+margin-bottom: 15px;
+border-radius: 25px;
+border: 1px solid #cccccc;
+background-color: #ffffff;
+font-size: 14px;
+cursor: pointer;
+appearance: none;
+background-image: url("data:image/svg+xml;utf8,<svg fill='%23888888' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+background-repeat: no-repeat;
+background-position: right 15px center;
+outline: none;
+transition: 0.3s;
 }
 
 #adicionar-brinquedo-form select:focus {
-  outline: none;
-  border-color: #ffb703;
+border-color: #ffb703;
+box-shadow: 0 0 5px rgba(255, 183, 3, 0.3);
 }
 
-#adicionar-brinquedo-form select option {
-  background-color: #fff;
-  color: #333;
-  font-size: 14px;
-}
-
+/* Botões de Ação */
 #buttons-div {
-  width: 100%;
-  display: flex;
-  gap: 10px;
+width: 100%;
+display: flex;
+gap: 15px;
+margin-top: 10px;
+}
+
+.btn {
+flex: 1;
+padding: 12px;
+border-radius: 25px;
+border: none;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s ease;
 }
 
 #salvar-brinquedo-btn {
-  flex: 1;
-  background-color: green;
+background-color: #ffb703; /* Amarelo MARAH */
+color: #1b4e4f;
+}
+
+#salvar-brinquedo-btn:hover {
+background-color: #e6a500;
+transform: translateY(-2px);
 }
 
 #limpar-btn {
-  flex: 1;
-  background-color: red;
+background-color: #eef3f2;
+color: #1b4e4f;
+border: 1px solid #cccccc;
+}
+
+#limpar-btn:hover {
+background-color: #e2e8e7;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+#form-container form {
+flex-direction: column;
+}
+
+#left-section img {
+    height: auto;
+}
 }
