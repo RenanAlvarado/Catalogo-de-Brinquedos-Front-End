@@ -171,6 +171,10 @@
   display: none !important;
 }
 
+#cep-address {
+  margin-top: 10px;
+}
+
 .cep-info {
   display: flex;
   gap: 5px;
