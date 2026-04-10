@@ -169,26 +169,40 @@ export function renderizarBrinquedos(container, brinquedos) {
   container.innerHTML = "";
 
   brinquedos.forEach((brinquedo) => {
-    const card = document.createElement("button");
+    // 1. Em vez de usar um <button> pro card, vamos usar uma <div> 
+    // Isso evita problemas no HTML de colocar um <button> (espiar) dentro de outro <button> (card)
+    const card = document.createElement("div");
     card.classList.add("product-card");
 
     const imagem = obterImagem("toys", brinquedo.imagem);
 
     card.innerHTML = `
-  <img 
-    src="${imagem}" 
-    alt="${brinquedo.nome}" 
-    class="toy-img"
-    onerror="this.onerror=null; this.src='img/placeholder.png'"
-  />
-  <h3 class="toy-title">${brinquedo.nome}</h3>
-  <p class="toy-description">${brinquedo.descricao}</p>
-  <p class="toy-price">R$: ${brinquedo.preco}</p>
-`;
+      <img 
+        src="${imagem}" 
+        alt="${brinquedo.nome}" 
+        class="toy-img"
+        onerror="this.onerror=null; this.src='img/placeholder.png'"
+      />
+      <h3 class="toy-title">${brinquedo.nome}</h3>
+      <p class="toy-description">${brinquedo.descricao}</p>
+      <p class="toy-price">R$: ${brinquedo.preco}</p>
+      
+      <button class="quick-view-btn" 
+        data-id="${brinquedo.id}"
+        data-nome="${brinquedo.nome}"
+        data-preco="${brinquedo.preco}"
+        data-desc="${brinquedo.descricao}"
+        data-img="${imagem}">
+        <i class="fa-solid fa-eye"></i> Espiar
+      </button>
+    `;
 
-    // Abrir a tela de detalhes já com id ao clicar
-    card.addEventListener("click", () => {
-      window.location.href = `detalhes_brinquedo.html?id=${brinquedo.id}`;
+    // 2. Abrir a tela de detalhes ao clicar no card (no fundo branco)
+    card.addEventListener("click", (event) => {
+      // Verifica se o clique NÃO foi no botão "Espiar"
+      if (!event.target.closest('.quick-view-btn')) {
+        window.location.href = `detalhes_brinquedo.html?id=${brinquedo.id}`;
+      }
     });
 
     container.appendChild(card);

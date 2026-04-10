@@ -563,5 +563,56 @@ window.removerDoCarrinho = function (index) {
 // Executa a renderização assim que a página carrega
 renderizarTelaCarrinho();
 
+// ==========================================
+// MODAL QUICK VIEW (DELEGAÇÃO DE EVENTOS BLINDADA)
+// ==========================================
+
+const modalQuickView = document.getElementById('quick-view-modal');
+const botaoFecharModal = document.querySelector('.close-btn');
+
+// 1. Função para ABRIR e PREENCHER o modal
+document.addEventListener('click', (event) => {
+    const botaoClicado = event.target.closest('.quick-view-btn');
+    
+    // Se clicou no botão ESPIAR e o Modal EXISTE na página
+    if (botaoClicado && modalQuickView) {
+        
+        // A. Pega os dados escondidos no botão
+        const nome = botaoClicado.getAttribute('data-nome');
+        const preco = botaoClicado.getAttribute('data-preco');
+        const desc = botaoClicado.getAttribute('data-desc');
+        const img = botaoClicado.getAttribute('data-img');
+
+        // B. Injeta esses dados dentro do HTML do Modal
+        const qvTitle = document.getElementById('qv-title');
+        const qvPrice = document.getElementById('qv-price');
+        const qvDesc = document.getElementById('qv-desc');
+        const qvImg = document.getElementById('qv-img');
+
+        if(qvTitle) qvTitle.textContent = nome;
+        if(qvPrice) qvPrice.textContent = `R$ ${preco}`;
+        if(qvDesc) qvDesc.textContent = desc;
+        if(qvImg) qvImg.src = img;
+
+        // C. Exibe a janela flutuante
+        modalQuickView.classList.add('mostrar');
+    }
+});
+
+// 2. Função para FECHAR o modal ao clicar no botão de 'X'
+if (botaoFecharModal && modalQuickView) {
+    botaoFecharModal.addEventListener('click', () => {
+        modalQuickView.classList.remove('mostrar');
+    });
+}
+
+// 3. Função para FECHAR o modal se o usuário clicar na parte escura
+window.addEventListener('click', (event) => {
+    // Só tenta fechar se o modal existir na página atual
+    if (modalQuickView && event.target === modalQuickView) {
+        modalQuickView.classList.remove('mostrar');
+    }
+});
+
 //Inicialização
 start();
