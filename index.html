@@ -89,17 +89,7 @@
 
         <!-- Brinquedos -->
         <div id="toys-container">
-          <div id="products-wrapper">
-            <div class="product-card">
-              <img src="img/brinquedo1.png" alt="Brinquedo" class="product-img">
-              <h3>Carrinho Super Rápido</h3>
-              <p class="price">R$ 49,90</p>
-  
-              <button class="quick-view-btn">
-    <i class="fa-solid fa-eye"></i> Espiar
-  </button>
-</div>
-          </div>
+          <div id="products-wrapper"></div>
         </div>
 
         <!-- FILTRO DE ORDENAÇÃO -->
@@ -128,24 +118,31 @@
         <i class="fa-solid fa-plus"></i>
       </a>
     </div>
+
+    <!-- Card que aparece ao clicar no espiar -->
     <div id="quick-view-modal" class="modal-overlay">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    
-    <div class="modal-body">
-      <div class="modal-img">
-        <img src="img/placeholder.png" id="qv-img" alt="Produto">
-      </div>
-      
-      <div class="modal-info">
-        <h2 id="qv-title">Nome do Brinquedo</h2>
-        <p id="qv-desc">Descrição rápida do produto para encantar o cliente sem precisar sair da página inicial.</p>
-        <h3 id="qv-price">R$ 00,00</h3>
-        
-        <button class="add-to-cart-btn">Adicionar ao Carrinho <i class="fa-solid fa-cart-shopping"></i></button>
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+
+        <div class="modal-body">
+          <div class="modal-img">
+            <img src="img/placeholder.png" id="qv-img" alt="Produto" />
+          </div>
+
+          <div class="modal-info">
+            <h2 id="qv-title">Nome do Brinquedo</h2>
+            <p id="qv-desc">
+              Descrição rápida do produto para encantar o cliente sem precisar
+              sair da página inicial.
+            </p>
+            <h3 id="qv-price">R$ 00,00</h3>
+
+            <button class="add-to-cart-btn btn">
+              Adicionar ao Carrinho <i class="fa-solid fa-cart-shopping"></i>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
   </body>
 </html>

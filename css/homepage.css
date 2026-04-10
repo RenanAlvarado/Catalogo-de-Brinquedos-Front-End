@@ -219,36 +219,6 @@ html {
   min-width: 200px;
 }
 
-/* BRINQUEDOS (CENTRO) */
-#toys-container {
-  flex: 1;
-}
-
-/* ORDENAÇÃO (DIREITA) */
-#ordenacao-lateral {
-  width: 180px;
-  min-width: 180px;
-
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  margin-right: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-/* SELEÇÃO DA ORDENAÇÃO */
-#ordenacao-lateral select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  cursor: pointer;
-}
-
 /* PARTE DE FILTROS */
 #filters-container {
   display: flex;
@@ -306,28 +276,9 @@ html {
   accent-color: #ff6b00; /* cor do check */
 }
 
-/* Estilização do filtro de ordenação */
-#ordenacao-container {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-#ordenacao-container select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-#ordenacao-container select:focus {
-  border-color: #55cbcd;
-  outline: none;
-}
-
 /* BRINQUEDOS */
 #toys-container {
+  flex: 1;
 }
 
 /* DIV PAI --> Ela que possui o flex e controla o wrap dos elementos */
@@ -348,12 +299,14 @@ html {
   border-radius: 12px;
   padding: 15px;
   text-align: left;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03); /* Sombra bem mais subtil */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
   cursor: pointer;
   transition: all 0.2s ease;
   height: 380px;
   max-width: 280px;
   min-width: 280px;
+  position: relative;
+  overflow: hidden;
 }
 
 .product-card:hover {
@@ -400,6 +353,73 @@ html {
   margin-top: auto;
 }
 
+/* Botão Espiar */
+.quick-view-btn {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  background-color: #40b4b2;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.quick-view-btn:hover {
+  background-color: #ffb703;
+  color: #1b4e4f;
+}
+
+.product-card:hover .quick-view-btn {
+  top: 20px;
+  opacity: 1;
+}
+
+/* ORDENAÇÃO (DIREITA) */
+#ordenacao-lateral {
+  width: 180px;
+  min-width: 180px;
+
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-right: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* SELEÇÃO DA ORDENAÇÃO */
+#ordenacao-lateral select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+/* Estilização do filtro de ordenação */
+#ordenacao-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#ordenacao-container select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#ordenacao-container select:focus {
+  border-color: #55cbcd;
+  outline: none;
+}
+
 /* --- PAGINAÇÃO --- */
 #pagination-container {
   display: flex;
@@ -442,141 +462,110 @@ html {
   border-color: #eee;
 }
 
-/* ===== 1. EFEITO HOVER NO CARD ===== */
-.product-card {
-    position: relative; /* O card precisa ser relativo para segurar o botão absoluto */
-    overflow: hidden; /* Esconde tudo que vazar (como o botão escondido) */
-    /* ... mantenha os outros estilos que você já tem no card (padding, borda, etc) */
-}
-
-.quick-view-btn {
-    position: absolute;
-    top: -50px; /* Mudamos de bottom para top */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #40b4b2; /* Cor da MARAH */
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    opacity: 0;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    z-index: 10; /* Garante que o botão fique por cima da foto do brinquedo */
-}
-
-/* Quando o mouse passa no card, o botão "desce" e aparece */
-.product-card:hover .quick-view-btn {
-    top: 20px; /* Desce até ficar 20px afastado do topo */
-    opacity: 1;
-}
-
-.quick-view-btn:hover {
-    background-color: #ffb703; /* Fica amarelo ao passar o mouse nele */
-    color: #1b4e4f;
-}
-
-
-/* ===== 2. JANELA DO QUICK VIEW (MODAL) ===== */
+/* =====  JANELA DO QUICK VIEW  ===== */
 .modal-overlay {
-    display: none; /* Começa totalmente escondido */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo preto com 70% de transparência */
-    z-index: 9999; /* Fica em cima de tudo no site */
-    justify-content: center;
-    align-items: center;
-    animation: fadeIn 0.3s;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s;
 }
 
-/* Quando o JS adicionar essa classe, ele aparece */
 .modal-overlay.mostrar {
-    display: flex;
+  display: flex;
 }
 
 .modal-content {
-    background-color: #ffffff;
-    width: 90%;
-    max-width: 800px;
-    border-radius: 20px;
-    position: relative;
-    padding: 40px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 800px;
+  border-radius: 20px;
+  position: relative;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
 .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 25px;
-    font-size: 35px;
-    cursor: pointer;
-    color: #888888;
-    transition: 0.2s;
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 35px;
+  cursor: pointer;
+  color: #888888;
+  transition: 0.2s;
 }
 
 .close-btn:hover {
-    color: #ff4d4d;
+  color: #ff4d4d;
 }
 
 .modal-body {
-    display: flex;
-    gap: 40px;
-    align-items: center;
+  display: flex;
+  gap: 40px;
+  align-items: center;
 }
 
 .modal-img {
-    flex: 1;
+  flex: 1;
 }
 
 .modal-img img {
-    width: 100%;
-    border-radius: 15px;
-    border: 1px solid #eeeeee;
+  width: 100%;
+  border-radius: 15px;
+  border: 1px solid #eeeeee;
 }
 
 .modal-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.modal-info h2 { color: #1b4e4f; font-size: 28px; }
-.modal-info p { color: #555555; line-height: 1.6; }
-.modal-info h3 { color: #ffb703; font-size: 26px; font-weight: bold; }
+.modal-info h2 {
+  color: #1b4e4f;
+  font-size: 28px;
+}
+.modal-info p {
+  color: #555555;
+  line-height: 1.6;
+}
+.modal-info h3 {
+  color: #ffb703;
+  font-size: 26px;
+  font-weight: bold;
+}
 
 .add-to-cart-btn {
-    background-color: #ffb703;
-    color: #1b4e4f;
-    border: none;
-    padding: 15px;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    margin-top: 10px;
+  background-color: #ffb703;
+  color: #1b4e4f;
+
+  margin-top: 10px;
 }
 
 .add-to-cart-btn:hover {
-    transform: translateY(-2px);
-    background-color: #e6a500;
+  background-color: #e6a500;
 }
 
 /* Animação suave para o fundo escuro aparecer */
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Responsividade para celular */
 @media (max-width: 768px) {
-    .modal-body {
-        flex-direction: column;
-    }
+  .modal-body {
+    flex-direction: column;
+  }
 }

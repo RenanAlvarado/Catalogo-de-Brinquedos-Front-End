@@ -169,14 +169,12 @@ export function renderizarBrinquedos(container, brinquedos) {
   container.innerHTML = "";
 
   brinquedos.forEach((brinquedo) => {
-    // 1. Em vez de usar um <button> pro card, vamos usar uma <div> 
-    // Isso evita problemas no HTML de colocar um <button> (espiar) dentro de outro <button> (card)
     const card = document.createElement("div");
     card.classList.add("product-card");
 
     const imagem = obterImagem("toys", brinquedo.imagem);
 
-    card.innerHTML = `
+    card.innerHTML = ` 
       <img 
         src="${imagem}" 
         alt="${brinquedo.nome}" 
@@ -187,12 +185,8 @@ export function renderizarBrinquedos(container, brinquedos) {
       <p class="toy-description">${brinquedo.descricao}</p>
       <p class="toy-price">R$: ${brinquedo.preco}</p>
       
-      <button class="quick-view-btn" 
-        data-id="${brinquedo.id}"
-        data-nome="${brinquedo.nome}"
-        data-preco="${brinquedo.preco}"
-        data-desc="${brinquedo.descricao}"
-        data-img="${imagem}">
+      <button class="quick-view-btn btn" 
+        data-id="${brinquedo.id}"> 
         <i class="fa-solid fa-eye"></i> Espiar
       </button>
     `;
@@ -200,13 +194,31 @@ export function renderizarBrinquedos(container, brinquedos) {
     // 2. Abrir a tela de detalhes ao clicar no card (no fundo branco)
     card.addEventListener("click", (event) => {
       // Verifica se o clique NÃO foi no botão "Espiar"
-      if (!event.target.closest('.quick-view-btn')) {
+      if (!event.target.closest(".quick-view-btn")) {
         window.location.href = `detalhes_brinquedo.html?id=${brinquedo.id}`;
       }
     });
 
     container.appendChild(card);
   });
+}
+
+// ===============================
+// RENDERIZAR QUICK VIEW DOS BRINQUEDOS
+// ===============================
+export function renderizarQuickViewBrinquedos(brinquedo) {
+  const titulo = document.getElementById("qv-title");
+  const preco = document.getElementById("qv-price");
+  const desc = document.getElementById("qv-desc");
+  const img = document.getElementById("qv-img");
+
+  if (titulo) titulo.textContent = brinquedo.nome;
+  if (preco) preco.textContent = `R$ ${brinquedo.preco}`;
+  if (desc) desc.textContent = brinquedo.descricao;
+
+  if (img) {
+    img.src = obterImagem("toys", brinquedo.imagem);
+  }
 }
 
 // ===============================
