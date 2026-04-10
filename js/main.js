@@ -20,6 +20,7 @@ import {
   filtrarBrinquedos,
   buscarBrinquedoPorId,
   buscarCEP,
+  carregarBrinquedoParaEdicao,
 } from "./api.js";
 
 import {
@@ -393,8 +394,11 @@ async function start() {
   );
 
   if (isAddPage) {
-    carregarMarcasSelect();
-    carregarCategoriasSelect();
+    await carregarMarcasSelect();
+    await carregarCategoriasSelect();
+
+    await carregarBrinquedoParaEdicao();
+
     iniciarLimparFormulario();
     iniciarValidacaoFormulario();
   }

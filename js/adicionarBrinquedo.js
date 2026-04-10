@@ -251,6 +251,12 @@ function adicionarRemocaoErroEmTempoReal() {
 export function iniciarValidacaoFormulario() {
   const form = document.getElementById("adicionar-brinquedo-form");
 
+  const deleteBtn = document.getElementById("delete-btn");
+
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", deletarBrinquedo);
+  }
+
   if (!form) return;
 
   adicionarRemocaoErroEmTempoReal();
@@ -301,6 +307,14 @@ async function salvarBrinquedo() {
 
   const formData = new FormData();
 
+  const id = document.getElementById("id-input").value;
+
+  const url = id
+    ? `http://localhost:8080/api/brinquedos/${id}`
+    : "http://localhost:8080/api/brinquedos";
+
+  const method = id ? "PUT" : "POST";
+
   // envia JSON como string
   formData.append("brinquedo", JSON.stringify(brinquedo));
 
@@ -310,12 +324,49 @@ async function salvarBrinquedo() {
   }
 
   try {
-    const data = await salvarBrinquedoAPI(formData);
+    const data = await salvarBrinquedoAPI(formData, url, method);
 
     console.log("Salvo com sucesso:", data);
     alert("Brinquedo salvo com sucesso!");
   } catch (erro) {
     console.error("Erro:", erro);
     alert("Erro ao salvar brinquedo");
+  }
+}
+
+// Pegar ID do URL para editar os brinquedos
+function pegarIdDaUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("id");
+}
+
+// Deletar brinquedo
+async function deletarBrinquedo() {
+  const id = document.getElementById("id-input").value;
+
+  if (!id) {
+    alert("Nenhum brinquedo selecionado para deletar");
+    return;
+  }
+
+  const confirmar = confirm("Tem certeza que deseja excluir este brinquedo?");
+  if (!confirmar) return;
+
+  try {
+    const response = await fetch(`http://localhost:8080/api/brinquedos/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Erro ao deletar");
+    }
+
+    alert("Brinquedo excluído com sucesso!");
+
+    // Redireciona para home
+    window.location.href = "index.html";
+  } catch (erro) {
+    console.error("Erro:", erro);
+    alert("Erro ao excluir brinquedo");
   }
 }

@@ -104,11 +104,17 @@ export async function filtrarBrinquedos({
 // BRINQUEDOS
 // ===============================
 
-export async function salvarBrinquedoAPI(formData) {
-  return await requisicao("/brinquedos", {
-    method: "POST",
+export async function salvarBrinquedoAPI(formData, url, method) {
+  const response = await fetch(url, {
+    method: method,
     body: formData,
   });
+
+  if (!response.ok) {
+    throw new Error("Erro na API");
+  }
+
+  return response.json();
 }
 
 export async function buscarBrinquedos(page = 0, size = 16) {
@@ -164,4 +170,39 @@ export async function buscarCEP(cep) {
   }
 
   return data;
+}
+
+// ===============================
+// PREENCHER FORMULÁRIO PARA EDIÇÃO
+// ===============================
+
+export async function carregarBrinquedoParaEdicao() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (!id) return; // se não tiver id, é cadastro normal
+
+  try {
+    const brinquedo = await buscarBrinquedoPorId(id);
+
+    console.log("Brinquedo carregado:", brinquedo);
+
+    document.getElementById("id-input").value = brinquedo.id;
+    document.getElementById("nome-input").value = brinquedo.nome;
+    document.getElementById("descricao-input").value = brinquedo.descricao;
+    document.getElementById("preco-input").value = brinquedo.preco;
+
+    document.getElementById("marca-input").value = brinquedo.marca?.id;
+    document.getElementById("categoria-input").value = brinquedo.categoria?.id;
+
+    const imgPreview = document.getElementById("img-preview");
+
+    if (imgPreview) {
+      imgPreview.src = brinquedo.imagem
+        ? `http://localhost:8080/uploads/toys/${brinquedo.imagem}`
+        : "img/placeholder.png";
+    }
+  } catch (erro) {
+    console.error("Erro ao carregar brinquedo:", erro);
+  }
 }
