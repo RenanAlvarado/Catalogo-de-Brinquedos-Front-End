@@ -199,6 +199,23 @@ export function renderizarBrinquedos(container, brinquedos) {
       }
     });
 
+    // Função fora para não ativar clique duplo
+    const quickBtn = card.querySelector(".quick-view-btn");
+
+    quickBtn.addEventListener("click", (e) => {
+      renderizarQuickViewBrinquedos(brinquedo);
+
+      const modal = document.getElementById("quick-view-modal");
+      if (modal) modal.classList.add("mostrar");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (e.target.classList.contains("close-btn")) {
+        const modal = document.getElementById("quick-view-modal");
+        if (modal) modal.classList.remove("mostrar");
+      }
+    });
+
     container.appendChild(card);
   });
 }
