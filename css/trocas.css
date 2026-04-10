@@ -1,0 +1,116 @@
+/* ===== FUNDO E CONTAINER ===== */
+#main-container {
+    padding: 50px 20px;
+    background-color: #f4f7f6;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+}
+
+.policy-wrapper {
+    width: 100%;
+    max-width: 900px;
+    background-color: white;
+    border-radius: 20px;
+    padding: 50px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.arrow-back {
+    color: #1b4e4f;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 30px;
+    transition: 0.3s;
+}
+
+.arrow-back:hover {
+    color: #ffb703;
+}
+
+/* ===== CABEÇALHO DA POLÍTICA ===== */
+.policy-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #f4f7f6;
+}
+
+.policy-header i {
+    font-size: 50px;
+    color: #ffb703; /* Amarelo da MARAH */
+    margin-bottom: 15px;
+}
+
+.policy-header h1 {
+    color: #1b4e4f;
+    font-size: 32px;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.policy-header p {
+    color: #888888;
+    font-size: 14px;
+}
+
+/* ===== CORPO DO TEXTO ===== */
+.policy-content h2 {
+    color: #40b4b2; /* Verde/Azul da MARAH */
+    font-size: 22px;
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+.policy-content p {
+    color: #555555;
+    line-height: 1.8; /* Espaçamento entre as linhas para facilitar a leitura */
+    font-size: 16px;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.policy-content strong {
+    color: #333333;
+}
+
+.policy-content ul {
+    margin-left: 20px;
+    margin-bottom: 25px;
+}
+
+.policy-content li {
+    color: #555555;
+    line-height: 1.8;
+    font-size: 16px;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 5px;
+}
+
+/* Bolinhas customizadas para a lista */
+.policy-content li::marker {
+    color: #ffb703;
+    font-size: 1.2em;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+@media (max-width: 768px) {
+    .policy-wrapper {
+        padding: 30px 20px;
+    }
+
+    .policy-header h1 {
+        font-size: 26px;
+    }
+
+    .policy-content h2 {
+        font-size: 20px;
+    }
+
+    .policy-content p, .policy-content li {
+        font-size: 15px;
+        text-align: left; /* Tira o justificado no celular para evitar buracos no texto */
+    }
+}
