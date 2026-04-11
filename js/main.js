@@ -20,7 +20,6 @@ import {
   filtrarBrinquedos,
   buscarBrinquedoPorId,
   buscarCEP,
-  carregarBrinquedoParaEdicao,
 } from "./api.js";
 
 import {
@@ -31,6 +30,7 @@ import {
   renderizarFiltroMarcas,
   renderizarPaginacao,
   renderizarDetalhes,
+  renderizarAlterarBrinquedo,
 } from "./render.js";
 
 import {
@@ -80,6 +80,23 @@ async function carregarDetalhes() {
   try {
     const brinquedo = await buscarBrinquedoPorId(id);
     renderizarDetalhes(brinquedo);
+  } catch (erro) {
+    console.error("Erro ao carregar detalhes:", erro);
+  }
+}
+
+// ===============================
+// FUNÇÃO AUXILIAR DE CARREGAMENTO DAS INFORMAÇÕES DA TELA DE DETALHES
+// ===============================
+async function carregarAlterarBrinquedos() {
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (!id) return;
+
+  try {
+    const brinquedo = await buscarBrinquedoPorId(id);
+    renderizarAlterarBrinquedo(brinquedo);
   } catch (erro) {
     console.error("Erro ao carregar detalhes:", erro);
   }
@@ -401,7 +418,7 @@ async function start() {
     await carregarMarcasSelect();
     await carregarCategoriasSelect();
 
-    await carregarBrinquedoParaEdicao();
+    await carregarAlterarBrinquedos();
 
     iniciarLimparFormulario();
     iniciarValidacaoFormulario();

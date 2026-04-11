@@ -2,7 +2,12 @@
 // IMPORTS
 // ===============================
 
-import { buscarMarcas, buscarCategorias, salvarBrinquedoAPI } from "./api.js";
+import {
+  buscarMarcas,
+  buscarCategorias,
+  salvarBrinquedoAPI,
+  deletarBrinquedoAPI,
+} from "./api.js";
 
 import { renderizarSelect } from "./render.js";
 
@@ -251,12 +256,6 @@ function adicionarRemocaoErroEmTempoReal() {
 export function iniciarValidacaoFormulario() {
   const form = document.getElementById("adicionar-brinquedo-form");
 
-  const deleteBtn = document.getElementById("delete-btn");
-
-  if (deleteBtn) {
-    deleteBtn.addEventListener("click", deletarBrinquedo);
-  }
-
   if (!form) return;
 
   adicionarRemocaoErroEmTempoReal();
@@ -267,6 +266,58 @@ export function iniciarValidacaoFormulario() {
 
     salvarBrinquedo();
   });
+}
+
+// ===============================
+// CONFIRMAÇÃO POR MODAL
+// ===============================
+function confirmarAcao(mensagem) {
+  return new Promise((resolve) => {
+    const modal = document.getElementById("modal-confirmacao");
+    const texto = document.getElementById("modal-texto");
+    const btnConfirmar = document.getElementById("confirmar-exclusao-btn");
+    const btnCancelar = document.getElementById("cancelar-btn");
+
+    if (!modal) {
+      console.error("Modal não encontrado");
+      resolve(false);
+      return;
+    }
+
+    // seta mensagem
+    if (texto) texto.textContent = mensagem;
+
+    modal.classList.remove("hidden");
+
+    function limpar() {
+      modal.classList.add("hidden");
+      btnConfirmar.removeEventListener("click", onConfirmar);
+      btnCancelar.removeEventListener("click", onCancelar);
+    }
+
+    function onConfirmar() {
+      limpar();
+      resolve(true);
+    }
+
+    function onCancelar() {
+      limpar();
+      resolve(false);
+    }
+
+    btnConfirmar.addEventListener("click", onConfirmar);
+    btnCancelar.addEventListener("click", onCancelar);
+  });
+}
+
+// ===============================
+// MONTAR OBJETO JSON PARA ENVIO AO BD
+// ===============================
+
+const deleteBtn = document.getElementById("delete-btn");
+
+if (deleteBtn) {
+  deleteBtn.addEventListener("click", deletarBrinquedo);
 }
 
 // ===============================
@@ -307,14 +358,6 @@ async function salvarBrinquedo() {
 
   const formData = new FormData();
 
-  const id = document.getElementById("id-input").value;
-
-  const url = id
-    ? `http://localhost:8080/api/brinquedos/${id}`
-    : "http://localhost:8080/api/brinquedos";
-
-  const method = id ? "PUT" : "POST";
-
   // envia JSON como string
   formData.append("brinquedo", JSON.stringify(brinquedo));
 
@@ -324,7 +367,7 @@ async function salvarBrinquedo() {
   }
 
   try {
-    const data = await salvarBrinquedoAPI(formData, url, method);
+    const data = await salvarBrinquedoAPI(formData);
 
     console.log("Salvo com sucesso:", data);
     alert("Brinquedo salvo com sucesso!");
@@ -334,39 +377,29 @@ async function salvarBrinquedo() {
   }
 }
 
-// Pegar ID do URL para editar os brinquedos
-function pegarIdDaUrl() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("id");
-}
-
 // Deletar brinquedo
 async function deletarBrinquedo() {
-  const id = document.getElementById("id-input").value;
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
 
   if (!id) {
-    alert("Nenhum brinquedo selecionado para deletar");
+    alert("Nenhum brinquedo selecionado.");
     return;
   }
 
-  const confirmar = confirm("Tem certeza que deseja excluir este brinquedo?");
+  const confirmar = await confirmarAcao(
+    "Tem certeza que deseja deletar este brinquedo?",
+  );
+
   if (!confirmar) return;
 
   try {
-    const response = await fetch(`http://localhost:8080/api/brinquedos/${id}`, {
-      method: "DELETE",
-    });
+    await deletarBrinquedoAPI(id);
 
-    if (!response.ok) {
-      throw new Error("Erro ao deletar");
-    }
-
-    alert("Brinquedo excluído com sucesso!");
-
-    // Redireciona para home
+    // Leva para a tela Inicial
     window.location.href = "index.html";
   } catch (erro) {
-    console.error("Erro:", erro);
-    alert("Erro ao excluir brinquedo");
+    console.error("Erro ao deletar:", erro);
+    alert("Erro ao deletar brinquedo.");
   }
 }

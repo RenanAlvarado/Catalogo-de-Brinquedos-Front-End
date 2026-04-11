@@ -4,6 +4,8 @@
 
 import { obterImagem } from "./api.js";
 
+import { formatarPreco } from "./utils/formatters.js";
+
 // ===============================
 // FUNÇÃO AUXILIAR PARA CRIAR SELECTS
 // ===============================
@@ -183,7 +185,7 @@ export function renderizarBrinquedos(container, brinquedos) {
       />
       <h3 class="toy-title">${brinquedo.nome}</h3>
       <p class="toy-description">${brinquedo.descricao}</p>
-      <p class="toy-price">R$: ${brinquedo.preco}</p>
+      <p class="toy-price">R$: ${formatarPreco(brinquedo.preco)}</p>
       
       <button class="quick-view-btn btn" 
         data-id="${brinquedo.id}"> 
@@ -195,11 +197,11 @@ export function renderizarBrinquedos(container, brinquedos) {
     card.addEventListener("click", (event) => {
       // Verifica se o clique NÃO foi no botão "Espiar"
       if (!event.target.closest(".quick-view-btn")) {
-        window.location.href = `detalhes_brinquedo.html?id=${brinquedo.id}`;
+        window.location.href = `adicionar_brinquedo.html?id=${brinquedo.id}`;
       }
     });
 
-    // Função fora para não ativar clique duplo
+    // Função fora para não ativar clique duplo ao tentar usar a quick view
     const quickBtn = card.querySelector(".quick-view-btn");
 
     quickBtn.addEventListener("click", (e) => {
@@ -230,12 +232,30 @@ export function renderizarQuickViewBrinquedos(brinquedo) {
   const img = document.getElementById("qv-img");
 
   if (titulo) titulo.textContent = brinquedo.nome;
-  if (preco) preco.textContent = `R$ ${brinquedo.preco}`;
+  if (preco) preco.textContent = `R$ ${formatarPreco(brinquedo.preco)}`;
   if (desc) desc.textContent = brinquedo.descricao;
 
   if (img) {
     img.src = obterImagem("toys", brinquedo.imagem);
   }
+}
+
+// ===============================
+// RENDERIZAR TELA DE ALTERAR
+// ===============================
+
+export function renderizarAlterarBrinquedo(brinquedo) {
+  document.getElementById("id-input").value = brinquedo.id;
+  document.getElementById("nome-input").value = brinquedo.nome;
+  document.getElementById("descricao-input").value = brinquedo.descricao;
+  document.getElementById("preco-input").value = formatarPreco(brinquedo.preco);
+
+  document.getElementById("marca-input").value = brinquedo.marca?.id;
+  document.getElementById("categoria-input").value = brinquedo.categoria?.id;
+
+  const imgPreview = document.getElementById("img-preview");
+
+  imgPreview.src = obterImagem("toys", brinquedo.imagem);
 }
 
 // ===============================
