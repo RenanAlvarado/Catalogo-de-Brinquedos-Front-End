@@ -163,6 +163,16 @@ export async function buscarBrinquedosPorMarca(id) {
 }
 
 // ===============================
+// SISTEMA DE LOGIN E CADASTRO
+// ===============================
+
+export async function loginAPI(email, senha) {
+  return await requisicao("/usuarios/login", {
+    method: "POST",
+    body: JSON.stringify({ email, senha }),
+  });
+}
+// ===============================
 // API DE CEP
 // ===============================
 

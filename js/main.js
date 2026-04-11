@@ -6,6 +6,10 @@ import { aplicarMascaraCEP, aplicarMascaraPreco } from "./utils/masks.js";
 
 import { cepValido } from "./utils/validators.js";
 
+import { inicializarHeaderUsuario } from "./components/header.js";
+
+import { controlarFab } from "./components/fab.js";
+
 import {
   iniciarUploadImagem,
   carregarMarcasSelect,
@@ -393,6 +397,10 @@ async function start() {
 
   //Componentes Modularizados
   await carregarLayout();
+
+  inicializarHeaderUsuario();
+
+  controlarFab();
 
   iniciarMascaraPreco();
 

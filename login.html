@@ -14,6 +14,9 @@
     <!-- CSS ESPECÍFICO -->
     <link rel="stylesheet" href="css/login.css" />
 
+    <!-- Scripts -->
+    <script type="module" src="js/login.js" defer></script>
+
     <!-- Icones -->
     <link
       rel="stylesheet"
@@ -43,7 +46,7 @@
         <div id="form-container">
           <form action="#" id="login-form">
             <h3 id="title">Login</h3>
-            <div class="input-icon">
+            <div class="input-icon" id="email-input-icon">
               <i class="fa-regular fa-user"></i>
               <input
                 type="email"
@@ -52,7 +55,7 @@
                 placeholder="Insira seu Email"
               />
             </div>
-            <div class="input-icon">
+            <div class="input-icon" id="password-input-icon">
               <i class="fa-solid fa-lock"></i>
               <input
                 type="password"
@@ -60,7 +63,10 @@
                 id="password-input"
                 placeholder="Insira sua senha"
               />
+              <i class="fa-solid fa-eye" id="toggle-password"></i>
             </div>
+
+            <p id="login-error" class="error-message"></p>
 
             <!-- Div criada para deixar tudo lado a lado -->
             <div id="remember-password">
@@ -75,7 +81,12 @@
               <a href="recuperar_senha.html">Esqueceu a senha?</a>
             </div>
 
-            <input type="submit" value="Login" class="btn-submit" />
+            <input
+              type="submit"
+              value="Login"
+              id="btn-submit"
+              class="btn-submit"
+            />
           </form>
 
           <a href="cadastro.html" id="link-account">Criar conta</a>

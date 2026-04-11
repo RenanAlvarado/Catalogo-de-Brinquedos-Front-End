@@ -44,6 +44,10 @@
   background: transparent;
 }
 
+#toggle-password {
+  cursor: pointer;
+}
+
 /* ESTLIZAÇÂO DE BOTÔES MAIS PRESENTES */
 .btn {
   padding: 12px 16px;

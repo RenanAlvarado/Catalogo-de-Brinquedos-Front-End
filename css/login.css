@@ -104,6 +104,17 @@ html {
   font-size: 20px;
 }
 
+#password-input-icon {
+  margin-bottom: 5px;
+}
+
+#login-error {
+  font-size: 14px;
+  color: red;
+  align-self: center;
+  margin-bottom: 5px;
+}
+
 /* LEMBRAR SENHA */
 #remember-password {
   display: flex;

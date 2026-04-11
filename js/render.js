@@ -6,6 +6,8 @@ import { obterImagem } from "./api.js";
 
 import { formatarPreco } from "./utils/formatters.js";
 
+import { abrirBrinquedo } from "./router/brinquedoRouter.js";
+
 // ===============================
 // FUNÇÃO AUXILIAR PARA CRIAR SELECTS
 // ===============================
@@ -197,7 +199,7 @@ export function renderizarBrinquedos(container, brinquedos) {
     card.addEventListener("click", (event) => {
       // Verifica se o clique NÃO foi no botão "Espiar"
       if (!event.target.closest(".quick-view-btn")) {
-        window.location.href = `adicionar_brinquedo.html?id=${brinquedo.id}`;
+        abrirBrinquedo(brinquedo.id);
       }
     });
 

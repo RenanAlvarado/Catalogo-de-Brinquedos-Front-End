@@ -155,11 +155,15 @@
 }
 
 /* Botão de Login */
-#login {
+#login-btn {
   background: #ffb703;
   border: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   border-radius: 50px;
+}
+
+#login-btn.logout {
+  background-color: red;
 }
 
 /*Botões da parte debaixo do menu*/
