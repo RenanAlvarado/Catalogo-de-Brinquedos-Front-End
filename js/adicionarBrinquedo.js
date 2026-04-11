@@ -7,6 +7,7 @@ import {
   buscarCategorias,
   salvarBrinquedoAPI,
   deletarBrinquedoAPI,
+  alterarBrinquedoAPI,
 } from "./api.js";
 
 import { renderizarSelect } from "./render.js";
@@ -264,7 +265,7 @@ export function iniciarValidacaoFormulario() {
     e.preventDefault();
     if (!validarFormulario()) return;
 
-    salvarBrinquedo();
+    salvarOuAlterarBrinquedo();
   });
 }
 
@@ -274,8 +275,8 @@ export function iniciarValidacaoFormulario() {
 function confirmarAcao(mensagem) {
   return new Promise((resolve) => {
     const modal = document.getElementById("modal-confirmacao");
-    const texto = document.getElementById("modal-texto");
-    const btnConfirmar = document.getElementById("confirmar-exclusao-btn");
+    const texto = document.querySelector(".modal-content span");
+    const btnConfirmar = document.getElementById("confirmar-btn");
     const btnCancelar = document.getElementById("cancelar-btn");
 
     if (!modal) {
@@ -286,6 +287,8 @@ function confirmarAcao(mensagem) {
 
     // seta mensagem
     if (texto) texto.textContent = mensagem;
+
+    if (btnConfirmar) btnConfirmar.textContent = mensagem;
 
     modal.classList.remove("hidden");
 
@@ -350,7 +353,7 @@ function montarObjetoBrinquedo() {
 // ===============================
 
 // Método para salvar brinquedos
-async function salvarBrinquedo() {
+async function salvarOuAlterarBrinquedo() {
   const brinquedo = montarObjetoBrinquedo();
 
   const imgInput = document.getElementById("img-input");
@@ -358,19 +361,42 @@ async function salvarBrinquedo() {
 
   const formData = new FormData();
 
-  // envia JSON como string
   formData.append("brinquedo", JSON.stringify(brinquedo));
 
-  // envia imagem
   if (arquivo) {
     formData.append("imagem", arquivo);
   }
 
-  try {
-    const data = await salvarBrinquedoAPI(formData);
+  // ID DA URL
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
 
-    console.log("Salvo com sucesso:", data);
-    alert("Brinquedo salvo com sucesso!");
+  try {
+    let data;
+
+    if (id) {
+      const confirmar = await confirmarAcao("Atualizar");
+
+      if (!confirmar) return;
+
+      // Atualizar
+      data = await alterarBrinquedoAPI(id, formData);
+
+      console.log("Atualizado:", data);
+      alert("Brinquedo atualizado com sucesso!");
+    } else {
+      const confirmar = await confirmarAcao("Salvar");
+
+      if (!confirmar) return;
+      // Salvar
+      data = await salvarBrinquedoAPI(formData);
+
+      console.log("Criado:", data);
+      alert("Brinquedo salvo com sucesso!");
+    }
+
+    //  Voltar ao Index
+    window.location.href = "index.html";
   } catch (erro) {
     console.error("Erro:", erro);
     alert("Erro ao salvar brinquedo");
@@ -387,9 +413,7 @@ async function deletarBrinquedo() {
     return;
   }
 
-  const confirmar = await confirmarAcao(
-    "Tem certeza que deseja deletar este brinquedo?",
-  );
+  const confirmar = await confirmarAcao("Excluir");
 
   if (!confirmar) return;
 

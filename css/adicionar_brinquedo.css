@@ -214,6 +214,10 @@ textarea:focus {
   text-align: center;
 }
 
+.modal-content span {
+  font-weight: bold;
+}
+
 .modal-actions {
   margin-top: 20px;
   display: flex;

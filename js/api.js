@@ -117,7 +117,7 @@ export async function buscarBrinquedos(page = 0, size = 16) {
   );
 }
 
-export async function alterarBrinquedoAPI(formData) {
+export async function alterarBrinquedoAPI(id, formData) {
   return await requisicao(`/brinquedos/${id}`, {
     method: "PUT",
     body: formData,
