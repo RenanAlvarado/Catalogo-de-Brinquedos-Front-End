@@ -41,7 +41,7 @@
           <i class="fa-solid fa-arrow-left"></i>
         </a>
 
-        <h1>Adicionar Brinquedo</h1>
+        <h1 id="title-toy-form">Adicionar Brinquedo</h1>
 
         <!-- Formulário -->
         <form id="adicionar-brinquedo-form">
@@ -132,6 +132,20 @@
           <div class="modal-actions">
             <button id="cancelar-btn" class="btn">Cancelar</button>
             <button id="confirmar-btn" class="danger btn">Excluir</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-feedback" class="modal hidden">
+        <div class="modal-content">
+          <h3 id="feedback-title">Confirmar</h3>
+          <p>
+            <span id="feedback-type-span">Sucesso</span> ao
+            <span id="feedback-span">deletar</span> brinquedo!
+          </p>
+
+          <div class="modal-actions">
+            <button id="ok-btn" class="btn">Fechar</button>
           </div>
         </div>
       </div>

@@ -23,6 +23,10 @@ async function requisicao(endpoint, options = {}) {
       ...options,
     });
 
+    if (resposta.status === 204) {
+      return null;
+    }
+
     if (!resposta.ok) {
       throw new Error(`Erro HTTP: ${resposta.status}`);
     }
@@ -30,7 +34,7 @@ async function requisicao(endpoint, options = {}) {
     return await resposta.json();
   } catch (erro) {
     console.error("Erro na requisição da API:", erro);
-    return null;
+    throw erro;
   }
 }
 

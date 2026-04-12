@@ -2,7 +2,7 @@
 // IMPORTS
 // ===============================
 
-import { aplicarMascaraCEP, aplicarMascaraPreco } from "./utils/masks.js";
+import { aplicarMascaraCEP } from "./utils/masks.js";
 
 import { cepValido } from "./utils/validators.js";
 
@@ -10,13 +10,7 @@ import { inicializarHeaderUsuario } from "./components/header.js";
 
 import { controlarFab } from "./components/fab.js";
 
-import {
-  iniciarUploadImagem,
-  carregarMarcasSelect,
-  carregarCategoriasSelect,
-  iniciarLimparFormulario,
-  iniciarValidacaoFormulario,
-} from "./adicionarBrinquedo.js";
+import { iniciarPaginaAdicionar } from "./adicionarBrinquedo.js";
 
 import {
   buscarCategorias,
@@ -34,7 +28,6 @@ import {
   renderizarFiltroMarcas,
   renderizarPaginacao,
   renderizarDetalhes,
-  renderizarAlterarBrinquedo,
 } from "./render.js";
 
 import {
@@ -88,27 +81,6 @@ async function carregarDetalhes() {
     console.error("Erro ao carregar detalhes:", erro);
   }
 }
-
-// ===============================
-// FUNÇÃO AUXILIAR DE CARREGAMENTO DAS INFORMAÇÕES DA TELA DE DETALHES
-// ===============================
-async function carregarAlterarBrinquedos() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-
-  if (!id) return;
-
-  try {
-    const brinquedo = await buscarBrinquedoPorId(id);
-    renderizarAlterarBrinquedo(brinquedo);
-  } catch (erro) {
-    console.error("Erro ao carregar detalhes:", erro);
-  }
-}
-
-// ===============================
-// FUNÇÃO AUXILIAR DE CARREGAMENTO DAS INFORMAÇÕES DA TELA DE QUICK VIEW DOS BRINQUEDOS
-// ===============================
 
 // ===============================
 // FUNÇÃO AUXILIAR PARA CARREGAR OS COMPONENTES HTML
@@ -240,16 +212,6 @@ function iniciarCep() {
         estadoSelect.innerHTML = `<option>Selecione</option>`;
       }
     }
-  });
-}
-
-function iniciarMascaraPreco() {
-  const precoInput = getEl("#preco-input");
-
-  if (!precoInput) return;
-
-  precoInput.addEventListener("input", (e) => {
-    e.target.value = aplicarMascaraPreco(e.target.value);
   });
 }
 
@@ -402,11 +364,7 @@ async function start() {
 
   controlarFab();
 
-  iniciarMascaraPreco();
-
   iniciarCep();
-
-  iniciarUploadImagem();
 
   // Caso esteja na pagina de detalhes
   const isDetalhesPage = window.location.pathname.includes(
@@ -423,13 +381,7 @@ async function start() {
   );
 
   if (isAddPage) {
-    await carregarMarcasSelect();
-    await carregarCategoriasSelect();
-
-    await carregarAlterarBrinquedos();
-
-    iniciarLimparFormulario();
-    iniciarValidacaoFormulario();
+    iniciarPaginaAdicionar();
   }
 
   //Busca ativa após ter os componentes

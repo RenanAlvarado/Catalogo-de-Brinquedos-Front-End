@@ -237,9 +237,14 @@ export function renderizarQuickViewBrinquedos(brinquedo) {
   if (preco) preco.textContent = `R$ ${formatarPreco(brinquedo.preco)}`;
   if (desc) desc.textContent = brinquedo.descricao;
 
-  if (img) {
-    img.src = obterImagem("toys", brinquedo.imagem);
-  }
+  if (!img) return;
+
+  img.src = obterImagem("toys", brinquedo.imagem);
+
+  img.onerror = () => {
+    img.onerror = null; // evita loop infinito
+    img.src = "img/placeholder.png";
+  };
 }
 
 // ===============================
@@ -257,7 +262,15 @@ export function renderizarAlterarBrinquedo(brinquedo) {
 
   const imgPreview = document.getElementById("img-preview");
 
+  if (!imgPreview) return;
+
   imgPreview.src = obterImagem("toys", brinquedo.imagem);
+
+  //  Caso  a imagem seja apagada ou não exista no server
+  imgPreview.onerror = () => {
+    imgPreview.onerror = null; // evita loop infinito
+    imgPreview.src = "img/placeholder.png";
+  };
 }
 
 // ===============================

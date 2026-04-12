@@ -221,7 +221,7 @@ textarea:focus {
 .modal-actions {
   margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 #cancelar-btn {
@@ -229,6 +229,11 @@ textarea:focus {
 }
 
 .danger {
+  background-color: red;
+  color: white;
+}
+
+#ok-btn {
   background-color: red;
   color: white;
 }
