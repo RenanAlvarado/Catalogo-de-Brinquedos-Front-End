@@ -115,6 +115,13 @@ html {
   font-size: 20px;
 }
 
+#cadastro-error {
+  font-size: 14px;
+  color: red;
+  align-self: center;
+  margin-bottom: 5px;
+}
+
 /* LINK LOGIN */
 
 #link-account {

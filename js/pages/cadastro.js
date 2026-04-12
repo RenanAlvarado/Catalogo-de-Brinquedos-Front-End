@@ -1,7 +1,7 @@
 // ===============================
 // IMPORTS
 // ===============================
-import { loginAPI } from "../api.js";
+import { cadastroAPI } from "../api.js";
 
 // ===============================
 // FUNÇÕES AUXILIARES PARA TRATAMENTO DE ERROS
@@ -15,22 +15,35 @@ function limparErro(campo) {
 }
 
 function adicionarRemocaoErroTempoReal() {
+  const nomeInputIcon = document.getElementById("nome-input-icon");
   const emailInputIcon = document.getElementById("email-input-icon");
   const senhaInputIcon = document.getElementById("password-input-icon");
+  const senhaAgainInputIcon = document.getElementById(
+    "password-again-input-icon",
+  );
+
+  nomeInputIcon.addEventListener("input", () => {
+    limparErro(nomeInputIcon);
+  });
 
   emailInputIcon.addEventListener("input", () => {
     limparErro(emailInputIcon);
-    limparErroLogin();
   });
 
   senhaInputIcon.addEventListener("input", () => {
     limparErro(senhaInputIcon);
-    limparErroLogin();
+
+    limparErroCadastro();
+  });
+
+  senhaAgainInputIcon.addEventListener("input", () => {
+    limparErro(senhaInputIcon);
+    limparErroCadastro();
   });
 }
 
-function mostrarErroLogin(mensagem) {
-  const erro = document.getElementById("login-error");
+function mostrarErroCadastro(mensagem) {
+  const erro = document.getElementById("cadastro-error");
 
   if (!erro) return;
 
@@ -38,8 +51,8 @@ function mostrarErroLogin(mensagem) {
   erro.style.display = "block";
 }
 
-function limparErroLogin() {
-  const erro = document.getElementById("login-error");
+function limparErroCadastro() {
+  const erro = document.getElementById("cadastro-error");
 
   if (!erro) return;
 
@@ -52,7 +65,9 @@ function limparErroLogin() {
 // ===============================
 function iniciarToggleSenha() {
   const senhaInput = document.getElementById("password-input");
+  const senhaInputAgain = document.getElementById("password-again-input");
   const toggleIcon = document.getElementById("toggle-password");
+  const toggleIconAgain = document.getElementById("toggle-password-again");
 
   if (!senhaInput || !toggleIcon) return;
 
@@ -71,21 +86,54 @@ function iniciarToggleSenha() {
       toggleIcon.classList.add("fa-eye");
     }
   });
+
+  toggleIconAgain.addEventListener("click", () => {
+    const tipoAtual = senhaInputAgain.getAttribute("type");
+
+    if (tipoAtual === "password") {
+      senhaInputAgain.setAttribute("type", "text");
+
+      toggleIconAgain.classList.remove("fa-eye");
+      toggleIconAgain.classList.add("fa-eye-slash");
+    } else {
+      senhaInputAgain.setAttribute("type", "password");
+
+      toggleIconAgain.classList.remove("fa-eye-slash");
+      toggleIconAgain.classList.add("fa-eye");
+    }
+  });
 }
 
 // ===============================
-// FUNÇÃO DE LOGIN
+// FUNÇÃO DE CADASTRO
 // ===============================
-async function realizarLogin() {
+async function realizarCadastro() {
+  const nomeInput = document.getElementById("nome-input");
   const emailInput = document.getElementById("email-input");
-  const emailInputIcon = document.getElementById("email-input-icon");
   const senhaInput = document.getElementById("password-input");
-  const senhaInputIcon = document.getElementById("password-input-icon");
+  const confirmarSenhaInput = document.getElementById("password-again-input");
 
+  const nomeInputIcon = document.getElementById("nome-input-icon");
+  const emailInputIcon = document.getElementById("email-input-icon");
+  const senhaInputIcon = document.getElementById("password-input-icon");
+  const senhaAgainInputIcon = document.getElementById(
+    "password-again-input-icon",
+  );
+
+  const nome = nomeInput.value.trim();
   const email = emailInput.value.trim();
   const senha = senhaInput.value.trim();
+  const confirmarSenha = confirmarSenhaInput.value.trim();
 
   let valido = true;
+
+  // valida nome
+  if (!nome) {
+    marcarErro(nomeInputIcon);
+    valido = false;
+  } else {
+    limparErro(nomeInputIcon);
+  }
 
   // valida email
   if (!email) {
@@ -103,29 +151,40 @@ async function realizarLogin() {
     limparErro(senhaInputIcon);
   }
 
+  if (confirmarSenha !== senha) {
+    mostrarErroCadastro("Senhas devem ser iguais!");
+  }
+
+  // valida confirmação de senha
+  if (!confirmarSenha || confirmarSenha !== senha) {
+    marcarErro(senhaAgainInputIcon);
+    valido = false;
+  } else {
+    limparErro(senhaAgainInputIcon);
+  }
+
   if (!valido) return;
 
   try {
-    const usuario = await loginAPI(email, senha);
+    const usuarioCriado = await cadastroAPI(nome, email, senha);
 
-    localStorage.setItem("usuario", JSON.stringify(usuario));
+    // opcional: salvar usuário logado automaticamente
+    localStorage.setItem("usuario", JSON.stringify(usuarioCriado));
 
     window.location.href = "index.html";
   } catch (erro) {
-    console.error("Erro no login:", erro);
+    console.error("Erro no cadastro:", erro);
 
-    marcarErro(emailInputIcon);
-    marcarErro(senhaInputIcon);
-
-    mostrarErroLogin("Email ou senha incorretos");
+    alert("Erro ao criar conta. Verifique os dados.");
   }
 }
 
 // ===============================
 // EVENTO DO FORM
 // ===============================
+
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("login-form");
+  const form = document.getElementById("register-form");
 
   if (!form) {
     console.error("Formulário não encontrado");
@@ -137,6 +196,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    realizarLogin();
+    realizarCadastro();
   });
 });
