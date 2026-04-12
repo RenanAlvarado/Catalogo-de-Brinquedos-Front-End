@@ -274,6 +274,50 @@ export function renderizarAlterarBrinquedo(brinquedo) {
 }
 
 // ===============================
+// RENDERIZAR TELA DE PERFIL
+// ===============================
+export function renderizarPerfil(usuario) {
+  // Dados básicos
+  document.getElementById("nome-input").value = usuario.nome || "";
+  document.getElementById("email-input").value = usuario.email || "";
+
+  // Contato
+  document.getElementById("number-input").value = usuario.telefone || "";
+  document.getElementById("email-input-right").value = usuario.email || "";
+
+  // Endereço (pode ser null!)
+  if (usuario.endereco) {
+    document.getElementById("cep-input").value = usuario.endereco.cep || "";
+
+    document.getElementById("endereco-input").value =
+      usuario.endereco.logradouro || "";
+
+    document.getElementById("bairro-input").value =
+      usuario.endereco.bairro || "";
+
+    document.getElementById("numero-input").value =
+      usuario.endereco.numero || "";
+
+    document.getElementById("city-select").innerHTML =
+      `<option>${usuario.endereco.cidade}</option>`;
+
+    document.getElementById("state-select").innerHTML =
+      `<option>${usuario.endereco.estado}</option>`;
+  } else {
+    // Se não tiver endereço → limpa tudo
+    document.getElementById("cep-input").value = "";
+    document.getElementById("endereco-input").value = "";
+    document.getElementById("bairro-input").value = "";
+    document.getElementById("numero-input").value = "";
+
+    document.getElementById("city-select").innerHTML =
+      `<option>Selecione</option>`;
+
+    document.getElementById("state-select").innerHTML =
+      `<option>Selecione</option>`;
+  }
+}
+// ===============================
 // RENDERIZAR PÁGINAÇÃO DE PRODUTOS
 // ===============================
 

@@ -52,6 +52,10 @@ export function obterImagem(pasta, imagem) {
     return `http://localhost:8080/uploads/toys/${imagem}`;
   }
 
+  if (pasta === "users") {
+    return `http://localhost:8080/uploads/users/${imagem}`;
+  }
+
   // categorias e marcas continuam locais
   return `img/${pasta}/${imagem}`;
 }

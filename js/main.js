@@ -12,11 +12,14 @@ import { controlarFab } from "./components/fab.js";
 
 import { iniciarPaginaAdicionar } from "./pages/adicionarBrinquedo.js";
 
+import { iniciarPaginaPerfil } from "./pages/perfil.js";
+
+import { iniciarPaginaDetalhes } from "./pages/detalhesBrinquedo.js";
+
 import {
   buscarCategorias,
   buscarMarcas,
   filtrarBrinquedos,
-  buscarBrinquedoPorId,
   buscarCEP,
 } from "./api.js";
 
@@ -27,7 +30,6 @@ import {
   renderizarMarcas,
   renderizarFiltroMarcas,
   renderizarPaginacao,
-  renderizarDetalhes,
 } from "./render.js";
 
 import {
@@ -66,23 +68,6 @@ function getEl(selector) {
 }
 
 // ===============================
-// FUNÇÃO AUXILIAR DE CARREGAMENTO DAS INFORMAÇÕES DA TELA DE DETALHES
-// ===============================
-async function carregarDetalhes() {
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
-
-  if (!id) return;
-
-  try {
-    const brinquedo = await buscarBrinquedoPorId(id);
-    renderizarDetalhes(brinquedo);
-  } catch (erro) {
-    console.error("Erro ao carregar detalhes:", erro);
-  }
-}
-
-// ===============================
 // FUNÇÃO AUXILIAR PARA CARREGAR OS COMPONENTES HTML
 // ===============================
 
@@ -109,110 +94,6 @@ async function carregarLayout() {
 function pegarParametroBusca() {
   const params = new URLSearchParams(window.location.search);
   return params.get("search");
-}
-
-// ===============================
-// FUNÇÃO AUXILIAR PARA INICIAR A MÁSCARA E VALIDAÇÃO DOS CAMPOS
-// ===============================
-
-function iniciarCep() {
-  const cepInput = getEl("#cep-input");
-
-  if (!cepInput) return;
-
-  const cepErrorDiv = getEl("#cep-error");
-
-  // Variáveis fora de escopo
-  let isDetalhesPage = false;
-
-  let cepInfoDiv, cepPrice, cepTime, cepCode;
-  let cepAddressDiv, addressSpan;
-  let enderecoInput, bairroInput, cidadeSelect, estadoSelect;
-
-  if (window.location.pathname.includes("detalhes_brinquedo.html")) {
-    isDetalhesPage = true;
-
-    cepInfoDiv = getEl("#cep-info-div");
-    cepPrice = document.querySelector("#price-span");
-    cepTime = document.querySelector("#cep-time span");
-    cepCode = document.querySelector("#cep-span");
-
-    cepAddressDiv = getEl("#cep-address");
-    addressSpan = getEl("#address-span");
-  } else if (window.location.pathname.includes("perfil.html")) {
-    enderecoInput = getEl("#endereco");
-    bairroInput = getEl("#bairro");
-    cidadeSelect = getEl("#city-select");
-    estadoSelect = getEl("#state-select");
-  }
-
-  cepInput.addEventListener("input", async (e) => {
-    const valor = aplicarMascaraCEP(e.target.value);
-    e.target.value = valor;
-
-    //  quando estiver completo
-    if (cepValido(valor)) {
-      try {
-        const dados = await buscarCEP(valor);
-
-        if (isDetalhesPage) {
-          if (cepCode) {
-            cepCode.textContent = dados.cep;
-          }
-
-          if (cepPrice) {
-            cepPrice.textContent = "R$ 20,90";
-          }
-
-          if (cepTime) {
-            cepTime.textContent = "3 a 5";
-          }
-
-          // Montar o endereço bonito
-          if (addressSpan && cepAddressDiv) {
-            const endereco = `${dados.logradouro}, ${dados.bairro}, ${dados.localidade} - ${dados.uf}`;
-
-            addressSpan.textContent = endereco;
-            cepAddressDiv.classList.remove("hide");
-          }
-
-          cepInfoDiv.classList.remove("hide");
-          cepErrorDiv.classList.add("hide");
-        } else {
-          enderecoInput.value = dados.logradouro;
-          bairroInput.value = dados.bairro;
-
-          cidadeSelect.innerHTML = `<option>${dados.localidade}</option>`;
-          estadoSelect.innerHTML = `<option>${dados.uf}</option>`;
-          cepErrorDiv.classList.add("hide");
-        }
-      } catch (erro) {
-        console.error("Erro ao buscar CEP:", erro);
-      }
-    } else if (valor.length === 0) {
-      cepErrorDiv.classList.add("hide");
-
-      if (!isDetalhesPage) {
-        enderecoInput.value = "";
-        bairroInput.value = "";
-
-        cidadeSelect.innerHTML = `<option>Selecione</option>`;
-        estadoSelect.innerHTML = `<option>Selecione</option>`;
-      }
-    } else {
-      cepErrorDiv.classList.remove("hide");
-
-      if (isDetalhesPage) {
-        cepInfoDiv.classList.add("hide");
-      } else {
-        enderecoInput.value = "";
-        bairroInput.value = "";
-
-        cidadeSelect.innerHTML = `<option>Selecione</option>`;
-        estadoSelect.innerHTML = `<option>Selecione</option>`;
-      }
-    }
-  });
 }
 
 // ===============================
@@ -364,7 +245,12 @@ async function start() {
 
   controlarFab();
 
-  iniciarCep();
+  // Caso esteja na pagina de perfil
+  const isPerfilPage = window.location.pathname.includes("perfil.html");
+
+  if (isPerfilPage) {
+    iniciarPaginaPerfil();
+  }
 
   // Caso esteja na pagina de detalhes
   const isDetalhesPage = window.location.pathname.includes(
@@ -372,7 +258,7 @@ async function start() {
   );
 
   if (isDetalhesPage) {
-    await carregarDetalhes();
+    iniciarPaginaDetalhes();
   }
 
   // Se esta na página de adicionar
