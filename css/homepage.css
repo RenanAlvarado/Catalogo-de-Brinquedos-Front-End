@@ -207,6 +207,7 @@ html {
 #filter-toys {
   display: flex;
   align-items: flex-start;
+  justify-content: space-around;
   width: 100%;
   gap: 25px;
 

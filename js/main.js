@@ -2,10 +2,6 @@
 // IMPORTS
 // ===============================
 
-import { aplicarMascaraCEP } from "./utils/masks.js";
-
-import { cepValido } from "./utils/validators.js";
-
 import { inicializarHeaderUsuario } from "./components/header.js";
 
 import { controlarFab } from "./components/fab.js";
@@ -16,12 +12,7 @@ import { iniciarPaginaPerfil } from "./pages/perfil.js";
 
 import { iniciarPaginaDetalhes } from "./pages/detalhesBrinquedo.js";
 
-import {
-  buscarCategorias,
-  buscarMarcas,
-  filtrarBrinquedos,
-  buscarCEP,
-} from "./api.js";
+import { buscarCategorias, buscarMarcas, filtrarBrinquedos } from "./api.js";
 
 import {
   renderizarCategorias,

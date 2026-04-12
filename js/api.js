@@ -191,6 +191,13 @@ export async function loginAPI(email, senha) {
   });
 }
 
+export async function cadastroAPI(nome, email, senha) {
+  return await requisicao("/usuarios/cadastro", {
+    method: "POST",
+    body: JSON.stringify({ nome, email, senha }),
+  });
+}
+
 // ===============================
 // API DE CEP
 // ===============================

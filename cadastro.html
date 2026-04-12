@@ -18,6 +18,9 @@
     <!-- CSS ESPECÍFICO -->
     <link rel="stylesheet" href="css/cadastro.css" />
 
+    <!-- Scripts -->
+    <script type="module" src="js/pages/cadastro.js" defer></script>
+
     <!-- Icones -->
     <link
       rel="stylesheet"
@@ -46,27 +49,42 @@
           <form id="register-form">
             <h3 id="title">Cadastro</h3>
 
-            <div class="input-icon">
+            <div class="input-icon" id="nome-input-icon">
               <i class="fa-regular fa-user"></i>
-              <input type="text" placeholder="Nome completo" required />
+              <input type="text" id="nome-input" placeholder="Nome completo" />
             </div>
 
-            <div class="input-icon">
+            <div class="input-icon" id="email-input-icon">
               <i class="fa-regular fa-envelope"></i>
-              <input type="email" placeholder="Email" required />
+              <input type="email" id="email-input" placeholder="Email" />
             </div>
 
-            <div class="input-icon">
+            <div class="input-icon" id="password-input-icon">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" placeholder="Senha" required />
+              <input type="password" id="password-input" placeholder="Senha" />
+
+              <i class="fa-solid fa-eye" id="toggle-password"></i>
             </div>
 
-            <div class="input-icon">
+            <div class="input-icon" id="password-again-input-icon">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" placeholder="Confirmar senha" required />
+              <input
+                type="password"
+                id="password-again-input"
+                placeholder="Confirmar senha"
+              />
+
+              <i class="fa-solid fa-eye" id="toggle-password-again"></i>
             </div>
 
-            <input type="submit" value="Criar conta" class="btn-submit" />
+            <p id="cadastro-error" class="error-message"></p>
+
+            <input
+              type="submit"
+              id="submit-btn"
+              value="Criar conta"
+              class="btn-submit"
+            />
           </form>
 
           <a href="login.html" id="link-account">
