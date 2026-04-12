@@ -334,7 +334,7 @@ export function renderizarDetalhes(brinquedo) {
   // Preço
   const preco = document.getElementById("content-toy-price");
   if (preco) {
-    preco.textContent = `R$ ${brinquedo.preco}`;
+    preco.textContent = `R$ ${formatarPreco(brinquedo.preco)}`;
   }
 
   // Imagem

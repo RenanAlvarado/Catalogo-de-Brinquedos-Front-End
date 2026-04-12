@@ -1,13 +1,22 @@
 /* CSS de elementos repetidos da página */
 
 /* RESET GERAL */
+@font-face {
+  font-family: "Hey Comic";
+  /* O caminho abaixo sobe uma pasta (..) e entra na pasta fonts */
+  src: url("../fonts/hey-comic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 2. RESET GERAL E APLICAÇÃO DA FONTE */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  /* Aplica Hey Comic em tudo. Se falhar, usa Comic Sans */
+  font-family: "Hey Comic", "Comic Sans MS", cursive, sans-serif;
 }
-
 /* INPUTS  COM ICONE DO LADO*/
 .input-icon {
   display: flex;
