@@ -187,7 +187,7 @@ export function renderizarBrinquedos(container, brinquedos) {
       />
       <h3 class="toy-title">${brinquedo.nome}</h3>
       <p class="toy-description">${brinquedo.descricao}</p>
-      <p class="toy-price">R$: ${formatarPreco(brinquedo.preco)}</p>
+      <p class="toy-price">R$ ${formatarPreco(brinquedo.preco)}</p>
       
       <button class="quick-view-btn btn" 
         data-id="${brinquedo.id}"> 
