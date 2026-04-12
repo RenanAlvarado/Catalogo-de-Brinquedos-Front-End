@@ -31,3 +31,20 @@ export function aplicarMascaraPreco(valor) {
 
   return valor;
 }
+
+// Máscara para o telefone
+export function aplicarMascaraTelefone(valor) {
+  valor = valor.replace(/\D/g, ""); // remove tudo que não é número
+
+  if (valor.length <= 10) {
+    // Telefone fixo: (11) 1234-5678
+    valor = valor.replace(/(\d{2})(\d)/, "($1) $2");
+    valor = valor.replace(/(\d{4})(\d)/, "$1-$2");
+  } else {
+    // Celular: (11) 91234-5678
+    valor = valor.replace(/(\d{2})(\d)/, "($1) $2");
+    valor = valor.replace(/(\d{5})(\d)/, "$1-$2");
+  }
+
+  return valor;
+}

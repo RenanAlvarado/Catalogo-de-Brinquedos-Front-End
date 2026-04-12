@@ -6,6 +6,7 @@ import { buscarUsuarioPorId, buscarCEP } from "../api.js";
 import { renderizarPerfil } from "../render.js";
 
 import { aplicarMascaraCEP } from "../utils/masks.js";
+import { aplicarMascaraTelefone } from "../utils/masks.js";
 import { cepValido } from "../utils/validators.js";
 
 // ===============================
@@ -15,6 +16,7 @@ import { cepValido } from "../utils/validators.js";
 export async function iniciarPaginaPerfil() {
   await carregarPerfil();
   iniciarCep();
+  iniciarTelefone();
   iniciarSubmitPerfil();
 }
 
@@ -64,6 +66,17 @@ function iniciarCep() {
         cepErrorDiv.classList.remove("hide");
       }
     }
+  });
+}
+
+function iniciarTelefone() {
+  const telefoneInput = document.getElementById("number-input");
+
+  if (!telefoneInput) return;
+
+  telefoneInput.addEventListener("input", (e) => {
+    const valor = aplicarMascaraTelefone(e.target.value);
+    e.target.value = valor;
   });
 }
 
