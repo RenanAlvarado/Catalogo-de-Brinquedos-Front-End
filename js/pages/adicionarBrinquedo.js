@@ -9,17 +9,17 @@ import {
   deletarBrinquedoAPI,
   alterarBrinquedoAPI,
   buscarBrinquedoPorId,
-} from "./api.js";
+} from "../api.js";
 
-import { renderizarSelect, renderizarAlterarBrinquedo } from "./render.js";
+import { renderizarSelect, renderizarAlterarBrinquedo } from "../render.js";
 
-import { aplicarMascaraPreco } from "./utils/masks.js";
+import { aplicarMascaraPreco } from "../utils/masks.js";
 
 import {
   campoVazio,
   normalizarPreco,
   selectNaoSelecionado,
-} from "./utils/validators.js";
+} from "../utils/validators.js";
 
 // ===============================
 // ESTADOS

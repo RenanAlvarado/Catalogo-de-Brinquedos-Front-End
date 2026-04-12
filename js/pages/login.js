@@ -1,7 +1,7 @@
 // ===============================
 // IMPORTS
 // ===============================
-import { loginAPI } from "./api.js";
+import { loginAPI } from "../api.js";
 
 // ===============================
 // FUNÇÕES AUXILIARES PARA TRATAMENTO DE ERROS
@@ -108,27 +108,16 @@ async function realizarLogin() {
   try {
     const usuario = await loginAPI(email, senha);
 
-    if (!usuario) {
-      marcarErro(emailInputIcon);
-      marcarErro(senhaInputIcon);
-
-      mostrarErroLogin("Email ou senha incorretos");
-      return;
-    }
-
-    // Local Storage: BD do navegador, fica salvo durante a sessão
     localStorage.setItem("usuario", JSON.stringify(usuario));
 
-    if (usuario.tipo === "ADMIN") {
-      window.location.href = "index.html";
-    } else {
-      window.location.href = "index.html";
-    }
+    window.location.href = "index.html";
   } catch (erro) {
     console.error("Erro no login:", erro);
 
-    marcarErro(emailInput);
-    marcarErro(senhaInput);
+    marcarErro(emailInputIcon);
+    marcarErro(senhaInputIcon);
+
+    mostrarErroLogin("Email ou senha incorretos");
   }
 }
 // ===============================

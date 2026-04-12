@@ -10,7 +10,7 @@ import { inicializarHeaderUsuario } from "./components/header.js";
 
 import { controlarFab } from "./components/fab.js";
 
-import { iniciarPaginaAdicionar } from "./adicionarBrinquedo.js";
+import { iniciarPaginaAdicionar } from "./pages/adicionarBrinquedo.js";
 
 import {
   buscarCategorias,

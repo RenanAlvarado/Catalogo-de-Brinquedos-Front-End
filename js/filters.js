@@ -3,7 +3,6 @@
 // ===============================
 
 import {
-  buscarBrinquedos,
   buscarBrinquedosPorCategoria,
   buscarBrinquedosPorMarca,
 } from "./api.js";
@@ -119,74 +118,3 @@ export async function filtrarPorMarca(id, nomeMarca) {
     console.error("Erro ao filtrar Marca:", erro);
   }
 }
-
-/*
-// ===============================
-// ALTERAR CATEGORIA (CHECKBOX)
-// ===============================
-
-export function alterarCategoria(id, marcado) {
-  if (marcado) {
-    categoriasSelecionadas.push(id);
-  } else {
-    categoriasSelecionadas = categoriasSelecionadas.filter((c) => c !== id);
-  }
-
-  aplicarFiltros();
-}
-
-// ===============================
-// ALTERAR MARCA (CHECKBOX)
-// ===============================
-
-export function alterarMarca(id, marcado) {
-  if (marcado) {
-    marcasSelecionadas.push(id);
-  } else {
-    marcasSelecionadas = marcasSelecionadas.filter((m) => m !== id);
-  }
-
-  aplicarFiltros();
-}
-
-// ===============================
-// APLICAR FILTROS
-// ===============================
-
-
-async function aplicarFiltros() {
-  //Nenhum filtro selecionado
-  if (categoriasSelecionadas.length === 0 && marcasSelecionadas.length === 0) {
-    const resposta = await buscarBrinquedos();
-    const brinquedos = resposta.content || resposta;
-
-    toysTitle.innerText = "Lista de Produtos";
-
-    renderizarBrinquedos(productsContainer, brinquedos);
-
-    return;
-  }
-
-  // filtrar por categorias
-  for (const id of categoriasSelecionadas) {
-    const brinquedos = await buscarBrinquedosPorCategoria(id);
-
-    const resposta = await buscarBrinquedosPorCategoria(id);
-    const lista = resposta.content || resposta;
-
-    resultados.push(...lista);
-  }
-
-  // filtrar por marcas
-  for (const id of marcasSelecionadas) {
-    const brinquedos = await buscarBrinquedosPorMarca(id);
-
-    const resposta = await buscarBrinquedosPorMarca(id);
-    const lista = resposta.content || resposta;
-
-    resultados.push(...lista);
-  }
-
-  renderizarBrinquedos(productsContainer, resultados);
-}
-*/

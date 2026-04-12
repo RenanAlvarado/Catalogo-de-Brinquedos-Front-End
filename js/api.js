@@ -28,7 +28,9 @@ async function requisicao(endpoint, options = {}) {
     }
 
     if (!resposta.ok) {
-      throw new Error(`Erro HTTP: ${resposta.status}`);
+      const erro = new Error(`Erro HTTP: ${resposta.status}`);
+      erro.status = resposta.status;
+      throw erro;
     }
 
     return await resposta.json();
@@ -167,6 +169,14 @@ export async function buscarBrinquedosPorMarca(id) {
 }
 
 // ===============================
+// BUSCA DE USUÁRIO POR ID
+// ===============================
+
+export async function buscarUsuarioPorId(id) {
+  return await requisicao(`/usuarios/${id}`);
+}
+
+// ===============================
 // SISTEMA DE LOGIN E CADASTRO
 // ===============================
 
@@ -176,6 +186,7 @@ export async function loginAPI(email, senha) {
     body: JSON.stringify({ email, senha }),
   });
 }
+
 // ===============================
 // API DE CEP
 // ===============================
