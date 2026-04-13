@@ -3,95 +3,82 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- Fonte -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Logo do Navegador -->
-    <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
-
-    <!-- CSS GERAL -->
-    <link rel="stylesheet" href="css/base/globals.css" />
-    <!-- CSS ESPECÍFICO -->
+    <title>Marah | Cadastro</title>
     <link rel="stylesheet" href="css/cadastro.css" />
-
-    <!-- Scripts -->
-    <script type="module" src="js/pages/cadastro.js" defer></script>
-
-    <!-- Icones -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-
-    <title>Marah / Cadastro</title>
   </head>
-
   <body>
     <main id="main-container">
       <div id="register-container">
-        <a href="login.html" class="arrow-index-back">
-          <i class="fa-solid fa-arrow-left"></i>
-        </a>
+        <section class="left-panel">
+          <a href="login.html" class="arrow-index-back">
+            <i class="fa-solid fa-arrow-left"></i>
+          </a>
+          <div id="logo-container">
+            <img src="img/marah_cadas-rem.png" alt="Logo Marah" />
+            <h1 id="frase-cadastro">
+              <span>Crie sua conta</span>
+              <span>na Marah</span>
+            </h1>
+            <p class="subtitle-left">Organize seus itens com facilidade</p>
+          </div>
+        </section>
 
-        <div id="logo-container">
-          <img src="img/marah_cadas-rem.png" alt="Logo" />
+        <section id="form-container">
+          <div class="header-titles">
+            <h2 class="main-title">Cadastro</h2>
+            <h3 class="sub-title">Preencha os campos abaixo</h3>
+          </div>
 
-          <h1 id="frase-login">Crie sua conta na Marah</h1>
-        </div>
-
-        <div id="form-container">
           <form id="register-form">
-            <h3 id="title">Cadastro</h3>
-
-            <div class="input-icon" id="nome-input-icon">
+            <div class="input-icon">
               <i class="fa-regular fa-user"></i>
-              <input type="text" id="nome-input" placeholder="Nome completo" />
+              <input
+                type="text"
+                id="nome-input"
+                placeholder="NOME COMPLETO"
+                required
+              />
             </div>
-
-            <div class="input-icon" id="email-input-icon">
+            <div class="input-icon">
               <i class="fa-regular fa-envelope"></i>
-              <input type="email" id="email-input" placeholder="Email" />
+              <input
+                type="email"
+                id="email-input"
+                placeholder="EMAIL"
+                required
+              />
             </div>
-
-            <div class="input-icon" id="password-input-icon">
+            <div class="input-icon">
               <i class="fa-solid fa-lock"></i>
-              <input type="password" id="password-input" placeholder="Senha" />
-
-              <i class="fa-solid fa-eye" id="toggle-password"></i>
+              <input
+                type="password"
+                id="password-input"
+                placeholder="SENHA"
+                required
+              />
             </div>
-
-            <div class="input-icon" id="password-again-input-icon">
+            <div class="input-icon">
               <i class="fa-solid fa-lock"></i>
               <input
                 type="password"
                 id="password-again-input"
-                placeholder="Confirmar senha"
+                placeholder="CONFIRMAR SENHA"
+                required
               />
-
-              <i class="fa-solid fa-eye" id="toggle-password-again"></i>
             </div>
-
             <p id="cadastro-error" class="error-message"></p>
-
-            <input
-              type="submit"
-              id="submit-btn"
-              value="Criar conta"
-              class="btn-submit"
-            />
+            <button type="submit" class="btn-submit">CADASTRAR</button>
           </form>
-
-          <a href="login.html" id="link-account">
-            Já possui conta? Fazer login
-          </a>
-        </div>
+          <a href="login.html" id="link-account"
+            >Já possui conta? Fazer login</a
+          >
+        </section>
       </div>
     </main>
+    <script type="module" src="js/pages/cadastro.js" defer></script>
   </body>
 </html>
