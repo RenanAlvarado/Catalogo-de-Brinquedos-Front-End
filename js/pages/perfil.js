@@ -7,6 +7,7 @@ import { renderizarPerfil } from "../render.js";
 
 import { aplicarMascaraCEP } from "../utils/masks.js";
 import { aplicarMascaraTelefone } from "../utils/masks.js";
+import { removerMascara } from "../utils/masks.js";
 import { cepValido } from "../utils/validators.js";
 
 // ===============================
@@ -97,7 +98,7 @@ async function alterarPerfil() {
   const dados = {
     nome: document.getElementById("nome-input").value,
     email: document.getElementById("email-input").value,
-    telefone: document.getElementById("number-input").value,
+    telefone: removerMascara(document.getElementById("number-input").value),
 
     endereco: {
       cep: document.getElementById("cep-input").value,

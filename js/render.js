@@ -6,6 +6,8 @@ import { obterImagem } from "./api.js";
 
 import { formatarPreco } from "./utils/formatters.js";
 
+import { aplicarMascaraTelefone } from "./utils/masks.js";
+
 import { abrirBrinquedo } from "./router/brinquedoRouter.js";
 
 // ===============================
@@ -282,7 +284,10 @@ export function renderizarPerfil(usuario) {
   document.getElementById("email-input").value = usuario.email || "";
 
   // Contato
-  document.getElementById("number-input").value = usuario.telefone || "";
+  // Para puxar o telefone com máscara na tela de Perfil
+  document.getElementById("number-input").value = usuario.telefone
+    ? aplicarMascaraTelefone(usuario.telefone)
+    : "";
   document.getElementById("email-input-right").value = usuario.email || "";
 
   // Endereço (pode ser null!)

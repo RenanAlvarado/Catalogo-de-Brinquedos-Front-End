@@ -48,3 +48,8 @@ export function aplicarMascaraTelefone(valor) {
 
   return valor;
 }
+
+// Método para tirar máscara
+export function removerMascara(valor) {
+  return valor.replace(/\D/g, ""); // remove tudo que não for número
+}
