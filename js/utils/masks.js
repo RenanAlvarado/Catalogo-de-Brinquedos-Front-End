@@ -34,7 +34,7 @@ export function aplicarMascaraPreco(valor) {
 
 // Máscara para o telefone
 export function aplicarMascaraTelefone(valor) {
-  valor = valor.replace(/\D/g, ""); // remove tudo que não é número
+  valor = valor.replace(/\D/g, "");
 
   if (valor.length <= 10) {
     // Telefone fixo: (11) 1234-5678

@@ -2,7 +2,7 @@
 // IMPORTS
 // ===============================
 
-import { buscarUsuarioPorId, buscarCEP } from "../api.js";
+import { buscarUsuarioPorId, buscarCEP, alterarUsuarioAPI } from "../api.js";
 import { renderizarPerfil } from "../render.js";
 
 import { aplicarMascaraCEP } from "../utils/masks.js";
@@ -87,7 +87,36 @@ function iniciarSubmitPerfil() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    console.log("Salvar perfil depois");
+    alterarPerfil();
   });
+}
+
+async function alterarPerfil() {
+  const usuarioLogado = JSON.parse(localStorage.getItem("usuario"));
+
+  const dados = {
+    nome: document.getElementById("nome-input").value,
+    email: document.getElementById("email-input").value,
+    telefone: document.getElementById("number-input").value,
+
+    endereco: {
+      cep: document.getElementById("cep-input").value,
+      rua: document.getElementById("endereco-input").value,
+      bairro: document.getElementById("bairro-input").value,
+      numero: document.getElementById("numero-input").value,
+      cidade: document.getElementById("city-select").value,
+      estado: document.getElementById("state-select").value,
+    },
+  };
+
+  try {
+    const atualizado = await alterarUsuarioAPI(usuarioLogado.id, dados);
+
+    localStorage.setItem("usuario", JSON.stringify(atualizado));
+
+    alert("Perfil atualizado com sucesso!");
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao atualizar perfil");
+  }
 }

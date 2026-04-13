@@ -199,6 +199,17 @@ export async function cadastroAPI(nome, email, senha) {
 }
 
 // ===============================
+// CRUD USUÁRIO
+// ===============================
+
+export async function alterarUsuarioAPI(id, dados) {
+  return await requisicao(`/usuarios/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(dados),
+  });
+}
+
+// ===============================
 // API DE CEP
 // ===============================
 
