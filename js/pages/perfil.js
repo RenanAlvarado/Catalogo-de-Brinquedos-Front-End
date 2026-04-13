@@ -9,6 +9,8 @@ import { aplicarMascaraCEP } from "../utils/masks.js";
 import { aplicarMascaraTelefone } from "../utils/masks.js";
 import { removerMascara } from "../utils/masks.js";
 import { cepValido } from "../utils/validators.js";
+import { campoVazio } from "../utils/validators.js";
+import { selectNaoSelecionado } from "../utils/validators.js";
 
 // ===============================
 // FUNÇÃO PRINCIPAL DA PÁGINA
@@ -19,6 +21,7 @@ export async function iniciarPaginaPerfil() {
   iniciarCep();
   iniciarTelefone();
   iniciarLimparFormularioPerfil();
+  adicionarRemocaoErroPerfil();
   iniciarSubmitPerfil();
 }
 
@@ -36,6 +39,70 @@ async function carregarPerfil() {
   } catch (erro) {
     console.error("Erro ao carregar perfil:", erro);
   }
+}
+
+// ===============================
+// FUNÇÕES DE VALIDAÇÃO
+// ===============================
+function marcarErro(campo) {
+  campo.style.border = "1px solid red";
+}
+
+function limparErro(campo) {
+  campo.style.border = "1px solid #000";
+}
+
+function validarFormularioPerfil() {
+  const nome = document.getElementById("nome-input");
+  const email = document.getElementById("email-input");
+  const telefone = document.getElementById("number-input");
+  const cep = document.getElementById("cep-input");
+  const numero = document.getElementById("numero-input");
+
+  let valido = true;
+
+  // Nome
+  if (campoVazio(nome.value)) {
+    marcarErro(nome);
+    valido = false;
+  } else limparErro(nome);
+
+  // E-mail
+  if (campoVazio(email.value)) {
+    marcarErro(email);
+    valido = false;
+  } else limparErro(email);
+
+  // Telefone
+  if (campoVazio(telefone.value)) {
+    marcarErro(telefone);
+    valido = false;
+  } else limparErro(telefone);
+
+  // CEP
+  if (campoVazio(cep.value) || !cepValido(cep.value)) {
+    marcarErro(cep);
+    valido = false;
+  } else limparErro(cep);
+
+  // Número
+  if (campoVazio(numero.value)) {
+    marcarErro(numero);
+    valido = false;
+  } else limparErro(numero);
+
+  return valido;
+}
+
+function adicionarRemocaoErroPerfil() {
+  const campos = document.querySelectorAll(
+    "#nome-input, #email-input, #number-input, #cep-input, #numero-input",
+  );
+
+  campos.forEach((campo) => {
+    campo.addEventListener("input", () => limparErro(campo));
+    campo.addEventListener("change", () => limparErro(campo));
+  });
 }
 
 function iniciarCep() {
@@ -89,6 +156,9 @@ function iniciarSubmitPerfil() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    if (!validarFormularioPerfil()) return;
+
     alterarPerfil();
   });
 }
@@ -126,6 +196,7 @@ async function alterarPerfil() {
 // ===============================
 // LIMPAR FORMULÁRIO
 // ===============================
+
 export function iniciarLimparFormularioPerfil() {
   const form = document.getElementById("form-aditional-informations");
   const btnLimpar = document.getElementById("limpar-btn");
