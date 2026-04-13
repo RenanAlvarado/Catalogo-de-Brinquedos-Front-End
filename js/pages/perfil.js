@@ -18,6 +18,7 @@ export async function iniciarPaginaPerfil() {
   await carregarPerfil();
   iniciarCep();
   iniciarTelefone();
+  iniciarLimparFormularioPerfil();
   iniciarSubmitPerfil();
 }
 
@@ -120,4 +121,39 @@ async function alterarPerfil() {
     console.error(error);
     alert("Erro ao atualizar perfil");
   }
+}
+
+// ===============================
+// LIMPAR FORMULÁRIO
+// ===============================
+export function iniciarLimparFormularioPerfil() {
+  const form = document.getElementById("form-aditional-informations");
+  const btnLimpar = document.getElementById("limpar-btn");
+
+  if (!form || !btnLimpar) return;
+
+  btnLimpar.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // limpa apenas os campos do formulário da direita
+    form.reset();
+
+    // limpa selects manualmente (porque são dinâmicos)
+    const citySelect = document.getElementById("city-select");
+    const stateSelect = document.getElementById("state-select");
+
+    if (citySelect) {
+      citySelect.innerHTML = "<option>Selecione</option>";
+    }
+
+    if (stateSelect) {
+      stateSelect.innerHTML = "<option>Selecione</option>";
+    }
+
+    // limpa mensagem de erro do CEP
+    const cepErrorDiv = document.getElementById("cep-error");
+    if (cepErrorDiv) {
+      cepErrorDiv.classList.add("hide");
+    }
+  });
 }
