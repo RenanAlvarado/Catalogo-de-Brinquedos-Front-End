@@ -4,11 +4,15 @@
 
 import { obterImagem } from "./api.js";
 
+import { isAdmin } from "./services/authService.js";
+
 import { formatarPreco } from "./utils/formatters.js";
 
 import { aplicarMascaraTelefone } from "./utils/masks.js";
 
 import { abrirBrinquedo } from "./router/brinquedoRouter.js";
+
+import { abrirCategoria } from "./router/categoriaRouter.js";
 
 // ===============================
 // FUNÇÃO AUXILIAR PARA CRIAR SELECTS
@@ -35,6 +39,8 @@ export function renderizarSelect(select, lista, placeholder) {
 export function renderizarCategorias(container, categorias, aoClicar) {
   container.innerHTML = "";
 
+  const admin = isAdmin();
+
   categorias.forEach((categoria) => {
     const card = document.createElement("button");
     card.classList.add("category-card");
@@ -49,15 +55,27 @@ export function renderizarCategorias(container, categorias, aoClicar) {
         onerror="this.src='img/placeholder.png'"
       />
       <h3 class="category-title">${categoria.nome}</h3>
+
+      ${
+        admin
+          ? `<button class="quick-view-btn-categories btn">
+              <i class="fa-solid fa-pencil"></i> Editar
+             </button>`
+          : ""
+      }
     `;
 
-    // guardar id da categoria
-    card.dataset.id = categoria.id;
+    const quickBtn = card.querySelector(".quick-view-btn-categories");
 
-    // evento de clique
-    card.addEventListener("click", () => {
-      // Se a função aoClicar existir, ela será executada passando os dados
-      if (typeof aoClicar === "function") {
+    if (quickBtn && admin) {
+      quickBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        abrirCategoria(categoria.id);
+      });
+    }
+
+    card.addEventListener("click", (event) => {
+      if (!event.target.closest(".quick-view-btn-categories")) {
         aoClicar(categoria.id, categoria.nome);
       }
     });
@@ -321,6 +339,20 @@ export function renderizarAlterarMarca(marca) {
 // RENDERIZAR TELA DE PERFIL
 // ===============================
 export function renderizarPerfil(usuario) {
+  // Imagem
+
+  const imagemHTML = document.getElementById("user-img-preview");
+
+  if (imagemHTML) {
+    const imagem = obterImagem("usuarios", usuario.imagem);
+
+    imagemHTML.src = imagem;
+
+    imagemHTML.onerror = () => {
+      imagemHTML.onerror = null;
+      imagemHTML.src = "img/placeholder.png";
+    };
+  }
   // Dados básicos
   document.getElementById("nome-input").value = usuario.nome || "";
   document.getElementById("email-input").value = usuario.email || "";
