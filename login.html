@@ -3,95 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
-
-    <!-- CSS GERAL -->
-    <link rel="stylesheet" href="css/base/globals.css" />
-    <!-- CSS ESPECÍFICO -->
+    <title>Marah | Login</title>
     <link rel="stylesheet" href="css/login.css" />
-
-    <!-- Scripts -->
-    <script type="module" src="js/pages/login.js" defer></script>
-
-    <!-- Icones -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
-    <title>Marah/Login</title>
   </head>
   <body>
     <main id="main-container">
       <div id="login-container">
-        <a href="index.html" class="arrow-index-back">
-          <i class="fa-solid fa-arrow-left"></i>
-        </a>
-        <div id="logo-container">
-          <img src="img/login_bem-remov.png" alt="Logo" />
-          <h1 id="frase-login">
-            <span class="linha1">É sempre</span>
+        <section class="left-panel">
+          <a href="index.html" class="arrow-index-back">
+            <i class="fa-solid fa-arrow-left"></i>
+          </a>
+          <div id="logo-container">
+            <img src="img/login_bem-remov.png" alt="Logo Marah" />
+            <h1 id="frase-login">
+              <span>É sempre</span>
+              <span>um prazer</span>
+              <span>recebê-lo</span>
+            </h1>
+            <p class="subtitle-left">Acesse sua conta agora mesmo</p>
+          </div>
+        </section>
 
-            <span class="linha2">um prazer</span>
+        <section id="form-container">
+          <div class="header-titles">
+            <h2 class="main-title">Login</h2>
+            <h3 class="sub-title">Insira seus dados de acesso</h3>
+          </div>
 
-            <span class="linha3">recebê-lo</span>
-          </h1>
-        </div>
-        <div id="form-container">
-          <form action="#" id="login-form">
-            <h3 id="title">Login</h3>
-            <div class="input-icon" id="email-input-icon">
-              <i class="fa-regular fa-user"></i>
+          <form id="login-form">
+            <div class="input-icon">
+              <i class="fa-regular fa-envelope"></i>
               <input
                 type="email"
-                name="email"
                 id="email-input"
-                placeholder="Insira seu Email"
+                placeholder="EMAIL"
+                required
               />
             </div>
-            <div class="input-icon" id="password-input-icon">
+
+            <div class="input-icon">
               <i class="fa-solid fa-lock"></i>
               <input
                 type="password"
-                name="password"
                 id="password-input"
-                placeholder="Insira sua senha"
+                placeholder="SENHA"
+                required
               />
               <i class="fa-solid fa-eye" id="toggle-password"></i>
             </div>
 
-            <p id="login-error" class="error-message"></p>
-
-            <!-- Div criada para deixar tudo lado a lado -->
-            <div id="remember-password">
-              <div id="remember-me">
-                <input type="checkbox" name="lembrar" id="remember-check" />
-                <label for="remember-check" class="switch">
-                  <span class="slider"></span>
-                </label>
-                <span id="remember-title">Lembrar</span>
-              </div>
-
-              <a href="recuperar_senha.html">Esqueceu a senha?</a>
+            <div class="forgot-pass-wrapper">
+              <a href="recuperar_senha.html" class="forgot-link"
+                >Esqueceu sua senha?</a
+              >
             </div>
 
-            <input
-              type="submit"
-              value="Login"
-              id="btn-submit"
-              class="btn-submit"
-            />
+            <p id="login-error" class="error-message"></p>
+
+            <button type="submit" class="btn-submit">ENTRAR</button>
           </form>
 
-          <a href="cadastro.html" id="link-account">Criar conta</a>
-        </div>
+          <a href="cadastro.html" id="link-account"
+            >Ainda não tem uma conta? Criar conta</a
+          >
+        </section>
       </div>
     </main>
+    <script type="module" src="js/pages/login.js" defer></script>
   </body>
 </html>
