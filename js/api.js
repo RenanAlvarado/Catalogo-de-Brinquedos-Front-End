@@ -28,9 +28,8 @@ async function requisicao(endpoint, options = {}) {
     }
 
     if (!resposta.ok) {
-      const erro = new Error(`Erro HTTP: ${resposta.status}`);
-      erro.status = resposta.status;
-      throw erro;
+      const erroData = await resposta.json();
+      throw erroData;
     }
 
     return await resposta.json();
@@ -244,10 +243,10 @@ export async function loginAPI(email, senha) {
   });
 }
 
-export async function cadastroAPI(nome, email, senha) {
+export async function cadastroAPI(nome, email, senha, confirmarSenha) {
   return await requisicao("/usuarios/cadastro", {
     method: "POST",
-    body: JSON.stringify({ nome, email, senha }),
+    body: JSON.stringify({ nome, email, senha, confirmarSenha }),
   });
 }
 

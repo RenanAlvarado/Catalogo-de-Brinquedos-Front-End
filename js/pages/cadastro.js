@@ -2,43 +2,23 @@
 // IMPORTS
 // ===============================
 import { cadastroAPI } from "../api.js";
+import { marcarErro, limparErros } from "../utils/formUtils.js";
 
 // ===============================
 // FUNÇÕES AUXILIARES PARA TRATAMENTO DE ERROS
 // ===============================
-function marcarErro(campo) {
-  campo.style.border = "1px solid red";
-}
-
-function limparErro(campo) {
-  campo.style.border = "1px solid #ccc";
-}
-
 function adicionarRemocaoErroTempoReal() {
-  const nomeInputIcon = document.getElementById("nome-input-icon");
-  const emailInputIcon = document.getElementById("email-input-icon");
-  const senhaInputIcon = document.getElementById("password-input-icon");
-  const senhaAgainInputIcon = document.getElementById(
-    "password-again-input-icon",
-  );
+  const inputs = document.querySelectorAll(".input-icon input");
 
-  nomeInputIcon.addEventListener("input", () => {
-    limparErro(nomeInputIcon);
-  });
+  inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      input.style.border = "";
 
-  emailInputIcon.addEventListener("input", () => {
-    limparErro(emailInputIcon);
-  });
+      const erro = input.closest(".input-icon").querySelector(".error-text");
+      if (erro) erro.remove();
 
-  senhaInputIcon.addEventListener("input", () => {
-    limparErro(senhaInputIcon);
-
-    limparErroCadastro();
-  });
-
-  senhaAgainInputIcon.addEventListener("input", () => {
-    limparErro(senhaInputIcon);
-    limparErroCadastro();
+      limparErroCadastro();
+    });
   });
 }
 
@@ -113,13 +93,6 @@ async function realizarCadastro() {
   const senhaInput = document.getElementById("password-input");
   const confirmarSenhaInput = document.getElementById("password-again-input");
 
-  const nomeInputIcon = document.getElementById("nome-input-icon");
-  const emailInputIcon = document.getElementById("email-input-icon");
-  const senhaInputIcon = document.getElementById("password-input-icon");
-  const senhaAgainInputIcon = document.getElementById(
-    "password-again-input-icon",
-  );
-
   const nome = nomeInput.value.trim();
   const email = emailInput.value.trim();
   const senha = senhaInput.value.trim();
@@ -127,46 +100,44 @@ async function realizarCadastro() {
 
   let valido = true;
 
+  // limpa erros anteriores
+  limparErros();
+  limparErroCadastro();
+
   // valida nome
   if (!nome) {
-    marcarErro(nomeInputIcon);
+    marcarErro("nome-input", "Nome é obrigatório");
     valido = false;
-  } else {
-    limparErro(nomeInputIcon);
   }
 
   // valida email
   if (!email) {
-    marcarErro(emailInputIcon);
+    marcarErro("email-input", "Email é obrigatório");
     valido = false;
-  } else {
-    limparErro(emailInputIcon);
   }
 
   // valida senha
   if (!senha) {
-    marcarErro(senhaInputIcon);
+    marcarErro("password-input", "Senha é obrigatória");
     valido = false;
-  } else {
-    limparErro(senhaInputIcon);
-  }
-
-  if (confirmarSenha !== senha) {
-    mostrarErroCadastro("Senhas devem ser iguais!");
   }
 
   // valida confirmação de senha
-  if (!confirmarSenha || confirmarSenha !== senha) {
-    marcarErro(senhaAgainInputIcon);
+  if (!confirmarSenha) {
+    marcarErro("password-again-input", "Confirme sua senha");
     valido = false;
-  } else {
-    limparErro(senhaAgainInputIcon);
+  } else if (confirmarSenha !== senha) {
+    marcarErro("password-input", ""); // só borda vermelha
+    marcarErro("password-again-input", "Senhas não coincidem");
+
+    mostrarErroCadastro("Senhas devem ser iguais!");
+    valido = false;
   }
 
   if (!valido) return;
 
   try {
-    const usuarioCriado = await cadastroAPI(nome, email, senha);
+    const usuarioCriado = await cadastroAPI(nome, email, senha, confirmarSenha);
 
     // opcional: salvar usuário logado automaticamente
     localStorage.setItem("usuario", JSON.stringify(usuarioCriado));
@@ -175,7 +146,16 @@ async function realizarCadastro() {
   } catch (erro) {
     console.error("Erro no cadastro:", erro);
 
-    alert("Erro ao criar conta. Verifique os dados.");
+    // tratamento de erro vindo do backend
+    if (erro && typeof erro === "object") {
+      if (erro.nome) marcarErro("nome-input", erro.nome);
+      if (erro.email) marcarErro("email-input", erro.email);
+      if (erro.senha) marcarErro("password-input", erro.senha);
+      if (erro.confirmarSenha)
+        marcarErro("password-again-input", erro.confirmarSenha);
+    } else {
+      mostrarErroCadastro("Erro ao criar conta. Verifique os dados.");
+    }
   }
 }
 
