@@ -6,7 +6,9 @@ import { inicializarHeaderUsuario } from "./components/header.js";
 
 import { controlarFab } from "./components/fab.js";
 
-import { iniciarPaginaAdicionar } from "./pages/adicionarBrinquedo.js";
+import { iniciarPaginaAdicionarBrinquedo } from "./pages/adicionarBrinquedo.js";
+
+import { iniciarPaginaAdicionarCategoria } from "./pages/adicionarCategoria.js";
 
 import { iniciarPaginaPerfil } from "./pages/perfil.js";
 
@@ -252,13 +254,21 @@ async function start() {
     iniciarPaginaDetalhes();
   }
 
-  // Se esta na página de adicionar
-  const isAddPage = window.location.pathname.includes(
+  // Se esta na página de adicionar brinquedo
+  const isAddBrinquedoPage = window.location.pathname.includes(
     "adicionar_brinquedo.html",
   );
 
-  if (isAddPage) {
-    iniciarPaginaAdicionar();
+  if (isAddBrinquedoPage) {
+    iniciarPaginaAdicionarBrinquedo();
+  }
+
+  const isAddCategoriaPage = window.location.pathname.includes(
+    "adicionar_categoria.html",
+  );
+
+  if (isAddCategoriaPage) {
+    iniciarPaginaAdicionarCategoria();
   }
 
   //Busca ativa após ter os componentes

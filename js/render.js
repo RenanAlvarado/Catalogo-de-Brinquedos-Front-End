@@ -250,7 +250,7 @@ export function renderizarQuickViewBrinquedos(brinquedo) {
 }
 
 // ===============================
-// RENDERIZAR TELA DE ALTERAR
+// RENDERIZAR TELA DE ALTERAR BRINQUEDO
 // ===============================
 
 export function renderizarAlterarBrinquedo(brinquedo) {
@@ -267,6 +267,27 @@ export function renderizarAlterarBrinquedo(brinquedo) {
   if (!imgPreview) return;
 
   imgPreview.src = obterImagem("toys", brinquedo.imagem);
+
+  //  Caso  a imagem seja apagada ou não exista no server
+  imgPreview.onerror = () => {
+    imgPreview.onerror = null; // evita loop infinito
+    imgPreview.src = "img/placeholder.png";
+  };
+}
+
+// ===============================
+// RENDERIZAR TELA DE ALTERAR CATEGORIA
+// ===============================
+
+export function renderizarAlterarCategoria(categoria) {
+  document.getElementById("id-input").value = categoria.id;
+  document.getElementById("nome-input").value = categoria.nome;
+
+  const imgPreview = document.getElementById("img-preview");
+
+  if (!imgPreview) return;
+
+  imgPreview.src = obterImagem("categories", categoria.imagem);
 
   //  Caso  a imagem seja apagada ou não exista no server
   imgPreview.onerror = () => {

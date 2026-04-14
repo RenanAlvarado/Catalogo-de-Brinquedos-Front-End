@@ -56,6 +56,10 @@ export function obterImagem(pasta, imagem) {
     return `http://localhost:8080/uploads/users/${imagem}`;
   }
 
+  if (pasta === "categories") {
+    return `http://localhost:8080/uploads/categories/${imagem}`;
+  }
+
   // categorias e marcas continuam locais
   return `img/${pasta}/${imagem}`;
 }
@@ -66,6 +70,10 @@ export function obterImagem(pasta, imagem) {
 
 export async function buscarCategorias() {
   return await requisicao("/categorias");
+}
+
+export async function buscarCategoriaPorId(id) {
+  return await requisicao(`/categorias/${id}`);
 }
 
 // ===============================
@@ -136,6 +144,30 @@ export async function alterarBrinquedoAPI(id, formData) {
 
 export async function deletarBrinquedoAPI(id) {
   return await requisicao(`/brinquedos/${id}`, {
+    method: "DELETE",
+  });
+}
+
+// ===============================
+// CRUD --> CATEGORIAS
+// ===============================
+
+export async function salvarCategoriaAPI(formData) {
+  return await requisicao("/categorias", {
+    method: "POST",
+    body: formData,
+  });
+}
+
+export async function alterarCategoriaAPI(id, formData) {
+  return await requisicao(`/categorias/${id}`, {
+    method: "PUT",
+    body: formData,
+  });
+}
+
+export async function deletarCategoriaAPI(id) {
+  return await requisicao(`/categorias/${id}`, {
     method: "DELETE",
   });
 }

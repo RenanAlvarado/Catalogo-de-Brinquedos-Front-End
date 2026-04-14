@@ -3,25 +3,17 @@
 // ===============================
 
 import {
-  buscarMarcas,
-  buscarCategorias,
-  salvarBrinquedoAPI,
-  deletarBrinquedoAPI,
-  alterarBrinquedoAPI,
-  buscarBrinquedoPorId,
+  buscarCategoriaPorId,
+  salvarCategoriaAPI,
+  alterarCategoriaAPI,
+  deletarCategoriaAPI,
 } from "../api.js";
 
-import { renderizarSelect, renderizarAlterarBrinquedo } from "../render.js";
-
-import { aplicarMascaraPreco } from "../utils/masks.js";
+import { renderizarAlterarCategoria } from "../render.js";
 
 import { confirmarAcao, mostrarFeedbackAcao } from "../utils/modals.js";
 
-import {
-  campoVazio,
-  normalizarPreco,
-  selectNaoSelecionado,
-} from "../utils/validators.js";
+import { campoVazio } from "../utils/validators.js";
 
 // ===============================
 // ESTADOS
@@ -33,17 +25,13 @@ let isEdicao = false;
 // INICIALIZAÇÃO
 // ===============================
 
-export async function iniciarPaginaAdicionarBrinquedo() {
-  await carregarMarcasSelect();
-  await carregarCategoriasSelect();
-
+export async function iniciarPaginaAdicionarCategoria() {
   isEdicao = await carregarModoEdicao();
 
   configurarModoTela();
 
   iniciarUploadImagem();
-  iniciarMascaraPreco();
-  iniciarLimparFormulario();
+
   iniciarValidacaoFormulario();
 }
 
@@ -52,19 +40,19 @@ export async function iniciarPaginaAdicionarBrinquedo() {
 // ===============================
 
 function configurarModoTela() {
-  const titulo = document.getElementById("title-toy-form");
-  const botaoSubmit = document.querySelector("#salvar-brinquedo-btn");
+  const titulo = document.getElementById("title-categorie-form");
+  const botaoSubmit = document.querySelector("#salvar-categoria-btn");
   const deleteBtn = document.getElementById("delete-btn");
   const idInput = document.querySelector("#id-input-icon");
 
   if (isEdicao) {
-    if (titulo) titulo.textContent = "Editar Brinquedo";
+    if (titulo) titulo.textContent = "Editar Categoria";
     if (botaoSubmit) botaoSubmit.textContent = "Atualizar";
 
     if (deleteBtn) deleteBtn.style.display = "block";
   } else {
     if (idInput) idInput.style.display = "none";
-    if (titulo) titulo.textContent = "Adicionar Brinquedo";
+    if (titulo) titulo.textContent = "Adicionar Categoria";
     if (botaoSubmit) botaoSubmit.textContent = "Salvar";
     if (deleteBtn) deleteBtn.style.display = "none";
   }
@@ -73,6 +61,7 @@ function configurarModoTela() {
 // ===============================
 // CARREGAR INFORMAÇÕES NA TELA
 // ===============================
+
 export async function carregarModoEdicao() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
@@ -80,57 +69,13 @@ export async function carregarModoEdicao() {
   if (!id) return false;
 
   try {
-    const brinquedo = await buscarBrinquedoPorId(id);
-    renderizarAlterarBrinquedo(brinquedo);
+    const categoria = await buscarCategoriaPorId(id);
+    renderizarAlterarCategoria(categoria);
     return true;
   } catch (erro) {
-    console.error("Erro ao carregar brinquedo:", erro);
+    console.error("Erro ao carregar categoria:", erro);
     return false;
   }
-}
-
-// ===============================
-// CARREGAMENTO DOS SELECTS
-// ===============================
-export async function carregarMarcasSelect() {
-  const select = document.getElementById("marca-input");
-
-  if (!select) return;
-
-  try {
-    const marcas = await buscarMarcas();
-
-    renderizarSelect(select, marcas, "Selecione a Marca:");
-  } catch (erro) {
-    console.error("Erro ao carregar marcas:", erro);
-  }
-}
-
-export async function carregarCategoriasSelect() {
-  const select = document.getElementById("categoria-input");
-
-  if (!select) return;
-
-  try {
-    const categorias = await buscarCategorias();
-
-    renderizarSelect(select, categorias, "Selecione a Categoria:");
-  } catch (erro) {
-    console.error("Erro ao carregar categorias:", erro);
-  }
-}
-
-// ===============================
-// MÁSCARA DE PREÇO
-// ===============================
-export function iniciarMascaraPreco() {
-  const precoInput = document.getElementById("preco-input");
-
-  if (!precoInput) return;
-
-  precoInput.addEventListener("input", (e) => {
-    e.target.value = aplicarMascaraPreco(e.target.value);
-  });
 }
 
 // ===============================
@@ -213,63 +158,6 @@ export function iniciarUploadImagem() {
 }
 
 // ===============================
-// LIMPAR FORMULÁRIO
-// ===============================
-export function iniciarLimparFormulario() {
-  const form = document.getElementById("adicionar-brinquedo-form");
-  const btnLimpar = document.getElementById("limpar-btn");
-
-  if (!form || !btnLimpar) return;
-
-  btnLimpar.addEventListener("click", (e) => {
-    e.preventDefault();
-    // limpa inputs padrão
-    form.reset();
-
-    //  limpar preview da imagem
-    const imgPreview = document.getElementById("img-preview");
-    const imgInput = document.getElementById("img-input");
-    const uploadText = document.getElementById("upload-text");
-    const uploadBtn = document.getElementById("upload-btn");
-    const uploadIcon = document.getElementById("upload-icon");
-
-    if (imgPreview) {
-      URL.revokeObjectURL(imgPreview.src);
-      imgPreview.src = "img/placeholder.png";
-    }
-
-    if (imgInput) {
-      imgInput.value = "";
-    }
-
-    if (uploadText) {
-      uploadText.textContent = "Selecionar imagem";
-    }
-
-    if (uploadBtn) {
-      uploadBtn.classList.remove("active");
-    }
-
-    if (uploadIcon) {
-      uploadIcon.classList.remove("fa-xmark");
-      uploadIcon.classList.add("fa-upload");
-    }
-
-    const camposErro = [
-      document.getElementById("nome-input-icon"),
-      document.getElementById("descricao-input"),
-      document.getElementById("price-input-icon"),
-      document.getElementById("marca-input"),
-      document.getElementById("categoria-input"),
-    ];
-
-    camposErro.forEach((campo) => {
-      if (campo) limparErro(campo);
-    });
-  });
-}
-
-// ===============================
 // FUNÇÕES DE VALIDAÇÃO
 // ===============================
 
@@ -284,11 +172,6 @@ function limparErro(campo) {
 function validarFormulario() {
   const nome = document.getElementById("nome-input");
   const nomeInputIcon = document.getElementById("nome-input-icon");
-  const descricao = document.getElementById("descricao-input");
-  const preco = document.getElementById("preco-input");
-  const precoInputIcon = document.getElementById("price-input-icon");
-  const marca = document.getElementById("marca-input");
-  const categoria = document.getElementById("categoria-input");
 
   let valido = true;
 
@@ -297,41 +180,11 @@ function validarFormulario() {
     valido = false;
   } else limparErro(nomeInputIcon);
 
-  if (campoVazio(descricao.value)) {
-    marcarErro(descricao);
-    valido = false;
-  } else limparErro(descricao);
-
-  const precoNormalizado = normalizarPreco(preco.value);
-
-  if (
-    campoVazio(preco.value) ||
-    isNaN(precoNormalizado) ||
-    precoNormalizado <= 0
-  ) {
-    marcarErro(precoInputIcon);
-    valido = false;
-  } else {
-    limparErro(precoInputIcon);
-  }
-
-  if (selectNaoSelecionado(marca.value)) {
-    marcarErro(marca);
-    valido = false;
-  } else limparErro(marca);
-
-  if (selectNaoSelecionado(categoria.value)) {
-    marcarErro(categoria);
-    valido = false;
-  } else limparErro(categoria);
-
   return valido;
 }
 
 function adicionarRemocaoErroEmTempoReal() {
-  const campos = document.querySelectorAll(
-    "#nome-input-icon, #descricao-input, #price-input-icon, #marca-input, #categoria-input",
-  );
+  const campos = document.querySelectorAll("#nome-input-icon");
 
   campos.forEach((campo) => {
     campo.addEventListener("input", () => limparErro(campo));
@@ -340,7 +193,7 @@ function adicionarRemocaoErroEmTempoReal() {
 }
 
 export function iniciarValidacaoFormulario() {
-  const form = document.getElementById("adicionar-brinquedo-form");
+  const form = document.getElementById("adicionar-categoria-form");
 
   if (!form) return;
 
@@ -350,20 +203,12 @@ export function iniciarValidacaoFormulario() {
     e.preventDefault();
     if (!validarFormulario()) return;
 
-    salvarOuAlterarBrinquedo();
+    salvarOuAlterarCategoria();
   });
 }
 
-// ===============================
-// MONTAR OBJETO JSON PARA ENVIO AO BD
-// ===============================
-
-function montarObjetoBrinquedo() {
+function montarObjetoCategoria() {
   const nome = document.getElementById("nome-input").value;
-  const descricao = document.getElementById("descricao-input").value;
-  const preco = document.getElementById("preco-input").value;
-  const marca = document.getElementById("marca-input").value;
-  const categoria = document.getElementById("categoria-input").value;
   const imgInput = document.getElementById("img-input");
 
   const arquivo = imgInput.files[0];
@@ -371,28 +216,24 @@ function montarObjetoBrinquedo() {
 
   return {
     nome,
-    descricao,
     imagem: nomeImagem,
-    preco: normalizarPreco(preco),
-    marca: { id: Number(marca) },
-    categoria: { id: Number(categoria) },
   };
 }
 
 // ===============================
-// FUNÇÕES DE CRUD DOS BRINQUEDOS
+// FUNÇÕES DE CRUD DAS CATEGORIAS
 // ===============================
 
-// Método para salvar brinquedos
-async function salvarOuAlterarBrinquedo() {
-  const brinquedo = montarObjetoBrinquedo();
+// Método para salvar categorias
+async function salvarOuAlterarCategoria() {
+  const categoria = montarObjetoCategoria();
 
   const imgInput = document.getElementById("img-input");
   const arquivo = imgInput.files[0];
 
   const formData = new FormData();
 
-  formData.append("brinquedo", JSON.stringify(brinquedo));
+  formData.append("categoria", JSON.stringify(categoria));
 
   if (arquivo) {
     formData.append("imagem", arquivo);
@@ -411,7 +252,7 @@ async function salvarOuAlterarBrinquedo() {
       if (!confirmar) return;
 
       // Atualizar
-      data = await alterarBrinquedoAPI(id, formData);
+      data = await alterarCategoriaAPI(id, formData);
 
       console.log("Atualizado:", data);
 
@@ -421,7 +262,7 @@ async function salvarOuAlterarBrinquedo() {
 
       if (!confirmar) return;
       // Salvar
-      data = await salvarBrinquedoAPI(formData);
+      data = await salvarCategoriaAPI(formData);
 
       await mostrarFeedbackAcao("Sucesso", "Salvar");
 
@@ -436,13 +277,13 @@ async function salvarOuAlterarBrinquedo() {
   }
 }
 
-// Deletar brinquedo
-async function deletarBrinquedo() {
+// Deletar categoria
+async function deletarCategoria() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
 
   if (!id) {
-    alert("Nenhum brinquedo selecionado.");
+    alert("Nenhuma categoria selecionada.");
     return;
   }
 
@@ -451,7 +292,7 @@ async function deletarBrinquedo() {
   if (!confirmar) return;
 
   try {
-    await deletarBrinquedoAPI(id);
+    await deletarCategoriaAPI(id);
 
     await mostrarFeedbackAcao("Sucesso", "Excluir");
 
@@ -465,5 +306,5 @@ async function deletarBrinquedo() {
 const deleteBtn = document.getElementById("delete-btn");
 
 if (deleteBtn) {
-  deleteBtn.addEventListener("click", deletarBrinquedo);
+  deleteBtn.addEventListener("click", deletarCategoria);
 }
