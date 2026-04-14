@@ -3,12 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marah | Login</title>
+
+    <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
+
+    <!-- CSS GERAL -->
+    <link rel="stylesheet" href="css/base/globals.css" />
+    <!-- CSS ESPECÍFICO -->
     <link rel="stylesheet" href="css/login.css" />
+
+    <!-- Scripts -->
+    <script type="module" src="js/pages/login.js" defer></script>
+
+    <!-- Icones -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
+
+    <title>Marah | Login</title>
   </head>
   <body>
     <main id="main-container">
@@ -35,24 +50,14 @@
           </div>
 
           <form id="login-form">
-            <div class="input-icon">
+            <div class="input-icon" id="email-input-icon">
               <i class="fa-regular fa-envelope"></i>
-              <input
-                type="email"
-                id="email-input"
-                placeholder="EMAIL"
-                required
-              />
+              <input type="email" id="email-input" placeholder="EMAIL" />
             </div>
 
-            <div class="input-icon">
+            <div class="input-icon" id="password-input-icon">
               <i class="fa-solid fa-lock"></i>
-              <input
-                type="password"
-                id="password-input"
-                placeholder="SENHA"
-                required
-              />
+              <input type="password" id="password-input" placeholder="SENHA" />
               <i class="fa-solid fa-eye" id="toggle-password"></i>
             </div>
 
@@ -64,7 +69,9 @@
 
             <p id="login-error" class="error-message"></p>
 
-            <button type="submit" class="btn-submit">ENTRAR</button>
+            <button type="submit" id="btn-submit" class="btn-submit">
+              ENTRAR
+            </button>
           </form>
 
           <a href="cadastro.html" id="link-account"
@@ -73,6 +80,5 @@
         </section>
       </div>
     </main>
-    <script type="module" src="js/pages/login.js" defer></script>
   </body>
 </html>

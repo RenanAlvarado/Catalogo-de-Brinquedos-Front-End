@@ -4,10 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Marah | Cadastro</title>
+
+    <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
+
+    <!-- CSS GERAL -->
+    <link rel="stylesheet" href="css/base/globals.css" />
+    <!-- CSS ESPECÍFICO -->
     <link rel="stylesheet" href="css/cadastro.css" />
+
+    <!-- Scripts -->
+    <script type="module" src="js/pages/cadastro.js" defer></script>
+
+    <!-- Icones -->
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     />
   </head>
   <body>
@@ -23,7 +37,7 @@
               <span>Crie sua conta</span>
               <span>na Marah</span>
             </h1>
-            <p class="subtitle-left">Organize seus itens com facilidade</p>
+            <p class="subtitle-left">Catalogo de Brinquedos</p>
           </div>
         </section>
 
@@ -34,40 +48,24 @@
           </div>
 
           <form id="register-form">
-            <div class="input-icon">
+            <div class="input-icon" id="nome-input-icon">
               <i class="fa-regular fa-user"></i>
-              <input
-                type="text"
-                id="nome-input"
-                placeholder="NOME COMPLETO"
-                required
-              />
+              <input type="text" id="nome-input" placeholder="NOME COMPLETO" />
             </div>
-            <div class="input-icon">
+            <div class="input-icon" id="email-input-icon">
               <i class="fa-regular fa-envelope"></i>
-              <input
-                type="email"
-                id="email-input"
-                placeholder="EMAIL"
-                required
-              />
+              <input type="email" id="email-input" placeholder="EMAIL" />
             </div>
-            <div class="input-icon">
+            <div class="input-icon" id="password-input-icon">
               <i class="fa-solid fa-lock"></i>
-              <input
-                type="password"
-                id="password-input"
-                placeholder="SENHA"
-                required
-              />
+              <input type="password" id="password-input" placeholder="SENHA" />
             </div>
-            <div class="input-icon">
+            <div class="input-icon" id="password-again-input-icon">
               <i class="fa-solid fa-lock"></i>
               <input
                 type="password"
                 id="password-again-input"
                 placeholder="CONFIRMAR SENHA"
-                required
               />
             </div>
             <p id="cadastro-error" class="error-message"></p>
@@ -79,6 +77,5 @@
         </section>
       </div>
     </main>
-    <script type="module" src="js/pages/cadastro.js" defer></script>
   </body>
 </html>
