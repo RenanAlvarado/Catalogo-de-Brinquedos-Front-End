@@ -1,10 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap");
+@font-face {
+  font-family: "Hey Comic";
+  src: url("../fonts/hey-comic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Fredoka", sans-serif;
+  font-family: "Hey Comic", "Comic Sans MS", cursive, sans-serif;
+}
+
+input,
+button,
+select,
+textarea {
+  font-family: "Hey Comic", sans-serif;
 }
 
 #main-container {
@@ -48,7 +60,6 @@
   z-index: 2;
 }
 
-/* --- ALTERAÇÃO AQUI: CONTORNO NAS LETRAS DA ESQUERDA --- */
 .arrow-index-back,
 #frase-cadastro,
 .subtitle-left {
@@ -73,7 +84,7 @@
 }
 
 #logo-container img {
-  width: 160px;
+  width: 220px;
   margin-bottom: 20px;
 }
 
@@ -83,7 +94,6 @@
   font-weight: 600;
 }
 
-/* FORMULÁRIO (Mantido original) */
 #form-container {
   flex: 1.2;
   padding: 40px 50px;

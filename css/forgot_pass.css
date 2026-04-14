@@ -1,100 +1,127 @@
-body,
-html {
-  width: 100%;
-  height: 100%;
-}
-
-/* IMPORTANDO FONTE */
-
+/* Importando Fredoka */
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap");
-
-/* FUNDO */
 
 #main-container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #d9d9d9, #bfbfbf);
-  /* Para afastamento, não colar nas bordas */
+  background-color: #f0f2f5;
   padding: 20px;
 }
-
-/* CONTAINER */
 
 #forgot-container {
   position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
-  max-width: 420px;
-  background: #d1d1d1;
-  border-radius: 12px;
-  border: 1px solid #000;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  padding: 25px;
-  overflow: hidden; /* evita a imagem sair do container */
+  max-width: 450px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  padding: 40px 30px;
+  text-align: center;
+}
+
+#forgot-container {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 #forgot-container::before {
   content: "";
   position: absolute;
-  inset: 0;
-
-  background-image: url("../img/fundo_mar.png"); /* sua imagem */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/fundo_mar.png");
   background-size: cover;
   background-position: center;
-
-  opacity: 0.8; /* controla transparência da imagem */
-  z-index: 0;
+  opacity: 1;
+  z-index: -1;
 }
 
-#forgot-container > * {
-  position: relative;
-  z-index: 1;
-}
-
-#forgot-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  max-width: 420px;
-  background: #d1d1d1;
-  border-radius: 12px;
-  border: 1px solid #000;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  padding: 25px;
-}
-
-/* SETA DE VOLTAR */
 .arrow-index-back {
-  padding-left: 0; /*Para essa tela especificamente, não precisa*/
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #ffffff;
+  font-size: 20px;
+  transition: 0.3s;
+  -webkit-text-stroke: 1px black;
+  text-stroke: 1px black;
+  paint-order: stroke fill;
+  z-index: 10; /* Garante que fique acima de tudo para ser clicável */
 }
 
-/* FORM CONTAINER */
+.arrow-index-back:hover {
+  color: #ffc5d3;
+  transform: translateX(-3px);
+}
 
 #form-container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* FORM */
-
-#forgot-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  color: #000;
+  margin-top: 20px;
 }
 
 #forgot-form h3 {
-  align-self: flex-start;
-  margin-bottom: 12px;
-  font-size: 20px;
+  color: #ffffff;
+  font-family: "Fredoka", sans-serif;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+.input-icon {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.input-icon i {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.input-icon input {
+  width: 100%;
+  padding: 16px 15px 16px 50px;
+  background-color: #eeeeee;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  outline: none;
+  font-family: "Fredoka", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.input-icon input:focus {
+  background-color: #fff;
+  border-color: #ffc5d3;
+  box-shadow: 0 0 8px rgba(255, 197, 211, 0.3);
+}
+
+/* Botão */
+.btn-submit {
+  background-color: #ffc5d3;
+  color: #fff;
+  border: none;
+  padding: 16px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.btn-submit:hover {
+  background-color: #ffb1c4;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px rgba(255, 197, 211, 0.4);
 }

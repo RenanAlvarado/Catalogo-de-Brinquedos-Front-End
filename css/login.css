@@ -1,4 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap");
+@font-face {
+  font-family: "Hey Comic";
+  src: url("../fonts/hey-comic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 
 #main-container {
   width: 100%;
@@ -41,13 +46,12 @@
   z-index: 2;
 }
 
-/* --- ALTERAÇÃO AQUI: CONTORNO NAS LETRAS DA ESQUERDA --- */
 .arrow-index-back,
 #frase-login,
 .subtitle-left {
-  -webkit-text-stroke: 1px black; /* Contorno preto de 1px */
+  -webkit-text-stroke: 1px black;
   text-stroke: 1px black;
-  paint-order: stroke fill; /* Garante que o contorno não deforme a letra */
+  paint-order: stroke fill;
 }
 
 .arrow-index-back {
@@ -66,7 +70,7 @@
 }
 
 #logo-container img {
-  width: 150px;
+  width: 200px;
   margin-bottom: 25px;
 }
 
@@ -76,7 +80,6 @@
   font-weight: 600;
 }
 
-/* LADO DO FORMULÁRIO (Mantido original) */
 #form-container {
   flex: 1.2;
   padding: 60px 50px;
