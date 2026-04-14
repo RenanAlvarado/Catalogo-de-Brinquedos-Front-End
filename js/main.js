@@ -10,6 +10,8 @@ import { iniciarPaginaAdicionarBrinquedo } from "./pages/adicionarBrinquedo.js";
 
 import { iniciarPaginaAdicionarCategoria } from "./pages/adicionarCategoria.js";
 
+import { iniciarPaginaAdicionarMarca } from "./pages/adicionarMarca.js";
+
 import { iniciarPaginaPerfil } from "./pages/perfil.js";
 
 import { iniciarPaginaDetalhes } from "./pages/detalhesBrinquedo.js";
@@ -263,12 +265,22 @@ async function start() {
     iniciarPaginaAdicionarBrinquedo();
   }
 
+  // Se esta na página de adicionar categoria
   const isAddCategoriaPage = window.location.pathname.includes(
     "adicionar_categoria.html",
   );
 
   if (isAddCategoriaPage) {
     iniciarPaginaAdicionarCategoria();
+  }
+
+  // Se esta na página de adicionar marca
+  const isAddMarcaPage = window.location.pathname.includes(
+    "adicionar_marca.html",
+  );
+
+  if (isAddMarcaPage) {
+    iniciarPaginaAdicionarMarca();
   }
 
   //Busca ativa após ter os componentes

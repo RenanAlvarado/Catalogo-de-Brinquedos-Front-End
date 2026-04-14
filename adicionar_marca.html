@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adicionar Marca</title>
+
+    <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
+
+    <!-- CSS GERAL -->
+    <link rel="stylesheet" href="css/base/globals.css" />
+
+    <!-- CSS ESPECÍFICO -->
+    <link rel="stylesheet" href="css/adicionar_marca.css" />
+
+    <!-- Header -->
+    <link rel="stylesheet" href="css/components/header.css" />
+
+    <!-- Footer -->
+    <link rel="stylesheet" href="css/components/footer.css" />
+
+    <!-- JavaScript -->
+    <script type="module" src="js/main.js" defer></script>
+
+    <!-- Icones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header id="header"></header>
+
+    <main id="main-container">
+      <div id="form-container">
+        <!-- Seta -->
+        <a href="index.html" class="arrow-index-back">
+          <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <h1 id="title-brand-form">Adicionar Marca</h1>
+
+        <!-- Formulário -->
+        <form id="adicionar-marca-form">
+          <section id="left-section">
+            <img
+              src="img/placeholder.png"
+              id="img-preview"
+              alt="Preview da Imagem"
+            />
+
+            <!-- Clicar na label é o mesmo que clicar no input -->
+            <label for="img-input" id="upload-btn" class="btn">
+              <i class="fa-solid fa-upload" id="upload-icon"></i>
+              <span id="upload-text">Selecionar imagem</span>
+            </label>
+
+            <input
+              type="file"
+              name="img"
+              id="img-input"
+              accept=".jpg, .jpeg, .png"
+              hidden
+            />
+
+            <p>*Arquivos aceitos: jpeg, png, jpg*</p>
+          </section>
+
+          <section id="right-section">
+            <h2>Informações</h2>
+            <div class="input-icon" id="id-input-icon">
+              <i class="fa-solid fa-tag"></i>
+              <input
+                type="text"
+                name="id-marca"
+                id="id-input"
+                placeholder="ID"
+                readonly
+              />
+            </div>
+
+            <div class="input-icon" id="nome-input-icon">
+              <i class="fa-solid fa-tag"></i>
+              <input
+                type="text"
+                name="nome-marca"
+                id="nome-input"
+                placeholder="Nome da Marca"
+              />
+            </div>
+
+            <div id="buttons-div">
+              <button type="button" class="btn" id="delete-btn">Deletar</button>
+              <button type="submit" class="btn" id="salvar-marca-btn">
+                Salvar
+              </button>
+            </div>
+          </section>
+        </form>
+      </div>
+
+      <div id="modal-confirmacao" class="modal hidden">
+        <div class="modal-content">
+          <h3>Confirmar</h3>
+          <p>Tem certeza que deseja <span>deletar</span> essa marca?</p>
+
+          <div class="modal-actions">
+            <button id="cancelar-btn" class="btn">Cancelar</button>
+            <button id="confirmar-btn" class="danger btn">Excluir</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="modal-feedback" class="modal hidden">
+        <div class="modal-content">
+          <h3 id="feedback-title">Confirmar</h3>
+          <p>
+            <span id="feedback-type-span">Sucesso</span> ao
+            <span id="feedback-span">deletar</span> marca!
+          </p>
+
+          <div class="modal-actions">
+            <button id="ok-btn" class="btn">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer id="footer"></footer>
+  </body>
+</html>

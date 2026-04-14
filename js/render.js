@@ -297,6 +297,27 @@ export function renderizarAlterarCategoria(categoria) {
 }
 
 // ===============================
+// RENDERIZAR TELA DE ALTERAR MARCA
+// ===============================
+
+export function renderizarAlterarMarca(marca) {
+  document.getElementById("id-input").value = marca.id;
+  document.getElementById("nome-input").value = marca.nome;
+
+  const imgPreview = document.getElementById("img-preview");
+
+  if (!imgPreview) return;
+
+  imgPreview.src = obterImagem("brands", marca.imagem);
+
+  //  Caso  a imagem seja apagada ou não exista no server
+  imgPreview.onerror = () => {
+    imgPreview.onerror = null; // evita loop infinito
+    imgPreview.src = "img/placeholder.png";
+  };
+}
+
+// ===============================
 // RENDERIZAR TELA DE PERFIL
 // ===============================
 export function renderizarPerfil(usuario) {

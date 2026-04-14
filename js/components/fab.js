@@ -2,19 +2,36 @@ import { isAdmin } from "../services/authService.js";
 
 export function controlarFab() {
   const fab = document.getElementById("fab");
+  const fabOptions = document.getElementById("fab-options");
+  const fabContainer = document.getElementById("fab-container");
 
-  if (!fab) return;
-
-  fab.onclick = null;
+  if (!fab || !fabOptions || !fabContainer) return;
 
   if (!isAdmin()) {
-    fab.style.display = "none";
+    fabContainer.style.display = "none";
     return;
   }
 
-  fab.style.display = "flex";
+  fabContainer.style.display = "block";
 
-  fab.onclick = () => {
-    window.location.href = "adicionar_brinquedo.html";
+  // toggle submenu
+  fab.onclick = (e) => {
+    e.stopPropagation();
+    fabOptions.classList.toggle("active");
   };
+
+  // clique nos itens
+  document.querySelectorAll(".fab-item").forEach((item) => {
+    item.addEventListener("click", () => {
+      const link = item.dataset.link;
+      window.location.href = link;
+    });
+  });
+
+  // fechar ao clicar fora
+  document.addEventListener("click", (e) => {
+    if (!fabContainer.contains(e.target)) {
+      fabOptions.classList.remove("active");
+    }
+  });
 }

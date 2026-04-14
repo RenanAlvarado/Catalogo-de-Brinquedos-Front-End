@@ -60,8 +60,9 @@ export function obterImagem(pasta, imagem) {
     return `http://localhost:8080/uploads/categories/${imagem}`;
   }
 
-  // categorias e marcas continuam locais
-  return `img/${pasta}/${imagem}`;
+  if (pasta === "brands") {
+    return `http://localhost:8080/uploads/brands/${imagem}`;
+  }
 }
 
 // ===============================
@@ -82,6 +83,10 @@ export async function buscarCategoriaPorId(id) {
 
 export async function buscarMarcas() {
   return await requisicao("/marcas");
+}
+
+export async function buscarMarcaPorId(id) {
+  return await requisicao(`/marcas/${id}`);
 }
 
 // ===============================
@@ -168,6 +173,30 @@ export async function alterarCategoriaAPI(id, formData) {
 
 export async function deletarCategoriaAPI(id) {
   return await requisicao(`/categorias/${id}`, {
+    method: "DELETE",
+  });
+}
+
+// ===============================
+// CRUD --> MARCAS
+// ===============================
+
+export async function salvarMarcaAPI(formData) {
+  return await requisicao("/marcas", {
+    method: "POST",
+    body: formData,
+  });
+}
+
+export async function alterarMarcaAPI(id, formData) {
+  return await requisicao(`/marcas/${id}`, {
+    method: "PUT",
+    body: formData,
+  });
+}
+
+export async function deletarMarcaAPI(id) {
+  return await requisicao(`/marcas/${id}`, {
     method: "DELETE",
   });
 }
