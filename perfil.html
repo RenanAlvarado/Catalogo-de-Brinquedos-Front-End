@@ -45,23 +45,13 @@
     <main id="main-container">
       <!-- Parte da esquerda -->
       <section id="left-section">
-        <button id="profile-img-button">
-          <img src="img/perfil.png" alt="Placeholder" id="profile-img" />
-        </button>
+        <img id="user-img-preview" src="img/perfil.png" />
 
-        <div class="input-icon">
-          <i class="fa-regular fa-user"></i>
-          <input
-            type="text"
-            id="nome-input"
-            class="input-profile"
-            placeholder="Nome"
-          />
-        </div>
+        <input type="file" id="user-img-input" accept="image/*" hidden />
 
         <div class="input-icon">
           <i class="fa-regular fa-envelope"></i>
-          <input type="email" id="email-input" placeholder="Email" />
+          <input type="email" id="email-input" placeholder="Email" disabled />
         </div>
 
         <button class="btn">Alterar Senha</button>
@@ -71,10 +61,20 @@
       <section id="right-section">
         <div id="form-container">
           <form action="#" id="form-aditional-informations">
+            <h3>Nome:</h3>
+            <div class="input-icon" id="nome-input-icon">
+              <i class="fa-solid fa-user"></i>
+              <input
+                type="text"
+                id="nome-input"
+                class="input-profile"
+                placeholder="Nome"
+              />
+            </div>
             <h3>Dados para Contato:</h3>
 
             <div id="contact">
-              <div class="input-icon">
+              <div class="input-icon" id="telefone-input-icon">
                 <i class="fa-solid fa-phone"></i>
                 <input
                   type="text"
@@ -84,12 +84,13 @@
                 />
               </div>
 
-              <div class="input-icon">
+              <div class="input-icon" id="email-input-icon">
                 <i class="fa-solid fa-envelope"></i>
                 <input
                   type="email"
                   id="email-input-right"
                   placeholder="Email"
+                  disabled
                 />
               </div>
             </div>
@@ -98,7 +99,7 @@
 
             <!-- Para o input do Cep e o botão -->
             <div id="cep">
-              <div class="input-icon">
+              <div class="input-icon" id="cep-input-icon">
                 <i class="fa-solid fa-location-crosshairs"></i>
                 <input
                   type="text"
@@ -136,7 +137,7 @@
                 />
               </div>
 
-              <div class="input-icon" id="input-numero">
+              <div class="input-icon" id="numero-input-icon">
                 <i class="fa-solid fa-location-crosshairs"></i>
                 <input type="number" id="numero-input" placeholder="Nº" />
               </div>
@@ -152,6 +153,34 @@
 
             <input type="submit" id="alterar-btn" class="btn" value="Alterar" />
           </form>
+
+          <div id="modal-confirmacao" class="modal hidden">
+            <div class="modal-content">
+              <h3>Confirmar</h3>
+              <p>
+                Tem certeza que deseja <span>deletar</span> esta informação?
+              </p>
+
+              <div class="modal-actions">
+                <button id="cancelar-btn" class="btn">Cancelar</button>
+                <button id="confirmar-btn" class="danger btn">Excluir</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="modal-feedback" class="modal hidden">
+            <div class="modal-content">
+              <h3 id="feedback-title">Confirmar</h3>
+              <p>
+                <span id="feedback-type-span">Sucesso</span> ao
+                <span id="feedback-span">deletar</span> informações!
+              </p>
+
+              <div class="modal-actions">
+                <button id="ok-btn" class="btn">Fechar</button>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>

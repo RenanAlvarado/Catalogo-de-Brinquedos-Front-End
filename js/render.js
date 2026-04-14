@@ -292,24 +292,22 @@ export function renderizarPerfil(usuario) {
 
   // Endereço (pode ser null!)
   if (usuario.endereco) {
-    document.getElementById("cep-input").value = usuario.endereco.cep || "";
+    const endereco = usuario.endereco;
 
-    document.getElementById("endereco-input").value =
-      usuario.endereco.logradouro || "";
+    document.getElementById("cep-input").value = endereco.cep || "";
+    document.getElementById("endereco-input").value = endereco.logradouro || "";
+    document.getElementById("bairro-input").value = endereco.bairro || "";
+    document.getElementById("numero-input").value = endereco.numero || "";
 
-    document.getElementById("bairro-input").value =
-      usuario.endereco.bairro || "";
-
-    document.getElementById("numero-input").value =
-      usuario.endereco.numero || "";
+    const cidade = endereco.cidade ? endereco.cidade : "Selecione";
+    const estado = endereco.estado ? endereco.estado : "Selecione";
 
     document.getElementById("city-select").innerHTML =
-      `<option>${usuario.endereco.cidade}</option>`;
+      `<option>${cidade}</option>`;
 
     document.getElementById("state-select").innerHTML =
-      `<option>${usuario.endereco.estado}</option>`;
+      `<option>${estado}</option>`;
   } else {
-    // Se não tiver endereço → limpa tudo
     document.getElementById("cep-input").value = "";
     document.getElementById("endereco-input").value = "";
     document.getElementById("bairro-input").value = "";

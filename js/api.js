@@ -173,14 +173,6 @@ export async function buscarBrinquedosPorMarca(id) {
 }
 
 // ===============================
-// BUSCA DE USUÁRIO POR ID
-// ===============================
-
-export async function buscarUsuarioPorId(id) {
-  return await requisicao(`/usuarios/${id}`);
-}
-
-// ===============================
 // SISTEMA DE LOGIN E CADASTRO
 // ===============================
 
@@ -202,10 +194,21 @@ export async function cadastroAPI(nome, email, senha) {
 // CRUD USUÁRIO
 // ===============================
 
+export async function buscarUsuarioPorId(id) {
+  return await requisicao(`/usuarios/${id}`);
+}
+
 export async function alterarUsuarioAPI(id, dados) {
   return await requisicao(`/usuarios/${id}`, {
     method: "PUT",
     body: JSON.stringify(dados),
+  });
+}
+
+export async function atualizarImagemUsuarioAPI(id, formData) {
+  return await requisicao(`/usuarios/${id}/imagem`, {
+    method: "PUT",
+    body: formData,
   });
 }
 
