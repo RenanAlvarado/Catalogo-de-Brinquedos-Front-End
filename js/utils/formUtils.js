@@ -1,55 +1,67 @@
 // ===============================
-// ARQUIVO PARA VALIDAÇÕES DO BACKEND
+// MARCAR ERRO
 // ===============================
-
-// ===============================
-// Cadastro do Usuário
-// ===============================
-
 export function marcarErro(id, mensagem) {
-  const input = document.getElementById(id);
+  const campo = document.getElementById(id);
+  if (!campo) return;
 
-  if (!input) return;
+  campo.classList.add("input-error");
 
-  input.classList.add("input-error");
+  let erro = campo.nextElementSibling;
 
-  let erro = input.parentElement.querySelector(".erro-texto");
-
-  if (!erro) {
+  // se o próximo NÃO for erro, cria
+  if (!erro || !erro.classList.contains("erro-texto")) {
     erro = document.createElement("small");
     erro.classList.add("erro-texto");
-    input.parentElement.appendChild(erro);
+
+    campo.insertAdjacentElement("afterend", erro);
   }
 
   erro.textContent = mensagem;
 }
 
+// ===============================
+// LIMPAR ERROS
+// ===============================
 export function limparErros() {
-  const campos = document.querySelectorAll(".input-error");
+  const campos = document.querySelectorAll("input, textarea, select");
 
   campos.forEach((campo) => {
     campo.classList.remove("input-error");
+
+    const erro = campo.nextElementSibling;
+
+    if (erro && erro.classList.contains("erro-texto")) {
+      erro.remove();
+    }
   });
-
-  const mensagens = document.querySelectorAll(".erro-texto");
-
-  mensagens.forEach((msg) => msg.remove());
 }
 
-// Remoção de erros ao digitar
+// ===============================
+// REMOÇÃO DE ERRO EM TEMPO REAL
+// ===============================
 export function adicionarRemocaoErroTempoReal() {
-  const inputs = document.querySelectorAll(".input-icon input");
+  const campos = document.querySelectorAll("input, textarea, select");
 
-  inputs.forEach((input) => {
-    input.addEventListener("input", () => {
-      input.classList.remove("input-error");
+  campos.forEach((campo) => {
+    const evento = campo.tagName === "SELECT" ? "change" : "input";
 
-      const erro = input.parentElement.querySelector(".erro-texto");
-      if (erro) erro.remove();
+    campo.addEventListener(evento, () => {
+      campo.classList.remove("input-error");
+
+      const erro = campo.nextElementSibling;
+
+      // 🔥 remove só o erro daquele campo
+      if (erro && erro.classList.contains("erro-texto")) {
+        erro.remove();
+      }
     });
   });
 }
 
+// ===============================
+// ERRO GERAL
+// ===============================
 export function mostrarErroGeral(id, mensagem) {
   const erro = document.getElementById(id);
   if (!erro) return;
