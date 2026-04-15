@@ -35,3 +35,33 @@ export function limparErros() {
 
   mensagens.forEach((msg) => msg.remove());
 }
+
+// Remoção de erros ao digitar
+export function adicionarRemocaoErroTempoReal() {
+  const inputs = document.querySelectorAll(".input-icon input");
+
+  inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      input.classList.remove("input-error");
+
+      const erro = input.parentElement.querySelector(".erro-texto");
+      if (erro) erro.remove();
+    });
+  });
+}
+
+export function mostrarErroGeral(id, mensagem) {
+  const erro = document.getElementById(id);
+  if (!erro) return;
+
+  erro.textContent = mensagem;
+  erro.style.display = "block";
+}
+
+export function limparErroGeral(id) {
+  const erro = document.getElementById(id);
+  if (!erro) return;
+
+  erro.textContent = "";
+  erro.style.display = "none";
+}

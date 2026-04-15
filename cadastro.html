@@ -47,7 +47,7 @@
             <h3 class="sub-title">Preencha os campos abaixo</h3>
           </div>
 
-          <form id="register-form">
+          <form id="register-form" novalidate>
             <div class="input-icon" id="nome-input-icon">
               <i class="fa-regular fa-user"></i>
               <input type="text" id="nome-input" placeholder="NOME COMPLETO" />
@@ -59,6 +59,7 @@
             <div class="input-icon" id="password-input-icon">
               <i class="fa-solid fa-lock"></i>
               <input type="password" id="password-input" placeholder="SENHA" />
+              <i class="fa-solid fa-eye" id="toggle-password"></i>
             </div>
             <div class="input-icon" id="password-again-input-icon">
               <i class="fa-solid fa-lock"></i>
@@ -67,6 +68,7 @@
                 id="password-again-input"
                 placeholder="CONFIRMAR SENHA"
               />
+              <i class="fa-solid fa-eye" id="toggle-password-again"></i>
             </div>
             <p id="cadastro-error" class="error-message"></p>
             <button type="submit" class="btn-submit">CADASTRAR</button>
