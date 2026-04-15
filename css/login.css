@@ -102,25 +102,19 @@
 }
 
 .input-icon {
-  position: relative;
   width: 100%;
   margin-bottom: 15px;
 }
 
 .input-icon i:first-child {
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
   color: #888;
   transition: color 0.3s ease;
 }
 
 #toggle-password {
-  position: absolute;
   right: 18px;
   top: 50%;
-  transform: translateY(-50%);
+
   cursor: pointer;
   color: #888;
 }
