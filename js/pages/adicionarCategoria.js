@@ -6,6 +6,7 @@ import {
   salvarCategoriaAPI,
   alterarCategoriaAPI,
   deletarCategoriaAPI,
+  buscarBrinquedosPorCategoria,
 } from "../api.js";
 
 import { renderizarAlterarCategoria } from "../render.js";
@@ -245,19 +246,34 @@ async function deletarCategoria() {
   const id = params.get("id");
 
   if (!id) {
-    alert("Nenhuma categoria selecionada.");
+    await mostrarFeedbackAcao("Erro", "Nenhuma categoria selecionada.");
     return;
   }
 
-  if (!(await confirmarAcao("Excluir"))) return;
-
   try {
+    const brinquedos = await buscarBrinquedosPorCategoria(id);
+    const quantidade = brinquedos?.length || 0;
+
+    const frase = document.querySelector("#frase-modal");
+
+    if (quantidade > 0) {
+      frase.innerHTML = `Esta categoria possui <strong>${quantidade}</strong> brinquedo(s). Deseja excluir mesmo assim?`;
+    } else {
+      frase.textContent = "Tem certeza que deseja excluir essa categoria?";
+    }
+
+    const confirmar = await confirmarAcao("Excluir");
+
+    if (!confirmar) return;
+
     await deletarCategoriaAPI(id);
+
     await mostrarFeedbackAcao("Sucesso", "Excluir");
+
     window.location.href = "index.html";
   } catch (erro) {
     console.error("Erro ao deletar:", erro);
-    await mostrarFeedbackAcao("Falha", "Excluir");
+    await mostrarFeedbackAcao("Erro", "Falha ao excluir categoria");
   }
 }
 
