@@ -33,6 +33,56 @@ html {
   align-self: center;
 }
 
+/* Div das Marcas Simplificado */
+#brands-simple-container {
+  display: none;
+  justify-content: space-around;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 0 25px;
+  width: 100%;
+}
+
+/* Setas */
+#brands-simple-container .brands-btn {
+  width: 45px;
+  height: 45px;
+  border: none;
+  border-radius: 50%;
+  background: white;
+  color: #333;
+  font-size: 18px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.25s ease;
+}
+
+#brands-simple-container .brands-btn:hover {
+  background: #ff6b00;
+  color: white;
+  transform: scale(1.08);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+}
+
+#brands-simple-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+#brands-simple-carousel {
+  display: flex;
+  justify-content: space-around;
+  gap: 20px;
+  padding: 20px;
+  transition: transform 0.4s ease;
+}
+
 /* Div das Categorias */
 #categories-container {
   display: flex;

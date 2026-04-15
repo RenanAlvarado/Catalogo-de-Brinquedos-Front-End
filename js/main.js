@@ -106,6 +106,16 @@ async function carregarCategorias() {
 }
 
 // Carregar os cards de marca
+async function carregarMarcasSimples() {
+  //Carrega dentro da função para não dar erro
+  const brandsContainer = getEl("#brands-simple-carousel");
+  if (!brandsContainer) return;
+
+  const marcas = await buscarMarcas();
+  renderizarMarcas(brandsContainer, marcas, filtrarPorMarca);
+}
+
+// Carregar os cards de marca
 async function carregarMarcas() {
   const brandsContainer = getEl("#brands-carousel");
   if (!brandsContainer) return;
@@ -224,6 +234,7 @@ async function iniciarPagina() {
   init("marcas", carregarMarcas);
   init("filtroCategorias", carregarCategoriasFiltro);
   init("filtroMarcas", carregarMarcasFiltro);
+  init("marcasSimples", carregarMarcasSimples);
 }
 
 // ===============================

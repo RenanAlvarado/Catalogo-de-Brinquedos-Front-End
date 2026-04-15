@@ -217,6 +217,14 @@ export async function buscarBrinquedosPorNome(nome) {
 }
 
 // ===============================
+// BUSCA DE MARCAS POR NOME
+// ===============================
+
+export async function buscarMarcasPorNome(nome) {
+  return await requisicao(`/marcas/contem-nome/${nome}`);
+}
+
+// ===============================
 // BUSCA DE BRINQUEDOS POR ID DA CATEGORIA
 // ===============================
 

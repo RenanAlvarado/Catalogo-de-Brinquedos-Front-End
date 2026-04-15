@@ -120,3 +120,43 @@ document.querySelectorAll(".dropdown-btn").forEach((botao) => {
     botao.classList.toggle("open");
   });
 });
+
+/* ===================================== */
+/* CARROSSEL DE MARCAS SIMPLIFICADO */
+/* ===================================== */
+
+const brandCarousel = document.querySelector("#brands-simple-carousel");
+const brandWrapper = document.querySelector("#brands-simple-wrapper");
+
+const prevBtnBrands = document.querySelector(".prev-brands");
+const nextBtnBrands = document.querySelector(".next-brands");
+
+if (brandCarousel && brandWrapper) {
+  let scrollPosition = 0;
+
+  const scrollAmount = 180;
+
+  nextBtnBrands?.addEventListener("click", () => {
+    const maxScroll = brandCarousel.scrollWidth - brandWrapper.clientWidth;
+
+    if (scrollPosition < maxScroll) {
+      scrollPosition += scrollAmount;
+
+      if (scrollPosition > maxScroll) {
+        scrollPosition = maxScroll;
+      }
+
+      brandCarousel.style.transform = `translateX(-${scrollPosition}px)`;
+    }
+  });
+
+  prevBtnBrands?.addEventListener("click", () => {
+    scrollPosition -= scrollAmount;
+
+    if (scrollPosition < 0) {
+      scrollPosition = 0;
+    }
+
+    brandCarousel.style.transform = `translateX(-${scrollPosition}px)`;
+  });
+}
