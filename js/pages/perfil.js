@@ -1,13 +1,13 @@
 // ===============================
 // IMPORTS
 // ===============================
-
 import {
   buscarUsuarioPorId,
   buscarCEP,
   alterarUsuarioAPI,
   atualizarImagemUsuarioAPI,
 } from "../api.js";
+
 import { renderizarPerfil } from "../render.js";
 
 import {
@@ -18,22 +18,30 @@ import {
 
 import { cepValido, campoVazio, telefoneValido } from "../utils/validators.js";
 
+import {
+  marcarErro,
+  limparErros,
+  adicionarRemocaoErroTempoReal,
+} from "../utils/formUtils.js";
+
 import { confirmarAcao, mostrarFeedbackAcao } from "../utils/modals.js";
 
 // ===============================
 // FUNÇÃO PRINCIPAL DA PÁGINA
 // ===============================
-
 export async function iniciarPaginaPerfil() {
   await carregarPerfil();
   iniciarCep();
   iniciarTelefone();
   iniciarLimparCep();
-  adicionarRemocaoErroPerfil();
+  adicionarRemocaoErroTempoReal();
   iniciarSubmitPerfil();
   iniciarUploadImagemPerfil();
 }
 
+// ===============================
+// CARREGAR PERFIL
+// ===============================
 async function carregarPerfil() {
   const usuarioStorage = JSON.parse(localStorage.getItem("usuario"));
 
@@ -50,7 +58,6 @@ async function carregarPerfil() {
 
   try {
     const usuario = await buscarUsuarioPorId(usuarioStorage.id);
-
     renderizarPerfil(usuario);
   } catch (erro) {
     console.error("Erro ao carregar perfil:", erro);
@@ -58,34 +65,19 @@ async function carregarPerfil() {
 }
 
 // ===============================
-// FUNÇÕES DE VALIDAÇÃO
+// VALIDAÇÃO DO FORMULÁRIO
 // ===============================
-function marcarErro(campo) {
-  campo.style.border = "1px solid red";
-}
-
-function limparErro(campo) {
-  campo.style.border = "1px solid #ccc";
-}
-
 function validarFormularioPerfil() {
-  const nome = document.getElementById("nome-input");
-  const nomeInputIcon = document.getElementById("nome-input-icon");
-  const telefone = document.getElementById("number-input");
-  const telefoneInputIcon = document.getElementById("telefone-input-icon");
-  const cep = document.getElementById("cep-input");
-  const cepInputIcon = document.getElementById("cep-input-icon");
-  const numero = document.getElementById("numero-input");
-  const numeroInputIcon = document.getElementById("numero-input-icon");
+  const nome = document.getElementById("nome-input").value;
+  const telefone = document.getElementById("number-input").value;
+  const cep = document.getElementById("cep-input").value;
+  const numero = document.getElementById("numero-input").value;
 
   let valido = true;
 
-  // Nome (obrigatório)
-  if (campoVazio(nome.value)) {
-    marcarErro(nomeInputIcon);
-    valido = false;
-  } else limparErro(nomeInputIcon);
+  limparErros();
 
+<<<<<<< HEAD
   // Telefone (opcional, mas se tiver valida)
   if (!campoVazio(telefone.value) && !telefoneValido(telefone.value)) {
     marcarErro(telefoneInputIcon);
@@ -93,41 +85,34 @@ function validarFormularioPerfil() {
     valido = false;
   } else {
     limparErro(telefoneInputIcon);
+=======
+  // Nome
+  if (campoVazio(nome)) {
+    marcarErro("nome-input", "Nome é obrigatório");
+    valido = false;
+>>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
   }
 
-  // CEP (só valida se preenchido)
-  if (!campoVazio(cep.value) && !cepValido(cep.value)) {
-    marcarErro(cepInputIcon);
+  // CEP
+  if (!campoVazio(cep) && !cepValido(cep)) {
+    marcarErro("cep-input", "CEP inválido");
     valido = false;
-  } else {
-    limparErro(cepInputIcon);
   }
 
-  // Número (só valida se CEP foi preenchido)
-  if (!campoVazio(cep.value) && campoVazio(numero.value)) {
-    marcarErro(numeroInputIcon);
+  // Número (se CEP preenchido)
+  if (!campoVazio(cep) && campoVazio(numero)) {
+    marcarErro("numero-input", "Número é obrigatório");
     valido = false;
-  } else {
-    limparErro(numeroInputIcon);
   }
 
   return valido;
 }
 
-function adicionarRemocaoErroPerfil() {
-  const campos = document.querySelectorAll(
-    "#nome-input-icon, #email-input, #telefone-input-icon, #cep-input-icon, #numero-input-icon",
-  );
-
-  campos.forEach((campo) => {
-    campo.addEventListener("input", () => limparErro(campo));
-    campo.addEventListener("change", () => limparErro(campo));
-  });
-}
-
+// ===============================
+// CEP
+// ===============================
 function iniciarCep() {
   const cepInput = document.getElementById("cep-input");
-  const cepErrorDiv = document.getElementById("cep-error");
 
   const enderecoInput = document.getElementById("endereco-input");
   const bairroInput = document.getElementById("bairro-input");
@@ -140,6 +125,7 @@ function iniciarCep() {
     const valor = aplicarMascaraCEP(e.target.value);
     e.target.value = valor;
 
+<<<<<<< HEAD
     // campo vazio → sem erro
     if (valor.trim() === "") {
       cepErrorDiv.classList.add("hide");
@@ -147,12 +133,19 @@ function iniciarCep() {
     }
 
     // CEP incompleto ou inválido → mostra erro
+=======
+    if (campoVazio(valor)) return;
+
+>>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
     if (!cepValido(valor)) {
-      cepErrorDiv.classList.remove("hide");
+      marcarErro("cep-input", "CEP inválido");
       return;
     }
 
+<<<<<<< HEAD
     // CEP válido → busca API
+=======
+>>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
     try {
       const dados = await buscarCEP(valor);
 
@@ -163,29 +156,41 @@ function iniciarCep() {
 
       cidadeSelect.innerHTML = `<option>${dados.localidade}</option>`;
       estadoSelect.innerHTML = `<option>${dados.uf}</option>`;
-
-      cepErrorDiv.classList.add("hide"); // ✅ remove erro
     } catch {
+<<<<<<< HEAD
       // CEP não encontrado → erro
       cepErrorDiv.classList.remove("hide");
+=======
+      marcarErro("cep-input", "CEP não encontrado");
+>>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
     }
   });
 }
 
+// ===============================
+// TELEFONE
+// ===============================
 function iniciarTelefone() {
   const telefoneInput = document.getElementById("number-input");
 
   if (!telefoneInput) return;
 
   telefoneInput.addEventListener("input", (e) => {
+<<<<<<< HEAD
     const valor = aplicarMascaraTelefone(e.target.value);
     e.target.value = valor;
 
     const telefoneInputIcon = document.getElementById("telefone-input-icon");
     limparErro(telefoneInputIcon);
+=======
+    e.target.value = aplicarMascaraTelefone(e.target.value);
+>>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
   });
 }
 
+// ===============================
+// SUBMIT
+// ===============================
 function iniciarSubmitPerfil() {
   const form = document.getElementById("form-aditional-informations");
 
@@ -193,16 +198,17 @@ function iniciarSubmitPerfil() {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-
     alterarPerfil();
   });
 }
 
+// ===============================
+// ALTERAR PERFIL
+// ===============================
 async function alterarPerfil() {
   if (!validarFormularioPerfil()) return;
 
   const confirmar = await confirmarAcao("Atualizar");
-
   if (!confirmar) return;
 
   const usuarioLogado = JSON.parse(localStorage.getItem("usuario"));
@@ -230,8 +236,6 @@ async function alterarPerfil() {
   try {
     const atualizado = await alterarUsuarioAPI(usuarioLogado.id, dados);
 
-    console.log("DADOS ENVIADOS:", dados);
-
     localStorage.setItem("usuario", JSON.stringify(atualizado));
 
     await mostrarFeedbackAcao("Sucesso", "Atualizar");
@@ -239,7 +243,6 @@ async function alterarPerfil() {
     window.location.reload();
   } catch (error) {
     console.error(error);
-
     await mostrarFeedbackAcao("Falha", "Atualizar");
   }
 }
@@ -247,7 +250,6 @@ async function alterarPerfil() {
 // ===============================
 // LIMPAR CEP
 // ===============================
-
 export function iniciarLimparCep() {
   const btnLimpar = document.getElementById("limpar-btn");
 
@@ -255,51 +257,47 @@ export function iniciarLimparCep() {
 
   btnLimpar.addEventListener("click", (e) => {
     e.preventDefault();
-
     limparEnderecoCompleto();
   });
 }
 
 function limparEnderecoCompleto() {
   const cepInput = document.getElementById("cep-input");
-  const cepErrorDiv = document.getElementById("cep-error");
 
   const enderecoInput = document.getElementById("endereco-input");
   const bairroInput = document.getElementById("bairro-input");
   const numeroInput = document.getElementById("numero-input");
-  const numeroInputIcon = document.getElementById("numero-input-icon");
   const cidadeSelect = document.getElementById("city-select");
   const estadoSelect = document.getElementById("state-select");
 
-  // limpa CEP
   cepInput.value = "";
+<<<<<<< HEAD
 
   // desbloqueia CEP
+=======
+>>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
   cepInput.disabled = false;
-
   cepInput.focus();
 
-  // limpa campos de endereço
   enderecoInput.value = "";
   bairroInput.value = "";
   numeroInput.value = "";
 
-  limparErro(numeroInputIcon);
-
   cidadeSelect.innerHTML = "<option>Selecione</option>";
   estadoSelect.innerHTML = "<option>Selecione</option>";
 
-  // esconde erro
-  cepErrorDiv.classList.add("hide");
+  limparErros();
 }
 
+// ===============================
+// UPLOAD DE IMAGEM
+// ===============================
 function iniciarUploadImagemPerfil() {
   const imgPreview = document.getElementById("user-img-preview");
   const imgInput = document.getElementById("user-img-input");
 
   if (!imgPreview || !imgInput) return;
 
-  // clicar na imagem abre o file
   imgPreview.addEventListener("click", () => {
     imgInput.click();
   });
@@ -311,7 +309,6 @@ function iniciarUploadImagemPerfil() {
 
     if (!arquivo) return;
 
-    // valida tipo
     if (!tiposPermitidos.includes(arquivo.type)) {
       alert("Formato inválido (jpeg, png, jpg)");
       imgInput.value = "";
@@ -334,11 +331,9 @@ function iniciarUploadImagemPerfil() {
 
       localStorage.setItem("usuario", JSON.stringify(atualizado));
 
-      // (opcional) feedback
       await mostrarFeedbackAcao("Sucesso", "Atualizar imagem");
     } catch (erro) {
       console.error("Erro ao enviar imagem:", erro);
-
       await mostrarFeedbackAcao("Falha", "Atualizar imagem");
     }
   });
