@@ -16,7 +16,7 @@ import {
   aplicarMascaraTelefone,
 } from "../utils/masks.js";
 
-import { cepValido, campoVazio } from "../utils/validators.js";
+import { cepValido, campoVazio, telefoneValido } from "../utils/validators.js";
 
 import {
   marcarErro,
@@ -83,6 +83,15 @@ function validarFormularioPerfil() {
     valido = false;
   }
 
+  // Telefone (opcional, mas se tiver valida)
+  if (!campoVazio(telefone.value) && !telefoneValido(telefone.value)) {
+    marcarErro(
+      "number-input",
+      "Telefone inválido! Verifique o DDD e o número.",
+    );
+    valido = false;
+  }
+
   // CEP
   if (!campoVazio(cep) && !cepValido(cep)) {
     marcarErro("cep-input", "CEP inválido");
@@ -115,6 +124,13 @@ function iniciarCep() {
     const valor = aplicarMascaraCEP(e.target.value);
     e.target.value = valor;
 
+    // campo vazio → sem erro
+    if (valor.trim() === "") {
+      cepErrorDiv.classList.add("hide");
+      return;
+    }
+
+    // CEP incompleto ou inválido → mostra erro
     if (campoVazio(valor)) return;
 
     if (!cepValido(valor)) {
@@ -122,6 +138,7 @@ function iniciarCep() {
       return;
     }
 
+    // CEP válido → busca API
     try {
       const dados = await buscarCEP(valor);
 
@@ -133,6 +150,8 @@ function iniciarCep() {
       cidadeSelect.innerHTML = `<option>${dados.localidade}</option>`;
       estadoSelect.innerHTML = `<option>${dados.uf}</option>`;
     } catch {
+      // CEP não encontrado → erro
+      cepErrorDiv.classList.remove("hide");
       marcarErro("cep-input", "CEP não encontrado");
     }
   });
@@ -147,6 +166,12 @@ function iniciarTelefone() {
   if (!telefoneInput) return;
 
   telefoneInput.addEventListener("input", (e) => {
+    const valor = aplicarMascaraTelefone(e.target.value);
+    e.target.value = valor;
+
+    const telefoneInputIcon = document.getElementById("telefone-input-icon");
+    limparErro(telefoneInputIcon);
+
     e.target.value = aplicarMascaraTelefone(e.target.value);
   });
 }
@@ -234,6 +259,9 @@ function limparEnderecoCompleto() {
   const estadoSelect = document.getElementById("state-select");
 
   cepInput.value = "";
+
+  // desbloqueia CEP
+
   cepInput.disabled = false;
   cepInput.focus();
 
