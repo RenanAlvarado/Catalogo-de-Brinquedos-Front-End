@@ -77,7 +77,12 @@ function validarFormularioPerfil() {
 
   limparErros();
 
-<<<<<<< HEAD
+  // Nome
+  if (campoVazio(nome)) {
+    marcarErro("nome-input", "Nome é obrigatório");
+    valido = false;
+  }
+
   // Telefone (opcional, mas se tiver valida)
   if (!campoVazio(telefone.value) && !telefoneValido(telefone.value)) {
     marcarErro(telefoneInputIcon);
@@ -85,12 +90,6 @@ function validarFormularioPerfil() {
     valido = false;
   } else {
     limparErro(telefoneInputIcon);
-=======
-  // Nome
-  if (campoVazio(nome)) {
-    marcarErro("nome-input", "Nome é obrigatório");
-    valido = false;
->>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
   }
 
   // CEP
@@ -125,7 +124,6 @@ function iniciarCep() {
     const valor = aplicarMascaraCEP(e.target.value);
     e.target.value = valor;
 
-<<<<<<< HEAD
     // campo vazio → sem erro
     if (valor.trim() === "") {
       cepErrorDiv.classList.add("hide");
@@ -133,19 +131,14 @@ function iniciarCep() {
     }
 
     // CEP incompleto ou inválido → mostra erro
-=======
     if (campoVazio(valor)) return;
 
->>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
     if (!cepValido(valor)) {
       marcarErro("cep-input", "CEP inválido");
       return;
     }
 
-<<<<<<< HEAD
     // CEP válido → busca API
-=======
->>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
     try {
       const dados = await buscarCEP(valor);
 
@@ -157,12 +150,9 @@ function iniciarCep() {
       cidadeSelect.innerHTML = `<option>${dados.localidade}</option>`;
       estadoSelect.innerHTML = `<option>${dados.uf}</option>`;
     } catch {
-<<<<<<< HEAD
       // CEP não encontrado → erro
       cepErrorDiv.classList.remove("hide");
-=======
       marcarErro("cep-input", "CEP não encontrado");
->>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
     }
   });
 }
@@ -176,15 +166,13 @@ function iniciarTelefone() {
   if (!telefoneInput) return;
 
   telefoneInput.addEventListener("input", (e) => {
-<<<<<<< HEAD
     const valor = aplicarMascaraTelefone(e.target.value);
     e.target.value = valor;
 
     const telefoneInputIcon = document.getElementById("telefone-input-icon");
     limparErro(telefoneInputIcon);
-=======
+
     e.target.value = aplicarMascaraTelefone(e.target.value);
->>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
   });
 }
 
@@ -271,11 +259,9 @@ function limparEnderecoCompleto() {
   const estadoSelect = document.getElementById("state-select");
 
   cepInput.value = "";
-<<<<<<< HEAD
 
   // desbloqueia CEP
-=======
->>>>>>> 2f3ab5656d9dbdd1a8cc46f6020a7c2f24abc55b
+
   cepInput.disabled = false;
   cepInput.focus();
 
