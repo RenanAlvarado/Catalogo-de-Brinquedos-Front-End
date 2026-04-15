@@ -274,6 +274,34 @@ html {
   object-fit: contain;
 }
 
+/* Botão Editar */
+.quick-view-btn-brands {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 60%;
+  height: 30px;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%) !important;
+  background-color: #40b4b2;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.quick-view-btn-brands:hover {
+  background-color: #ffb703;
+  color: #1b4e4f;
+}
+
+.brand-card:hover .quick-view-btn-brands {
+  top: 5px;
+  opacity: 1;
+}
+
 /* TÍTULO PARA OS BRINQUEDOS */
 #toysContainer-title {
   text-align: center;

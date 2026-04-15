@@ -14,6 +14,8 @@ import { abrirBrinquedo } from "./router/brinquedoRouter.js";
 
 import { abrirCategoria } from "./router/categoriaRouter.js";
 
+import { abrirMarca } from "./router/marcaRouter.js";
+
 // ===============================
 // FUNÇÃO AUXILIAR PARA CRIAR SELECTS
 // ===============================
@@ -87,6 +89,7 @@ export function renderizarCategorias(container, categorias, aoClicar) {
 // ===============================
 // RENDERIZAR FILTROS DAS CATEGORIAS
 // ===============================
+
 export function renderizarFiltroCategorias(container, categorias, aoAlterar) {
   container.innerHTML = "";
 
@@ -123,6 +126,8 @@ export function renderizarFiltroCategorias(container, categorias, aoAlterar) {
 export function renderizarMarcas(container, marcas, aoClicar) {
   container.innerHTML = "";
 
+  const admin = isAdmin();
+
   marcas.forEach((marca) => {
     const card = document.createElement("button");
     card.classList.add("brand-card");
@@ -136,15 +141,27 @@ export function renderizarMarcas(container, marcas, aoClicar) {
         class="brand-img"
         onerror="this.src='img/placeholder.png'"
       />
+
+      ${
+        admin
+          ? `<button class="quick-view-btn-brands btn">
+              <i class="fa-solid fa-pencil"></i> Editar
+             </button>`
+          : ""
+      }
     `;
 
-    // guardar id da categoria
-    card.dataset.id = marca.id;
+    const quickBtn = card.querySelector(".quick-view-btn-brands");
 
-    // evento de clique
-    card.addEventListener("click", () => {
-      // Se a função aoClicar existir, ela será executada passando os dados
-      if (typeof aoClicar === "function") {
+    if (quickBtn && admin) {
+      quickBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        abrirMarca(marca.id);
+      });
+    }
+
+    card.addEventListener("click", (event) => {
+      if (!event.target.closest(".quick-view-btn-brands")) {
         aoClicar(marca.id, marca.nome);
       }
     });

@@ -9,6 +9,7 @@ import {
   filtrarBrinquedos,
   buscarBrinquedosPorMarca,
 } from "./api.js";
+
 import { filtrarPorMarca } from "./filters.js";
 
 import { renderizarBrinquedos, renderizarMarcas } from "./render.js";
@@ -208,7 +209,7 @@ export function iniciarBusca() {
     if (categoriesContainer) categoriesContainer.style.display = "";
     if (brandsContainer) brandsContainer.style.display = "";
 
-    const brandsSection = document.querySelector("#brands-simple-section");
+    const brandsSection = document.querySelector("#brands-simple-container");
     if (brandsSection) brandsSection.style.display = "none";
 
     toysTitle.innerText = tituloOriginal;
@@ -223,19 +224,26 @@ export function iniciarBusca() {
   // BUSCA POR MARCA (NOVO, CORRETO)
   // ===============================
   async function executarBuscaPorMarca(id, nome) {
-    const resposta = await buscarBrinquedosPorMarca(id);
+    await filtrarPorMarca(id, nome);
 
-    const brinquedos = resposta.content || resposta;
-
-    toysTitle.innerText = `Marca: ${nome}`;
+    const categoriesContainer = document.querySelector("#categories-container");
+    const brandsContainer = document.querySelector("#brands-container");
 
     if (categoriesContainer) categoriesContainer.style.display = "none";
     if (brandsContainer) brandsContainer.style.display = "none";
 
-    const brandsSection = document.querySelector("#brands-simple-section");
-    if (brandsSection) brandsSection.style.display = "none";
+    const brandsSection = document.querySelector("#brands-simple-container");
+    const brandsCarousel = document.querySelector("#brands-simple-carousel");
 
-    renderizarBrinquedos(productsContainer, brinquedos);
+    if (brandsSection && brandsCarousel) {
+      brandsSection.style.display = "flex";
+
+      const marcasFiltradas = await buscarMarcasPorNome(nome);
+      const marcas = marcasFiltradas.content || marcasFiltradas;
+
+      brandsCarousel.innerHTML = "";
+      renderizarMarcas(brandsCarousel, marcas, filtrarPorMarca);
+    }
   }
 }
 
@@ -252,20 +260,6 @@ export async function executarBusca(valor) {
   const marcas = resMarcas.content || resMarcas;
 
   atualizarResultadoNaTela(valor, brinquedos, marcas);
-
-  const mainContainer = document.querySelector("#main-container");
-  if (mainContainer && !document.querySelector("#return-index-btn")) {
-    const link = document.createElement("a");
-    link.href = "index.html";
-
-    const button = document.createElement("button");
-    button.classList.add("btn");
-    button.id = "return-index-btn";
-    button.textContent = "Voltar ao Menu Principal";
-
-    link.appendChild(button);
-    mainContainer.prepend(link);
-  }
 }
 
 // ===============================
@@ -276,15 +270,27 @@ function atualizarResultadoNaTela(valor, brinquedos, marcas) {
   const toysTitle = document.querySelector("#toysContainer-title");
   const categoriesContainer = document.querySelector("#categories-container");
   const brandsContainer = document.querySelector("#brands-container");
+  const mainContainer = document.querySelector("#main-container");
 
+  if (!productsContainer || !toysTitle) return;
+
+  // ===============================
+  // ESCONDER FILTROS DA HOME
+  // ===============================
   if (categoriesContainer) categoriesContainer.style.display = "none";
   if (brandsContainer) brandsContainer.style.display = "none";
 
+  // ===============================
+  // TÍTULO
+  // ===============================
   toysTitle.innerText =
     brinquedos.length === 0 && marcas.length === 0
       ? `Nenhum resultado para: "${valor}"`
       : `Resultados para: ${valor}`;
 
+  // ===============================
+  // CARROSSEL DE MARCAS (BUSCA)
+  // ===============================
   const brandsSection = document.querySelector("#brands-simple-container");
   const brandsCarousel = document.querySelector("#brands-simple-carousel");
 
@@ -292,11 +298,34 @@ function atualizarResultadoNaTela(valor, brinquedos, marcas) {
     if (marcas.length > 0) {
       brandsSection.style.display = "flex";
       brandsCarousel.innerHTML = "";
+
       renderizarMarcas(brandsCarousel, marcas, filtrarPorMarca);
     } else {
       brandsSection.style.display = "none";
     }
   }
 
+  // ===============================
+  // BRINQUEDOS
+  // ===============================
   renderizarBrinquedos(productsContainer, brinquedos);
+
+  // ===============================
+  // BOTÃO VOLTAR (BUSCA TEXTO / SUGESTÃO)
+  // ===============================
+  const existeBotao = document.querySelector("#return-index-btn");
+
+  if (!existeBotao) {
+    const link = document.createElement("a");
+    link.href = "index.html";
+
+    const button = document.createElement("button");
+    button.classList.add("btn");
+    button.id = "return-index-btn";
+    button.textContent = "Voltar ao Menu Principal";
+
+    link.appendChild(button);
+
+    mainContainer.prepend(link);
+  }
 }
