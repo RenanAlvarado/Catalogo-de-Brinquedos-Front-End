@@ -16,7 +16,7 @@ import {
   aplicarMascaraTelefone,
 } from "../utils/masks.js";
 
-import { cepValido, campoVazio } from "../utils/validators.js";
+import { cepValido, campoVazio, telefoneValido } from "../utils/validators.js";
 
 import { confirmarAcao, mostrarFeedbackAcao } from "../utils/modals.js";
 
@@ -87,7 +87,11 @@ function validarFormularioPerfil() {
   } else limparErro(nomeInputIcon);
 
   // Telefone (opcional, mas se tiver valida)
-  if (!campoVazio(telefone.value)) {
+  if (!campoVazio(telefone.value) && !telefoneValido(telefone.value)) {
+    marcarErro(telefoneInputIcon);
+    alert("Telefone inválido! Verifique o DDD e o número.");
+    valido = false;
+  } else {
     limparErro(telefoneInputIcon);
   }
 
@@ -136,19 +140,19 @@ function iniciarCep() {
     const valor = aplicarMascaraCEP(e.target.value);
     e.target.value = valor;
 
-    // 🧠 REGRA 1: campo vazio → sem erro
+    // campo vazio → sem erro
     if (valor.trim() === "") {
       cepErrorDiv.classList.add("hide");
       return;
     }
 
-    // 🧠 REGRA 2: CEP incompleto ou inválido → mostra erro
+    // CEP incompleto ou inválido → mostra erro
     if (!cepValido(valor)) {
       cepErrorDiv.classList.remove("hide");
       return;
     }
 
-    // 🧠 REGRA 3: CEP válido → busca API
+    // CEP válido → busca API
     try {
       const dados = await buscarCEP(valor);
 
@@ -162,7 +166,7 @@ function iniciarCep() {
 
       cepErrorDiv.classList.add("hide"); // ✅ remove erro
     } catch {
-      // 🧠 REGRA 4: CEP não encontrado → erro
+      // CEP não encontrado → erro
       cepErrorDiv.classList.remove("hide");
     }
   });
@@ -176,6 +180,9 @@ function iniciarTelefone() {
   telefoneInput.addEventListener("input", (e) => {
     const valor = aplicarMascaraTelefone(e.target.value);
     e.target.value = valor;
+
+    const telefoneInputIcon = document.getElementById("telefone-input-icon");
+    limparErro(telefoneInputIcon);
   });
 }
 
@@ -267,7 +274,7 @@ function limparEnderecoCompleto() {
   // limpa CEP
   cepInput.value = "";
 
-  // 🔓 desbloqueia CEP
+  // desbloqueia CEP
   cepInput.disabled = false;
 
   cepInput.focus();
