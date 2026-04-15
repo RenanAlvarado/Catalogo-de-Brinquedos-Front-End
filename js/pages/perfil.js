@@ -85,11 +85,11 @@ function validarFormularioPerfil() {
 
   // Telefone (opcional, mas se tiver valida)
   if (!campoVazio(telefone.value) && !telefoneValido(telefone.value)) {
-    marcarErro(telefoneInputIcon);
-    alert("Telefone inválido! Verifique o DDD e o número.");
+    marcarErro(
+      "number-input",
+      "Telefone inválido! Verifique o DDD e o número.",
+    );
     valido = false;
-  } else {
-    limparErro(telefoneInputIcon);
   }
 
   // CEP
