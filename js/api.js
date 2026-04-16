@@ -44,6 +44,10 @@ async function requisicao(endpoint, options = {}) {
 // ===============================
 
 export function obterImagem(pasta, imagem) {
+  if (!imagem && pasta === "usuarios") {
+    return "img/perfil.png";
+  }
+
   if (!imagem) return "img/placeholder.png";
 
   // Puxar imagens

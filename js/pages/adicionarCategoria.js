@@ -47,7 +47,7 @@ export async function iniciarPaginaAdicionarCategoria() {
 function configurarModoTela() {
   const titulo = document.getElementById("title-categorie-form");
   const botaoSubmit = document.querySelector("#salvar-categoria-btn");
-  const deleteBtn = document.getElementById("delete-btn");
+  const deleteBtn = document.getElementById("delete-categoria-btn");
   const idInput = document.querySelector("#id-input-icon");
 
   if (isEdicao) {

@@ -378,7 +378,7 @@ export function renderizarPerfil(usuario) {
 
     imagemHTML.onerror = () => {
       imagemHTML.onerror = null;
-      imagemHTML.src = "img/placeholder.png";
+      imagemHTML.src = "img/perfil.png";
     };
   }
   // Dados básicos

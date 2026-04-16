@@ -50,7 +50,7 @@ export async function iniciarPaginaAdicionarMarca() {
 function configurarModoTela() {
   const titulo = document.getElementById("title-brand-form");
   const botaoSubmit = document.querySelector("#salvar-marca-btn");
-  const deleteBtn = document.getElementById("delete-btn");
+  const deleteBtn = document.getElementById("delete-marca-btn");
   const idInput = document.querySelector("#id-input-icon");
 
   if (isEdicao) {
