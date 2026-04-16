@@ -73,7 +73,7 @@ async function carregarMarcasFiltro() {
 }
 
 // ===============================
-// 🎯 MODO BUSCA (UI)
+//  MODO BUSCA (UI)
 // ===============================
 function aplicarModoBusca(valor, brinquedos) {
   const productsContainer = document.querySelector("#products-wrapper");
@@ -97,7 +97,7 @@ function aplicarModoBusca(valor, brinquedos) {
 }
 
 // ===============================
-// 🔄 MODO NORMAL (UI)
+//  MODO NORMAL (UI)
 // ===============================
 function restaurarModoNormal() {
   const categoriesContainer = document.querySelector("#categories-container");
@@ -284,7 +284,7 @@ export async function iniciarHome() {
 
   restaurarScroll();
 
-  // 🔥 ESSENCIAL PRA BUSCA FUNCIONAR
+  //  ESSENCIAL PRA BUSCA FUNCIONAR
   window.addEventListener("filtrosAtualizados", () => {
     carregarBrinquedos(0);
   });
@@ -302,8 +302,11 @@ export async function iniciarHome() {
       const params = new URLSearchParams(window.location.search);
 
       params.set("ordenacao", e.target.value);
+      params.set("page", 0);
 
       window.history.pushState({}, "", `?${params.toString()}`);
+
+      window.scrollTo(0, 0);
 
       carregarBrinquedos(0);
     });

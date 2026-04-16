@@ -418,6 +418,8 @@ export function renderizarPerfil(usuario) {
 export function renderizarPaginacao(container, data, aoMudarPagina) {
   container.innerHTML = "";
 
+  window.scrollTo(0, 500);
+
   // ANTERIOR
   const prev = document.createElement("button");
   prev.innerText = "«";
