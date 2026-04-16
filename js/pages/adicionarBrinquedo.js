@@ -53,8 +53,16 @@ export async function iniciarPaginaAdicionarBrinquedo() {
   const backBtn = document.querySelector(".arrow-index-back");
 
   if (backBtn) {
-    backBtn.addEventListener("click", () => {
-      window.location.href = "index.html";
+    backBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      const params = new URLSearchParams(window.location.search);
+
+      // remove o id (não faz sentido na home)
+      params.delete("id");
+
+      // 🔥 volta com estado completo
+      window.location.href = `index.html?${params.toString()}`;
     });
   }
 }
