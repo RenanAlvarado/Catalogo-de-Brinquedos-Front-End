@@ -90,6 +90,7 @@ export function iniciarBusca() {
           buscaNavbar.classList.remove("active");
 
           if (estaNaHome) {
+            window.history.pushState({}, "", `?marca=${id}`);
             executarBuscaPorMarca(id, nome);
           } else {
             window.location.href = `index.html?marca=${id}`;
@@ -156,6 +157,8 @@ export function iniciarBusca() {
       suggestionsBox.style.display = "none";
       buscaNavbar.classList.remove("active");
 
+      window.history.pushState({}, "", "index.html");
+
       if (estaNaHome) restaurarCatalogo();
       return;
     }
@@ -184,6 +187,9 @@ export function iniciarBusca() {
     buscaNavbar.classList.remove("active");
 
     if (estaNaHome) {
+      const url = `?search=${encodeURIComponent(valor)}`;
+      window.history.pushState({}, "", url);
+
       executarBusca(valor);
     } else {
       window.location.href = `index.html?search=${encodeURIComponent(valor)}`;

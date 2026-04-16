@@ -292,7 +292,7 @@ async function deletarMarca() {
 // EVENTO DELETE
 // ===============================
 
-const deleteBtn = document.getElementById("delete-btn");
+const deleteBtn = document.getElementById("delete-marca-btn");
 
 if (deleteBtn) {
   deleteBtn.addEventListener("click", deletarMarca);

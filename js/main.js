@@ -6,6 +6,8 @@ import { inicializarHeaderUsuario } from "./components/header.js";
 
 import { controlarFab } from "./components/fab.js";
 
+import { iniciarHome } from "./pages/homepage.js";
+
 import { iniciarPaginaAdicionarBrinquedo } from "./pages/adicionarBrinquedo.js";
 
 import { iniciarPaginaAdicionarCategoria } from "./pages/adicionarCategoria.js";
@@ -16,37 +18,7 @@ import { iniciarPaginaPerfil } from "./pages/perfil.js";
 
 import { iniciarPaginaDetalhes } from "./pages/detalhesBrinquedo.js";
 
-import { buscarCategorias, buscarMarcas, filtrarBrinquedos } from "./api.js";
-
-import {
-  renderizarCategorias,
-  renderizarFiltroCategorias,
-  renderizarBrinquedos,
-  renderizarMarcas,
-  renderizarFiltroMarcas,
-  renderizarPaginacao,
-} from "./render.js";
-
-import {
-  filtrarPorCategoria,
-  filtrarPorMarca,
-  alterarCategoria,
-  alterarMarca,
-  setAtualizarFiltrosCallback,
-} from "./filters.js";
-
-import { iniciarCarrosselMarcas } from "./scripts.js";
-
 import { iniciarBusca, executarBusca } from "./search.js";
-
-// Inicialização dos filtros
-let filtros = {
-  categorias: [],
-  marcas: [],
-};
-
-// Variável que inicia a ordenação
-let ordenacao = "";
 
 // ===============================
 // FUNÇÃO AUXILIAR PARA VER SE O COMPONENTES EXISTE
@@ -89,152 +61,6 @@ async function carregarLayout() {
 function pegarParametroBusca() {
   const params = new URLSearchParams(window.location.search);
   return params.get("search");
-}
-
-// ===============================
-// FUNÇÕES DE CARREGAMENTO DA PÁGINA
-// ===============================
-
-// Carregar os cards de categoria
-async function carregarCategorias() {
-  //Carrega dentro da função para não dar erro
-  const categoriesContainer = getEl("#categories-carousel");
-  if (!categoriesContainer) return;
-
-  const categorias = await buscarCategorias();
-  renderizarCategorias(categoriesContainer, categorias, filtrarPorCategoria);
-}
-
-// Carregar os cards de marca
-async function carregarMarcasSimples() {
-  //Carrega dentro da função para não dar erro
-  const brandsContainer = getEl("#brands-simple-carousel");
-  if (!brandsContainer) return;
-
-  const marcas = await buscarMarcas();
-  renderizarMarcas(brandsContainer, marcas, filtrarPorMarca);
-}
-
-// Carregar os cards de marca
-async function carregarMarcas() {
-  const brandsContainer = getEl("#brands-carousel");
-  if (!brandsContainer) return;
-
-  const marcas = await buscarMarcas();
-
-  renderizarMarcas(brandsContainer, marcas, filtrarPorMarca);
-
-  iniciarCarrosselMarcas();
-}
-
-//Carregar os cards de brinquedos
-const tamanhoPagina = 16; //Varíavel de quantos brinquedos aparecem na página
-
-async function carregarBrinquedos(page = 0) {
-  const productsContainer = getEl("#products-wrapper");
-  if (!productsContainer) return;
-
-  const resposta = await filtrarBrinquedos({
-    categorias: filtros.categorias,
-    marcas: filtros.marcas,
-    page: page,
-    size: tamanhoPagina,
-    ordenacao,
-  });
-
-  if (!resposta || !resposta.content) {
-    console.error("Resposta inválida:", resposta);
-    return;
-  }
-
-  const brinquedos = resposta.content;
-
-  renderizarBrinquedos(productsContainer, brinquedos);
-
-  const paginacaoContainer = getEl("#pagination-container");
-  if (!paginacaoContainer) return;
-
-  renderizarPaginacao(paginacaoContainer, resposta, (novaPagina) => {
-    carregarBrinquedos(novaPagina);
-  });
-}
-
-// ===============================
-// FUNÇÕES DE CARREGAMENTO DOS FILTROS
-// ===============================
-
-// Carregar os filtros de categoria
-async function carregarCategoriasFiltro() {
-  const filtroCategoriasContainer = getEl("#categories-filter");
-  if (!filtroCategoriasContainer) return;
-
-  const categorias = await buscarCategorias();
-
-  renderizarFiltroCategorias(
-    filtroCategoriasContainer,
-    categorias,
-    alterarCategoria,
-  );
-}
-
-// Carregar os filtros de marca
-async function carregarMarcasFiltro() {
-  const filtroMarcasContainer = getEl("#brands-filter");
-  if (!filtroMarcasContainer) return;
-
-  const marcas = await buscarMarcas();
-
-  renderizarFiltroMarcas(filtroMarcasContainer, marcas, alterarMarca);
-}
-
-// Função que atualiza os filtros
-function atualizarFiltros(tipo, id, marcado) {
-  if (tipo === "categoria") {
-    if (marcado) {
-      filtros.categorias.push(id);
-    } else {
-      filtros.categorias = filtros.categorias.filter((c) => c !== id);
-    }
-  }
-
-  if (tipo === "marca") {
-    if (marcado) {
-      filtros.marcas.push(id);
-    } else {
-      filtros.marcas = filtros.marcas.filter((m) => m !== id);
-    }
-  }
-
-  carregarBrinquedos(0); // recarrega com paginação + filtro + ordenação
-}
-
-// ===============================
-// INICIALIZAÇÃO DA PÁGINA
-// ===============================
-
-// Função auxiliar de inicialização isolada de cada coisa (Nome para erro e função que vai ser carregada)
-function init(nome, fn) {
-  try {
-    const result = fn();
-
-    // Caso seja async
-    if (result instanceof Promise) {
-      result.catch((err) => {
-        console.error(`Erro em ${nome}:`, err);
-      });
-    }
-  } catch (err) {
-    console.error(`Erro em ${nome}:`, err);
-  }
-}
-
-// Função auxiliar da inicialização dos componentes
-async function iniciarPagina() {
-  init("categorias", carregarCategorias);
-  init("marcas", carregarMarcas);
-  init("filtroCategorias", carregarCategoriasFiltro);
-  init("filtroMarcas", carregarMarcasFiltro);
-  init("marcasSimples", carregarMarcasSimples);
 }
 
 // ===============================
@@ -299,32 +125,13 @@ async function start() {
 
   const busca = pegarParametroBusca();
 
-  // Sempre carrega estrutura (SEM produtos ainda)
-  await iniciarPagina();
+  const isHome =
+    window.location.pathname === "/" ||
+    window.location.pathname.includes("index.html");
 
-  if (busca) {
-    // Se veio com ?search=
-    await executarBusca(busca);
-
-    //Preench input
-    if (input) input.value = busca;
-  } else {
-    // Comportamento normal
-    await carregarBrinquedos();
+  if (isHome) {
+    await iniciarHome();
   }
-
-  // Carregar o filtro de ordenação
-  const ordenacaoSelect = document.getElementById("ordenacao-select");
-
-  if (ordenacaoSelect) {
-    ordenacaoSelect.addEventListener("change", (e) => {
-      ordenacao = e.target.value;
-      carregarBrinquedos(0); // volta para a primeira página
-    });
-  }
-
-  // Registrar o callback
-  setAtualizarFiltrosCallback(atualizarFiltros);
 }
 
 // ==========================================

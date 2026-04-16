@@ -36,7 +36,7 @@ export async function iniciarPaginaAdicionarCategoria() {
 
   iniciarUploadImagem();
 
-  adicionarRemocaoErroTempoReal(); // 🔥 padrão global
+  adicionarRemocaoErroTempoReal();
 
   iniciarValidacaoFormulario();
 }
@@ -280,7 +280,7 @@ async function deletarCategoria() {
 // ===============================
 // EVENTO DELETE
 // ===============================
-const deleteBtn = document.getElementById("delete-btn");
+const deleteBtn = document.getElementById("delete-categoria-btn");
 
 if (deleteBtn) {
   deleteBtn.addEventListener("click", deletarCategoria);

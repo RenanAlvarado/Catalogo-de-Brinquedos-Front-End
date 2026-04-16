@@ -27,6 +27,9 @@
   padding-left: 0;
   padding-top: 0;
   margin-bottom: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 #form-container h1 {

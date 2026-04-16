@@ -49,6 +49,14 @@ export async function iniciarPaginaAdicionarBrinquedo() {
   iniciarLimparFormulario();
   adicionarRemocaoErroTempoReal();
   iniciarValidacaoFormulario();
+
+  const backBtn = document.querySelector(".arrow-index-back");
+
+  if (backBtn) {
+    backBtn.addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  }
 }
 
 // ===============================

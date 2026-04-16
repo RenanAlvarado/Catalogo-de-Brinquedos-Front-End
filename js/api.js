@@ -65,6 +65,46 @@ export function obterImagem(pasta, imagem) {
 }
 
 // ===============================
+// CRUD USUÁRIO
+// ===============================
+
+export async function buscarUsuarioPorId(id) {
+  return await requisicao(`/usuarios/${id}`);
+}
+
+export async function alterarUsuarioAPI(id, dados) {
+  return await requisicao(`/usuarios/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(dados),
+  });
+}
+
+export async function atualizarImagemUsuarioAPI(id, formData) {
+  return await requisicao(`/usuarios/${id}/imagem`, {
+    method: "PUT",
+    body: formData,
+  });
+}
+
+// ===============================
+// SISTEMA DE LOGIN E CADASTRO
+// ===============================
+
+export async function loginAPI(email, senha) {
+  return await requisicao("/usuarios/login", {
+    method: "POST",
+    body: JSON.stringify({ email, senha }),
+  });
+}
+
+export async function cadastroAPI(nome, email, senha, confirmarSenha) {
+  return await requisicao("/usuarios/cadastro", {
+    method: "POST",
+    body: JSON.stringify({ nome, email, senha, confirmarSenha }),
+  });
+}
+
+// ===============================
 // CATEGORIAS
 // ===============================
 
@@ -77,6 +117,30 @@ export async function buscarCategoriaPorId(id) {
 }
 
 // ===============================
+// CRUD --> CATEGORIAS
+// ===============================
+
+export async function salvarCategoriaAPI(formData) {
+  return await requisicao("/categorias", {
+    method: "POST",
+    body: formData,
+  });
+}
+
+export async function alterarCategoriaAPI(id, formData) {
+  return await requisicao(`/categorias/${id}`, {
+    method: "PUT",
+    body: formData,
+  });
+}
+
+export async function deletarCategoriaAPI(id) {
+  return await requisicao(`/categorias/${id}`, {
+    method: "DELETE",
+  });
+}
+
+// ===============================
 // MARCAS
 // ===============================
 
@@ -86,6 +150,30 @@ export async function buscarMarcas() {
 
 export async function buscarMarcaPorId(id) {
   return await requisicao(`/marcas/${id}`);
+}
+
+// ===============================
+// CRUD --> MARCAS
+// ===============================
+
+export async function salvarMarcaAPI(formData) {
+  return await requisicao("/marcas", {
+    method: "POST",
+    body: formData,
+  });
+}
+
+export async function alterarMarcaAPI(id, formData) {
+  return await requisicao(`/marcas/${id}`, {
+    method: "PUT",
+    body: formData,
+  });
+}
+
+export async function deletarMarcaAPI(id) {
+  return await requisicao(`/marcas/${id}`, {
+    method: "DELETE",
+  });
 }
 
 // ===============================
@@ -153,54 +241,6 @@ export async function deletarBrinquedoAPI(id) {
 }
 
 // ===============================
-// CRUD --> CATEGORIAS
-// ===============================
-
-export async function salvarCategoriaAPI(formData) {
-  return await requisicao("/categorias", {
-    method: "POST",
-    body: formData,
-  });
-}
-
-export async function alterarCategoriaAPI(id, formData) {
-  return await requisicao(`/categorias/${id}`, {
-    method: "PUT",
-    body: formData,
-  });
-}
-
-export async function deletarCategoriaAPI(id) {
-  return await requisicao(`/categorias/${id}`, {
-    method: "DELETE",
-  });
-}
-
-// ===============================
-// CRUD --> MARCAS
-// ===============================
-
-export async function salvarMarcaAPI(formData) {
-  return await requisicao("/marcas", {
-    method: "POST",
-    body: formData,
-  });
-}
-
-export async function alterarMarcaAPI(id, formData) {
-  return await requisicao(`/marcas/${id}`, {
-    method: "PUT",
-    body: formData,
-  });
-}
-
-export async function deletarMarcaAPI(id) {
-  return await requisicao(`/marcas/${id}`, {
-    method: "DELETE",
-  });
-}
-
-// ===============================
 // BUSCA DE BRINQUEDOS POR ID
 // ===============================
 
@@ -238,46 +278,6 @@ export async function buscarBrinquedosPorCategoria(id) {
 
 export async function buscarBrinquedosPorMarca(id) {
   return await requisicao(`/brinquedos/marca/${id}`);
-}
-
-// ===============================
-// SISTEMA DE LOGIN E CADASTRO
-// ===============================
-
-export async function loginAPI(email, senha) {
-  return await requisicao("/usuarios/login", {
-    method: "POST",
-    body: JSON.stringify({ email, senha }),
-  });
-}
-
-export async function cadastroAPI(nome, email, senha, confirmarSenha) {
-  return await requisicao("/usuarios/cadastro", {
-    method: "POST",
-    body: JSON.stringify({ nome, email, senha, confirmarSenha }),
-  });
-}
-
-// ===============================
-// CRUD USUÁRIO
-// ===============================
-
-export async function buscarUsuarioPorId(id) {
-  return await requisicao(`/usuarios/${id}`);
-}
-
-export async function alterarUsuarioAPI(id, dados) {
-  return await requisicao(`/usuarios/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(dados),
-  });
-}
-
-export async function atualizarImagemUsuarioAPI(id, formData) {
-  return await requisicao(`/usuarios/${id}/imagem`, {
-    method: "PUT",
-    body: formData,
-  });
 }
 
 // ===============================
