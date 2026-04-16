@@ -80,7 +80,20 @@ async function realizarLogin() {
   } catch (erro) {
     console.error("Erro no login:", erro);
 
-    // erro genérico de login
+    // erro de validação do backend (400)
+    if (Array.isArray(erro)) {
+      erro.forEach((msg) => {
+        if (msg.toLowerCase().includes("email")) {
+          marcarErro("email-input", msg);
+        } else if (msg.toLowerCase().includes("senha")) {
+          marcarErro("password-input", msg);
+        }
+      });
+
+      return;
+    }
+
+    // erro de login (401)
     marcarErro("email-input", "");
     marcarErro("password-input", "");
 
