@@ -270,7 +270,18 @@ export function renderizarQuickViewBrinquedos(brinquedo) {
   const desc = document.getElementById("qv-desc");
   const img = document.getElementById("qv-img");
 
-  if (titulo) titulo.textContent = brinquedo.nome;
+  const cartBtn = document.getElementById("adicionar-carrinho-quick-view-btn");
+
+  const admin = isAdmin();
+
+  if (admin && cartBtn) {
+    cartBtn.style.display = "none";
+  }
+
+  if (titulo) {
+    titulo.textContent = brinquedo.nome;
+    titulo.dataset.id = brinquedo.id;
+  }
   if (preco) preco.textContent = `R$ ${formatarPreco(brinquedo.preco)}`;
   if (desc) desc.textContent = brinquedo.descricao;
 
@@ -503,5 +514,97 @@ export function renderizarDetalhes(brinquedo) {
       imagemHTML.onerror = null;
       imagemHTML.src = "img/placeholder.png";
     };
+  }
+}
+
+// ===============================
+// RENDERIZAR CARRINHO (APENAS UI)
+// ===============================
+
+export function renderizarCarrinho(carrinho) {
+  const container = document.querySelector("#cart-items-section");
+  const subtotalEl = document.querySelector(".total-line span:last-child");
+  const itensEl = document.querySelector(".summary-line span");
+
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  // carrinho vazio
+  if (!Array.isArray(carrinho) || carrinho.length === 0) {
+    container.innerHTML = `<p>Seu carrinho está vazio.</p>`;
+
+    if (subtotalEl) subtotalEl.textContent = "R$ 0,00";
+    if (itensEl) itensEl.textContent = "Subtotal (0 itens)";
+    return;
+  }
+
+  carrinho.forEach((item) => {
+    const preco = Number(item.preco) || 0;
+
+    const marca =
+      typeof item.marca === "object" ? item.marca?.nome : item.marca || "";
+
+    const imagem = obterImagem("toys", item.imagem);
+
+    const div = document.createElement("div");
+    div.classList.add("cart-item");
+
+    div.innerHTML = `
+      <img 
+        src="${imagem}" 
+        class="item-img"
+        alt="${item.nome}"
+        onerror="this.onerror=null; this.src='img/placeholder.png'"
+      />
+
+      <div class="item-info">
+        <h3>${item.nome}</h3>
+        <p class="item-brand">${marca}</p>
+        <p class="item-price">R$ ${formatarPreco(preco)}</p>
+      </div>
+
+      <div class="item-actions">
+        <div class="quantity-control">
+          <button class="qtd-btn minus" data-id="${item.id}">-</button>
+          <input type="text" value="${item.quantidade}" readonly />
+          <button class="qtd-btn plus" data-id="${item.id}">+</button>
+        </div>
+
+        <button class="remove-btn" data-id="${item.id}">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </div>
+    `;
+
+    container.appendChild(div);
+  });
+
+  atualizarResumoCarrinho(carrinho);
+}
+
+// ===============================
+// RESUMO (APENAS UI)
+// ===============================
+
+export function atualizarResumoCarrinho(carrinho) {
+  const subtotalEl = document.querySelector(".total-line span:last-child");
+  const itensEl = document.querySelector(".summary-line span");
+
+  if (!carrinho) return;
+
+  const subtotal = carrinho.reduce(
+    (acc, item) => acc + (Number(item.preco) || 0) * item.quantidade,
+    0,
+  );
+
+  const itens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+
+  if (subtotalEl) {
+    subtotalEl.textContent = `R$ ${subtotal.toFixed(2)}`;
+  }
+
+  if (itensEl) {
+    itensEl.textContent = `Subtotal (${itens} itens)`;
   }
 }

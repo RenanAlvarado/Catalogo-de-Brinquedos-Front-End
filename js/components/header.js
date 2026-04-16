@@ -1,8 +1,14 @@
+import { contarItens } from "../services/cartService.js";
+
 export function inicializarHeaderUsuario() {
+  atualizarTextoCarrinho();
+
   const usuario = JSON.parse(localStorage.getItem("usuario"));
 
   const botao = document.getElementById("login-btn");
   const texto = document.getElementById("login-text");
+
+  const cartBtn = document.getElementById("cart");
 
   if (!botao || !texto) return;
 
@@ -33,10 +39,55 @@ export function inicializarHeaderUsuario() {
     };
   }
 
+  // ===============================
+  //  CARRINHO (NOVO)
+  // ===============================
+  if (cartBtn) {
+    cartBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      if (usuario) {
+        window.location.href = "carrinho.html";
+      } else {
+        window.location.href = "perfil.html";
+      }
+    });
+  }
+
   // estado inicial
   if (usuario) {
     renderizarUsuario();
   } else {
     renderizarVisitante();
+  }
+}
+
+export function atualizarTextoCarrinho() {
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+  const cartBtn = document.getElementById("cart");
+
+  if (!cartBtn) return;
+
+  //  ADMIN NÃO VÊ CARRINHO
+  if (usuario?.tipo === "ADMIN") {
+    cartBtn.style.display = "none";
+    return;
+  }
+
+  if (!usuario) {
+    // só ícone, sem contador
+    cartBtn.innerHTML = `Carrinho<i class="fa-solid fa-cart-shopping"></i>`;
+    return;
+  }
+
+  const total = contarItens();
+
+  if (total > 0) {
+    cartBtn.innerHTML = `Carrinho
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span class="cart-count">(${total})</span>
+    `;
+  } else {
+    cartBtn.innerHTML = `Carrinho <i class="fa-solid fa-cart-shopping"></i>`;
   }
 }
