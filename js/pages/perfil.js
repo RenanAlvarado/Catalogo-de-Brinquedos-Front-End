@@ -270,6 +270,33 @@ async function alterarPerfil() {
     window.location.reload();
   } catch (error) {
     console.error(error);
+
+    // limpa erros antigos da tela
+    limparErros();
+
+    // se veio erro da API (validação back-end)
+    if (error.response && error.response.data) {
+      const erros = error.response.data;
+
+      // nome
+      if (erros.nome) {
+        marcarErro("nome-input", erros.nome);
+      }
+
+      // telefone
+      if (erros.telefone) {
+        marcarErro("number-input", erros.telefone);
+      }
+
+      // CEP (quando usar DTO com endereco)
+      if (erros["endereco.cep"]) {
+        marcarErro("cep-input", erros["endereco.cep"]);
+      }
+
+      return; // evita mostrar modal de falha geral
+    }
+
+    // erro genérico
     await mostrarFeedbackAcao("Falha", "Atualizar");
   }
 }
