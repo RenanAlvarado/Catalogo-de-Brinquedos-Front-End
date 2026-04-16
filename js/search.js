@@ -1,48 +1,56 @@
 // ===============================
 // IMPORTS
 // ===============================
-
-import {
-  buscarBrinquedos,
-  buscarBrinquedosPorNome,
-  buscarMarcasPorNome,
-  filtrarBrinquedos,
-  buscarBrinquedosPorMarca,
-} from "./api.js";
-
-import { filtrarPorMarca } from "./filters.js";
-
-import { renderizarBrinquedos, renderizarMarcas } from "./render.js";
+import { buscarBrinquedosPorNome, buscarMarcasPorNome } from "./api.js";
 
 // ===============================
-// FUNÇÃO DE INICIAR BUSCA
+// INICIAR BUSCA
 // ===============================
-
 export function iniciarBusca() {
   let sugestaoSelecionada = -1;
+  let itensSugestao = [];
 
-  const mainContainer = document.querySelector("#main-container");
   const searchInput = document.querySelector("#search-input");
   const suggestionsBox = document.querySelector("#suggestions-box");
   const buscaNavbar = document.querySelector("#busca-navbar");
   const formBusca = document.querySelector("#busca-navbar form");
 
-  const productsContainer = document.querySelector("#products-wrapper");
-  const categoriesContainer = document.querySelector("#categories-container");
-  const brandsContainer = document.querySelector("#brands-container");
-  const toysTitle = document.querySelector("#toysContainer-title");
-
   if (!searchInput) return;
 
-  const estaNaHome = productsContainer && toysTitle;
-  const tituloOriginal = toysTitle ? toysTitle.innerText : "";
-
   // ===============================
-  // DESTACAR TEXTO
+  // UTIL
   // ===============================
   function destacarTexto(texto, busca) {
+    if (!busca) return texto;
     const regex = new RegExp(`(${busca})`, "gi");
     return texto.replace(regex, "<strong>$1</strong>");
+  }
+
+  function fecharSugestoes() {
+    suggestionsBox.style.display = "none";
+    buscaNavbar.classList.remove("active");
+
+    sugestaoSelecionada = -1;
+    itensSugestao = [];
+  }
+
+  function renderSelecao() {
+    const items = suggestionsBox.querySelectorAll(".suggestion-item");
+
+    items.forEach((el, index) => {
+      el.classList.toggle("selected", index === sugestaoSelecionada);
+    });
+
+    if (items[sugestaoSelecionada]) {
+      items[sugestaoSelecionada].scrollIntoView({
+        block: "nearest",
+        behavior: "smooth",
+      });
+    }
+  }
+
+  function preencherInput(texto) {
+    searchInput.value = texto;
   }
 
   // ===============================
@@ -50,19 +58,18 @@ export function iniciarBusca() {
   // ===============================
   function mostrarSugestoes(brinquedos, marcas) {
     sugestaoSelecionada = -1;
+    itensSugestao = [];
     suggestionsBox.innerHTML = "";
 
-    if (
-      (!Array.isArray(brinquedos) || brinquedos.length === 0) &&
-      (!Array.isArray(marcas) || marcas.length === 0)
-    ) {
-      suggestionsBox.style.display = "none";
-      buscaNavbar.classList.remove("active");
+    const temMarcas = marcas?.length > 0;
+    const temBrinquedos = brinquedos?.length > 0;
+
+    if (!temMarcas && !temBrinquedos) {
+      fecharSugestoes();
       return;
     }
 
-    const temMarcas = Array.isArray(marcas) && marcas.length > 0;
-    const temBrinquedos = Array.isArray(brinquedos) && brinquedos.length > 0;
+    const valor = searchInput.value.trim();
 
     // ===============================
     // MARCAS
@@ -77,24 +84,17 @@ export function iniciarBusca() {
         const item = document.createElement("div");
 
         item.classList.add("suggestion-item");
-        item.innerHTML = destacarTexto(marca.nome, searchInput.value);
-
-        item.dataset.id = marca.id;
+        item.innerHTML = destacarTexto(marca.nome, valor);
 
         item.addEventListener("click", () => {
-          const id = marca.id;
-          const nome = marca.nome;
+          preencherInput(marca.nome);
+          selecionarMarca(marca.id);
+        });
 
-          searchInput.value = nome;
-          suggestionsBox.style.display = "none";
-          buscaNavbar.classList.remove("active");
-
-          if (estaNaHome) {
-            window.history.pushState({}, "", `?marca=${id}`);
-            executarBuscaPorMarca(id, nome);
-          } else {
-            window.location.href = `index.html?marca=${id}`;
-          }
+        itensSugestao.push({
+          tipo: "marca",
+          id: marca.id,
+          nome: marca.nome,
         });
 
         suggestionsBox.appendChild(item);
@@ -123,20 +123,17 @@ export function iniciarBusca() {
         const item = document.createElement("div");
 
         item.classList.add("suggestion-item");
-        item.innerHTML = destacarTexto(brinquedo.nome, searchInput.value);
+        item.innerHTML = destacarTexto(brinquedo.nome, valor);
 
         item.addEventListener("click", () => {
-          const nome = brinquedo.nome;
+          preencherInput(brinquedo.nome);
+          executarBusca(brinquedo.nome);
+          fecharSugestoes();
+        });
 
-          searchInput.value = nome;
-          suggestionsBox.style.display = "none";
-          buscaNavbar.classList.remove("active");
-
-          if (estaNaHome) {
-            executarBusca(nome);
-          } else {
-            window.location.href = `index.html?search=${encodeURIComponent(nome)}`;
-          }
+        itensSugestao.push({
+          tipo: "brinquedo",
+          nome: brinquedo.nome,
         });
 
         suggestionsBox.appendChild(item);
@@ -145,37 +142,99 @@ export function iniciarBusca() {
 
     suggestionsBox.style.display = "block";
     buscaNavbar.classList.add("active");
+
+    renderSelecao();
   }
 
   // ===============================
-  // INPUT (NÃO MEXI NO COMPORTAMENTO)
+  // INPUT (SUGESTÕES)
   // ===============================
+  let debounce;
+
   searchInput.addEventListener("input", async () => {
     const valor = searchInput.value.trim();
 
-    if (valor.length === 0) {
-      suggestionsBox.style.display = "none";
-      buscaNavbar.classList.remove("active");
+    clearTimeout(debounce);
 
-      window.history.pushState({}, "", "index.html");
-
-      if (estaNaHome) restaurarCatalogo();
+    if (!valor) {
+      fecharSugestoes();
+      window.dispatchEvent(new Event("filtrosAtualizados"));
       return;
     }
 
-    const [resBrinquedos, resMarcas] = await Promise.all([
-      buscarBrinquedosPorNome(valor),
-      buscarMarcasPorNome(valor),
-    ]);
+    debounce = setTimeout(async () => {
+      const [resB, resM] = await Promise.all([
+        buscarBrinquedosPorNome(valor),
+        buscarMarcasPorNome(valor),
+      ]);
 
-    const brinquedos = resBrinquedos.content || resBrinquedos;
-    const marcas = resMarcas.content || resMarcas;
-
-    mostrarSugestoes(brinquedos, marcas);
+      mostrarSugestoes(
+        resB?.content ?? resB ?? [],
+        resM?.content ?? resM ?? [],
+      );
+    }, 200);
   });
 
   // ===============================
-  // ENTER (MANTIDO IGUAL)
+  // TECLADO
+  // ===============================
+  // ===============================
+  // TECLADO (SETAS SIMPLES - ESTILO ANTIGO)
+  // ===============================
+  searchInput.addEventListener("keydown", (e) => {
+    const total = itensSugestao.length;
+
+    if (!total) return;
+
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+
+      sugestaoSelecionada++;
+
+      if (sugestaoSelecionada >= total) {
+        sugestaoSelecionada = 0;
+      }
+
+      renderSelecao();
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+
+      sugestaoSelecionada--;
+
+      if (sugestaoSelecionada < 0) {
+        sugestaoSelecionada = total - 1;
+      }
+
+      renderSelecao();
+    }
+
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      const item = itensSugestao[sugestaoSelecionada];
+
+      if (!item) return;
+
+      if (item.tipo === "marca") {
+        preencherInput(item.nome);
+        selecionarMarca(item.id);
+      } else {
+        preencherInput(item.nome);
+        executarBusca(item.nome);
+      }
+
+      fecharSugestoes();
+    }
+
+    if (e.key === "Escape") {
+      fecharSugestoes();
+    }
+  });
+
+  // ===============================
+  // SUBMIT
   // ===============================
   formBusca.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -183,155 +242,31 @@ export function iniciarBusca() {
     const valor = searchInput.value.trim();
     if (!valor) return;
 
-    suggestionsBox.style.display = "none";
-    buscaNavbar.classList.remove("active");
-
-    if (estaNaHome) {
-      const url = `?search=${encodeURIComponent(valor)}`;
-      window.history.pushState({}, "", url);
-
-      executarBusca(valor);
-    } else {
-      window.location.href = `index.html?search=${encodeURIComponent(valor)}`;
-    }
+    executarBusca(valor);
+    fecharSugestoes();
   });
 
   // ===============================
-  // CLICK FORA (MANTIDO)
+  // CLICK FORA
   // ===============================
   document.addEventListener("click", (e) => {
     if (!buscaNavbar.contains(e.target)) {
-      suggestionsBox.style.display = "none";
-      buscaNavbar.classList.remove("active");
+      fecharSugestoes();
     }
   });
-
-  // ===============================
-  // RESTAURAR CATÁLOGO
-  // ===============================
-  async function restaurarCatalogo() {
-    if (!estaNaHome) return;
-
-    if (categoriesContainer) categoriesContainer.style.display = "";
-    if (brandsContainer) brandsContainer.style.display = "";
-
-    const brandsSection = document.querySelector("#brands-simple-container");
-    if (brandsSection) brandsSection.style.display = "none";
-
-    toysTitle.innerText = tituloOriginal;
-
-    const resposta = await buscarBrinquedos();
-    const brinquedos = resposta.content || resposta;
-
-    renderizarBrinquedos(productsContainer, brinquedos);
-  }
-
-  // ===============================
-  // BUSCA POR MARCA (NOVO, CORRETO)
-  // ===============================
-  async function executarBuscaPorMarca(id, nome) {
-    await filtrarPorMarca(id, nome);
-
-    const categoriesContainer = document.querySelector("#categories-container");
-    const brandsContainer = document.querySelector("#brands-container");
-
-    if (categoriesContainer) categoriesContainer.style.display = "none";
-    if (brandsContainer) brandsContainer.style.display = "none";
-
-    const brandsSection = document.querySelector("#brands-simple-container");
-    const brandsCarousel = document.querySelector("#brands-simple-carousel");
-
-    if (brandsSection && brandsCarousel) {
-      brandsSection.style.display = "flex";
-
-      const marcasFiltradas = await buscarMarcasPorNome(nome);
-      const marcas = marcasFiltradas.content || marcasFiltradas;
-
-      brandsCarousel.innerHTML = "";
-      renderizarMarcas(brandsCarousel, marcas, filtrarPorMarca);
-    }
-  }
 }
 
 // ===============================
-// BUSCA NORMAL
+// BUSCA REAL
 // ===============================
-export async function executarBusca(valor) {
-  const [resBrinquedos, resMarcas] = await Promise.all([
-    buscarBrinquedosPorNome(valor),
-    buscarMarcasPorNome(valor),
-  ]);
+export function executarBusca(valor) {
+  const params = new URLSearchParams(window.location.search);
 
-  const brinquedos = resBrinquedos.content || resBrinquedos;
-  const marcas = resMarcas.content || resMarcas;
+  if (valor) params.set("search", valor);
+  else params.delete("search");
 
-  atualizarResultadoNaTela(valor, brinquedos, marcas);
-}
+  params.set("page", 0);
 
-// ===============================
-// ATUALIZAR TELA
-// ===============================
-function atualizarResultadoNaTela(valor, brinquedos, marcas) {
-  const productsContainer = document.querySelector("#products-wrapper");
-  const toysTitle = document.querySelector("#toysContainer-title");
-  const categoriesContainer = document.querySelector("#categories-container");
-  const brandsContainer = document.querySelector("#brands-container");
-  const mainContainer = document.querySelector("#main-container");
-
-  if (!productsContainer || !toysTitle) return;
-
-  // ===============================
-  // ESCONDER FILTROS DA HOME
-  // ===============================
-  if (categoriesContainer) categoriesContainer.style.display = "none";
-  if (brandsContainer) brandsContainer.style.display = "none";
-
-  // ===============================
-  // TÍTULO
-  // ===============================
-  toysTitle.innerText =
-    brinquedos.length === 0 && marcas.length === 0
-      ? `Nenhum resultado para: "${valor}"`
-      : `Resultados para: ${valor}`;
-
-  // ===============================
-  // CARROSSEL DE MARCAS (BUSCA)
-  // ===============================
-  const brandsSection = document.querySelector("#brands-simple-container");
-  const brandsCarousel = document.querySelector("#brands-simple-carousel");
-
-  if (brandsSection && brandsCarousel) {
-    if (marcas.length > 0) {
-      brandsSection.style.display = "flex";
-      brandsCarousel.innerHTML = "";
-
-      renderizarMarcas(brandsCarousel, marcas, filtrarPorMarca);
-    } else {
-      brandsSection.style.display = "none";
-    }
-  }
-
-  // ===============================
-  // BRINQUEDOS
-  // ===============================
-  renderizarBrinquedos(productsContainer, brinquedos);
-
-  // ===============================
-  // BOTÃO VOLTAR (BUSCA TEXTO / SUGESTÃO)
-  // ===============================
-  const existeBotao = document.querySelector("#return-index-btn");
-
-  if (!existeBotao) {
-    const link = document.createElement("a");
-    link.href = "index.html";
-
-    const button = document.createElement("button");
-    button.classList.add("btn");
-    button.id = "return-index-btn";
-    button.textContent = "Voltar ao Menu Principal";
-
-    link.appendChild(button);
-
-    mainContainer.prepend(link);
-  }
+  window.history.pushState({}, "", `?${params.toString()}`);
+  window.dispatchEvent(new Event("filtrosAtualizados"));
 }

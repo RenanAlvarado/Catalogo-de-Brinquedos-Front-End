@@ -21,17 +21,10 @@ import {
 } from "../filters.js";
 
 import { iniciarCarrosselMarcas } from "../scripts.js";
-import { executarBusca } from "../search.js";
 
 // ===============================
-// ESTADOS
+// CONFIG
 // ===============================
-let filtros = {
-  categorias: [],
-  marcas: [],
-};
-
-let ordenacao = "";
 const tamanhoPagina = 16;
 
 // ===============================
@@ -80,28 +73,92 @@ async function carregarMarcasFiltro() {
 }
 
 // ===============================
-// BRINQUEDOS
+// 🎯 MODO BUSCA (UI)
+// ===============================
+function aplicarModoBusca(valor, brinquedos) {
+  const productsContainer = document.querySelector("#products-wrapper");
+  const toysTitle = document.querySelector("#toysContainer-title");
+  const categoriesContainer = document.querySelector("#categories-container");
+  const brandsContainer = document.querySelector("#brands-container");
+  const brandsSection = document.querySelector("#brands-simple-container");
+
+  if (categoriesContainer) categoriesContainer.style.display = "none";
+  if (brandsContainer) brandsContainer.style.display = "none";
+  if (brandsSection) brandsSection.style.display = "none";
+
+  if (toysTitle) {
+    toysTitle.innerText =
+      brinquedos.length === 0
+        ? `Nenhum resultado para: "${valor}"`
+        : `Resultados para: ${valor}`;
+  }
+
+  renderizarBrinquedos(productsContainer, brinquedos);
+}
+
+// ===============================
+// 🔄 MODO NORMAL (UI)
+// ===============================
+function restaurarModoNormal() {
+  const categoriesContainer = document.querySelector("#categories-container");
+  const brandsContainer = document.querySelector("#brands-container");
+  const brandsSection = document.querySelector("#brands-simple-container");
+  const toysTitle = document.querySelector("#toysContainer-title");
+
+  if (categoriesContainer) categoriesContainer.style.display = "";
+  if (brandsContainer) brandsContainer.style.display = "";
+  if (brandsSection) brandsSection.style.display = "none";
+
+  if (toysTitle) {
+    toysTitle.innerText = "Brinquedos";
+  }
+}
+
+// ===============================
+// BRINQUEDOS (FONTE ÚNICA)
 // ===============================
 async function carregarBrinquedos(page = 0) {
   const container = document.querySelector("#products-wrapper");
   if (!container) return;
 
   const params = new URLSearchParams(window.location.search);
-  params.set("page", page);
 
+  const search = params.get("search");
+
+  const categorias = params.get("categoria")
+    ? params.get("categoria").split(",").map(Number)
+    : [];
+
+  const marcas = params.get("marca")
+    ? params.get("marca").split(",").map(Number)
+    : [];
+
+  const ordenacao = params.get("ordenacao");
+
+  params.set("page", page);
   window.history.pushState({}, "", `?${params.toString()}`);
 
   const resposta = await filtrarBrinquedos({
-    categorias: filtros.categorias,
-    marcas: filtros.marcas,
+    categorias,
+    marcas,
     page,
     size: tamanhoPagina,
     ordenacao,
+    search,
   });
 
   const brinquedos = resposta.content;
-  renderizarBrinquedos(container, brinquedos);
 
+  if (search) {
+    aplicarModoBusca(search, brinquedos);
+  } else {
+    restaurarModoNormal();
+    renderizarBrinquedos(container, brinquedos);
+  }
+
+  // ===============================
+  // PAGINAÇÃO
+  // ===============================
   const paginacao = document.querySelector("#pagination-container");
   if (!paginacao) return;
 
@@ -111,101 +168,67 @@ async function carregarBrinquedos(page = 0) {
 }
 
 // ===============================
-// FILTROS
+// FILTROS (BASEADOS NA URL)
 // ===============================
 function atualizarFiltros(tipo, id, marcado) {
   const params = new URLSearchParams(window.location.search);
 
-  if (tipo === "categoria") {
-    if (marcado) {
-      if (!filtros.categorias.includes(id)) {
-        filtros.categorias.push(id);
-      }
-    } else {
-      filtros.categorias = filtros.categorias.filter((c) => c !== id);
-    }
+  const chave = tipo === "categoria" ? "categoria" : "marca";
 
-    if (filtros.categorias.length > 0) {
-      params.set("categoria", filtros.categorias.join(","));
-    } else {
-      params.delete("categoria");
-    }
+  let lista = params.get(chave) ? params.get(chave).split(",") : [];
+
+  if (marcado) {
+    if (!lista.includes(String(id))) lista.push(String(id));
+  } else {
+    lista = lista.filter((item) => item !== String(id));
   }
 
-  if (tipo === "marca") {
-    if (marcado) {
-      if (!filtros.marcas.includes(id)) {
-        filtros.marcas.push(id);
-      }
-    } else {
-      filtros.marcas = filtros.marcas.filter((m) => m !== id);
-    }
-
-    if (filtros.marcas.length > 0) {
-      params.set("marca", filtros.marcas.join(","));
-    } else {
-      params.delete("marca");
-    }
+  if (lista.length > 0) {
+    params.set(chave, lista.join(","));
+  } else {
+    params.delete(chave);
   }
+
+  params.set("page", 0);
 
   window.history.pushState({}, "", `?${params.toString()}`);
 
   carregarBrinquedos(0);
 }
 
+// ===============================
+// RESTAURAR FILTROS VISUAIS
+// ===============================
 function restaurarFiltrosDaURL() {
   const params = new URLSearchParams(window.location.search);
 
   const categorias = params.get("categoria");
   const marcas = params.get("marca");
 
-  // ===============================
-  // RESTAURAR CATEGORIAS
-  // ===============================
   if (categorias) {
-    const ids = categorias.split(",");
-
-    ids.forEach((id) => {
+    categorias.split(",").forEach((id) => {
       const checkbox = document.querySelector(
         `#categories-filter input[value="${id}"]`,
       );
-
-      if (checkbox) {
-        checkbox.checked = true;
-
-        // atualiza estado interno também
-        filtros.categorias.push(Number(id));
-      }
+      if (checkbox) checkbox.checked = true;
     });
   }
 
-  // ===============================
-  // RESTAURAR MARCAS
-  // ===============================
   if (marcas) {
-    const ids = marcas.split(",");
-
-    ids.forEach((id) => {
+    marcas.split(",").forEach((id) => {
       const checkbox = document.querySelector(
         `#brands-filter input[value="${id}"]`,
       );
-
-      if (checkbox) {
-        checkbox.checked = true;
-
-        filtros.marcas.push(Number(id));
-      }
+      if (checkbox) checkbox.checked = true;
     });
   }
 
-  function abrirDropdownSeTemFiltro(containerSelector) {
+  function abrirDropdown(containerSelector) {
     const container = document.querySelector(containerSelector);
     if (!container) return;
 
-    const algumMarcado = container.querySelector("input:checked");
-
-    if (algumMarcado) {
-      const botao = container.previousElementSibling; // botão do dropdown
+    if (container.querySelector("input:checked")) {
+      const botao = container.previousElementSibling;
       if (botao) {
         botao.classList.add("open");
         container.classList.add("open");
@@ -213,8 +236,8 @@ function restaurarFiltrosDaURL() {
     }
   }
 
-  abrirDropdownSeTemFiltro("#categories-filter");
-  abrirDropdownSeTemFiltro("#brands-filter");
+  abrirDropdown("#categories-filter");
+  abrirDropdown("#brands-filter");
 }
 
 // ===============================
@@ -232,7 +255,7 @@ function restaurarScroll() {
 }
 
 // ===============================
-// INIT HOME
+// INIT
 // ===============================
 export async function iniciarHome() {
   await carregarCategorias();
@@ -244,34 +267,27 @@ export async function iniciarHome() {
   restaurarFiltrosDaURL();
 
   const params = new URLSearchParams(window.location.search);
-
-  const categoriasParam = params.get("categoria");
-  const marcasParam = params.get("marca");
-  const ordenacaoParam = params.get("ordenacao");
-  const pageParam = params.get("page");
   const busca = params.get("search");
 
-  if (categoriasParam) {
-    filtros.categorias = categoriasParam.split(",").map(Number);
+  if (busca) {
+    const input = document.querySelector("#search-input");
+    const navbar = document.querySelector("#busca-navbar");
+
+    if (input) input.value = busca;
+    if (navbar) navbar.classList.add("active");
   }
 
-  if (marcasParam) {
-    filtros.marcas = marcasParam.split(",").map(Number);
-  }
-
-  if (ordenacaoParam) {
-    ordenacao = ordenacaoParam;
-  }
-
+  const pageParam = params.get("page");
   const paginaInicial = pageParam ? Number(pageParam) : 0;
 
-  if (busca) {
-    await executarBusca(busca);
-  } else {
-    await carregarBrinquedos(paginaInicial);
-  }
+  await carregarBrinquedos(paginaInicial);
 
   restaurarScroll();
+
+  // 🔥 ESSENCIAL PRA BUSCA FUNCIONAR
+  window.addEventListener("filtrosAtualizados", () => {
+    carregarBrinquedos(0);
+  });
 
   // ===============================
   // ORDENAÇÃO
@@ -279,15 +295,13 @@ export async function iniciarHome() {
   const ordenacaoSelect = document.getElementById("ordenacao-select");
 
   if (ordenacaoSelect) {
-    if (ordenacao) {
-      ordenacaoSelect.value = ordenacao;
-    }
+    const ordenacao = params.get("ordenacao");
+    if (ordenacao) ordenacaoSelect.value = ordenacao;
 
     ordenacaoSelect.addEventListener("change", (e) => {
-      ordenacao = e.target.value;
-
       const params = new URLSearchParams(window.location.search);
-      params.set("ordenacao", ordenacao);
+
+      params.set("ordenacao", e.target.value);
 
       window.history.pushState({}, "", `?${params.toString()}`);
 

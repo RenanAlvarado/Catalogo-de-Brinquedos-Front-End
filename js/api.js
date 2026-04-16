@@ -186,25 +186,44 @@ export async function filtrarBrinquedos({
   page = 0,
   size = 16,
   ordenacao,
+  search, // 🔥 NOVO
 }) {
   let url = `/brinquedos/filtrar?page=${page}&size=${size}`;
 
+  // ===============================
+  // CATEGORIAS (FORMATO CORRETO)
+  // ===============================
   if (categorias && categorias.length) {
-    url += `&categorias=${categorias.join(",")}`;
+    categorias.forEach((id) => {
+      url += `&categorias=${id}`;
+    });
   }
 
+  // ===============================
+  // MARCAS (FORMATO CORRETO)
+  // ===============================
   if (marcas && marcas.length) {
-    url += `&marcas=${marcas.join(",")}`;
+    marcas.forEach((id) => {
+      url += `&marcas=${id}`;
+    });
   }
 
-  if (ordenacao) {
-    if (ordenacao === "preco-asc") {
-      url += "&sort=preco,asc";
-    } else if (ordenacao === "preco-desc") {
-      url += "&sort=preco,desc";
-    } else if (ordenacao === "nome-asc") {
-      url += "&sort=nome,asc";
-    }
+  // ===============================
+  // 🔥 SEARCH (ESSENCIAL)
+  // ===============================
+  if (search) {
+    url += `&search=${encodeURIComponent(search)}`;
+  }
+
+  // ===============================
+  // ORDENAÇÃO
+  // ===============================
+  if (ordenacao === "preco-asc") {
+    url += "&sort=preco,asc";
+  } else if (ordenacao === "preco-desc") {
+    url += "&sort=preco,desc";
+  } else if (ordenacao === "nome-asc") {
+    url += "&sort=nome,asc";
   }
 
   return await requisicao(url);
