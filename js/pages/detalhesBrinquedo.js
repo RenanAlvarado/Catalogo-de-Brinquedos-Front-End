@@ -7,6 +7,8 @@ import { renderizarDetalhes } from "../render.js";
 import { aplicarMascaraCEP } from "../utils/masks.js";
 import { cepValido } from "../utils/validators.js";
 import { buscarCEP } from "../api.js";
+import { adicionarAoCarrinho } from "../services/cartService.js";
+import { atualizarTextoCarrinho } from "../components/header.js";
 
 // ===============================
 // FUNÇÃO PRINCIPAL
@@ -26,6 +28,8 @@ async function carregarDetalhes() {
   try {
     const brinquedo = await buscarBrinquedoPorId(id);
     renderizarDetalhes(brinquedo);
+
+    iniciarBotaoCarrinho(brinquedo);
   } catch (erro) {
     console.error("Erro ao carregar detalhes:", erro);
   }
@@ -87,5 +91,34 @@ function iniciarCep() {
       cepErrorDiv.classList.remove("hide");
       cepInfoDiv.classList.add("hide");
     }
+  });
+}
+
+function iniciarBotaoCarrinho(brinquedo) {
+  const botao = document.querySelector("#adicionar-carrinho-btn");
+
+  if (!botao) return;
+
+  botao.addEventListener("click", () => {
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    // 🔒 BLOQUEIO DE LOGIN
+    if (!usuario) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    adicionarAoCarrinho(brinquedo);
+
+    atualizarTextoCarrinho();
+
+    botao.innerHTML = "Adicionado ✔";
+    botao.disabled = true;
+
+    setTimeout(() => {
+      botao.innerHTML =
+        "Adicionar ao Carrinho <i class='fa-solid fa-cart-shopping'></i>";
+      botao.disabled = false;
+    }, 1200);
   });
 }

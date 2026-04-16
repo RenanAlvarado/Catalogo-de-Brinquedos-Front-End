@@ -1,7 +1,16 @@
 // ===============================
 // IMPORTS
 // ===============================
-import { buscarCategorias, buscarMarcas, filtrarBrinquedos } from "../api.js";
+import {
+  buscarCategorias,
+  buscarMarcas,
+  filtrarBrinquedos,
+  buscarBrinquedoPorId,
+} from "../api.js";
+
+import { adicionarAoCarrinho } from "../services/cartService.js";
+
+import { atualizarTextoCarrinho } from "../components/header.js";
 
 import {
   renderizarCategorias,
@@ -264,6 +273,7 @@ export async function iniciarHome() {
   await carregarMarcasFiltro();
   await carregarMarcasSimples();
 
+  await iniciarBotaoCarrinhoQuickView();
   restaurarFiltrosDaURL();
 
   const params = new URLSearchParams(window.location.search);
@@ -313,4 +323,46 @@ export async function iniciarHome() {
   }
 
   setAtualizarFiltrosCallback(atualizarFiltros);
+}
+
+export function iniciarBotaoCarrinhoQuickView() {
+  document.addEventListener("click", async (e) => {
+    const btn = e.target.closest("#adicionar-carrinho-quick-view-btn");
+    if (!btn) return;
+
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    if (!usuario) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    const titulo = document.querySelector("#qv-title");
+    if (!titulo) return;
+
+    const id = titulo.dataset.id;
+
+    if (!id) return;
+
+    try {
+      const produto = await buscarBrinquedoPorId(id);
+
+      if (!produto) return;
+
+      adicionarAoCarrinho(produto);
+
+      atualizarTextoCarrinho();
+
+      btn.innerHTML = "Adicionado ✔";
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML =
+          "Adicionar ao Carrinho <i class='fa-solid fa-cart-shopping'></i>";
+        btn.disabled = false;
+      }, 1200);
+    } catch (err) {
+      console.error("Erro ao adicionar ao carrinho:", err);
+    }
+  });
 }

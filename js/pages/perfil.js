@@ -123,11 +123,9 @@ function validarFormularioPerfil() {
   }
 
   // Telefone (opcional, mas se tiver valida)
-  if (!campoVazio(telefone.value) && !telefoneValido(telefone.value)) {
-    marcarErro(
-      "number-input",
-      "Telefone inválido! Verifique o DDD e o número.",
-    );
+  // Telefone (opcional, mas se preenchido tem que ser válido)
+  if (!campoVazio(telefone) && !telefoneValido(removerMascara(telefone))) {
+    marcarErro("number-input", "Telefone inválido! Use DDD + número correto.");
     valido = false;
   }
 

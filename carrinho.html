@@ -6,15 +6,29 @@
     <link rel="shortcut icon" href="img/newlogo.png" type="image/x-icon" />
     <title>Carrinho de Compras - MARAH</title>
 
+    <!-- CSS GERAL -->
     <link rel="stylesheet" href="css/base/globals.css" />
+    <!-- CSS ESPECÍFICO -->
     <link rel="stylesheet" href="css/carrinho.css" />
+
+    <!-- Header -->
     <link rel="stylesheet" href="css/components/header.css" />
+
+    <!-- Footer -->
     <link rel="stylesheet" href="css/components/footer.css" />
 
+    <!-- JavaScript -->
     <script type="module" src="js/main.js" defer></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <!-- Icones -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
+
   <body>
     <header id="header"></header>
 
@@ -23,15 +37,18 @@
         <a href="index.html" class="arrow-back">
           <i class="fa-solid fa-arrow-left"></i> Continuar Comprando
         </a>
-        
+
         <h1>Meu Carrinho</h1>
 
         <div id="cart-content">
           <section id="cart-items-section">
-            
             <div class="cart-item">
-              <img src="img/placeholder.png" alt="Carrinho Hot Wheels" class="item-img" />
-              
+              <img
+                src="img/placeholder.png"
+                alt="Carrinho Hot Wheels"
+                class="item-img"
+              />
+
               <div class="item-info">
                 <h3>Carrinho Hot Wheels</h3>
                 <p class="item-brand">Marca: Hotwheels</p>
@@ -51,8 +68,12 @@
             </div>
 
             <div class="cart-item">
-              <img src="img/placeholder.png" alt="Pelúcia Axolote" class="item-img" />
-              
+              <img
+                src="img/placeholder.png"
+                alt="Pelúcia Axolote"
+                class="item-img"
+              />
+
               <div class="item-info">
                 <h3>Ursinho de Pelúcia Axolote</h3>
                 <p class="item-brand">Marca: MARAH</p>
@@ -70,17 +91,15 @@
                 </button>
               </div>
             </div>
-
           </section>
 
           <section id="cart-summary-section">
             <h2>Resumo do Pedido</h2>
-            
+
             <div class="summary-line">
               <span>Subtotal (2 itens)</span>
-              <span>R$ 109,80</span>
             </div>
-            
+
             <div class="summary-line shipping-line">
               <span>Frete</span>
               <span>Calcular na próxima etapa</span>
@@ -93,8 +112,10 @@
               <span>R$ 109,80</span>
             </div>
 
-            <button class="checkout-btn">Finalizar Compra <i class="fa-solid fa-check"></i></button>
-            
+            <a href="manutencao.html">
+              <button class="checkout-btn">
+                Finalizar Compra <i class="fa-solid fa-check"></i></button
+            ></a>
             <div class="safe-checkout">
               <i class="fa-solid fa-lock"></i> Compra 100% Segura
             </div>
