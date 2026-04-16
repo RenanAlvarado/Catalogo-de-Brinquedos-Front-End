@@ -1,7 +1,16 @@
 // ===============================
 // IMPORTS
 // ===============================
-import { buscarCategorias, buscarMarcas, filtrarBrinquedos } from "../api.js";
+import {
+  buscarCategorias,
+  buscarMarcas,
+  filtrarBrinquedos,
+  buscarBrinquedoPorId,
+} from "../api.js";
+
+import { adicionarAoCarrinho } from "../services/cartService.js";
+
+import { atualizarTextoCarrinho } from "../components/header.js";
 
 import {
   renderizarCategorias,
@@ -73,7 +82,7 @@ async function carregarMarcasFiltro() {
 }
 
 // ===============================
-// 🎯 MODO BUSCA (UI)
+//  MODO BUSCA (UI)
 // ===============================
 function aplicarModoBusca(valor, brinquedos) {
   const productsContainer = document.querySelector("#products-wrapper");
@@ -97,7 +106,7 @@ function aplicarModoBusca(valor, brinquedos) {
 }
 
 // ===============================
-// 🔄 MODO NORMAL (UI)
+//  MODO NORMAL (UI)
 // ===============================
 function restaurarModoNormal() {
   const categoriesContainer = document.querySelector("#categories-container");
@@ -264,6 +273,7 @@ export async function iniciarHome() {
   await carregarMarcasFiltro();
   await carregarMarcasSimples();
 
+  await iniciarBotaoCarrinhoQuickView();
   restaurarFiltrosDaURL();
 
   const params = new URLSearchParams(window.location.search);
@@ -284,7 +294,7 @@ export async function iniciarHome() {
 
   restaurarScroll();
 
-  // 🔥 ESSENCIAL PRA BUSCA FUNCIONAR
+  //  ESSENCIAL PRA BUSCA FUNCIONAR
   window.addEventListener("filtrosAtualizados", () => {
     carregarBrinquedos(0);
   });
@@ -302,12 +312,57 @@ export async function iniciarHome() {
       const params = new URLSearchParams(window.location.search);
 
       params.set("ordenacao", e.target.value);
+      params.set("page", 0);
 
       window.history.pushState({}, "", `?${params.toString()}`);
+
+      window.scrollTo(0, 0);
 
       carregarBrinquedos(0);
     });
   }
 
   setAtualizarFiltrosCallback(atualizarFiltros);
+}
+
+export function iniciarBotaoCarrinhoQuickView() {
+  document.addEventListener("click", async (e) => {
+    const btn = e.target.closest("#adicionar-carrinho-quick-view-btn");
+    if (!btn) return;
+
+    const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+    if (!usuario) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    const titulo = document.querySelector("#qv-title");
+    if (!titulo) return;
+
+    const id = titulo.dataset.id;
+
+    if (!id) return;
+
+    try {
+      const produto = await buscarBrinquedoPorId(id);
+
+      if (!produto) return;
+
+      adicionarAoCarrinho(produto);
+
+      atualizarTextoCarrinho();
+
+      btn.innerHTML = "Adicionado ✔";
+      btn.disabled = true;
+
+      setTimeout(() => {
+        btn.innerHTML =
+          "Adicionar ao Carrinho <i class='fa-solid fa-cart-shopping'></i>";
+        btn.disabled = false;
+      }, 1200);
+    } catch (err) {
+      console.error("Erro ao adicionar ao carrinho:", err);
+    }
+  });
 }
