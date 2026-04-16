@@ -86,6 +86,13 @@ export async function atualizarImagemUsuarioAPI(id, formData) {
   });
 }
 
+export async function alterarSenhaUsuarioAPI(id, dados) {
+  return await requisicao(`/usuarios/${id}/senha`, {
+    method: "PUT",
+    body: JSON.stringify(dados),
+  });
+}
+
 // ===============================
 // SISTEMA DE LOGIN E CADASTRO
 // ===============================
@@ -186,7 +193,7 @@ export async function filtrarBrinquedos({
   page = 0,
   size = 16,
   ordenacao,
-  search, // 🔥 NOVO
+  search,
 }) {
   let url = `/brinquedos/filtrar?page=${page}&size=${size}`;
 
@@ -209,7 +216,7 @@ export async function filtrarBrinquedos({
   }
 
   // ===============================
-  // 🔥 SEARCH (ESSENCIAL)
+  //  SEARCH (ESSENCIAL)
   // ===============================
   if (search) {
     url += `&search=${encodeURIComponent(search)}`;

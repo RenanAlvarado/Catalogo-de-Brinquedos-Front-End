@@ -6,6 +6,7 @@ import {
   buscarCEP,
   alterarUsuarioAPI,
   atualizarImagemUsuarioAPI,
+  alterarSenhaUsuarioAPI,
 } from "../api.js";
 
 import { renderizarPerfil } from "../render.js";
@@ -37,6 +38,44 @@ export async function iniciarPaginaPerfil() {
   adicionarRemocaoErroTempoReal();
   iniciarSubmitPerfil();
   iniciarUploadImagemPerfil();
+  iniciarToggleSenha();
+  iniciarAlterarSenha();
+}
+
+// ===============================
+// FUNÇÕES DE VISUALIZAR SENHA
+// ===============================
+function iniciarToggleSenha() {
+  const senhaInput = document.getElementById("password-input");
+  const senhaInputAgain = document.getElementById("password-again-input");
+  const toggleIcon = document.getElementById("toggle-password");
+  const toggleIconAgain = document.getElementById("toggle-password-again");
+
+  if (!senhaInput || !toggleIcon) return;
+
+  toggleIcon.addEventListener("click", () => {
+    const tipoAtual = senhaInput.getAttribute("type");
+
+    if (tipoAtual === "password") {
+      senhaInput.setAttribute("type", "text");
+      toggleIcon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+      senhaInput.setAttribute("type", "password");
+      toggleIcon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+  });
+
+  toggleIconAgain.addEventListener("click", () => {
+    const tipoAtual = senhaInputAgain.getAttribute("type");
+
+    if (tipoAtual === "password") {
+      senhaInputAgain.setAttribute("type", "text");
+      toggleIconAgain.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+      senhaInputAgain.setAttribute("type", "password");
+      toggleIconAgain.classList.replace("fa-eye-slash", "fa-eye");
+    }
+  });
 }
 
 // ===============================
@@ -322,5 +361,74 @@ function iniciarUploadImagemPerfil() {
       console.error("Erro ao enviar imagem:", erro);
       await mostrarFeedbackAcao("Falha", "Atualizar imagem");
     }
+  });
+}
+
+async function alterarSenha() {
+  const senhaInput = document.getElementById("password-input");
+  const confirmarInput = document.getElementById("password-again-input");
+
+  const senha = senhaInput.value.trim();
+  const confirmarSenha = confirmarInput.value.trim();
+
+  limparErros();
+
+  let valido = true;
+
+  // vazio
+  if (!senha) {
+    marcarErro("password-input", "Senha é obrigatória");
+    valido = false;
+  }
+
+  // mínimo 6 caracteres
+  else if (senha.length < 6) {
+    marcarErro("password-input", "Senha deve ter no mínimo 6 caracteres");
+    valido = false;
+  }
+
+  if (!confirmarSenha) {
+    marcarErro("password-again-input", "Confirme sua senha");
+    valido = false;
+  }
+
+  if (!valido) return;
+
+  // igualdade
+  if (senha !== confirmarSenha) {
+    marcarErro("password-input", "Senhas não conferem");
+    marcarErro("password-again-input", "Senhas não conferem");
+    return;
+  }
+
+  const usuarioLogado = JSON.parse(localStorage.getItem("usuario"));
+
+  const confirmar = await confirmarAcao("Atualizar senha");
+  if (!confirmar) return;
+
+  try {
+    await alterarSenhaUsuarioAPI(usuarioLogado.id, {
+      senha,
+      confirmarSenha,
+    });
+
+    await mostrarFeedbackAcao("Sucesso", "Atualizar senha");
+
+    senhaInput.value = "";
+    confirmarInput.value = "";
+  } catch (error) {
+    console.error(error);
+    await mostrarFeedbackAcao("Falha", "Atualizar senha");
+  }
+}
+
+function iniciarAlterarSenha() {
+  const btn = document.getElementById("btn-alterar-senha");
+
+  if (!btn) return;
+
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    alterarSenha();
   });
 }
