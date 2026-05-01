@@ -8,6 +8,10 @@ const API_URL = "http://localhost:8080/api";
 // FUNÇÃO GENÉRICA DE REQUISIÇÃO
 // ===============================
 
+function getToken() {
+  return localStorage.getItem("token");
+}
+
 async function requisicao(endpoint, options = {}) {
   try {
     const headers =
@@ -15,24 +19,28 @@ async function requisicao(endpoint, options = {}) {
         ? {}
         : { "Content-Type": "application/json" };
 
+    const token = getToken();
+
     const resposta = await fetch(`${API_URL}${endpoint}`, {
+      method: options.method || "GET",
       headers: {
         ...headers,
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
         ...options.headers,
       },
-      ...options,
+      body: options.body,
     });
 
-    if (resposta.status === 204) {
-      return null;
-    }
+    if (resposta.status === 204) return null;
 
-    if (!resposta.ok) {
-      const erroData = await resposta.json();
-      throw erroData;
-    }
+    const text = await resposta.text();
+    if (!text) return null;
 
-    return await resposta.json();
+    try {
+      return JSON.parse(text);
+    } catch {
+      return text;
+    }
   } catch (erro) {
     console.error("Erro na requisição da API:", erro);
     throw erro;

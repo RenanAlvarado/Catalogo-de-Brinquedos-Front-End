@@ -20,6 +20,7 @@ export function inicializarHeaderUsuario() {
     botao.onclick = () => {
       // LOGOUT
       localStorage.removeItem("usuario");
+      localStorage.removeItem("token");
 
       // recarrega a página
       window.location.reload();

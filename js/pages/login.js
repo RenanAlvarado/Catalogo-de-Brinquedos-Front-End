@@ -73,9 +73,14 @@ async function realizarLogin() {
   // CHAMADA API
   // ===============================
   try {
-    const usuario = await loginAPI(email, senha);
+    const data = await loginAPI(email, senha);
 
-    localStorage.setItem("usuario", JSON.stringify(usuario));
+    // salvar token separado
+    localStorage.setItem("token", data.token);
+
+    // salvar usuário separado
+    localStorage.setItem("usuario", JSON.stringify(data.usuario));
+
     window.location.href = "index.html";
   } catch (erro) {
     console.error("Erro no login:", erro);

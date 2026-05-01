@@ -25,9 +25,9 @@ export function adicionarAoCarrinho(produto) {
   const carrinho = getCarrinho();
 
   const produtoNormalizado = {
-    id: Number(produto.id), // 🔥 SEMPRE NUMBER
+    id: Number(produto.id), //  SEMPRE NUMBER
     nome: produto.nome,
-    preco: Number(produto.preco) || 0, // 🔥 nunca null
+    preco: Number(produto.preco) || 0, //  nunca null
     imagem: produto.imagem,
     marca: produto.marca?.nome || produto.marca || "",
     quantidade: 1,
