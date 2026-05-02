@@ -2,7 +2,7 @@
 // CONFIGURAÇÃO DA API --> Arquivo que realiza as chamadas
 // ===============================
 
-const API_URL = "http://localhost:8080/api";
+const API_URL = "https://catalogo-de-brinquedos-api.onrender.com/api";
 
 // ===============================
 // FUNÇÃO GENÉRICA DE REQUISIÇÃO
@@ -58,22 +58,14 @@ export function obterImagem(pasta, imagem) {
 
   if (!imagem) return "img/placeholder.png";
 
-  // Puxar imagens
-  if (pasta === "toys") {
-    return `http://localhost:8080/uploads/toys/${imagem}`;
+  // se já for URL (Cloudinary)
+  if (imagem.startsWith("http")) {
+    return imagem;
   }
 
-  if (pasta === "usuarios") {
-    return `http://localhost:8080/uploads/usuarios/${imagem}`;
-  }
+  const BASE_UPLOAD = "https://catalogo-de-brinquedos-api.onrender.com/uploads";
 
-  if (pasta === "categories") {
-    return `http://localhost:8080/uploads/categories/${imagem}`;
-  }
-
-  if (pasta === "brands") {
-    return `http://localhost:8080/uploads/brands/${imagem}`;
-  }
+  return `${BASE_UPLOAD}/${pasta}/${imagem}`;
 }
 
 // ===============================
