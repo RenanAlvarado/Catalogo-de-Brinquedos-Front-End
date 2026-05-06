@@ -1,13 +1,5 @@
 /* CSS de elementos repetidos da página */
 
-@font-face {
-  font-family: "Hey Comic";
-  /* O caminho abaixo sobe uma pasta (..) e entra na pasta fonts */
-  src: url("../fonts/hey-comic.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 /* RESET GERAL */
 * {
   margin: 0;
