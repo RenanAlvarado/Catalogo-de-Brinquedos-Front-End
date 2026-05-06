@@ -1,6 +1,10 @@
 import { contarItens } from "../services/cartService.js";
 
 export function inicializarHeaderUsuario() {
+  if (!usuario) {
+    localStorage.removeItem("carrinho"); // limpa automaticamente
+  }
+
   atualizarTextoCarrinho();
 
   const usuario = JSON.parse(localStorage.getItem("usuario"));
