@@ -17,4 +17,5 @@ export function isAdmin() {
 
 export function logout() {
   localStorage.removeItem("usuario");
+  localStorage.removeItem("carrinho");
 }
