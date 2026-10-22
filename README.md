@@ -6,6 +6,18 @@ Interface web de um sistema completo de catálogo de brinquedos, desenvolvida co
 
 ---
 
+# 🌐 Aplicação Online
+
+🚀 O projeto já está publicado e acessível via navegador:
+
+* Frontend hospedado na web
+* Integrado com API REST em produção
+* Comunicação em tempo real com o back-end
+
+⚠️ O desempenho pode variar dependendo da infraestrutura do servidor (ex: planos gratuitos)
+
+---
+
 ## 🎯 Objetivo
 
 Desenvolver uma aplicação frontend capaz de consumir uma API REST e oferecer uma experiência fluida para:
@@ -41,10 +53,7 @@ Este projeto foi construído com foco em consolidar conceitos essenciais de dese
 
 ## 🔗 Integração com Backend
 
-Este frontend consome uma API REST desenvolvida em Spring Boot de forma local.
-
-
-⚠️ O backend deve estar em execução para o funcionamento completo da aplicação.
+Este frontend consome uma API REST desenvolvida em Spring Boot.
 
 ---
 
@@ -78,6 +87,17 @@ Este frontend consome uma API REST desenvolvida em Spring Boot de forma local.
   Facilita manutenção e escalabilidade
 
 ---
+
+# 👨‍💻 Autor
+Desenvolvido por Arthur Portilio Suguiura da Silva, Heitor Cortez Norilla, Matheus Fernandes da Silva e Renan Amaral Luz Alvarado
+
+Projeto acadêmico desenvolvido para prática de desenvolvimento web com Java + Spring Boot.
+
+---
+
+# 📄 Licença
+
+Projeto desenvolvido para fins educacionais.
 
 
 
